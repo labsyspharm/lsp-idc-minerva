@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-BamNEAY0.js","./pako.esm-C0YWBoLx.js","./lerc-CqArzSoq.js","./LercDecode-GkxKO0nc.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-DSxZOe3E.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-a3zAOB6o.js","./pako.esm-C0YWBoLx.js","./lerc-BgHawqC3.js","./LercDecode-CJHFH2X1.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-COf3F8oL.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -114059,22 +114059,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-CF6hBT7k.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-BzLgu4W1.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-oxB6FV6g.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-CFK1cLHS.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-BUr-2b20.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-BamNEAY0.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-C3uT5edR.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-DGSq1SB7.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-a3zAOB6o.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-B9_xskzB.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-CqArzSoq.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-BgHawqC3.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-BzNNQk0H.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-n0Iq8Mcv.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -131060,8 +131060,8 @@ const getShapeForBinaryDownsampleLevel = (options) => {
   resolutionShape[yIndex] = axes.shape[yIndex] >> level;
   return resolutionShape;
 };
-const loadDicom = (meta, little_endian) => {
-  const { pyramids, series } = meta;
+const loadDicom = (meta) => {
+  const { pyramids, series, little_endian } = meta;
   const { width, height } = [
     ...pyramids[0]
   ].pop();
@@ -131152,21 +131152,19 @@ const loadDicom = (meta, little_endian) => {
   };
 };
 function createTileLayers(meta) {
-  const little_endian = true;
-  const loader = loadDicom(meta, little_endian);
   const {
     channelsVisible,
     colors,
     contrastLimits,
     selections
   } = meta.settings;
-  const { pyramids } = meta;
+  const { pyramids, dicomSource } = meta;
   [...pyramids["0"]].pop().height;
   [...pyramids["0"]].pop().width;
   pyramids["0"][0].tileSize;
   pyramids["0"].length;
   const imageProps = {
-    loader: loader.data,
+    loader: dicomSource.data,
     // https://deck.gl/docs/api-reference/geo-layers/tile-layer#refinementstrategy
     refinementStrategy: "no-overlap",
     id: "multichannel-tiled-image",
@@ -145040,8 +145038,6 @@ const VivView = (props) => {
   const maxShape = useWindowSize();
   const { loader, groups, stories, hash, setHash, overlayLayers = [], activeTool, isDragging = false, hoveredAnnotationId = null, onOverlayInteraction } = props;
   const { v: v2, g: g2, s: s3, w: w2 } = hash;
-  const toMainSettings = props.viewerConfig.toSettings;
-  const [mainSettings, setMainSettings] = reactExports.useState(toMainSettings(hash));
   const [shape, setShape] = reactExports.useState(maxShape);
   const [channelSettings, setChannelSettings] = reactExports.useState({});
   const [canvas2, setCanvas] = reactExports.useState(null);
@@ -145049,11 +145045,16 @@ const VivView = (props) => {
   const rootRef = reactExports.useMemo(() => {
     return shapeRef(setShape);
   }, []);
-  reactExports.useEffect(() => {
-  }, [groups]);
-  reactExports.useEffect(() => {
-    setMainSettings(toMainSettings(hash, loader, groups));
-  }, [loader, groups, hash, toMainSettings]);
+  const mainSettings = reactExports.useMemo(() => {
+    if (!loader || !groups) {
+      return props.viewerConfig.toSettings(hash);
+    }
+    return props.viewerConfig.toSettings(
+      hash,
+      loader,
+      groups
+    );
+  }, [loader, groups, hash]);
   const imageShape = reactExports.useMemo(() => {
     const shape_labels = loader.data[0].labels;
     const shape_values = loader.data[0].shape;
@@ -145075,20 +145076,48 @@ const VivView = (props) => {
     loader: loader.data,
     ...mainSettings
   }), [shape, loader.data, mainSettings]);
+  console.log(mainProps);
+  const dicomSource = reactExports.useMemo(() => {
+    return loadDicom({
+      pyramids: props.dicomIndex,
+      series: props.series,
+      little_endian: true
+    });
+  }, [
+    props.dicomIndex,
+    props.series
+  ]);
+  const dicomLayer = reactExports.useMemo(
+    () => {
+      return createTileLayers({
+        pyramids: props.dicomIndex,
+        settings: mainSettings,
+        dicomSource
+      });
+    },
+    [
+      dicomSource,
+      mainSettings
+    ]
+  );
+  const imageLayer = reactExports.useMemo(
+    () => {
+      return new MultiscaleImageLayer(mainProps);
+    },
+    [mainProps]
+  );
   const allLayers = reactExports.useMemo(
     () => {
       if (props.series) {
-        const dicomLayer = createTileLayers({
-          pyramids: props.dicomIndex,
-          settings: mainSettings,
-          series: props.series
-        });
         return [dicomLayer, ...overlayLayers];
       }
-      const imageLayer = new MultiscaleImageLayer(mainProps);
       return [imageLayer, ...overlayLayers];
     },
-    [mainProps, overlayLayers]
+    [
+      dicomLayer,
+      imageLayer,
+      overlayLayers
+    ]
   );
   const dragHandlers = reactExports.useMemo(
     () => createDragHandlers(),
@@ -149525,34 +149554,38 @@ const Index = (props) => {
   const itemRegistryMarkerNames = SourceChannels.map(
     (source_channel) => source_channel.Properties.Name
   );
-  const itemRegistryGroups = Groups2.map((group, g2) => {
-    const { Name } = group.Properties;
-    const channels2 = GroupChannels.filter((group_channel) => group_channel.Associations.Group.UUID == group.UUID).map((group_channel) => {
-      var _a3, _b2;
-      const defaults = { Name: "" };
-      const { R: R4, G: G3, B: B3 } = ((_a3 = Colors.find(({ ID }) => {
-        return ID === group_channel.Associations.Color.ID;
-      })) == null ? void 0 : _a3.Properties) || {};
-      const color2 = ((1 << 24) + (R4 << 16) + (G3 << 8) + B3).toString(16).slice(1);
-      const { LowerRange, UpperRange } = group_channel.Properties;
-      const { SourceChannel } = group_channel.Associations;
-      const { Name: Name2 } = ((_b2 = SourceChannels.find((source_channel) => source_channel.UUID == SourceChannel.UUID)) == null ? void 0 : _b2.Properties) || defaults;
+  const itemRegistryGroups = reactExports.useMemo(() => {
+    return Groups2.map((group, g2) => {
+      const { Name } = group.Properties;
+      const channels2 = GroupChannels.filter((group_channel) => group_channel.Associations.Group.UUID == group.UUID).map((group_channel) => {
+        var _a3, _b2;
+        const defaults = { Name: "" };
+        const { R: R4, G: G3, B: B3 } = ((_a3 = Colors.find(({ ID }) => {
+          return ID === group_channel.Associations.Color.ID;
+        })) == null ? void 0 : _a3.Properties) || {};
+        const color2 = ((1 << 24) + (R4 << 16) + (G3 << 8) + B3).toString(16).slice(1);
+        const { LowerRange, UpperRange } = group_channel.Properties;
+        const { SourceChannel } = group_channel.Associations;
+        const { Name: Name2 } = ((_b2 = SourceChannels.find((source_channel) => source_channel.UUID == SourceChannel.UUID)) == null ? void 0 : _b2.Properties) || defaults;
+        return {
+          color: color2,
+          name: Name2,
+          contrast: [
+            LowerRange,
+            UpperRange
+          ]
+        };
+      });
       return {
-        color: color2,
-        name: Name2,
-        contrast: [
-          LowerRange,
-          UpperRange
-        ]
+        State: group.State,
+        g: g2,
+        name: Name,
+        channels: channels2
       };
     });
-    return {
-      State: group.State,
-      g: g2,
-      name: Name,
-      channels: channels2
-    };
-  });
+  }, [
+    GroupChannels
+  ]);
   const channelProps = {
     hash,
     setHash,
@@ -149586,18 +149619,22 @@ const Index = (props) => {
     pushWaypoint,
     popWaypoint
   };
-  const imageProps = toImageProps({
-    props: {
-      loader,
-      dicomIndex: props.dicomIndex,
-      marker_names: itemRegistryMarkerNames,
-      ...channelProps
-    },
-    buttons: {
-      zoomInButton: zoomInEl,
-      zoomOutButton: zoomOutEl
-    }
-  });
+  const imageProps = reactExports.useMemo(() => {
+    return toImageProps({
+      props: {
+        loader,
+        dicomIndex: props.dicomIndex,
+        marker_names: itemRegistryMarkerNames,
+        ...channelProps
+      },
+      buttons: {
+        zoomInButton: zoomInEl,
+        zoomOutButton: zoomOutEl
+      }
+    });
+  }, [
+    GroupChannels
+  ]);
   const {
     overlayLayers,
     activeTool,
@@ -149680,7 +149717,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-DSxZOe3E.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-COf3F8oL.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
