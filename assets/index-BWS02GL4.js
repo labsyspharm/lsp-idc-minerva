@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-DiYQBOrm.js","./pako.esm-C0YWBoLx.js","./lerc-DlI2FJZ4.js","./LercDecode-BO-aN1nl.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-CzB22V_g.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-aND9MxkQ.js","./pako.esm-C0YWBoLx.js","./lerc-xhkR_16J.js","./LercDecode-CryZEDNC.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-prrA1QIZ.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -114083,22 +114083,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-je6Gxya7.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-CMsdMvcn.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-Dkj_3rrF.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-BcjnQWa_.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-wR377e0f.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-DiYQBOrm.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-B5nVSFfv.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-CGWR3NQP.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-aND9MxkQ.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-ptm9uklI.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-DlI2FJZ4.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-xhkR_16J.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-D_Ks1C7w.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-C809uGEU.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -157484,7 +157484,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-CzB22V_g.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-prrA1QIZ.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
@@ -157845,7 +157845,7 @@ const Content = (props) => {
         "https://us-central1-idc-external-031.cloudfunctions.net/minerva_proxy/studies/2.25.112849421593762410108114587383519700602/series/1.3.6.1.4.1.5962.99.1.331207435.2054329796.1752677896971.4.0",
         "DICOM-WEB"
       );
-    });
+    }, []);
     if (loader === null) {
       return /* @__PURE__ */ jsxRuntimeExports.jsx(Wrapper, { children: "Loading DicomWeb Endpoint..." });
     }

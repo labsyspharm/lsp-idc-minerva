@@ -1,5 +1,5 @@
 import { i as inflate_1 } from "./pako.esm-C0YWBoLx.js";
-import { B as BaseDecoder } from "./index-COPC7Hyq.js";
+import { B as BaseDecoder } from "./index-BWS02GL4.js";
 class DeflateDecoder extends BaseDecoder {
   decodeBlock(buffer) {
     return inflate_1(new Uint8Array(buffer)).buffer;
