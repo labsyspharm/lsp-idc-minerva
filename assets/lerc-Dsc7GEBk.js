@@ -1,6 +1,6 @@
 import { i as inflate_1 } from "./pako.esm-C0YWBoLx.js";
-import { L as Lerc } from "./LercDecode-CryZEDNC.js";
-import { B as BaseDecoder, L as LercParameters, a as LercAddCompression } from "./index-BWS02GL4.js";
+import { L as Lerc } from "./LercDecode-EEG8rJmx.js";
+import { B as BaseDecoder, L as LercParameters, a as LercAddCompression } from "./index-Cl0_w2jy.js";
 let init;
 let instance;
 let heap;
