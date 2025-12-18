@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-CMdB-pqs.js","./pako.esm-C0YWBoLx.js","./lerc-Dsc7GEBk.js","./LercDecode-EEG8rJmx.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-Crssp_Ac.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-BZYlDRWm.js","./pako.esm-C0YWBoLx.js","./lerc-BHBnfVbH.js","./LercDecode-CE4UkX-a.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-DEuBiJqP.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -114083,22 +114083,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-B3or-Ern.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-BiPWws46.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-CNXjcJ_e.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-C_wg7GEX.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-CMOsffZf.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-CMdB-pqs.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-CyxE6LnA.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-Ce-tuWWW.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-BZYlDRWm.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-C7iyRJ02.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-Dsc7GEBk.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-BHBnfVbH.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-W0QI7y-I.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-lb9SqcYw.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -133556,6 +133556,7 @@ const overlayInitialState = {
   hoverState: {
     hoveredAnnotationId: null
   },
+  activeWaypoint: 0,
   annotations: [],
   // New: empty annotations array
   annotationGroups: [],
@@ -134172,6 +134173,12 @@ const useOverlayStore = create$2()(
           waypoints: state.waypoints.filter((waypoint) => waypoint.UUID !== waypointId),
           activeWaypointId: state.activeWaypointId === waypointId ? null : state.activeWaypointId
         }));
+      },
+      // channel and group actions
+      //
+      setActiveChannelGroup: (channelGroupId) => {
+        console.log("Store: Setting active channel group ID:", channelGroupId);
+        set5({ activeChannelGroupId: channelGroupId });
       }
     }),
     {
@@ -134209,6 +134216,9 @@ const VivView = (props) => {
   const maxShape = useWindowSize();
   const { loader, groups, stories, hash, setHash, overlayLayers = [], activeTool, isDragging = false, hoveredAnnotationId = null, onOverlayInteraction } = props;
   const { v: v2, g: g2, s: s3, w: w2 } = hash;
+  const {
+    activeChannelGroupId
+  } = useOverlayStore();
   const [shape, setShape] = reactExports.useState(maxShape);
   const [channelSettings, setChannelSettings] = reactExports.useState({});
   const [canvas2, setCanvas] = reactExports.useState(null);
@@ -134217,16 +134227,17 @@ const VivView = (props) => {
     return shapeRef(setShape);
   }, []);
   const mainSettings = reactExports.useMemo(() => {
-    console.log(hash, "HASH");
     if (!loader || !groups) {
-      return props.viewerConfig.toSettings(hash);
+      return props.viewerConfig.toSettings(
+        activeChannelGroupId
+      );
     }
     return props.viewerConfig.toSettings(
-      hash,
+      activeChannelGroupId,
       loader,
       groups
     );
-  }, [loader, groups, hash.g]);
+  }, [loader, groups, activeChannelGroupId]);
   const imageShape = reactExports.useMemo(() => {
     const shape_labels = loader.data[0].labels;
     const shape_values = loader.data[0].shape;
@@ -134381,36 +134392,39 @@ const hexToRGB = (hex) => {
   return [r4, g2, b2];
 };
 const toSettings = (opts) => {
-  return (hash, loader, groups) => {
-    const { g: g2 } = hash;
-    const group = (groups || opts.groups).find(
-      (group2) => group2.g === g2
+  return (activeChannelGroupId, loader, groups) => {
+    const { ItemRegistry } = opts.config;
+    const { GroupChannels, SourceChannels } = ItemRegistry;
+    const channels2 = GroupChannels.filter(
+      (channel) => channel.Associations.Group.UUID === activeChannelGroupId
     );
-    const channels2 = (group == null ? void 0 : group.channels) || [];
     if (!loader) return toDefaultSettings(3);
     const full_level = loader.data[0];
     if (!loader) return toDefaultSettings(3);
     const { labels, shape } = full_level;
     const c_idx = labels.indexOf("c");
-    const { SourceChannels } = opts.config.ItemRegistry;
-    const marker_names = SourceChannels.map((x2) => x2.Properties.Name);
     const selections = channels2.map((channel) => {
-      const c2 = SourceChannels[marker_names.indexOf(channel.name)].Properties.SourceIndex;
+      SourceChannels.map(
+        (source_channel2) => source_channel2.UUID
+      );
+      const source_channel = SourceChannels.find(
+        (source_channel2) => channel.Associations.SourceChannel.UUID === source_channel2.UUID
+      );
+      const c2 = (source_channel == null ? void 0 : source_channel.Properties.SourceIndex) || 0;
       return { z: 0, t: 0, c: c2 };
-    }).filter(({ c: c2 }, i5) => {
-      if (c2 < 0) {
-        console.error(`Missing channel "${channels2[i5].name}"`);
-        return false;
-      }
-      return true;
     });
     const colors = channels2.map((c2, i5) => {
-      return c2.color ? hexToRGB(c2.color) : [0, 0, 0];
+      const rgb = c2.Associations.Color.ID.split("#").pop();
+      return rgb ? hexToRGB(rgb) : [0, 0, 0];
     });
     const contrastLimits = channels2.map((c2) => {
-      return c2.contrast;
+      const { LowerRange, UpperRange } = c2.Properties;
+      return [LowerRange, UpperRange];
     });
-    const channelsVisible = channels2.map((c2, i5) => true);
+    const channelsVisible = channels2.map(
+      (c2, i5) => true
+    );
+    console.log(colors, contrastLimits, channelsVisible);
     const n_channels = shape[c_idx] || 0;
     const out = {
       ...toDefaultSettings(n_channels),
@@ -157035,20 +157049,19 @@ const Presentation = (props) => {
   const {
     stories,
     activeStoryIndex,
-    setActiveStory
+    setActiveStory,
+    activeChannelGroupId,
+    setActiveChannelGroup
   } = useOverlayStore();
   const updateGroup = (activeStory) => {
     const story2 = stories[activeStory];
     const group_name = story2.Properties.Group;
     const { Groups: Groups2 } = props.config.ItemRegistry;
-    const group_names = Groups2.map(
-      ({ Properties }) => Properties.Name
-    );
-    const found_group_index = group_names.indexOf(
-      group_name
-    );
-    if (found_group_index >= 0) {
-      props.setHash({ g: found_group_index });
+    const found_group = Groups2.find(
+      ({ Properties }) => Properties.Name === group_name
+    ) || Groups2[0];
+    if (found_group) {
+      setActiveChannelGroup(found_group.UUID);
     }
   };
   const storyFirst = () => {
@@ -157484,7 +157497,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-Crssp_Ac.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-DEuBiJqP.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
@@ -157693,6 +157706,9 @@ const Content = (props) => {
     },
     ID: crypto.randomUUID()
   });
+  const {
+    setActiveChannelGroup
+  } = useOverlayStore();
   const resetItems = (ItemRegistry2) => {
     setConfig((config22) => ({
       ...config22,
@@ -157702,6 +157718,10 @@ const Content = (props) => {
       },
       ID: crypto.randomUUID()
     }));
+    const { Groups: Groups2 } = ItemRegistry2;
+    if ((Groups2 == null ? void 0 : Groups2.length) > 0) {
+      setActiveChannelGroup(Groups2[0].UUID);
+    }
   };
   const setItems = (ItemRegistry2) => {
     setConfig((config22) => ({
