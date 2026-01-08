@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-CrGJBryt.js","./pako.esm-C0YWBoLx.js","./lerc-V4WD6wVZ.js","./LercDecode-u8XF0U7O.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-FW6ti0_L.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-Dz-BSP7o.js","./pako.esm-C0YWBoLx.js","./lerc-D_6F9sd8.js","./LercDecode-rK_aEfAT.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-B3XX1a6v.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-BO1UDD0S.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-BgiudSGq.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-z7a_qeN1.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-RbO2_PeE.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-vlHj2LuL.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-CrGJBryt.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-Dis-OH2z.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-BcrcE23Z.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-Dz-BSP7o.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-BJWZ1aFj.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-V4WD6wVZ.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-D_6F9sd8.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-DZDSFgR4.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-BQu90Ey-.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -131541,6 +131541,26 @@ const useVars = (params, opts) => {
   const entries = useFormats(opts).map(parse2);
   return Object.fromEntries(entries);
 };
+const convertWaypointToViewState = (pan, zoom, imageWidth, imageHeight, containerWidth) => {
+  if ((pan === void 0 || pan === null) && (zoom === void 0 || zoom === null)) {
+    return null;
+  }
+  const panX = (pan == null ? void 0 : pan[0]) ?? 0.5;
+  const panY = (pan == null ? void 0 : pan[1]) ?? 0.5;
+  const targetX = panX * imageWidth;
+  const targetY = panY * imageHeight;
+  let deckZoom;
+  if (zoom !== void 0 && zoom !== null && containerWidth > 0 && imageWidth > 0) {
+    const imageZoom = zoom * (containerWidth / imageWidth);
+    deckZoom = Math.log2(imageZoom);
+  } else {
+    deckZoom = Math.log2(containerWidth / imageWidth);
+  }
+  return {
+    zoom: deckZoom,
+    target: [targetX, targetY, 0]
+  };
+};
 const modulo = (i5, n3) => (i5 % n3 + n3) % n3;
 const getWaypoints = (list2, s3) => {
   var _a3;
@@ -133724,7 +133744,11 @@ const overlayInitialState = {
   activeWaypointId: null,
   // New: no active waypoint initially
   imageWidth: 0,
-  imageHeight: 0
+  imageHeight: 0,
+  targetWaypointPan: null,
+  // Target pan from waypoint selection (Minerva 1.5 format)
+  targetWaypointZoom: null
+  // Target zoom from waypoint selection (Minerva 1.5 format)
 };
 const useOverlayStore = create$2()(
   devtools(
@@ -134417,6 +134441,13 @@ const useOverlayStore = create$2()(
       setActiveChannelGroup: (channelGroupId) => {
         console.log("Store: Setting active channel group ID:", channelGroupId);
         set5({ activeChannelGroupId: channelGroupId });
+      },
+      // Waypoint view state actions
+      setTargetWaypointViewState: (pan, zoom) => {
+        set5({ targetWaypointPan: pan, targetWaypointZoom: zoom });
+      },
+      clearTargetWaypointViewState: () => {
+        set5({ targetWaypointPan: null, targetWaypointZoom: null });
       }
     }),
     {
@@ -134523,17 +134554,17 @@ const VivView = (props) => {
   }, [loader.data]);
   const initialViewState = reactExports.useMemo(() => {
     const n_levels = loader.data.length;
-    const initial_view = {
+    return {
       zoom: -n_levels,
       target: [imageShape.x / 2, imageShape.y / 2, 0]
     };
-    console.log("Initial View State:");
-    console.log(initial_view);
-    return initial_view;
   }, [loader.data, imageShape]);
   const [viewState, setViewState] = reactExports.useState(initialViewState);
   const setViewportZoom = useOverlayStore((state) => state.setViewportZoom);
   const setImageDimensions = useOverlayStore((state) => state.setImageDimensions);
+  const targetWaypointPan = useOverlayStore((state) => state.targetWaypointPan);
+  const targetWaypointZoom = useOverlayStore((state) => state.targetWaypointZoom);
+  const clearTargetWaypointViewState = useOverlayStore((state) => state.clearTargetWaypointViewState);
   reactExports.useEffect(() => {
     if (loader && loader.data && loader.data.length > 0) {
       setViewState(initialViewState);
@@ -134547,6 +134578,26 @@ const VivView = (props) => {
       setImageDimensions(imageShape.x, imageShape.y);
     }
   }, [imageShape, setImageDimensions]);
+  reactExports.useEffect(() => {
+    if (targetWaypointPan === null && targetWaypointZoom === null) {
+      return;
+    }
+    if (!imageShape.x || imageShape.x <= 0 || !imageShape.y || imageShape.y <= 0 || shape.width <= 0) {
+      return;
+    }
+    const newViewState = convertWaypointToViewState(
+      targetWaypointPan,
+      targetWaypointZoom,
+      imageShape.x,
+      imageShape.y,
+      shape.width
+    );
+    if (newViewState) {
+      setViewState(newViewState);
+      setViewportZoom(newViewState.zoom);
+    }
+    clearTargetWaypointViewState();
+  }, [targetWaypointPan, targetWaypointZoom, imageShape.x, imageShape.y, shape.width, clearTargetWaypointViewState, setViewportZoom]);
   const mainProps = reactExports.useMemo(() => ({
     ...shape,
     id: "mainLayer",
@@ -157218,8 +157269,8 @@ function defaultUrlTransform(value) {
   }
   return "";
 }
-const ARROW_ICON_URL = "/arrow.png";
-const ARROW_ICON_SIZE = 1e3;
+const ARROW_ICON_URL = "/arrow.svg";
+const ARROW_ICON_SIZE = 250;
 function createTextLayer(annotation, isHovered, pickable = true) {
   const fontColor2 = isHovered ? [0, 120, 255, 255] : annotation.style.fontColor;
   const backgroundColor = isHovered ? [0, 120, 255, 150] : annotation.style.backgroundColor || [0, 0, 0, 100];
@@ -157231,6 +157282,7 @@ function createTextLayer(annotation, isHovered, pickable = true) {
     }],
     getText: (d2) => d2.text,
     getPosition: (d2) => d2.position,
+    maxWidth: 10,
     getColor: fontColor2,
     background: true,
     // Enable background rendering
@@ -157276,7 +157328,7 @@ function createArrowIconLayer(annotation, isHovered, pickable = true) {
   const angleDeg = angleRad * 180 / Math.PI + 90;
   const iconColor = isHovered ? [0, 120, 255, 255] : annotation.style.lineColor;
   return new IconLayer({
-    id: `annotation-${annotation.id}`,
+    id: `annotation-${annotation.id}-arrow`,
     data: [{
       position: [endX, endY, 0],
       angle: angleDeg
@@ -157287,13 +157339,13 @@ function createArrowIconLayer(annotation, isHovered, pickable = true) {
       width: ARROW_ICON_SIZE,
       height: ARROW_ICON_SIZE,
       anchorX: ARROW_ICON_SIZE / 2,
-      // Center of PNG (200,200)
+      // Center of SVG (125,125)
       anchorY: ARROW_ICON_SIZE / 2
     }),
-    getSize: 300,
+    getSize: ARROW_ICON_SIZE,
     sizeUnits: "pixels",
-    sizeMinPixels: 300,
-    sizeMaxPixels: 300,
+    sizeMinPixels: ARROW_ICON_SIZE,
+    sizeMaxPixels: ARROW_ICON_SIZE,
     getAngle: (d2) => d2.angle,
     getColor: iconColor,
     pickable,
@@ -157338,6 +157390,7 @@ function createLabelTextLayer(annotationId, text2, position2, textColor, textAnc
     getText: (d2) => d2.text,
     getPosition: (d2) => d2.position,
     getPixelOffset: (d2) => d2.pixelOffset,
+    maxWidth: 10,
     getColor: textColor,
     background: true,
     // Enable background rendering
@@ -157383,7 +157436,7 @@ function createAnnotationLayers(annotation, hoveredAnnotationId, pickable = true
       const length2 = Math.sqrt(dx * dx + dy * dy);
       const dirX = length2 > 0 ? dx / length2 : 0;
       const dirY = length2 > 0 ? dy / length2 : 1;
-      const pixelOffsetMagnitude = 160;
+      const pixelOffsetMagnitude = ARROW_ICON_SIZE / 2 + 12;
       const pixelOffsetX = dirX * pixelOffsetMagnitude;
       const pixelOffsetY = dirY * pixelOffsetMagnitude;
       const textAnchor = dx > 0 ? "start" : "end";
@@ -157422,19 +157475,22 @@ function createAnnotationLayers(annotation, hoveredAnnotationId, pickable = true
   return layers;
 }
 function createAllAnnotationLayers(annotations, hiddenLayers, hoveredAnnotationId, pickable = true) {
-  const mainLayers = [];
+  const shapeLayers = [];
+  const arrowLayers = [];
   const labelLayers = [];
   annotations.filter((annotation) => !hiddenLayers.has(annotation.id)).forEach((annotation) => {
     const annotationLayers = createAnnotationLayers(annotation, hoveredAnnotationId, pickable);
     annotationLayers.forEach((layer) => {
       if (layer.id.endsWith("-text")) {
         labelLayers.push(layer);
+      } else if (layer.id.endsWith("-arrow")) {
+        arrowLayers.push(layer);
       } else {
-        mainLayers.push(layer);
+        shapeLayers.push(layer);
       }
     });
   });
-  return [...mainLayers, ...labelLayers];
+  return [...shapeLayers, ...arrowLayers, ...labelLayers];
 }
 function useAnnotationLayers(pickable = true) {
   const annotations = useOverlayStore((state) => state.annotations);
@@ -157614,7 +157670,8 @@ const Presentation = (props) => {
     importWaypointAnnotations,
     clearImportedAnnotations,
     imageWidth,
-    imageHeight
+    imageHeight,
+    setTargetWaypointViewState
   } = useOverlayStore();
   reactExports.useEffect(() => {
     if (stories.length === 0) return;
@@ -157628,8 +157685,12 @@ const Presentation = (props) => {
       if (arrows.length > 0 || overlays.length > 0) {
         importWaypointAnnotations(arrows, overlays);
       }
+      const { Pan, Zoom } = story2.Properties;
+      if (Pan !== void 0 || Zoom !== void 0) {
+        setTargetWaypointViewState(Pan || null, Zoom ?? null);
+      }
     }
-  }, [stories, activeStoryIndex, imageWidth, imageHeight, importWaypointAnnotations, clearImportedAnnotations]);
+  }, [stories, activeStoryIndex, imageWidth, imageHeight, importWaypointAnnotations, clearImportedAnnotations, setTargetWaypointViewState]);
   const updateGroup = (activeStory) => {
     const story2 = stories[activeStory];
     const group_name = story2.Properties.Group;
@@ -157641,10 +157702,20 @@ const Presentation = (props) => {
       setActiveChannelGroup(found_group.UUID);
     }
   };
+  const updateViewState = (storyIndex) => {
+    const story2 = stories[storyIndex];
+    if (story2) {
+      const { Pan, Zoom } = story2.Properties;
+      if (Pan !== void 0 || Zoom !== void 0) {
+        setTargetWaypointViewState(Pan || null, Zoom ?? null);
+      }
+    }
+  };
   const storyFirst = () => {
     const { Groups: Groups2 } = props.config.ItemRegistry;
     setActiveStory(0);
     updateGroup(0);
+    updateViewState(0);
   };
   const storyLeft = () => {
     const active_story = Math.max(
@@ -157653,6 +157724,7 @@ const Presentation = (props) => {
     );
     setActiveStory(active_story);
     updateGroup(active_story);
+    updateViewState(active_story);
   };
   const storyRight = () => {
     const active_story = Math.min(
@@ -157661,6 +157733,7 @@ const Presentation = (props) => {
     );
     setActiveStory(active_story);
     updateGroup(active_story);
+    updateViewState(active_story);
   };
   const buttonHeight = 50;
   const story_left = /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "left", onClick: storyLeft, children: /* @__PURE__ */ jsxRuntimeExports.jsx(SVG, { d: "M 14 7 L 12 0 l -12 18 l 12 17 l 2 -7 L 8 18 z", px: buttonHeight }) });
@@ -158082,7 +158155,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-FW6ti0_L.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-B3XX1a6v.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
