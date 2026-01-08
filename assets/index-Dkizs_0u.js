@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-CzJKeIFp.js","./pako.esm-C0YWBoLx.js","./lerc-D5NjU7Wy.js","./LercDecode-D9oivKlt.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-RBUaw6Ss.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-BOkm4MzW.js","./pako.esm-C0YWBoLx.js","./lerc-tWvFIH-1.js","./LercDecode-q9ZAA6lz.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-B618S0oV.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-BGrnuB5W.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-Dpj5uI2U.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-BOLtYvqG.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-BOMSuhFR.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-CAEQECmG.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-CzJKeIFp.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-jjqfKzOR.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-BbHDQZju.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-BOkm4MzW.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-1rqfhih-.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-D5NjU7Wy.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-tWvFIH-1.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-DAiP__GY.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-68YjLZBO.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -131772,7 +131772,43 @@ const extractChannels = (loader, groups) => {
       }
     })
   );
-  const Colors = list_colors("sRGB");
+  const Colors = [...new Set(
+    groups.reduce((colors, g2) => {
+      return g2.Colors.reduce((colors2, c2) => {
+        const n3 = parseInt(c2, 16);
+        const R4 = n3 >> 16 & 255;
+        const G3 = n3 >> 8 & 255;
+        const B3 = n3 & 255;
+        return [
+          ...colors2,
+          {
+            ID: `sRGB#${c2}`,
+            Properties: {
+              R: R4,
+              G: G3,
+              B: B3,
+              Space: "sRGB",
+              LowerRange: 0,
+              UpperRange: 255
+            }
+          }
+        ];
+      }, colors);
+    }, [
+      ...list_colors("sRGB"),
+      {
+        ID: "sRGB#ffffff",
+        Properties: {
+          R: 255,
+          G: 255,
+          B: 255,
+          Space: "sRGB",
+          LowerRange: 0,
+          UpperRange: 255
+        }
+      }
+    ])
+  )];
   const hardcoded_crc01 = groups.reduce(
     ({ name_map: name_map2, Groups: Groups22, GroupChannels: GroupChannels2 }, g2) => {
       if (!(g2.Path in GROUP_CHANNELS_CRC01)) {
@@ -131816,25 +131852,24 @@ const extractChannels = (loader, groups) => {
       };
       const new_group_channels = g2.Channels.reduce(
         (new_group_channels2, name2, index2) => {
-          const color_index = index2 % Colors.length;
           if (!(name2 in new_name_map)) {
             return new_group_channels2;
           }
-          return {
+          const color2 = g2.Colors[index2];
+          const color_id = `sRGB#${color2}`;
+          return new_group_channels2.concat({
             UUID: crypto.randomUUID(),
             State: { Expanded: true },
             Properties: {
-              LowerRange: 2 ** 8,
-              //TODO
-              UpperRange: 2 ** 12
-              //TODO
+              LowerRange: g2.Lows[index2],
+              UpperRange: g2.Highs[index2]
             },
             Associations: {
               SourceChannel: asUUID(new_name_map[name2]),
-              Color: asID(Colors[color_index].ID),
+              Color: asID(color_id),
               Group: asUUID(new_group.UUID)
             }
-          };
+          });
         },
         []
       );
@@ -131870,18 +131905,6 @@ const extractChannels = (loader, groups) => {
       Colors
     };
   } else if (SourceChannels.length === 1 && SourceChannels[0].Properties.Samples === 3 && SourceChannels[0].Associations.SourceDataType.ID === "Uint8") {
-    const OneColor = [{
-      ID: "sRGB#ffffff",
-      Properties: {
-        R: 255,
-        G: 255,
-        B: 255,
-        Space: "sRGB",
-        LowerRange: 0,
-        UpperRange: 255
-      }
-    }];
-    const White = OneColor[0];
     const Groups22 = [{
       UUID: crypto.randomUUID(),
       State: { Expanded: true },
@@ -131901,7 +131924,7 @@ const extractChannels = (loader, groups) => {
           },
           Associations: {
             SourceChannel: onlyUUID(channel),
-            Color: asID(White.ID),
+            Color: asID("sRGB#ffffff"),
             Group: asUUID(group_uuid)
           }
         };
@@ -131911,7 +131934,7 @@ const extractChannels = (loader, groups) => {
       SourceChannels,
       GroupChannels: GroupChannels2,
       Groups: Groups22,
-      Colors: OneColor
+      Colors
     };
   }
   const group_size = 4;
@@ -131929,8 +131952,13 @@ const extractChannels = (loader, groups) => {
   const GroupChannels = SourceChannels.map(
     (channel, index2) => {
       const group_index = Math.floor(index2 / group_size);
-      const color_index = index2 % group_size % Colors.length;
       const group_uuid = Groups2[group_index].UUID;
+      const color_id = [
+        "sRGB#0dabff",
+        "sRGB#c3ff00",
+        "sRGB#ff8b00",
+        "sRGB#ff00c7"
+      ][index2 % 4];
       return {
         UUID: crypto.randomUUID(),
         State: { Expanded: true },
@@ -131942,7 +131970,7 @@ const extractChannels = (loader, groups) => {
         },
         Associations: {
           SourceChannel: onlyUUID(channel),
-          Color: asID(Colors[color_index].ID),
+          Color: asID(color_id),
           Group: asUUID(group_uuid)
         }
       };
@@ -158053,7 +158081,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-RBUaw6Ss.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-B618S0oV.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
@@ -158414,7 +158442,7 @@ const Content = (props) => {
       onStart(
         [
           "https://us-central1-idc-external-031.cloudfunctions.net/minerva_proxy/studies/2.25.112849421593762410108114587383519700602/series/1.3.6.1.4.1.5962.99.1.331207435.2054329796.1752677896971.4.0",
-          "https://us-central1-idc-external-031.cloudfunctions.net/minerva_proxy/studies/2.25.112849421593762410108114587383519700602/series/1.3.6.1.4.1.5962.99.1.714652616.317867787.1753061342152.4.0"
+          "https://us-central1-idc-external-031.cloudfunctions.net/minerva_proxy/studies/2.25.112849421593762410108114587383519700602/series/1.3.6.1.4.1.5962.99.1.2507374895.494638264.1767738966319.4.0"
         ][+h_and_e],
         "DICOM-WEB"
       );
@@ -161190,7 +161218,17 @@ const exhibit_config = {
         "FF8080"
       ],
       "Name": "Histology",
-      "Path": "Histology_40__HE-r--41__HE-g--42__HE-b"
+      "Path": "Histology_40__HE-r--41__HE-g--42__HE-b",
+      "Highs": [
+        65600,
+        65600,
+        65600
+      ],
+      "Lows": [
+        0,
+        0,
+        0
+      ]
     },
     {
       "Channels": [
@@ -161208,7 +161246,21 @@ const exhibit_config = {
         "ffff00"
       ],
       "Name": "Tissue Structure",
-      "Path": "Tissue-Structure_0__DNA1--14__PanCK--15__ASMA--35__CD31--18__CD45"
+      "Path": "Tissue-Structure_0__DNA1--14__PanCK--15__ASMA--35__CD31--18__CD45",
+      "Highs": [
+        3e4,
+        4e4,
+        1e4,
+        1e4,
+        12e3
+      ],
+      "Lows": [
+        500,
+        500,
+        500,
+        500,
+        1500
+      ]
     },
     {
       "Channels": [
@@ -161230,7 +161282,25 @@ const exhibit_config = {
         "00ffff"
       ],
       "Name": "Immune Populations",
-      "Path": "Immune-Populations_0__DNA1--18__CD45--23__CD8a--17__CD4--21__CD20--22__CD68--25__CD163"
+      "Path": "Immune-Populations_0__DNA1--18__CD45--23__CD8a--17__CD4--21__CD20--22__CD68--25__CD163",
+      "Highs": [
+        3e4,
+        2e4,
+        15e3,
+        8e3,
+        45e3,
+        15e3,
+        1e4
+      ],
+      "Lows": [
+        500,
+        1500,
+        3e3,
+        3e3,
+        500,
+        3e3,
+        2e3
+      ]
     },
     {
       "Channels": [
@@ -161248,7 +161318,21 @@ const exhibit_config = {
         "ffffff"
       ],
       "Name": "Lymphocytes",
-      "Path": "Lymphocytes_0__DNA1--23__CD8a--17__CD4--21__CD20--26__FOXP3"
+      "Path": "Lymphocytes_0__DNA1--23__CD8a--17__CD4--21__CD20--26__FOXP3",
+      "Highs": [
+        3e4,
+        15e3,
+        8e3,
+        45e3,
+        15e3
+      ],
+      "Lows": [
+        500,
+        3e3,
+        3e3,
+        500,
+        500
+      ]
     },
     {
       "Channels": [
@@ -161262,7 +161346,17 @@ const exhibit_config = {
         "ff0000"
       ],
       "Name": "Macrophages",
-      "Path": "Macrophages_0__DNA1--22__CD68--25__CD163"
+      "Path": "Macrophages_0__DNA1--22__CD68--25__CD163",
+      "Highs": [
+        3e4,
+        1e4,
+        7e3
+      ],
+      "Lows": [
+        500,
+        1e3,
+        2e3
+      ]
     },
     {
       "Channels": [
@@ -161280,7 +161374,21 @@ const exhibit_config = {
         "00ff00"
       ],
       "Name": "Proliferation",
-      "Path": "Proliferation_0__DNA1--37__PCNA--14__PanCK--18__CD45--13__Ki67"
+      "Path": "Proliferation_0__DNA1--37__PCNA--14__PanCK--18__CD45--13__Ki67",
+      "Highs": [
+        3e4,
+        2e4,
+        65e3,
+        15e3,
+        8e3
+      ],
+      "Lows": [
+        500,
+        5e3,
+        1e3,
+        1500,
+        4e3
+      ]
     },
     {
       "Channels": [
@@ -161296,7 +161404,19 @@ const exhibit_config = {
         "00ff00"
       ],
       "Name": "PD1 Immune Checkpoint",
-      "Path": "PD1-Immune-Checkpoint_0__DNA1--14__PanCK--27__PDL1--19__PD1"
+      "Path": "PD1-Immune-Checkpoint_0__DNA1--14__PanCK--27__PDL1--19__PD1",
+      "Highs": [
+        3e4,
+        65e3,
+        6e3,
+        6e3
+      ],
+      "Lows": [
+        500,
+        1e3,
+        2500,
+        1500
+      ]
     },
     {
       "Channels": [
@@ -161310,7 +161430,17 @@ const exhibit_config = {
         "ff0000"
       ],
       "Name": "Helper and Regulatory T Cells",
-      "Path": "Helper-and-Regulatory-T-Cells_0__DNA1--17__CD4--26__FOXP3"
+      "Path": "Helper-and-Regulatory-T-Cells_0__DNA1--17__CD4--26__FOXP3",
+      "Highs": [
+        3e4,
+        15e3,
+        1e4
+      ],
+      "Lows": [
+        500,
+        3e3,
+        1e3
+      ]
     },
     {
       "Channels": [
@@ -161324,7 +161454,17 @@ const exhibit_config = {
         "00ff00"
       ],
       "Name": "CD8 Cytotoxic T Cells",
-      "Path": "CD8-Cytotoxic-T-Cells_0__DNA1--23__CD8a--19__PD1"
+      "Path": "CD8-Cytotoxic-T-Cells_0__DNA1--23__CD8a--19__PD1",
+      "Highs": [
+        3e4,
+        25e3,
+        1e4
+      ],
+      "Lows": [
+        500,
+        3e3,
+        1500
+      ]
     },
     {
       "Channels": [
@@ -161338,7 +161478,17 @@ const exhibit_config = {
         "ff0000"
       ],
       "Name": "FOXP3 CD8 T Cells",
-      "Path": "FOXP3-CD8-T-Cells_0__DNA1--23__CD8a--26__FOXP3"
+      "Path": "FOXP3-CD8-T-Cells_0__DNA1--23__CD8a--26__FOXP3",
+      "Highs": [
+        3e4,
+        25e3,
+        1e4
+      ],
+      "Lows": [
+        500,
+        3e3,
+        1e3
+      ]
     },
     {
       "Channels": [
@@ -161352,7 +161502,17 @@ const exhibit_config = {
         "00ff00"
       ],
       "Name": "NaK ATPase",
-      "Path": "NaK-ATPase_0__DNA1--14__PanCK--10__Na-K-ATPase"
+      "Path": "NaK-ATPase_0__DNA1--14__PanCK--10__Na-K-ATPase",
+      "Highs": [
+        3e4,
+        65e3,
+        2e4
+      ],
+      "Lows": [
+        500,
+        1e3,
+        1e3
+      ]
     },
     {
       "Channels": [
@@ -161366,7 +161526,17 @@ const exhibit_config = {
         "00ff00"
       ],
       "Name": "E-Cadherin",
-      "Path": "E-Cadherin_0__DNA1--14__PanCK--29__Ecadherin"
+      "Path": "E-Cadherin_0__DNA1--14__PanCK--29__Ecadherin",
+      "Highs": [
+        3e4,
+        65e3,
+        25e3
+      ],
+      "Lows": [
+        500,
+        1e3,
+        1e3
+      ]
     },
     {
       "Channels": [
@@ -161384,7 +161554,21 @@ const exhibit_config = {
         "00ffff"
       ],
       "Name": "Stroma",
-      "Path": "Stroma_0__DNA1--15__ASMA--34__Desmin--39__Collagen--30__Vimentin"
+      "Path": "Stroma_0__DNA1--15__ASMA--34__Desmin--39__Collagen--30__Vimentin",
+      "Highs": [
+        3e4,
+        3e4,
+        3e4,
+        6e4,
+        5e3
+      ],
+      "Lows": [
+        500,
+        1e3,
+        1e3,
+        1e3,
+        1e3
+      ]
     },
     {
       "Channels": [
@@ -161402,7 +161586,21 @@ const exhibit_config = {
         "ff0000"
       ],
       "Name": "PDL1-Positive Immune Cells",
-      "Path": "PDL1-Positive-Immune-Cells_0__DNA1--17__CD4--22__CD68--25__CD163--27__PDL1"
+      "Path": "PDL1-Positive-Immune-Cells_0__DNA1--17__CD4--22__CD68--25__CD163--27__PDL1",
+      "Highs": [
+        3e4,
+        15e3,
+        15e3,
+        1e4,
+        5e3
+      ],
+      "Lows": [
+        500,
+        3e3,
+        3e3,
+        2e3,
+        2500
+      ]
     },
     {
       "Channels": [
@@ -161418,7 +161616,19 @@ const exhibit_config = {
         "00ff00"
       ],
       "Name": "PDL1-CD8 Interaction",
-      "Path": "PDL1-CD8-Interaction_0__DNA1--27__PDL1--23__CD8a--19__PD1"
+      "Path": "PDL1-CD8-Interaction_0__DNA1--27__PDL1--23__CD8a--19__PD1",
+      "Highs": [
+        3e4,
+        5e3,
+        25e3,
+        1e4
+      ],
+      "Lows": [
+        500,
+        2500,
+        3e3,
+        1500
+      ]
     },
     {
       "Channels": [
@@ -161434,7 +161644,19 @@ const exhibit_config = {
         "ff0000"
       ],
       "Name": "Tumor Budding Epithelial",
-      "Path": "Tumor-Budding-Epithelial_0__DNA1--14__PanCK--29__Ecadherin--37__PCNA"
+      "Path": "Tumor-Budding-Epithelial_0__DNA1--14__PanCK--29__Ecadherin--37__PCNA",
+      "Highs": [
+        4e4,
+        65e3,
+        25e3,
+        5e4
+      ],
+      "Lows": [
+        500,
+        1e3,
+        1e3,
+        1e3
+      ]
     },
     {
       "Channels": [
@@ -161443,8 +161665,7 @@ const exhibit_config = {
         "PDL1",
         "FOXP3",
         "CD8a",
-        "PD1",
-        "CD68"
+        "PD1"
       ],
       "Colors": [
         "0000ff",
@@ -161452,11 +161673,26 @@ const exhibit_config = {
         "ff0000",
         "ffff00",
         "00ff00",
-        "6c00ff",
-        "654321"
+        "6c00ff"
       ],
       "Name": "Tumor Budding Immune Modulation",
-      "Path": "Tumor-Budding-Immune-Modulation_0__DNA1--14__PanCK--27__PDL1--26__FOXP3--23__CD8a--19__PD1--22__CD68"
+      "Path": "Tumor-Budding-Immune-Modulation_0__DNA1--14__PanCK--27__PDL1--26__FOXP3--23__CD8a--19__PD1--22__CD68",
+      "Highs": [
+        3e4,
+        4e4,
+        5e3,
+        7e3,
+        2e4,
+        6e3
+      ],
+      "Lows": [
+        500,
+        500,
+        2500,
+        1e3,
+        1500,
+        1500
+      ]
     },
     {
       "Channels": [
@@ -161468,7 +161704,15 @@ const exhibit_config = {
         "00ff00"
       ],
       "Name": "Nuclear Lamina",
-      "Path": "Nuclear-Lamina_0__DNA1--33__LaminABC"
+      "Path": "Nuclear-Lamina_0__DNA1--33__LaminABC",
+      "Highs": [
+        3e4,
+        2e4
+      ],
+      "Lows": [
+        500,
+        500
+      ]
     },
     {
       "Channels": [
@@ -161480,7 +161724,15 @@ const exhibit_config = {
         "ff0000"
       ],
       "Name": "DAPI Cycle Correlation",
-      "Path": "DAPI-Cycle-Correlation_0__DNA1--36__DNA10"
+      "Path": "DAPI-Cycle-Correlation_0__DNA1--36__DNA10",
+      "Highs": [
+        65e3,
+        5e4
+      ],
+      "Lows": [
+        1e3,
+        1e3
+      ]
     },
     {
       "Channels": [
@@ -161496,7 +161748,19 @@ const exhibit_config = {
         "ff0000"
       ],
       "Name": "Transitions",
-      "Path": "Transitions_0__DNA1--14__PanCK--29__Ecadherin--37__PCNA"
+      "Path": "Transitions_0__DNA1--14__PanCK--29__Ecadherin--37__PCNA",
+      "Highs": [
+        32768,
+        5e4,
+        5e4,
+        2e4
+      ],
+      "Lows": [
+        0,
+        0,
+        1e3,
+        5e3
+      ]
     }
   ]
 };
@@ -161521,7 +161785,7 @@ root.render(
       {
         handleKeys: ["ome-dir-1"],
         demo_dicom_web: true,
-        h_and_e: false,
+        h_and_e: true,
         exhibit_config,
         configWaypoints
       }
