@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-DOEQ6EEB.js","./pako.esm-C0YWBoLx.js","./lerc-DX4hISTF.js","./LercDecode-C-JHAJtF.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-DslDsze8.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-CzJKeIFp.js","./pako.esm-C0YWBoLx.js","./lerc-D5NjU7Wy.js","./LercDecode-D9oivKlt.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-RBUaw6Ss.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -60865,7 +60865,7 @@ const _VertexArray = class _VertexArray extends Resource$1 {
   }
   // DEPRECATED METHODS
   /** @deprecated Set constant attributes (WebGL only) */
-  setConstantWebGL(location2, value) {
+  setConstantWebGL(location, value) {
     this.device.reportError(new Error("constant attributes not supported"));
   }
 };
@@ -76751,8 +76751,8 @@ const _Model = class _Model {
       for (const attributeName of attributeNames) {
         const attributeInfo = this._attributeInfos[attributeName];
         if (attributeInfo) {
-          const location2 = this.device.type === "webgpu" ? bufferLayoutHelper.getBufferIndex(attributeInfo.bufferName) : attributeInfo.location;
-          this.vertexArray.setBuffer(location2, buffer2);
+          const location = this.device.type === "webgpu" ? bufferLayoutHelper.getBufferIndex(attributeInfo.bufferName) : attributeInfo.location;
+          this.vertexArray.setBuffer(location, buffer2);
           set5 = true;
         }
       }
@@ -84124,13 +84124,13 @@ function readAttributeDeclarations(gl2, program) {
       type: compositeType
       /* , size*/
     } = activeInfo;
-    const location2 = gl2.getAttribLocation(program, name2);
-    if (location2 >= 0) {
+    const location = gl2.getAttribLocation(program, name2);
+    if (location >= 0) {
       const { attributeType } = decodeGLAttributeType(compositeType);
       const stepMode = /instance/i.test(name2) ? "instance" : "vertex";
       attributes.push({
         name: name2,
-        location: location2,
+        location,
         stepMode,
         type: attributeType
         // size - for arrays, size is the number of elements in the array
@@ -84143,14 +84143,14 @@ function readAttributeDeclarations(gl2, program) {
 function readVaryings(gl2, program) {
   const varyings = [];
   const count2 = gl2.getProgramParameter(program, 35971);
-  for (let location2 = 0; location2 < count2; location2++) {
-    const activeInfo = gl2.getTransformFeedbackVarying(program, location2);
+  for (let location = 0; location < count2; location++) {
+    const activeInfo = gl2.getTransformFeedbackVarying(program, location);
     if (!activeInfo) {
       throw new Error("activeInfo");
     }
     const { name: name2, type: compositeType, size } = activeInfo;
     const { glType, components } = decodeGLUniformType(compositeType);
-    const varying = { location: location2, name: name2, type: glType, size: size * components };
+    const varying = { location, name: name2, type: glType, size: size * components };
     varyings.push(varying);
   }
   varyings.sort((a2, b2) => a2.location - b2.location);
@@ -84275,7 +84275,7 @@ function parseUniformName(name2) {
     isArray: Boolean(matches2[2])
   };
 }
-function setUniform(gl2, location2, type, value) {
+function setUniform(gl2, location, type, value) {
   const gl22 = gl2;
   let uniformValue = value;
   if (uniformValue === true) {
@@ -84304,57 +84304,57 @@ function setUniform(gl2, location2, type, value) {
       if (typeof value !== "number") {
         throw new Error("samplers must be set to integers");
       }
-      return gl2.uniform1i(location2, value);
+      return gl2.uniform1i(location, value);
     case 5126:
-      return gl2.uniform1fv(location2, arrayValue);
+      return gl2.uniform1fv(location, arrayValue);
     case 35664:
-      return gl2.uniform2fv(location2, arrayValue);
+      return gl2.uniform2fv(location, arrayValue);
     case 35665:
-      return gl2.uniform3fv(location2, arrayValue);
+      return gl2.uniform3fv(location, arrayValue);
     case 35666:
-      return gl2.uniform4fv(location2, arrayValue);
+      return gl2.uniform4fv(location, arrayValue);
     case 5124:
-      return gl2.uniform1iv(location2, arrayValue);
+      return gl2.uniform1iv(location, arrayValue);
     case 35667:
-      return gl2.uniform2iv(location2, arrayValue);
+      return gl2.uniform2iv(location, arrayValue);
     case 35668:
-      return gl2.uniform3iv(location2, arrayValue);
+      return gl2.uniform3iv(location, arrayValue);
     case 35669:
-      return gl2.uniform4iv(location2, arrayValue);
+      return gl2.uniform4iv(location, arrayValue);
     case 35670:
-      return gl2.uniform1iv(location2, arrayValue);
+      return gl2.uniform1iv(location, arrayValue);
     case 35671:
-      return gl2.uniform2iv(location2, arrayValue);
+      return gl2.uniform2iv(location, arrayValue);
     case 35672:
-      return gl2.uniform3iv(location2, arrayValue);
+      return gl2.uniform3iv(location, arrayValue);
     case 35673:
-      return gl2.uniform4iv(location2, arrayValue);
+      return gl2.uniform4iv(location, arrayValue);
     case 5125:
-      return gl22.uniform1uiv(location2, arrayValue, 1);
+      return gl22.uniform1uiv(location, arrayValue, 1);
     case 36294:
-      return gl22.uniform2uiv(location2, arrayValue, 2);
+      return gl22.uniform2uiv(location, arrayValue, 2);
     case 36295:
-      return gl22.uniform3uiv(location2, arrayValue, 3);
+      return gl22.uniform3uiv(location, arrayValue, 3);
     case 36296:
-      return gl22.uniform4uiv(location2, arrayValue, 4);
+      return gl22.uniform4uiv(location, arrayValue, 4);
     case 35674:
-      return gl2.uniformMatrix2fv(location2, false, arrayValue);
+      return gl2.uniformMatrix2fv(location, false, arrayValue);
     case 35675:
-      return gl2.uniformMatrix3fv(location2, false, arrayValue);
+      return gl2.uniformMatrix3fv(location, false, arrayValue);
     case 35676:
-      return gl2.uniformMatrix4fv(location2, false, arrayValue);
+      return gl2.uniformMatrix4fv(location, false, arrayValue);
     case 35685:
-      return gl22.uniformMatrix2x3fv(location2, false, arrayValue);
+      return gl22.uniformMatrix2x3fv(location, false, arrayValue);
     case 35686:
-      return gl22.uniformMatrix2x4fv(location2, false, arrayValue);
+      return gl22.uniformMatrix2x4fv(location, false, arrayValue);
     case 35687:
-      return gl22.uniformMatrix3x2fv(location2, false, arrayValue);
+      return gl22.uniformMatrix3x2fv(location, false, arrayValue);
     case 35688:
-      return gl22.uniformMatrix3x4fv(location2, false, arrayValue);
+      return gl22.uniformMatrix3x4fv(location, false, arrayValue);
     case 35689:
-      return gl22.uniformMatrix4x2fv(location2, false, arrayValue);
+      return gl22.uniformMatrix4x2fv(location, false, arrayValue);
     case 35690:
-      return gl22.uniformMatrix4x3fv(location2, false, arrayValue);
+      return gl22.uniformMatrix4x3fv(location, false, arrayValue);
   }
   throw new Error("Illegal uniform");
 }
@@ -84678,11 +84678,11 @@ class WEBGLRenderPipeline extends RenderPipeline {
       switch (binding.type) {
         case "uniform":
           const { name: name2 } = binding;
-          const location2 = gl2.getUniformBlockIndex(this.handle, name2);
-          if (location2 === 4294967295) {
+          const location = gl2.getUniformBlockIndex(this.handle, name2);
+          if (location === 4294967295) {
             throw new Error(`Invalid uniform block name ${name2}`);
           }
-          gl2.uniformBlockBinding(this.handle, uniformBufferIndex, location2);
+          gl2.uniformBlockBinding(this.handle, uniformBufferIndex, location);
           if (value instanceof WEBGLBuffer) {
             gl2.bindBufferBase(35345, uniformBufferIndex, value.handle);
           } else {
@@ -84732,10 +84732,10 @@ class WEBGLRenderPipeline extends RenderPipeline {
    */
   _applyUniforms() {
     for (const uniformLayout of this.shaderLayout.uniforms || []) {
-      const { name: name2, location: location2, type, textureUnit } = uniformLayout;
+      const { name: name2, location, type, textureUnit } = uniformLayout;
       const value = this.uniforms[name2] ?? textureUnit;
       if (value !== void 0) {
-        setUniform(this.device.gl, location2, type, value);
+        setUniform(this.device.gl, location, type, value);
       }
     }
   }
@@ -85033,29 +85033,29 @@ class WEBGLVertexArray extends VertexArray {
     this.device.gl.bindVertexArray(null);
   }
   /** Set a location in vertex attributes array to a buffer, enables the location, sets divisor */
-  setBuffer(location2, attributeBuffer) {
+  setBuffer(location, attributeBuffer) {
     const buffer2 = attributeBuffer;
     if (buffer2.glTarget === 34963) {
       throw new Error("Use .setIndexBuffer()");
     }
-    const { size, type, stride, offset, normalized, integer, divisor } = this._getAccessor(location2);
+    const { size, type, stride, offset, normalized, integer, divisor } = this._getAccessor(location);
     this.device.gl.bindVertexArray(this.handle);
     this.device.gl.bindBuffer(34962, buffer2.handle);
     if (integer) {
-      this.device.gl.vertexAttribIPointer(location2, size, type, stride, offset);
+      this.device.gl.vertexAttribIPointer(location, size, type, stride, offset);
     } else {
-      this.device.gl.vertexAttribPointer(location2, size, type, normalized, stride, offset);
+      this.device.gl.vertexAttribPointer(location, size, type, normalized, stride, offset);
     }
     this.device.gl.bindBuffer(34962, null);
-    this.device.gl.enableVertexAttribArray(location2);
-    this.device.gl.vertexAttribDivisor(location2, divisor || 0);
-    this.attributes[location2] = buffer2;
+    this.device.gl.enableVertexAttribArray(location);
+    this.device.gl.vertexAttribDivisor(location, divisor || 0);
+    this.attributes[location] = buffer2;
     this.device.gl.bindVertexArray(null);
   }
   /** Set a location in vertex attributes array to a constant value, disables the location */
-  setConstantWebGL(location2, value) {
-    this._enable(location2, false);
-    this.attributes[location2] = value;
+  setConstantWebGL(location, value) {
+    this._enable(location, false);
+    this.attributes[location] = value;
   }
   bindBeforeRender() {
     this.device.gl.bindVertexArray(this.handle);
@@ -85072,10 +85072,10 @@ class WEBGLVertexArray extends VertexArray {
    * @note Constant attributes are only supported in WebGL, not in WebGPU
    */
   _applyConstantAttributes() {
-    for (let location2 = 0; location2 < this.maxVertexAttributes; ++location2) {
-      const constant2 = this.attributes[location2];
+    for (let location = 0; location < this.maxVertexAttributes; ++location) {
+      const constant2 = this.attributes[location];
       if (ArrayBuffer.isView(constant2)) {
-        this.device.setConstantAttributeWebGL(location2, constant2);
+        this.device.setConstantAttributeWebGL(location, constant2);
       }
     }
   }
@@ -85095,10 +85095,10 @@ class WEBGLVertexArray extends VertexArray {
   //   this.device.gl.vertexAttribDivisor(location, divisor || 0);
   // }
   /** Get an accessor from the  */
-  _getAccessor(location2) {
-    const attributeInfo = this.attributeInfos[location2];
+  _getAccessor(location) {
+    const attributeInfo = this.attributeInfos[location];
     if (!attributeInfo) {
-      throw new Error(`Unknown attribute location ${location2}`);
+      throw new Error(`Unknown attribute location ${location}`);
     }
     const glType = getGLFromVertexType(attributeInfo.bufferDataType);
     return {
@@ -85122,16 +85122,16 @@ class WEBGLVertexArray extends VertexArray {
    * TODO - handle single values for size 1 attributes?
    * TODO - convert classic arrays based on known type?
    */
-  _enable(location2, enable2 = true) {
+  _enable(location, enable2 = true) {
     const canDisableAttributeZero = WEBGLVertexArray.isConstantAttributeZeroSupported(this.device);
-    const canDisableAttribute = canDisableAttributeZero || location2 !== 0;
+    const canDisableAttribute = canDisableAttributeZero || location !== 0;
     if (enable2 || canDisableAttribute) {
-      location2 = Number(location2);
+      location = Number(location);
       this.device.gl.bindVertexArray(this.handle);
       if (enable2) {
-        this.device.gl.enableVertexAttribArray(location2);
+        this.device.gl.enableVertexAttribArray(location);
       } else {
-        this.device.gl.disableVertexAttribArray(location2);
+        this.device.gl.disableVertexAttribArray(location);
       }
       this.device.gl.bindVertexArray(null);
     }
@@ -85237,24 +85237,24 @@ class WEBGLTransformFeedback extends TransformFeedback {
     });
   }
   setBuffer(locationOrName, bufferOrRange) {
-    const location2 = this._getVaryingIndex(locationOrName);
+    const location = this._getVaryingIndex(locationOrName);
     const { buffer: buffer2, byteLength, byteOffset } = this._getBufferRange(bufferOrRange);
-    if (location2 < 0) {
+    if (location < 0) {
       this.unusedBuffers[locationOrName] = buffer2;
       log$3.warn(`${this.id} unusedBuffers varying buffer ${locationOrName}`)();
       return;
     }
-    this.buffers[location2] = { buffer: buffer2, byteLength, byteOffset };
+    this.buffers[location] = { buffer: buffer2, byteLength, byteOffset };
     if (!this.bindOnUse) {
-      this._bindBuffer(location2, buffer2, byteOffset, byteLength);
+      this._bindBuffer(location, buffer2, byteOffset, byteLength);
     }
   }
   getBuffer(locationOrName) {
     if (isIndex$4(locationOrName)) {
       return this.buffers[locationOrName] || null;
     }
-    const location2 = this._getVaryingIndex(locationOrName);
-    return location2 >= 0 ? this.buffers[location2] : null;
+    const location = this._getVaryingIndex(locationOrName);
+    return location >= 0 ? this.buffers[location] : null;
   }
   bind(funcOrHandle = this.handle) {
     if (typeof funcOrHandle !== "function") {
@@ -85728,23 +85728,23 @@ class WebGLDevice extends Device {
    * so they need to be updated before every render
    * @todo - remember/cache values to avoid setting them unnecessarily?
    */
-  setConstantAttributeWebGL(location2, constant2) {
+  setConstantAttributeWebGL(location, constant2) {
     const maxVertexAttributes = this.limits.maxVertexAttributes;
     this._constants = this._constants || new Array(maxVertexAttributes).fill(null);
-    const currentConstant = this._constants[location2];
+    const currentConstant = this._constants[location];
     if (currentConstant && compareConstantArrayValues(currentConstant, constant2)) {
-      log$3.info(1, `setConstantAttributeWebGL(${location2}) could have been skipped, value unchanged`)();
+      log$3.info(1, `setConstantAttributeWebGL(${location}) could have been skipped, value unchanged`)();
     }
-    this._constants[location2] = constant2;
+    this._constants[location] = constant2;
     switch (constant2.constructor) {
       case Float32Array:
-        setConstantFloatArray(this, location2, constant2);
+        setConstantFloatArray(this, location, constant2);
         break;
       case Int32Array:
-        setConstantIntArray(this, location2, constant2);
+        setConstantIntArray(this, location, constant2);
         break;
       case Uint32Array:
-        setConstantUintArray(this, location2, constant2);
+        setConstantUintArray(this, location, constant2);
         break;
       default:
         throw new Error("constant");
@@ -85756,27 +85756,27 @@ class WebGLDevice extends Device {
     return this._extensions;
   }
 }
-function setConstantFloatArray(device, location2, array) {
+function setConstantFloatArray(device, location, array) {
   switch (array.length) {
     case 1:
-      device.gl.vertexAttrib1fv(location2, array);
+      device.gl.vertexAttrib1fv(location, array);
       break;
     case 2:
-      device.gl.vertexAttrib2fv(location2, array);
+      device.gl.vertexAttrib2fv(location, array);
       break;
     case 3:
-      device.gl.vertexAttrib3fv(location2, array);
+      device.gl.vertexAttrib3fv(location, array);
       break;
     case 4:
-      device.gl.vertexAttrib4fv(location2, array);
+      device.gl.vertexAttrib4fv(location, array);
       break;
   }
 }
-function setConstantIntArray(device, location2, array) {
-  device.gl.vertexAttribI4iv(location2, array);
+function setConstantIntArray(device, location, array) {
+  device.gl.vertexAttribI4iv(location, array);
 }
-function setConstantUintArray(device, location2, array) {
-  device.gl.vertexAttribI4uiv(location2, array);
+function setConstantUintArray(device, location, array) {
+  device.gl.vertexAttribI4uiv(location, array);
 }
 function compareConstantArrayValues(v1, v2) {
   if (!v1 || !v2 || v1.length !== v2.length || v1.constructor !== v2.constructor) {
@@ -100664,10 +100664,10 @@ var loglevel = { exports: {} };
           try {
             var cookie = window.document.cookie;
             var cookieName = encodeURIComponent(storageKey);
-            var location2 = cookie.indexOf(cookieName + "=");
-            if (location2 !== -1) {
+            var location = cookie.indexOf(cookieName + "=");
+            if (location !== -1) {
               storedLevel = /^([^;]+)/.exec(
-                cookie.slice(location2 + cookieName.length + 1)
+                cookie.slice(location + cookieName.length + 1)
               )[1];
             }
           } catch (ignore2) {
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-CF_CHQmL.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-Bx6XZYQT.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-BGrnuB5W.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-Dpj5uI2U.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-BZEBxKKv.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-DOEQ6EEB.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-BsJbuC3c.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-CAEQECmG.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-CzJKeIFp.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-jjqfKzOR.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-DX4hISTF.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-D5NjU7Wy.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-DF3GPIPP.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-DAiP__GY.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -118355,14 +118355,14 @@ function parseGeoKeyDirectory(fileDirectory) {
   const geoKeyDirectory = {};
   for (let i5 = 4; i5 <= rawGeoKeyDirectory[3] * 4; i5 += 4) {
     const key = geoKeyNames[rawGeoKeyDirectory[i5]];
-    const location2 = rawGeoKeyDirectory[i5 + 1] ? fieldTagNames[rawGeoKeyDirectory[i5 + 1]] : null;
+    const location = rawGeoKeyDirectory[i5 + 1] ? fieldTagNames[rawGeoKeyDirectory[i5 + 1]] : null;
     const count2 = rawGeoKeyDirectory[i5 + 2];
     const offset = rawGeoKeyDirectory[i5 + 3];
     let value = null;
-    if (!location2) {
+    if (!location) {
       value = offset;
     } else {
-      value = fileDirectory[location2];
+      value = fileDirectory[location];
       if (typeof value === "undefined" || value === null) {
         throw new Error(`Could not get value of geoKey '${key}'.`);
       } else if (typeof value === "string") {
@@ -131473,74 +131473,6 @@ const loadDicomWeb = async (series) => {
 const findDicomWeb = (series) => {
   return listDicomWeb(series);
 };
-function useFormats({ formats }) {
-  const empty2 = [];
-  return empty2.concat(...formats.map((f3) => {
-    return f3.keys.map((k4) => [k4, f3]);
-  }));
-}
-function handleFormat(format2) {
-  const { encode: encode2, decode: decode2 } = {
-    decode: (s3) => s3,
-    encode: (s3) => s3,
-    ...format2
-  };
-  return {
-    join: (kv) => kv.pop(),
-    checkText: (s3) => s3 === encode2(decode2(s3)),
-    checkValue: (v2) => v2 === decode2(encode2(v2)),
-    empty: decode2(""),
-    ...format2,
-    decode: decode2,
-    encode: encode2
-  };
-}
-function core(..._2) {
-  const [obj, read] = _2;
-  const anyIn = (x2) => !read;
-  const anyOut = (x2) => read;
-  return ([k4, _f2]) => {
-    const f3 = handleFormat(_f2);
-    const checkIn = (x2) => {
-      return !anyIn() ? f3.checkText(x2) : f3.checkValue(x2);
-    };
-    const codeIn = (x2) => {
-      return !anyIn() ? f3.decode(x2) : x2;
-    };
-    const codeOut = (x2) => {
-      return !anyOut() ? f3.encode(x2) : x2;
-    };
-    const join2 = (kv) => {
-      return !anyOut(kv[1]) ? f3.join(kv) : kv;
-    };
-    const checkOut = (x2) => {
-      return !anyOut() ? f3.checkText(x2) : f3.checkValue(x2);
-    };
-    if (k4 in obj) {
-      const vIn = obj[k4];
-      const value = codeIn(vIn);
-      const vOut = codeOut(value);
-      if (checkIn(vIn) && checkOut(vOut)) {
-        return join2([k4, vOut]);
-      }
-    }
-    return join2([k4, codeOut(f3.empty)]);
-  };
-}
-const useSetVars = (nav2, opts) => {
-  return (state) => {
-    const { root: root2 = "/", slash = "/" } = opts;
-    const serialize2 = core(state, false);
-    const hashKVs = useFormats(opts).map(serialize2);
-    const pathname = root2 + hashKVs.join(slash);
-    nav2({ pathname });
-  };
-};
-const useVars = (params, opts) => {
-  const parse2 = core(params, true);
-  const entries = useFormats(opts).map(parse2);
-  return Object.fromEntries(entries);
-};
 const convertWaypointToViewState = (pan, zoom, imageWidth, imageHeight, containerWidth) => {
   if ((pan === void 0 || pan === null) && (zoom === void 0 || zoom === null)) {
     return null;
@@ -131569,61 +131501,6 @@ const getWaypoints = (list2, s3) => {
 const getWaypoint = (list2, s3, w2) => {
   const waypoints = getWaypoints(list2, s3) || [];
   return waypoints[modulo(w2, waypoints.length)];
-};
-const VEC = (len2) => {
-  return {
-    checkValue: (a2) => !a2.some(isNaN) && a2.length === len2,
-    encode: (a2) => a2.map((n3) => n3.toPrecision(4)).join("_"),
-    decode: (s3) => s3.split("_").map(parseFloat),
-    checkText: (s3) => true
-  };
-};
-const toOpts = (noHash) => {
-  const asInt = {
-    encode: (x2) => `${x2}`,
-    decode: parseInt
-  };
-  return {
-    root: "#",
-    slash: "#",
-    formats: [
-      { ...asInt, keys: ["i"], empty: noHash.i },
-      { ...asInt, keys: ["s"], empty: noHash.s },
-      { ...asInt, keys: ["w"], empty: noHash.w },
-      { ...asInt, keys: ["g"], empty: noHash.g },
-      { ...asInt, keys: ["m"], empty: noHash.m },
-      { ...VEC(2), keys: ["a"], empty: noHash.a },
-      { ...VEC(3), keys: ["v"], empty: noHash.v },
-      { ...VEC(4), keys: ["o"], empty: noHash.o },
-      { keys: ["p"], empty: noHash.p }
-    ].map((f3) => {
-      const join2 = (kv) => kv.join("=");
-      return { ...f3, join: join2 };
-    })
-  };
-};
-const toHash = (url, opts) => {
-  const urlHash = window.location.hash.split("#");
-  const urlParams = urlHash.reduce((obj, str2) => {
-    const [k4, v2] = str2.split("=");
-    obj[k4] = v2;
-    return obj;
-  }, {});
-  return useVars(urlParams, opts);
-};
-const useHash = (url, stories) => {
-  const opts = toOpts(toEmptyHash(stories));
-  const hash = toHash(url, opts);
-  const setVars = useSetVars((to) => {
-    location.hash = to.pathname;
-  }, opts);
-  const setHash = (newHash) => {
-    return setVars({
-      ...hash,
-      ...newHash
-    });
-  };
-  return { hash, setHash };
 };
 const toEmptyHash = (stories) => {
   const defaultHash = {
@@ -132347,7 +132224,7 @@ function emptyFunctionWithReset() {
 }
 emptyFunctionWithReset.resetWarningCache = emptyFunction;
 var factoryWithThrowingShims = function() {
-  function shim(props, propName, componentName, location2, propFullName, secret) {
+  function shim(props, propName, componentName, location, propFullName, secret) {
     if (secret === ReactPropTypesSecret) {
       return;
     }
@@ -134505,6 +134382,7 @@ const createDragHandlers = (activeTool, onInteraction) => {
   };
 };
 const Main$2 = qe$1.div`
+  position: relative;
   height: 100%;
 `;
 const isElement = (x2 = {}) => {
@@ -158175,7 +158053,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-DslDsze8.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-RBUaw6Ss.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
@@ -158468,14 +158346,6 @@ const Content = (props) => {
     }
     onStartOmeTiff(s3);
   };
-  reactExports.useEffect(() => {
-    const urlContext = useHash(
-      window.location.href,
-      exhibit.stories
-    );
-    console.log(hash);
-    urlContext.setHash(hash);
-  }, [hash]);
   const onStartDicomWeb = async (series, groups) => {
     setDicomSeries(series);
     const dicomIndex2 = await loadDicomWeb(series);
