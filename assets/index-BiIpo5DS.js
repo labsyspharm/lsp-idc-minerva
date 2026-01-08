@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-BZYlDRWm.js","./pako.esm-C0YWBoLx.js","./lerc-BHBnfVbH.js","./LercDecode-CE4UkX-a.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-DEuBiJqP.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-CrGJBryt.js","./pako.esm-C0YWBoLx.js","./lerc-V4WD6wVZ.js","./LercDecode-u8XF0U7O.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-FW6ti0_L.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -98607,6 +98607,1940 @@ class GeoJsonLayer extends CompositeLayer {
 }
 GeoJsonLayer.layerName = "GeoJsonLayer";
 GeoJsonLayer.defaultProps = defaultProps$c;
+const STAT_QUEUED_REQUESTS = "Queued Requests";
+const STAT_ACTIVE_REQUESTS = "Active Requests";
+const STAT_CANCELLED_REQUESTS = "Cancelled Requests";
+const STAT_QUEUED_REQUESTS_EVER = "Queued Requests Ever";
+const STAT_ACTIVE_REQUESTS_EVER = "Active Requests Ever";
+const DEFAULT_PROPS = {
+  id: "request-scheduler",
+  /** Specifies if the request scheduler should throttle incoming requests, mainly for comparative testing. */
+  throttleRequests: true,
+  /** The maximum number of simultaneous active requests. Un-throttled requests do not observe this limit. */
+  maxRequests: 6,
+  /**
+   * Specifies a debounce time, in milliseconds. All requests are queued, until no new requests have
+   * been added to the queue for this amount of time.
+   */
+  debounceTime: 0
+};
+class RequestScheduler {
+  constructor(props = {}) {
+    __publicField(this, "props");
+    __publicField(this, "stats");
+    __publicField(this, "activeRequestCount", 0);
+    /** Tracks the number of active requests and prioritizes/cancels queued requests. */
+    __publicField(this, "requestQueue", []);
+    __publicField(this, "requestMap", /* @__PURE__ */ new Map());
+    __publicField(this, "updateTimer", null);
+    this.props = { ...DEFAULT_PROPS, ...props };
+    this.stats = new Stats({ id: this.props.id });
+    this.stats.get(STAT_QUEUED_REQUESTS);
+    this.stats.get(STAT_ACTIVE_REQUESTS);
+    this.stats.get(STAT_CANCELLED_REQUESTS);
+    this.stats.get(STAT_QUEUED_REQUESTS_EVER);
+    this.stats.get(STAT_ACTIVE_REQUESTS_EVER);
+  }
+  /**
+   * Called by an application that wants to issue a request, without having it deeply queued by the browser
+   *
+   * When the returned promise resolved, it is OK for the application to issue a request.
+   * The promise resolves to an object that contains a `done` method.
+   * When the application's request has completed (or failed), the application must call the `done` function
+   *
+   * @param handle
+   * @param getPriority will be called when request "slots" open up,
+   *    allowing the caller to update priority or cancel the request
+   *    Highest priority executes first, priority < 0 cancels the request
+   * @returns a promise
+   *   - resolves to a object (with a `done` field) when the request can be issued without queueing,
+   *   - resolves to `null` if the request has been cancelled (by the callback return < 0).
+   *     In this case the application should not issue the request
+   */
+  scheduleRequest(handle, getPriority = () => 0) {
+    if (!this.props.throttleRequests) {
+      return Promise.resolve({ done: () => {
+      } });
+    }
+    if (this.requestMap.has(handle)) {
+      return this.requestMap.get(handle);
+    }
+    const request = { handle, priority: 0, getPriority };
+    const promise = new Promise((resolve) => {
+      request.resolve = resolve;
+      return request;
+    });
+    this.requestQueue.push(request);
+    this.requestMap.set(handle, promise);
+    this._issueNewRequests();
+    return promise;
+  }
+  // PRIVATE
+  _issueRequest(request) {
+    const { handle, resolve } = request;
+    let isDone = false;
+    const done = () => {
+      if (!isDone) {
+        isDone = true;
+        this.requestMap.delete(handle);
+        this.activeRequestCount--;
+        this._issueNewRequests();
+      }
+    };
+    this.activeRequestCount++;
+    return resolve ? resolve({ done }) : Promise.resolve({ done });
+  }
+  /** We check requests asynchronously, to prevent multiple updates */
+  _issueNewRequests() {
+    if (this.updateTimer !== null) {
+      clearTimeout(this.updateTimer);
+    }
+    this.updateTimer = setTimeout(() => this._issueNewRequestsAsync(), this.props.debounceTime);
+  }
+  /** Refresh all requests  */
+  _issueNewRequestsAsync() {
+    if (this.updateTimer !== null) {
+      clearTimeout(this.updateTimer);
+    }
+    this.updateTimer = null;
+    const freeSlots = Math.max(this.props.maxRequests - this.activeRequestCount, 0);
+    if (freeSlots === 0) {
+      return;
+    }
+    this._updateAllRequests();
+    for (let i5 = 0; i5 < freeSlots; ++i5) {
+      const request = this.requestQueue.shift();
+      if (request) {
+        this._issueRequest(request);
+      }
+    }
+  }
+  /** Ensure all requests have updated priorities, and that no longer valid requests are cancelled */
+  _updateAllRequests() {
+    const requestQueue = this.requestQueue;
+    for (let i5 = 0; i5 < requestQueue.length; ++i5) {
+      const request = requestQueue[i5];
+      if (!this._updateRequest(request)) {
+        requestQueue.splice(i5, 1);
+        this.requestMap.delete(request.handle);
+        i5--;
+      }
+    }
+    requestQueue.sort((a2, b2) => a2.priority - b2.priority);
+  }
+  /** Update a single request by calling the callback */
+  _updateRequest(request) {
+    request.priority = request.getPriority(request.handle);
+    if (request.priority < 0) {
+      request.resolve(null);
+      return false;
+    }
+    return true;
+  }
+}
+class Tile2DHeader {
+  constructor(index2) {
+    this.index = index2;
+    this.isVisible = false;
+    this.isSelected = false;
+    this.parent = null;
+    this.children = [];
+    this.content = null;
+    this._loader = void 0;
+    this._abortController = null;
+    this._loaderId = 0;
+    this._isLoaded = false;
+    this._isCancelled = false;
+    this._needsReload = false;
+  }
+  /** @deprecated use `boundingBox` instead */
+  get bbox() {
+    return this._bbox;
+  }
+  // TODO - remove in v9
+  set bbox(value) {
+    if (this._bbox)
+      return;
+    this._bbox = value;
+    if ("west" in value) {
+      this.boundingBox = [
+        [value.west, value.south],
+        [value.east, value.north]
+      ];
+    } else {
+      this.boundingBox = [
+        [value.left, value.top],
+        [value.right, value.bottom]
+      ];
+    }
+  }
+  get data() {
+    return this.isLoading && this._loader ? this._loader.then(() => this.data) : this.content;
+  }
+  get isLoaded() {
+    return this._isLoaded && !this._needsReload;
+  }
+  get isLoading() {
+    return Boolean(this._loader) && !this._isCancelled;
+  }
+  get needsReload() {
+    return this._needsReload || this._isCancelled;
+  }
+  get byteLength() {
+    const result = this.content ? this.content.byteLength : 0;
+    if (!Number.isFinite(result)) {
+      console.error("byteLength not defined in tile data");
+    }
+    return result;
+  }
+  /* eslint-disable max-statements */
+  async _loadData({ getData, requestScheduler, onLoad, onError }) {
+    const { index: index2, id: id2, bbox, userData, zoom } = this;
+    const loaderId = this._loaderId;
+    this._abortController = new AbortController();
+    const { signal } = this._abortController;
+    const requestToken = await requestScheduler.scheduleRequest(this, (tile) => {
+      return tile.isSelected ? 1 : -1;
+    });
+    if (!requestToken) {
+      this._isCancelled = true;
+      return;
+    }
+    if (this._isCancelled) {
+      requestToken.done();
+      return;
+    }
+    let tileData = null;
+    let error2;
+    try {
+      tileData = await getData({ index: index2, id: id2, bbox, userData, zoom, signal });
+    } catch (err2) {
+      error2 = err2 || true;
+    } finally {
+      requestToken.done();
+    }
+    if (loaderId !== this._loaderId) {
+      return;
+    }
+    this._loader = void 0;
+    this.content = tileData;
+    if (this._isCancelled && !tileData) {
+      this._isLoaded = false;
+      return;
+    }
+    this._isLoaded = true;
+    this._isCancelled = false;
+    if (error2) {
+      onError(error2, this);
+    } else {
+      onLoad(this);
+    }
+  }
+  loadData(opts) {
+    this._isLoaded = false;
+    this._isCancelled = false;
+    this._needsReload = false;
+    this._loaderId++;
+    this._loader = this._loadData(opts);
+    return this._loader;
+  }
+  setNeedsReload() {
+    if (this.isLoading) {
+      this.abort();
+      this._loader = void 0;
+    }
+    this._needsReload = true;
+  }
+  abort() {
+    var _a3;
+    if (this.isLoaded) {
+      return;
+    }
+    this._isCancelled = true;
+    (_a3 = this._abortController) == null ? void 0 : _a3.abort();
+  }
+}
+const INTERSECTION = {
+  OUTSIDE: -1,
+  // Represents that an object is not contained within the frustum.
+  INTERSECTING: 0,
+  // Represents that an object intersects one of the frustum's planes.
+  INSIDE: 1
+  // Represents that an object is fully within the frustum.
+};
+const scratchVector$1 = new Vector3();
+const scratchNormal$1 = new Vector3();
+class AxisAlignedBoundingBox {
+  /**
+   * Creates an instance of an AxisAlignedBoundingBox from the minimum and maximum points along the x, y, and z axes.
+   * @param minimum=[0, 0, 0] The minimum point along the x, y, and z axes.
+   * @param maximum=[0, 0, 0] The maximum point along the x, y, and z axes.
+   * @param center The center of the box; automatically computed if not supplied.
+   */
+  constructor(minimum = [0, 0, 0], maximum = [0, 0, 0], center) {
+    center = center || scratchVector$1.copy(minimum).add(maximum).scale(0.5);
+    this.center = new Vector3(center);
+    this.halfDiagonal = new Vector3(maximum).subtract(this.center);
+    this.minimum = new Vector3(minimum);
+    this.maximum = new Vector3(maximum);
+  }
+  /**
+   * Duplicates a AxisAlignedBoundingBox instance.
+   *
+   * @returns {AxisAlignedBoundingBox} A new AxisAlignedBoundingBox instance.
+   */
+  clone() {
+    return new AxisAlignedBoundingBox(this.minimum, this.maximum, this.center);
+  }
+  /**
+   * Compares the provided AxisAlignedBoundingBox componentwise and returns
+   * <code>true</code> if they are equal, <code>false</code> otherwise.
+   *
+   * @param {AxisAlignedBoundingBox} [right] The second AxisAlignedBoundingBox to compare with.
+   * @returns {Boolean} <code>true</code> if left and right are equal, <code>false</code> otherwise.
+   */
+  equals(right) {
+    return this === right || Boolean(right) && this.minimum.equals(right.minimum) && this.maximum.equals(right.maximum);
+  }
+  /**
+   * Applies a 4x4 affine transformation matrix to a bounding sphere.
+   * @param transform The transformation matrix to apply to the bounding sphere.
+   * @returns itself, i.e. the modified BoundingVolume.
+   */
+  transform(transform2) {
+    this.center.transformAsPoint(transform2);
+    this.halfDiagonal.transform(transform2);
+    this.minimum.transform(transform2);
+    this.maximum.transform(transform2);
+    return this;
+  }
+  /**
+   * Determines which side of a plane a box is located.
+   */
+  intersectPlane(plane) {
+    const { halfDiagonal } = this;
+    const normal = scratchNormal$1.from(plane.normal);
+    const e3 = halfDiagonal.x * Math.abs(normal.x) + halfDiagonal.y * Math.abs(normal.y) + halfDiagonal.z * Math.abs(normal.z);
+    const s3 = this.center.dot(normal) + plane.distance;
+    if (s3 - e3 > 0) {
+      return INTERSECTION.INSIDE;
+    }
+    if (s3 + e3 < 0) {
+      return INTERSECTION.OUTSIDE;
+    }
+    return INTERSECTION.INTERSECTING;
+  }
+  /** Computes the estimated distance from the closest point on a bounding box to a point. */
+  distanceTo(point2) {
+    return Math.sqrt(this.distanceSquaredTo(point2));
+  }
+  /** Computes the estimated distance squared from the closest point on a bounding box to a point. */
+  distanceSquaredTo(point2) {
+    const offset = scratchVector$1.from(point2).subtract(this.center);
+    const { halfDiagonal } = this;
+    let distanceSquared = 0;
+    let d2;
+    d2 = Math.abs(offset.x) - halfDiagonal.x;
+    if (d2 > 0) {
+      distanceSquared += d2 * d2;
+    }
+    d2 = Math.abs(offset.y) - halfDiagonal.y;
+    if (d2 > 0) {
+      distanceSquared += d2 * d2;
+    }
+    d2 = Math.abs(offset.z) - halfDiagonal.z;
+    if (d2 > 0) {
+      distanceSquared += d2 * d2;
+    }
+    return distanceSquared;
+  }
+}
+const scratchVector = new Vector3();
+const scratchVector2$1 = new Vector3();
+class BoundingSphere {
+  /** Creates a bounding sphere */
+  constructor(center = [0, 0, 0], radius = 0) {
+    this.radius = -0;
+    this.center = new Vector3();
+    this.fromCenterRadius(center, radius);
+  }
+  /** Sets the bounding sphere from `center` and `radius`. */
+  fromCenterRadius(center, radius) {
+    this.center.from(center);
+    this.radius = radius;
+    return this;
+  }
+  /**
+   * Computes a bounding sphere from the corner points of an axis-aligned bounding box.  The sphere
+   * tightly and fully encompasses the box.
+   */
+  fromCornerPoints(corner, oppositeCorner) {
+    oppositeCorner = scratchVector.from(oppositeCorner);
+    this.center = new Vector3().from(corner).add(oppositeCorner).scale(0.5);
+    this.radius = this.center.distance(oppositeCorner);
+    return this;
+  }
+  /** Compares the provided BoundingSphere component wise */
+  equals(right) {
+    return this === right || Boolean(right) && this.center.equals(right.center) && this.radius === right.radius;
+  }
+  /** Duplicates a BoundingSphere instance. */
+  clone() {
+    return new BoundingSphere(this.center, this.radius);
+  }
+  /** Computes a bounding sphere that contains both the left and right bounding spheres. */
+  union(boundingSphere) {
+    const leftCenter = this.center;
+    const leftRadius = this.radius;
+    const rightCenter = boundingSphere.center;
+    const rightRadius = boundingSphere.radius;
+    const toRightCenter = scratchVector.copy(rightCenter).subtract(leftCenter);
+    const centerSeparation = toRightCenter.magnitude();
+    if (leftRadius >= centerSeparation + rightRadius) {
+      return this.clone();
+    }
+    if (rightRadius >= centerSeparation + leftRadius) {
+      return boundingSphere.clone();
+    }
+    const halfDistanceBetweenTangentPoints = (leftRadius + centerSeparation + rightRadius) * 0.5;
+    scratchVector2$1.copy(toRightCenter).scale((-leftRadius + halfDistanceBetweenTangentPoints) / centerSeparation).add(leftCenter);
+    this.center.copy(scratchVector2$1);
+    this.radius = halfDistanceBetweenTangentPoints;
+    return this;
+  }
+  /** Computes a bounding sphere by enlarging the provided sphere to contain the provided point. */
+  expand(point2) {
+    const scratchPoint = scratchVector.from(point2);
+    const radius = scratchPoint.subtract(this.center).magnitude();
+    if (radius > this.radius) {
+      this.radius = radius;
+    }
+    return this;
+  }
+  // BoundingVolume interface
+  /**
+   * Applies a 4x4 affine transformation matrix to a bounding sphere.
+   * @param sphere The bounding sphere to apply the transformation to.
+   * @param transform The transformation matrix to apply to the bounding sphere.
+   * @returns self.
+   */
+  transform(transform2) {
+    this.center.transform(transform2);
+    const scale2 = getScaling(scratchVector, transform2);
+    this.radius = Math.max(scale2[0], Math.max(scale2[1], scale2[2])) * this.radius;
+    return this;
+  }
+  /** Computes the estimated distance squared from the closest point on a bounding sphere to a point. */
+  distanceSquaredTo(point2) {
+    const d2 = this.distanceTo(point2);
+    return d2 * d2;
+  }
+  /** Computes the estimated distance from the closest point on a bounding sphere to a point. */
+  distanceTo(point2) {
+    const scratchPoint = scratchVector.from(point2);
+    const delta = scratchPoint.subtract(this.center);
+    return Math.max(0, delta.len() - this.radius);
+  }
+  /** Determines which side of a plane a sphere is located. */
+  intersectPlane(plane) {
+    const center = this.center;
+    const radius = this.radius;
+    const normal = plane.normal;
+    const distanceToPlane = normal.dot(center) + plane.distance;
+    if (distanceToPlane < -radius) {
+      return INTERSECTION.OUTSIDE;
+    }
+    if (distanceToPlane < radius) {
+      return INTERSECTION.INTERSECTING;
+    }
+    return INTERSECTION.INSIDE;
+  }
+}
+const scratchVector3$1 = new Vector3();
+const scratchOffset = new Vector3();
+const scratchVectorU = new Vector3();
+const scratchVectorV = new Vector3();
+const scratchVectorW = new Vector3();
+const scratchCorner = new Vector3();
+const scratchToCenter = new Vector3();
+const MATRIX3 = {
+  COLUMN0ROW0: 0,
+  COLUMN0ROW1: 1,
+  COLUMN0ROW2: 2,
+  COLUMN1ROW0: 3,
+  COLUMN1ROW1: 4,
+  COLUMN1ROW2: 5,
+  COLUMN2ROW0: 6,
+  COLUMN2ROW1: 7,
+  COLUMN2ROW2: 8
+};
+class OrientedBoundingBox {
+  constructor(center = [0, 0, 0], halfAxes = [0, 0, 0, 0, 0, 0, 0, 0, 0]) {
+    this.center = new Vector3().from(center);
+    this.halfAxes = new Matrix3(halfAxes);
+  }
+  /** Returns an array with three halfSizes for the bounding box */
+  get halfSize() {
+    const xAxis = this.halfAxes.getColumn(0);
+    const yAxis = this.halfAxes.getColumn(1);
+    const zAxis = this.halfAxes.getColumn(2);
+    return [new Vector3(xAxis).len(), new Vector3(yAxis).len(), new Vector3(zAxis).len()];
+  }
+  /** Returns a quaternion describing the orientation of the bounding box */
+  get quaternion() {
+    const xAxis = this.halfAxes.getColumn(0);
+    const yAxis = this.halfAxes.getColumn(1);
+    const zAxis = this.halfAxes.getColumn(2);
+    const normXAxis = new Vector3(xAxis).normalize();
+    const normYAxis = new Vector3(yAxis).normalize();
+    const normZAxis = new Vector3(zAxis).normalize();
+    return new Quaternion().fromMatrix3(new Matrix3([...normXAxis, ...normYAxis, ...normZAxis]));
+  }
+  /**
+   * Create OrientedBoundingBox from quaternion based OBB,
+   */
+  fromCenterHalfSizeQuaternion(center, halfSize, quaternion) {
+    const quaternionObject = new Quaternion(quaternion);
+    const directionsMatrix = new Matrix3().fromQuaternion(quaternionObject);
+    directionsMatrix[0] = directionsMatrix[0] * halfSize[0];
+    directionsMatrix[1] = directionsMatrix[1] * halfSize[0];
+    directionsMatrix[2] = directionsMatrix[2] * halfSize[0];
+    directionsMatrix[3] = directionsMatrix[3] * halfSize[1];
+    directionsMatrix[4] = directionsMatrix[4] * halfSize[1];
+    directionsMatrix[5] = directionsMatrix[5] * halfSize[1];
+    directionsMatrix[6] = directionsMatrix[6] * halfSize[2];
+    directionsMatrix[7] = directionsMatrix[7] * halfSize[2];
+    directionsMatrix[8] = directionsMatrix[8] * halfSize[2];
+    this.center = new Vector3().from(center);
+    this.halfAxes = directionsMatrix;
+    return this;
+  }
+  /** Duplicates a OrientedBoundingBox instance. */
+  clone() {
+    return new OrientedBoundingBox(this.center, this.halfAxes);
+  }
+  /** Compares the provided OrientedBoundingBox component wise and returns */
+  equals(right) {
+    return this === right || Boolean(right) && this.center.equals(right.center) && this.halfAxes.equals(right.halfAxes);
+  }
+  /** Computes a tight-fitting bounding sphere enclosing the provided oriented bounding box. */
+  getBoundingSphere(result = new BoundingSphere()) {
+    const halfAxes = this.halfAxes;
+    const u4 = halfAxes.getColumn(0, scratchVectorU);
+    const v2 = halfAxes.getColumn(1, scratchVectorV);
+    const w2 = halfAxes.getColumn(2, scratchVectorW);
+    const cornerVector = scratchVector3$1.copy(u4).add(v2).add(w2);
+    result.center.copy(this.center);
+    result.radius = cornerVector.magnitude();
+    return result;
+  }
+  /** Determines which side of a plane the oriented bounding box is located. */
+  intersectPlane(plane) {
+    const center = this.center;
+    const normal = plane.normal;
+    const halfAxes = this.halfAxes;
+    const normalX = normal.x;
+    const normalY = normal.y;
+    const normalZ = normal.z;
+    const radEffective = Math.abs(normalX * halfAxes[MATRIX3.COLUMN0ROW0] + normalY * halfAxes[MATRIX3.COLUMN0ROW1] + normalZ * halfAxes[MATRIX3.COLUMN0ROW2]) + Math.abs(normalX * halfAxes[MATRIX3.COLUMN1ROW0] + normalY * halfAxes[MATRIX3.COLUMN1ROW1] + normalZ * halfAxes[MATRIX3.COLUMN1ROW2]) + Math.abs(normalX * halfAxes[MATRIX3.COLUMN2ROW0] + normalY * halfAxes[MATRIX3.COLUMN2ROW1] + normalZ * halfAxes[MATRIX3.COLUMN2ROW2]);
+    const distanceToPlane = normal.dot(center) + plane.distance;
+    if (distanceToPlane <= -radEffective) {
+      return INTERSECTION.OUTSIDE;
+    } else if (distanceToPlane >= radEffective) {
+      return INTERSECTION.INSIDE;
+    }
+    return INTERSECTION.INTERSECTING;
+  }
+  /** Computes the estimated distance from the closest point on a bounding box to a point. */
+  distanceTo(point2) {
+    return Math.sqrt(this.distanceSquaredTo(point2));
+  }
+  /**
+   * Computes the estimated distance squared from the closest point
+   * on a bounding box to a point.
+   * See Geometric Tools for Computer Graphics 10.4.2
+   */
+  distanceSquaredTo(point2) {
+    const offset = scratchOffset.from(point2).subtract(this.center);
+    const halfAxes = this.halfAxes;
+    const u4 = halfAxes.getColumn(0, scratchVectorU);
+    const v2 = halfAxes.getColumn(1, scratchVectorV);
+    const w2 = halfAxes.getColumn(2, scratchVectorW);
+    const uHalf = u4.magnitude();
+    const vHalf = v2.magnitude();
+    const wHalf = w2.magnitude();
+    u4.normalize();
+    v2.normalize();
+    w2.normalize();
+    let distanceSquared = 0;
+    let d2;
+    d2 = Math.abs(offset.dot(u4)) - uHalf;
+    if (d2 > 0) {
+      distanceSquared += d2 * d2;
+    }
+    d2 = Math.abs(offset.dot(v2)) - vHalf;
+    if (d2 > 0) {
+      distanceSquared += d2 * d2;
+    }
+    d2 = Math.abs(offset.dot(w2)) - wHalf;
+    if (d2 > 0) {
+      distanceSquared += d2 * d2;
+    }
+    return distanceSquared;
+  }
+  /**
+   * The distances calculated by the vector from the center of the bounding box
+   * to position projected onto direction.
+   *
+   * - If you imagine the infinite number of planes with normal direction,
+   *   this computes the smallest distance to the closest and farthest planes
+   *   from `position` that intersect the bounding box.
+   *
+   * @param position The position to calculate the distance from.
+   * @param direction The direction from position.
+   * @param result An Interval (array of length 2) to store the nearest and farthest distances.
+   * @returns Interval (array of length 2) with nearest and farthest distances
+   *   on the bounding box from position in direction.
+   */
+  // eslint-disable-next-line max-statements
+  computePlaneDistances(position2, direction, result = [-0, -0]) {
+    let minDist = Number.POSITIVE_INFINITY;
+    let maxDist = Number.NEGATIVE_INFINITY;
+    const center = this.center;
+    const halfAxes = this.halfAxes;
+    const u4 = halfAxes.getColumn(0, scratchVectorU);
+    const v2 = halfAxes.getColumn(1, scratchVectorV);
+    const w2 = halfAxes.getColumn(2, scratchVectorW);
+    const corner = scratchCorner.copy(u4).add(v2).add(w2).add(center);
+    const toCenter = scratchToCenter.copy(corner).subtract(position2);
+    let mag = direction.dot(toCenter);
+    minDist = Math.min(mag, minDist);
+    maxDist = Math.max(mag, maxDist);
+    corner.copy(center).add(u4).add(v2).subtract(w2);
+    toCenter.copy(corner).subtract(position2);
+    mag = direction.dot(toCenter);
+    minDist = Math.min(mag, minDist);
+    maxDist = Math.max(mag, maxDist);
+    corner.copy(center).add(u4).subtract(v2).add(w2);
+    toCenter.copy(corner).subtract(position2);
+    mag = direction.dot(toCenter);
+    minDist = Math.min(mag, minDist);
+    maxDist = Math.max(mag, maxDist);
+    corner.copy(center).add(u4).subtract(v2).subtract(w2);
+    toCenter.copy(corner).subtract(position2);
+    mag = direction.dot(toCenter);
+    minDist = Math.min(mag, minDist);
+    maxDist = Math.max(mag, maxDist);
+    center.copy(corner).subtract(u4).add(v2).add(w2);
+    toCenter.copy(corner).subtract(position2);
+    mag = direction.dot(toCenter);
+    minDist = Math.min(mag, minDist);
+    maxDist = Math.max(mag, maxDist);
+    center.copy(corner).subtract(u4).add(v2).subtract(w2);
+    toCenter.copy(corner).subtract(position2);
+    mag = direction.dot(toCenter);
+    minDist = Math.min(mag, minDist);
+    maxDist = Math.max(mag, maxDist);
+    center.copy(corner).subtract(u4).subtract(v2).add(w2);
+    toCenter.copy(corner).subtract(position2);
+    mag = direction.dot(toCenter);
+    minDist = Math.min(mag, minDist);
+    maxDist = Math.max(mag, maxDist);
+    center.copy(corner).subtract(u4).subtract(v2).subtract(w2);
+    toCenter.copy(corner).subtract(position2);
+    mag = direction.dot(toCenter);
+    minDist = Math.min(mag, minDist);
+    maxDist = Math.max(mag, maxDist);
+    result[0] = minDist;
+    result[1] = maxDist;
+    return result;
+  }
+  /**
+   * Applies a 4x4 affine transformation matrix to a bounding sphere.
+   * @param transform The transformation matrix to apply to the bounding sphere.
+   * @returns itself, i.e. the modified BoundingVolume.
+   */
+  transform(transformation) {
+    this.center.transformAsPoint(transformation);
+    const xAxis = this.halfAxes.getColumn(0, scratchVectorU);
+    xAxis.transformAsPoint(transformation);
+    const yAxis = this.halfAxes.getColumn(1, scratchVectorV);
+    yAxis.transformAsPoint(transformation);
+    const zAxis = this.halfAxes.getColumn(2, scratchVectorW);
+    zAxis.transformAsPoint(transformation);
+    this.halfAxes = new Matrix3([...xAxis, ...yAxis, ...zAxis]);
+    return this;
+  }
+  getTransform() {
+    throw new Error("not implemented");
+  }
+}
+const scratchPosition = new Vector3();
+const scratchNormal = new Vector3();
+class Plane {
+  constructor(normal = [0, 0, 1], distance2 = 0) {
+    this.normal = new Vector3();
+    this.distance = -0;
+    this.fromNormalDistance(normal, distance2);
+  }
+  /** Creates a plane from a normal and a distance from the origin. */
+  fromNormalDistance(normal, distance2) {
+    assert$5(Number.isFinite(distance2));
+    this.normal.from(normal).normalize();
+    this.distance = distance2;
+    return this;
+  }
+  /** Creates a plane from a normal and a point on the plane. */
+  fromPointNormal(point2, normal) {
+    point2 = scratchPosition.from(point2);
+    this.normal.from(normal).normalize();
+    const distance2 = -this.normal.dot(point2);
+    this.distance = distance2;
+    return this;
+  }
+  /** Creates a plane from the general equation */
+  fromCoefficients(a2, b2, c2, d2) {
+    this.normal.set(a2, b2, c2);
+    assert$5(equals$2(this.normal.len(), 1));
+    this.distance = d2;
+    return this;
+  }
+  /** Duplicates a Plane instance. */
+  clone() {
+    return new Plane(this.normal, this.distance);
+  }
+  /** Compares the provided Planes by normal and distance */
+  equals(right) {
+    return equals$2(this.distance, right.distance) && equals$2(this.normal, right.normal);
+  }
+  /** Computes the signed shortest distance of a point to a plane.
+   * The sign of the distance determines which side of the plane the point is on.
+   */
+  getPointDistance(point2) {
+    return this.normal.dot(point2) + this.distance;
+  }
+  /** Transforms the plane by the given transformation matrix. */
+  transform(matrix4) {
+    const normal = scratchNormal.copy(this.normal).transformAsVector(matrix4).normalize();
+    const point2 = this.normal.scale(-this.distance).transform(matrix4);
+    return this.fromPointNormal(point2, normal);
+  }
+  projectPointOntoPlane(point2, result = [0, 0, 0]) {
+    const scratchPoint = scratchPosition.from(point2);
+    const pointDistance = this.getPointDistance(scratchPoint);
+    const scaledNormal = scratchNormal.copy(this.normal).scale(pointDistance);
+    return scratchPoint.subtract(scaledNormal).to(result);
+  }
+}
+const faces = [new Vector3([1, 0, 0]), new Vector3([0, 1, 0]), new Vector3([0, 0, 1])];
+const scratchPlaneCenter = new Vector3();
+const scratchPlaneNormal = new Vector3();
+class CullingVolume {
+  /**
+   * Create a new `CullingVolume` bounded by an array of clipping planed
+   * @param planes Array of clipping planes.
+   * */
+  constructor(planes = []) {
+    this.planes = planes;
+  }
+  /**
+   * Constructs a culling volume from a bounding sphere. Creates six planes that create a box containing the sphere.
+   * The planes are aligned to the x, y, and z axes in world coordinates.
+   */
+  fromBoundingSphere(boundingSphere) {
+    this.planes.length = 2 * faces.length;
+    const center = boundingSphere.center;
+    const radius = boundingSphere.radius;
+    let planeIndex = 0;
+    for (const faceNormal of faces) {
+      let plane0 = this.planes[planeIndex];
+      let plane1 = this.planes[planeIndex + 1];
+      if (!plane0) {
+        plane0 = this.planes[planeIndex] = new Plane();
+      }
+      if (!plane1) {
+        plane1 = this.planes[planeIndex + 1] = new Plane();
+      }
+      const plane0Center = scratchPlaneCenter.copy(faceNormal).scale(-radius).add(center);
+      plane0.fromPointNormal(plane0Center, faceNormal);
+      const plane1Center = scratchPlaneCenter.copy(faceNormal).scale(radius).add(center);
+      const negatedFaceNormal = scratchPlaneNormal.copy(faceNormal).negate();
+      plane1.fromPointNormal(plane1Center, negatedFaceNormal);
+      planeIndex += 2;
+    }
+    return this;
+  }
+  /** Determines whether a bounding volume intersects the culling volume. */
+  computeVisibility(boundingVolume) {
+    let intersect2 = INTERSECTION.INSIDE;
+    for (const plane of this.planes) {
+      const result = boundingVolume.intersectPlane(plane);
+      switch (result) {
+        case INTERSECTION.OUTSIDE:
+          return INTERSECTION.OUTSIDE;
+        case INTERSECTION.INTERSECTING:
+          intersect2 = INTERSECTION.INTERSECTING;
+          break;
+      }
+    }
+    return intersect2;
+  }
+  /**
+   * Determines whether a bounding volume intersects the culling volume.
+   *
+   * @param parentPlaneMask A bit mask from the boundingVolume's parent's check against the same culling
+   *   volume, such that if (planeMask & (1 << planeIndex) === 0), for k < 31, then
+   *   the parent (and therefore this) volume is completely inside plane[planeIndex]
+   *   and that plane check can be skipped.
+   */
+  computeVisibilityWithPlaneMask(boundingVolume, parentPlaneMask) {
+    assert$5(Number.isFinite(parentPlaneMask), "parentPlaneMask is required.");
+    if (parentPlaneMask === CullingVolume.MASK_OUTSIDE || parentPlaneMask === CullingVolume.MASK_INSIDE) {
+      return parentPlaneMask;
+    }
+    let mask = CullingVolume.MASK_INSIDE;
+    const planes = this.planes;
+    for (let k4 = 0; k4 < this.planes.length; ++k4) {
+      const flag = k4 < 31 ? 1 << k4 : 0;
+      if (k4 < 31 && (parentPlaneMask & flag) === 0) {
+        continue;
+      }
+      const plane = planes[k4];
+      const result = boundingVolume.intersectPlane(plane);
+      if (result === INTERSECTION.OUTSIDE) {
+        return CullingVolume.MASK_OUTSIDE;
+      } else if (result === INTERSECTION.INTERSECTING) {
+        mask |= flag;
+      }
+    }
+    return mask;
+  }
+}
+CullingVolume.MASK_OUTSIDE = 4294967295;
+CullingVolume.MASK_INSIDE = 0;
+CullingVolume.MASK_INDETERMINATE = 2147483647;
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+new Vector3();
+const scratchMatrix = new Matrix3();
+const scratchUnitary = new Matrix3();
+const scratchDiagonal = new Matrix3();
+const jMatrix = new Matrix3();
+const jMatrixTranspose = new Matrix3();
+function computeEigenDecomposition(matrix, result = {}) {
+  const EIGEN_TOLERANCE = EPSILON20;
+  const EIGEN_MAX_SWEEPS = 10;
+  let count2 = 0;
+  let sweep = 0;
+  const unitaryMatrix = scratchUnitary;
+  const diagonalMatrix = scratchDiagonal;
+  unitaryMatrix.identity();
+  diagonalMatrix.copy(matrix);
+  const epsilon = EIGEN_TOLERANCE * computeFrobeniusNorm(diagonalMatrix);
+  while (sweep < EIGEN_MAX_SWEEPS && offDiagonalFrobeniusNorm(diagonalMatrix) > epsilon) {
+    shurDecomposition(diagonalMatrix, jMatrix);
+    jMatrixTranspose.copy(jMatrix).transpose();
+    diagonalMatrix.multiplyRight(jMatrix);
+    diagonalMatrix.multiplyLeft(jMatrixTranspose);
+    unitaryMatrix.multiplyRight(jMatrix);
+    if (++count2 > 2) {
+      ++sweep;
+      count2 = 0;
+    }
+  }
+  result.unitary = unitaryMatrix.toTarget(result.unitary);
+  result.diagonal = diagonalMatrix.toTarget(result.diagonal);
+  return result;
+}
+function computeFrobeniusNorm(matrix) {
+  let norm = 0;
+  for (let i5 = 0; i5 < 9; ++i5) {
+    const temp = matrix[i5];
+    norm += temp * temp;
+  }
+  return Math.sqrt(norm);
+}
+const rowVal = [1, 0, 0];
+const colVal = [2, 2, 1];
+function offDiagonalFrobeniusNorm(matrix) {
+  let norm = 0;
+  for (let i5 = 0; i5 < 3; ++i5) {
+    const temp = matrix[scratchMatrix.getElementIndex(colVal[i5], rowVal[i5])];
+    norm += 2 * temp * temp;
+  }
+  return Math.sqrt(norm);
+}
+function shurDecomposition(matrix, result) {
+  const tolerance = EPSILON15;
+  let maxDiagonal = 0;
+  let rotAxis = 1;
+  for (let i5 = 0; i5 < 3; ++i5) {
+    const temp = Math.abs(matrix[scratchMatrix.getElementIndex(colVal[i5], rowVal[i5])]);
+    if (temp > maxDiagonal) {
+      rotAxis = i5;
+      maxDiagonal = temp;
+    }
+  }
+  const p4 = rowVal[rotAxis];
+  const q2 = colVal[rotAxis];
+  let c2 = 1;
+  let s3 = 0;
+  if (Math.abs(matrix[scratchMatrix.getElementIndex(q2, p4)]) > tolerance) {
+    const qq = matrix[scratchMatrix.getElementIndex(q2, q2)];
+    const pp = matrix[scratchMatrix.getElementIndex(p4, p4)];
+    const qp = matrix[scratchMatrix.getElementIndex(q2, p4)];
+    const tau = (qq - pp) / 2 / qp;
+    let t3;
+    if (tau < 0) {
+      t3 = -1 / (-tau + Math.sqrt(1 + tau * tau));
+    } else {
+      t3 = 1 / (tau + Math.sqrt(1 + tau * tau));
+    }
+    c2 = 1 / Math.sqrt(1 + t3 * t3);
+    s3 = t3 * c2;
+  }
+  Matrix3.IDENTITY.to(result);
+  result[scratchMatrix.getElementIndex(p4, p4)] = result[scratchMatrix.getElementIndex(q2, q2)] = c2;
+  result[scratchMatrix.getElementIndex(q2, p4)] = s3;
+  result[scratchMatrix.getElementIndex(p4, q2)] = -s3;
+  return result;
+}
+const scratchVector2 = new Vector3();
+const scratchVector3 = new Vector3();
+const scratchVector4 = new Vector3();
+const scratchVector5 = new Vector3();
+const scratchVector6 = new Vector3();
+const scratchCovarianceResult = new Matrix3();
+const scratchEigenResult = {
+  diagonal: new Matrix3(),
+  unitary: new Matrix3()
+};
+function makeOrientedBoundingBoxFromPoints(positions, result = new OrientedBoundingBox()) {
+  if (!positions || positions.length === 0) {
+    result.halfAxes = new Matrix3([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    result.center = new Vector3();
+    return result;
+  }
+  const length2 = positions.length;
+  const meanPoint = new Vector3(0, 0, 0);
+  for (const position2 of positions) {
+    meanPoint.add(position2);
+  }
+  const invLength = 1 / length2;
+  meanPoint.multiplyByScalar(invLength);
+  let exx = 0;
+  let exy = 0;
+  let exz = 0;
+  let eyy = 0;
+  let eyz = 0;
+  let ezz = 0;
+  for (const position2 of positions) {
+    const p4 = scratchVector2.copy(position2).subtract(meanPoint);
+    exx += p4.x * p4.x;
+    exy += p4.x * p4.y;
+    exz += p4.x * p4.z;
+    eyy += p4.y * p4.y;
+    eyz += p4.y * p4.z;
+    ezz += p4.z * p4.z;
+  }
+  exx *= invLength;
+  exy *= invLength;
+  exz *= invLength;
+  eyy *= invLength;
+  eyz *= invLength;
+  ezz *= invLength;
+  const covarianceMatrix = scratchCovarianceResult;
+  covarianceMatrix[0] = exx;
+  covarianceMatrix[1] = exy;
+  covarianceMatrix[2] = exz;
+  covarianceMatrix[3] = exy;
+  covarianceMatrix[4] = eyy;
+  covarianceMatrix[5] = eyz;
+  covarianceMatrix[6] = exz;
+  covarianceMatrix[7] = eyz;
+  covarianceMatrix[8] = ezz;
+  const { unitary } = computeEigenDecomposition(covarianceMatrix, scratchEigenResult);
+  const rotation = result.halfAxes.copy(unitary);
+  let v1 = rotation.getColumn(0, scratchVector4);
+  let v2 = rotation.getColumn(1, scratchVector5);
+  let v3 = rotation.getColumn(2, scratchVector6);
+  let u1 = -Number.MAX_VALUE;
+  let u22 = -Number.MAX_VALUE;
+  let u32 = -Number.MAX_VALUE;
+  let l1 = Number.MAX_VALUE;
+  let l22 = Number.MAX_VALUE;
+  let l3 = Number.MAX_VALUE;
+  for (const position2 of positions) {
+    scratchVector2.copy(position2);
+    u1 = Math.max(scratchVector2.dot(v1), u1);
+    u22 = Math.max(scratchVector2.dot(v2), u22);
+    u32 = Math.max(scratchVector2.dot(v3), u32);
+    l1 = Math.min(scratchVector2.dot(v1), l1);
+    l22 = Math.min(scratchVector2.dot(v2), l22);
+    l3 = Math.min(scratchVector2.dot(v3), l3);
+  }
+  v1 = v1.multiplyByScalar(0.5 * (l1 + u1));
+  v2 = v2.multiplyByScalar(0.5 * (l22 + u22));
+  v3 = v3.multiplyByScalar(0.5 * (l3 + u32));
+  result.center.copy(v1).add(v2).add(v3);
+  const scale2 = scratchVector3.set(u1 - l1, u22 - l22, u32 - l3).multiplyByScalar(0.5);
+  const scaleMatrix = new Matrix3([scale2[0], 0, 0, 0, scale2[1], 0, 0, 0, scale2[2]]);
+  result.halfAxes.multiplyRight(scaleMatrix);
+  return result;
+}
+const TILE_SIZE$1 = 512;
+const MAX_MAPS = 3;
+const REF_POINTS_5 = [
+  [0.5, 0.5],
+  [0, 0],
+  [0, 1],
+  [1, 0],
+  [1, 1]
+];
+const REF_POINTS_9 = REF_POINTS_5.concat([
+  [0, 0.5],
+  [0.5, 0],
+  [1, 0.5],
+  [0.5, 1]
+]);
+const REF_POINTS_11 = REF_POINTS_9.concat([
+  [0.25, 0.5],
+  [0.75, 0.5]
+]);
+class OSMNode {
+  constructor(x2, y3, z4) {
+    this.x = x2;
+    this.y = y3;
+    this.z = z4;
+  }
+  get children() {
+    if (!this._children) {
+      const x2 = this.x * 2;
+      const y3 = this.y * 2;
+      const z4 = this.z + 1;
+      this._children = [
+        new OSMNode(x2, y3, z4),
+        new OSMNode(x2, y3 + 1, z4),
+        new OSMNode(x2 + 1, y3, z4),
+        new OSMNode(x2 + 1, y3 + 1, z4)
+      ];
+    }
+    return this._children;
+  }
+  // eslint-disable-next-line complexity
+  update(params) {
+    const { viewport, cullingVolume, elevationBounds, minZ, maxZ, bounds, offset, project: project2 } = params;
+    const boundingVolume = this.getBoundingVolume(elevationBounds, offset, project2);
+    if (bounds && !this.insideBounds(bounds)) {
+      return false;
+    }
+    const isInside = cullingVolume.computeVisibility(boundingVolume);
+    if (isInside < 0) {
+      return false;
+    }
+    if (!this.childVisible) {
+      let { z: z4 } = this;
+      if (z4 < maxZ && z4 >= minZ) {
+        const distance2 = boundingVolume.distanceTo(viewport.cameraPosition) * viewport.scale / viewport.height;
+        z4 += Math.floor(Math.log2(distance2));
+      }
+      if (z4 >= maxZ) {
+        this.selected = true;
+        return true;
+      }
+    }
+    this.selected = false;
+    this.childVisible = true;
+    for (const child of this.children) {
+      child.update(params);
+    }
+    return true;
+  }
+  getSelected(result = []) {
+    if (this.selected) {
+      result.push(this);
+    }
+    if (this._children) {
+      for (const node2 of this._children) {
+        node2.getSelected(result);
+      }
+    }
+    return result;
+  }
+  insideBounds([minX, minY, maxX, maxY]) {
+    const scale2 = Math.pow(2, this.z);
+    const extent = TILE_SIZE$1 / scale2;
+    return this.x * extent < maxX && this.y * extent < maxY && (this.x + 1) * extent > minX && (this.y + 1) * extent > minY;
+  }
+  getBoundingVolume(zRange, worldOffset, project2) {
+    if (project2) {
+      const refPoints = this.z < 1 ? REF_POINTS_11 : this.z < 2 ? REF_POINTS_9 : REF_POINTS_5;
+      const refPointPositions = [];
+      for (const p4 of refPoints) {
+        const lngLat = osmTile2lngLat(this.x + p4[0], this.y + p4[1], this.z);
+        lngLat[2] = zRange[0];
+        refPointPositions.push(project2(lngLat));
+        if (zRange[0] !== zRange[1]) {
+          lngLat[2] = zRange[1];
+          refPointPositions.push(project2(lngLat));
+        }
+      }
+      return makeOrientedBoundingBoxFromPoints(refPointPositions);
+    }
+    const scale2 = Math.pow(2, this.z);
+    const extent = TILE_SIZE$1 / scale2;
+    const originX = this.x * extent + worldOffset * TILE_SIZE$1;
+    const originY = TILE_SIZE$1 - (this.y + 1) * extent;
+    return new AxisAlignedBoundingBox([originX, originY, zRange[0]], [originX + extent, originY + extent, zRange[1]]);
+  }
+}
+function getOSMTileIndices(viewport, maxZ, zRange, bounds) {
+  const project2 = viewport instanceof GlobeViewport && viewport.resolution ? (
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    viewport.projectPosition
+  ) : null;
+  const planes = Object.values(viewport.getFrustumPlanes()).map(({ normal, distance: distance2 }) => new Plane(normal.clone().negate(), distance2));
+  const cullingVolume = new CullingVolume(planes);
+  const unitsPerMeter2 = viewport.distanceScales.unitsPerMeter[2];
+  const elevationMin = zRange && zRange[0] * unitsPerMeter2 || 0;
+  const elevationMax = zRange && zRange[1] * unitsPerMeter2 || 0;
+  const minZ = viewport instanceof WebMercatorViewport && viewport.pitch <= 60 ? maxZ : 0;
+  if (bounds) {
+    const [minLng, minLat, maxLng, maxLat] = bounds;
+    const topLeft = lngLatToWorld([minLng, maxLat]);
+    const bottomRight = lngLatToWorld([maxLng, minLat]);
+    bounds = [topLeft[0], TILE_SIZE$1 - topLeft[1], bottomRight[0], TILE_SIZE$1 - bottomRight[1]];
+  }
+  const root2 = new OSMNode(0, 0, 0);
+  const traversalParams = {
+    viewport,
+    project: project2,
+    cullingVolume,
+    elevationBounds: [elevationMin, elevationMax],
+    minZ,
+    maxZ,
+    bounds,
+    // num. of worlds from the center. For repeated maps
+    offset: 0
+  };
+  root2.update(traversalParams);
+  if (viewport instanceof WebMercatorViewport && viewport.subViewports && viewport.subViewports.length > 1) {
+    traversalParams.offset = -1;
+    while (root2.update(traversalParams)) {
+      if (--traversalParams.offset < -3) {
+        break;
+      }
+    }
+    traversalParams.offset = 1;
+    while (root2.update(traversalParams)) {
+      if (++traversalParams.offset > MAX_MAPS) {
+        break;
+      }
+    }
+  }
+  return root2.getSelected();
+}
+const TILE_SIZE = 512;
+const DEFAULT_EXTENT = [-Infinity, -Infinity, Infinity, Infinity];
+const urlType = {
+  equal: (value1, value2) => {
+    if (value1 === value2) {
+      return true;
+    }
+    if (!Array.isArray(value1) || !Array.isArray(value2)) {
+      return false;
+    }
+    const len2 = value1.length;
+    if (len2 !== value2.length) {
+      return false;
+    }
+    for (let i5 = 0; i5 < len2; i5++) {
+      if (value1[i5] !== value2[i5]) {
+        return false;
+      }
+    }
+    return true;
+  }
+};
+function transformBox(bbox, modelMatrix) {
+  const transformedCoords = [
+    // top-left
+    modelMatrix.transformAsPoint([bbox[0], bbox[1]]),
+    // top-right
+    modelMatrix.transformAsPoint([bbox[2], bbox[1]]),
+    // bottom-left
+    modelMatrix.transformAsPoint([bbox[0], bbox[3]]),
+    // bottom-right
+    modelMatrix.transformAsPoint([bbox[2], bbox[3]])
+  ];
+  const transformedBox = [
+    // Minimum x coord
+    Math.min(...transformedCoords.map((i5) => i5[0])),
+    // Minimum y coord
+    Math.min(...transformedCoords.map((i5) => i5[1])),
+    // Max x coord
+    Math.max(...transformedCoords.map((i5) => i5[0])),
+    // Max y coord
+    Math.max(...transformedCoords.map((i5) => i5[1]))
+  ];
+  return transformedBox;
+}
+function stringHash(s3) {
+  return Math.abs(s3.split("").reduce((a2, b2) => (a2 << 5) - a2 + b2.charCodeAt(0) | 0, 0));
+}
+function getURLFromTemplate(template2, tile) {
+  if (!template2 || !template2.length) {
+    return null;
+  }
+  const { index: index2, id: id2 } = tile;
+  if (Array.isArray(template2)) {
+    const i5 = stringHash(id2) % template2.length;
+    template2 = template2[i5];
+  }
+  let url = template2;
+  for (const key of Object.keys(index2)) {
+    const regex2 = new RegExp(`{${key}}`, "g");
+    url = url.replace(regex2, String(index2[key]));
+  }
+  if (Number.isInteger(index2.y) && Number.isInteger(index2.z)) {
+    url = url.replace(/\{-y\}/g, String(Math.pow(2, index2.z) - index2.y - 1));
+  }
+  return url;
+}
+function getBoundingBox(viewport, zRange, extent) {
+  let bounds;
+  {
+    bounds = viewport.getBounds();
+  }
+  if (!viewport.isGeospatial) {
+    return [
+      // Top corner should not be more then bottom corner in either direction
+      Math.max(Math.min(bounds[0], extent[2]), extent[0]),
+      Math.max(Math.min(bounds[1], extent[3]), extent[1]),
+      // Bottom corner should not be less then top corner in either direction
+      Math.min(Math.max(bounds[2], extent[0]), extent[2]),
+      Math.min(Math.max(bounds[3], extent[1]), extent[3])
+    ];
+  }
+  return [
+    Math.max(bounds[0], extent[0]),
+    Math.max(bounds[1], extent[1]),
+    Math.min(bounds[2], extent[2]),
+    Math.min(bounds[3], extent[3])
+  ];
+}
+function getCullBounds({ viewport, z: z4, cullRect }) {
+  const subViewports = viewport.subViewports || [viewport];
+  return subViewports.map((v2) => getCullBoundsInViewport(v2, z4 || 0, cullRect));
+}
+function getCullBoundsInViewport(viewport, z4, cullRect) {
+  if (!Array.isArray(z4)) {
+    const x2 = cullRect.x - viewport.x;
+    const y3 = cullRect.y - viewport.y;
+    const { width, height } = cullRect;
+    const unprojectOption = { targetZ: z4 };
+    const topLeft = viewport.unproject([x2, y3], unprojectOption);
+    const topRight = viewport.unproject([x2 + width, y3], unprojectOption);
+    const bottomLeft = viewport.unproject([x2, y3 + height], unprojectOption);
+    const bottomRight = viewport.unproject([x2 + width, y3 + height], unprojectOption);
+    return [
+      Math.min(topLeft[0], topRight[0], bottomLeft[0], bottomRight[0]),
+      Math.min(topLeft[1], topRight[1], bottomLeft[1], bottomRight[1]),
+      Math.max(topLeft[0], topRight[0], bottomLeft[0], bottomRight[0]),
+      Math.max(topLeft[1], topRight[1], bottomLeft[1], bottomRight[1])
+    ];
+  }
+  const bounds0 = getCullBoundsInViewport(viewport, z4[0], cullRect);
+  const bounds1 = getCullBoundsInViewport(viewport, z4[1], cullRect);
+  return [
+    Math.min(bounds0[0], bounds1[0]),
+    Math.min(bounds0[1], bounds1[1]),
+    Math.max(bounds0[2], bounds1[2]),
+    Math.max(bounds0[3], bounds1[3])
+  ];
+}
+function getIndexingCoords(bbox, scale2, modelMatrixInverse) {
+  if (modelMatrixInverse) {
+    const transformedTileIndex = transformBox(bbox, modelMatrixInverse).map((i5) => i5 * scale2 / TILE_SIZE);
+    return transformedTileIndex;
+  }
+  return bbox.map((i5) => i5 * scale2 / TILE_SIZE);
+}
+function getScale(z4, tileSize) {
+  return Math.pow(2, z4) * TILE_SIZE / tileSize;
+}
+function osmTile2lngLat(x2, y3, z4) {
+  const scale2 = getScale(z4, TILE_SIZE);
+  const lng = x2 / scale2 * 360 - 180;
+  const n3 = Math.PI - 2 * Math.PI * y3 / scale2;
+  const lat = 180 / Math.PI * Math.atan(0.5 * (Math.exp(n3) - Math.exp(-n3)));
+  return [lng, lat];
+}
+function tile2XY(x2, y3, z4, tileSize) {
+  const scale2 = getScale(z4, tileSize);
+  return [x2 / scale2 * TILE_SIZE, y3 / scale2 * TILE_SIZE];
+}
+function tileToBoundingBox(viewport, x2, y3, z4, tileSize = TILE_SIZE) {
+  if (viewport.isGeospatial) {
+    const [west, north] = osmTile2lngLat(x2, y3, z4);
+    const [east, south] = osmTile2lngLat(x2 + 1, y3 + 1, z4);
+    return { west, north, east, south };
+  }
+  const [left, top] = tile2XY(x2, y3, z4, tileSize);
+  const [right, bottom] = tile2XY(x2 + 1, y3 + 1, z4, tileSize);
+  return { left, top, right, bottom };
+}
+function getIdentityTileIndices(viewport, z4, tileSize, extent, modelMatrixInverse) {
+  const bbox = getBoundingBox(viewport, null, extent);
+  const scale2 = getScale(z4, tileSize);
+  const [minX, minY, maxX, maxY] = getIndexingCoords(bbox, scale2, modelMatrixInverse);
+  const indices = [];
+  for (let x2 = Math.floor(minX); x2 < maxX; x2++) {
+    for (let y3 = Math.floor(minY); y3 < maxY; y3++) {
+      indices.push({ x: x2, y: y3, z: z4 });
+    }
+  }
+  return indices;
+}
+function getTileIndices({ viewport, maxZoom, minZoom, zRange, extent, tileSize = TILE_SIZE, modelMatrix, modelMatrixInverse, zoomOffset = 0 }) {
+  let z4 = viewport.isGeospatial ? Math.round(viewport.zoom + Math.log2(TILE_SIZE / tileSize)) + zoomOffset : Math.ceil(viewport.zoom) + zoomOffset;
+  if (typeof minZoom === "number" && Number.isFinite(minZoom) && z4 < minZoom) {
+    if (!extent) {
+      return [];
+    }
+    z4 = minZoom;
+  }
+  if (typeof maxZoom === "number" && Number.isFinite(maxZoom) && z4 > maxZoom) {
+    z4 = maxZoom;
+  }
+  let transformedExtent = extent;
+  if (modelMatrix && modelMatrixInverse && extent && !viewport.isGeospatial) {
+    transformedExtent = transformBox(extent, modelMatrix);
+  }
+  return viewport.isGeospatial ? getOSMTileIndices(viewport, z4, zRange, extent) : getIdentityTileIndices(viewport, z4, tileSize, transformedExtent || DEFAULT_EXTENT, modelMatrixInverse);
+}
+function memoize$3(compute) {
+  let cachedArgs = {};
+  let cachedResult2;
+  return (args) => {
+    for (const key in args) {
+      if (!isEqual(args[key], cachedArgs[key])) {
+        cachedResult2 = compute(args);
+        cachedArgs = args;
+        break;
+      }
+    }
+    return cachedResult2;
+  };
+}
+function isEqual(a2, b2) {
+  if (a2 === b2) {
+    return true;
+  }
+  if (Array.isArray(a2)) {
+    const len2 = a2.length;
+    if (!b2 || b2.length !== len2) {
+      return false;
+    }
+    for (let i5 = 0; i5 < len2; i5++) {
+      if (a2[i5] !== b2[i5]) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+const TILE_STATE_VISITED = 1;
+const TILE_STATE_VISIBLE = 2;
+const STRATEGY_NEVER = "never";
+const STRATEGY_REPLACE = "no-overlap";
+const STRATEGY_DEFAULT = "best-available";
+const DEFAULT_CACHE_SCALE = 5;
+const STRATEGIES = {
+  [STRATEGY_DEFAULT]: updateTileStateDefault,
+  [STRATEGY_REPLACE]: updateTileStateReplace,
+  [STRATEGY_NEVER]: () => {
+  }
+};
+const DEFAULT_TILESET2D_PROPS = {
+  extent: null,
+  tileSize: 512,
+  maxZoom: null,
+  minZoom: null,
+  maxCacheSize: null,
+  maxCacheByteSize: null,
+  refinementStrategy: "best-available",
+  zRange: null,
+  maxRequests: 6,
+  debounceTime: 0,
+  zoomOffset: 0,
+  // onTileLoad: (tile: Tile2DHeader) => void,  // onTileUnload: (tile: Tile2DHeader) => void,  // onTileError: (error: any, tile: Tile2DHeader) => void,  /** Called when all tiles in the current viewport are loaded. */
+  // onViewportLoad: ((tiles: Tile2DHeader<DataT>[]) => void) | null,
+  onTileLoad: () => {
+  },
+  onTileUnload: () => {
+  },
+  onTileError: () => {
+  }
+};
+class Tileset2D {
+  /**
+   * Takes in a function that returns tile data, a cache size, and a max and a min zoom level.
+   * Cache size defaults to 5 * number of tiles in the current viewport
+   */
+  constructor(opts) {
+    this._getCullBounds = memoize$3(getCullBounds);
+    this.opts = { ...DEFAULT_TILESET2D_PROPS, ...opts };
+    this.setOptions(this.opts);
+    this.onTileLoad = (tile) => {
+      var _a3, _b2;
+      (_b2 = (_a3 = this.opts).onTileLoad) == null ? void 0 : _b2.call(_a3, tile);
+      if (this.opts.maxCacheByteSize !== null) {
+        this._cacheByteSize += tile.byteLength;
+        this._resizeCache();
+      }
+    };
+    this._requestScheduler = new RequestScheduler({
+      throttleRequests: this.opts.maxRequests > 0 || this.opts.debounceTime > 0,
+      maxRequests: this.opts.maxRequests,
+      debounceTime: this.opts.debounceTime
+    });
+    this._cache = /* @__PURE__ */ new Map();
+    this._tiles = [];
+    this._dirty = false;
+    this._cacheByteSize = 0;
+    this._viewport = null;
+    this._zRange = null;
+    this._selectedTiles = null;
+    this._frameNumber = 0;
+    this._modelMatrix = new Matrix4();
+    this._modelMatrixInverse = new Matrix4();
+  }
+  /* Public API */
+  get tiles() {
+    return this._tiles;
+  }
+  get selectedTiles() {
+    return this._selectedTiles;
+  }
+  get isLoaded() {
+    return this._selectedTiles !== null && this._selectedTiles.every((tile) => tile.isLoaded);
+  }
+  get needsReload() {
+    return this._selectedTiles !== null && this._selectedTiles.some((tile) => tile.needsReload);
+  }
+  setOptions(opts) {
+    Object.assign(this.opts, opts);
+    if (Number.isFinite(opts.maxZoom)) {
+      this._maxZoom = Math.floor(opts.maxZoom);
+    }
+    if (Number.isFinite(opts.minZoom)) {
+      this._minZoom = Math.ceil(opts.minZoom);
+    }
+  }
+  // Clean up any outstanding tile requests.
+  finalize() {
+    for (const tile of this._cache.values()) {
+      if (tile.isLoading) {
+        tile.abort();
+      }
+    }
+    this._cache.clear();
+    this._tiles = [];
+    this._selectedTiles = null;
+  }
+  reloadAll() {
+    for (const id2 of this._cache.keys()) {
+      const tile = this._cache.get(id2);
+      if (!this._selectedTiles || !this._selectedTiles.includes(tile)) {
+        this._cache.delete(id2);
+      } else {
+        tile.setNeedsReload();
+      }
+    }
+  }
+  /**
+   * Update the cache with the given viewport and model matrix and triggers callback onUpdate.
+   */
+  update(viewport, { zRange, modelMatrix } = {
+    zRange: null,
+    modelMatrix: null
+  }) {
+    const modelMatrixAsMatrix4 = modelMatrix ? new Matrix4(modelMatrix) : new Matrix4();
+    const isModelMatrixNew = !modelMatrixAsMatrix4.equals(this._modelMatrix);
+    if (!this._viewport || !viewport.equals(this._viewport) || !equals$2(this._zRange, zRange) || isModelMatrixNew) {
+      if (isModelMatrixNew) {
+        this._modelMatrixInverse = modelMatrixAsMatrix4.clone().invert();
+        this._modelMatrix = modelMatrixAsMatrix4;
+      }
+      this._viewport = viewport;
+      this._zRange = zRange;
+      const tileIndices = this.getTileIndices({
+        viewport,
+        maxZoom: this._maxZoom,
+        minZoom: this._minZoom,
+        zRange,
+        modelMatrix: this._modelMatrix,
+        modelMatrixInverse: this._modelMatrixInverse
+      });
+      this._selectedTiles = tileIndices.map((index2) => this._getTile(index2, true));
+      if (this._dirty) {
+        this._rebuildTree();
+      }
+    } else if (this.needsReload) {
+      this._selectedTiles = this._selectedTiles.map((tile) => this._getTile(tile.index, true));
+    }
+    const changed = this.updateTileStates();
+    this._pruneRequests();
+    if (this._dirty) {
+      this._resizeCache();
+    }
+    if (changed) {
+      this._frameNumber++;
+    }
+    return this._frameNumber;
+  }
+  // eslint-disable-next-line complexity
+  isTileVisible(tile, cullRect) {
+    if (!tile.isVisible) {
+      return false;
+    }
+    if (cullRect && this._viewport) {
+      const boundsArr = this._getCullBounds({
+        viewport: this._viewport,
+        z: this._zRange,
+        cullRect
+      });
+      const { bbox } = tile;
+      for (const [minX, minY, maxX, maxY] of boundsArr) {
+        let overlaps;
+        if ("west" in bbox) {
+          overlaps = bbox.west < maxX && bbox.east > minX && bbox.south < maxY && bbox.north > minY;
+        } else {
+          const y0 = Math.min(bbox.top, bbox.bottom);
+          const y1 = Math.max(bbox.top, bbox.bottom);
+          overlaps = bbox.left < maxX && bbox.right > minX && y0 < maxY && y1 > minY;
+        }
+        if (overlaps) {
+          return true;
+        }
+      }
+      return false;
+    }
+    return true;
+  }
+  /* Public interface for subclassing */
+  /** Returns array of tile indices in the current viewport */
+  getTileIndices({ viewport, maxZoom, minZoom, zRange, modelMatrix, modelMatrixInverse }) {
+    const { tileSize, extent, zoomOffset } = this.opts;
+    return getTileIndices({
+      viewport,
+      maxZoom,
+      minZoom,
+      zRange,
+      tileSize,
+      extent,
+      modelMatrix,
+      modelMatrixInverse,
+      zoomOffset
+    });
+  }
+  /** Returns unique string key for a tile index */
+  getTileId(index2) {
+    return `${index2.x}-${index2.y}-${index2.z}`;
+  }
+  /** Returns a zoom level for a tile index */
+  getTileZoom(index2) {
+    return index2.z;
+  }
+  /** Returns additional metadata to add to tile, bbox by default */
+  getTileMetadata(index2) {
+    const { tileSize } = this.opts;
+    return { bbox: tileToBoundingBox(this._viewport, index2.x, index2.y, index2.z, tileSize) };
+  }
+  /** Returns index of the parent tile */
+  getParentIndex(index2) {
+    const x2 = Math.floor(index2.x / 2);
+    const y3 = Math.floor(index2.y / 2);
+    const z4 = index2.z - 1;
+    return { x: x2, y: y3, z: z4 };
+  }
+  // Returns true if any tile's visibility changed
+  updateTileStates() {
+    const refinementStrategy = this.opts.refinementStrategy || STRATEGY_DEFAULT;
+    const visibilities = new Array(this._cache.size);
+    let i5 = 0;
+    for (const tile of this._cache.values()) {
+      visibilities[i5++] = tile.isVisible;
+      tile.isSelected = false;
+      tile.isVisible = false;
+    }
+    for (const tile of this._selectedTiles) {
+      tile.isSelected = true;
+      tile.isVisible = true;
+    }
+    (typeof refinementStrategy === "function" ? refinementStrategy : STRATEGIES[refinementStrategy])(Array.from(this._cache.values()));
+    i5 = 0;
+    for (const tile of this._cache.values()) {
+      if (visibilities[i5++] !== tile.isVisible) {
+        return true;
+      }
+    }
+    return false;
+  }
+  _pruneRequests() {
+    const { maxRequests = 0 } = this.opts;
+    const abortCandidates = [];
+    let ongoingRequestCount = 0;
+    for (const tile of this._cache.values()) {
+      if (tile.isLoading) {
+        ongoingRequestCount++;
+        if (!tile.isSelected && !tile.isVisible) {
+          abortCandidates.push(tile);
+        }
+      }
+    }
+    while (maxRequests > 0 && ongoingRequestCount > maxRequests && abortCandidates.length > 0) {
+      const tile = abortCandidates.shift();
+      tile.abort();
+      ongoingRequestCount--;
+    }
+  }
+  // This needs to be called every time some tiles have been added/removed from cache
+  _rebuildTree() {
+    const { _cache } = this;
+    for (const tile of _cache.values()) {
+      tile.parent = null;
+      if (tile.children) {
+        tile.children.length = 0;
+      }
+    }
+    for (const tile of _cache.values()) {
+      const parent = this._getNearestAncestor(tile);
+      tile.parent = parent;
+      if (parent == null ? void 0 : parent.children) {
+        parent.children.push(tile);
+      }
+    }
+  }
+  /**
+   * Clear tiles that are not visible when the cache is full
+   */
+  /* eslint-disable complexity */
+  _resizeCache() {
+    var _a3, _b2;
+    const { _cache, opts } = this;
+    const maxCacheSize = opts.maxCacheSize ?? // @ts-expect-error called only when selectedTiles is initialized
+    (opts.maxCacheByteSize !== null ? Infinity : DEFAULT_CACHE_SCALE * this.selectedTiles.length);
+    const maxCacheByteSize = opts.maxCacheByteSize ?? Infinity;
+    const overflown = _cache.size > maxCacheSize || this._cacheByteSize > maxCacheByteSize;
+    if (overflown) {
+      for (const [id2, tile] of _cache) {
+        if (!tile.isVisible && !tile.isSelected) {
+          this._cacheByteSize -= opts.maxCacheByteSize !== null ? tile.byteLength : 0;
+          _cache.delete(id2);
+          (_b2 = (_a3 = this.opts).onTileUnload) == null ? void 0 : _b2.call(_a3, tile);
+        }
+        if (_cache.size <= maxCacheSize && this._cacheByteSize <= maxCacheByteSize) {
+          break;
+        }
+      }
+      this._rebuildTree();
+      this._dirty = true;
+    }
+    if (this._dirty) {
+      this._tiles = Array.from(this._cache.values()).sort((t1, t22) => t1.zoom - t22.zoom);
+      this._dirty = false;
+    }
+  }
+  _getTile(index2, create2) {
+    const id2 = this.getTileId(index2);
+    let tile = this._cache.get(id2);
+    let needsReload = false;
+    if (!tile && create2) {
+      tile = new Tile2DHeader(index2);
+      Object.assign(tile, this.getTileMetadata(tile.index));
+      Object.assign(tile, { id: id2, zoom: this.getTileZoom(tile.index) });
+      needsReload = true;
+      this._cache.set(id2, tile);
+      this._dirty = true;
+    } else if (tile && tile.needsReload) {
+      needsReload = true;
+    }
+    if (tile && needsReload) {
+      tile.loadData({
+        getData: this.opts.getTileData,
+        requestScheduler: this._requestScheduler,
+        onLoad: this.onTileLoad,
+        onError: this.opts.onTileError
+      });
+    }
+    return tile;
+  }
+  _getNearestAncestor(tile) {
+    const { _minZoom = 0 } = this;
+    let index2 = tile.index;
+    while (this.getTileZoom(index2) > _minZoom) {
+      index2 = this.getParentIndex(index2);
+      const parent = this._getTile(index2);
+      if (parent) {
+        return parent;
+      }
+    }
+    return null;
+  }
+}
+function updateTileStateDefault(allTiles) {
+  for (const tile of allTiles) {
+    tile.state = 0;
+  }
+  for (const tile of allTiles) {
+    if (tile.isSelected && !getPlaceholderInAncestors(tile)) {
+      getPlaceholderInChildren(tile);
+    }
+  }
+  for (const tile of allTiles) {
+    tile.isVisible = Boolean(tile.state & TILE_STATE_VISIBLE);
+  }
+}
+function updateTileStateReplace(allTiles) {
+  for (const tile of allTiles) {
+    tile.state = 0;
+  }
+  for (const tile of allTiles) {
+    if (tile.isSelected) {
+      getPlaceholderInAncestors(tile);
+    }
+  }
+  const sortedTiles = Array.from(allTiles).sort((t1, t22) => t1.zoom - t22.zoom);
+  for (const tile of sortedTiles) {
+    tile.isVisible = Boolean(tile.state & TILE_STATE_VISIBLE);
+    if (tile.children && (tile.isVisible || tile.state & TILE_STATE_VISITED)) {
+      for (const child of tile.children) {
+        child.state = TILE_STATE_VISITED;
+      }
+    } else if (tile.isSelected) {
+      getPlaceholderInChildren(tile);
+    }
+  }
+}
+function getPlaceholderInAncestors(startTile) {
+  let tile = startTile;
+  while (tile) {
+    if (tile.isLoaded || tile.content) {
+      tile.state |= TILE_STATE_VISIBLE;
+      return true;
+    }
+    tile = tile.parent;
+  }
+  return false;
+}
+function getPlaceholderInChildren(tile) {
+  for (const child of tile.children) {
+    if (child.isLoaded || child.content) {
+      child.state |= TILE_STATE_VISIBLE;
+    } else {
+      getPlaceholderInChildren(child);
+    }
+  }
+}
+const defaultProps$b = {
+  TilesetClass: Tileset2D,
+  data: { type: "data", value: [] },
+  dataComparator: urlType.equal,
+  renderSubLayers: { type: "function", value: (props) => new GeoJsonLayer(props) },
+  getTileData: { type: "function", optional: true, value: null },
+  // TODO - change to onViewportLoad to align with Tile3DLayer
+  onViewportLoad: { type: "function", optional: true, value: null },
+  onTileLoad: { type: "function", value: (tile) => {
+  } },
+  onTileUnload: { type: "function", value: (tile) => {
+  } },
+  // eslint-disable-next-line
+  onTileError: { type: "function", value: (err2) => console.error(err2) },
+  extent: { type: "array", optional: true, value: null, compare: true },
+  tileSize: 512,
+  maxZoom: null,
+  minZoom: 0,
+  maxCacheSize: null,
+  maxCacheByteSize: null,
+  refinementStrategy: STRATEGY_DEFAULT,
+  zRange: null,
+  maxRequests: 6,
+  debounceTime: 0,
+  zoomOffset: 0
+};
+class TileLayer extends CompositeLayer {
+  initializeState() {
+    this.state = {
+      tileset: null,
+      isLoaded: false
+    };
+  }
+  finalizeState() {
+    var _a3, _b2;
+    (_b2 = (_a3 = this.state) == null ? void 0 : _a3.tileset) == null ? void 0 : _b2.finalize();
+  }
+  get isLoaded() {
+    var _a3, _b2, _c2;
+    return Boolean((_c2 = (_b2 = (_a3 = this.state) == null ? void 0 : _a3.tileset) == null ? void 0 : _b2.selectedTiles) == null ? void 0 : _c2.every((tile) => tile.isLoaded && tile.layers && tile.layers.every((layer) => layer.isLoaded)));
+  }
+  shouldUpdateState({ changeFlags }) {
+    return changeFlags.somethingChanged;
+  }
+  updateState({ changeFlags }) {
+    let { tileset } = this.state;
+    const propsChanged = changeFlags.propsOrDataChanged || changeFlags.updateTriggersChanged;
+    const dataChanged = changeFlags.dataChanged || changeFlags.updateTriggersChanged && (changeFlags.updateTriggersChanged.all || changeFlags.updateTriggersChanged.getTileData);
+    if (!tileset) {
+      tileset = new this.props.TilesetClass(this._getTilesetOptions());
+      this.setState({ tileset });
+    } else if (propsChanged) {
+      tileset.setOptions(this._getTilesetOptions());
+      if (dataChanged) {
+        tileset.reloadAll();
+      } else {
+        tileset.tiles.forEach((tile) => {
+          tile.layers = null;
+        });
+      }
+    }
+    this._updateTileset();
+  }
+  _getTilesetOptions() {
+    const { tileSize, maxCacheSize, maxCacheByteSize, refinementStrategy, extent, maxZoom, minZoom, maxRequests, debounceTime, zoomOffset } = this.props;
+    return {
+      maxCacheSize,
+      maxCacheByteSize,
+      maxZoom,
+      minZoom,
+      tileSize,
+      refinementStrategy,
+      extent,
+      maxRequests,
+      debounceTime,
+      zoomOffset,
+      getTileData: this.getTileData.bind(this),
+      onTileLoad: this._onTileLoad.bind(this),
+      onTileError: this._onTileError.bind(this),
+      onTileUnload: this._onTileUnload.bind(this)
+    };
+  }
+  _updateTileset() {
+    const tileset = this.state.tileset;
+    const { zRange, modelMatrix } = this.props;
+    const frameNumber = tileset.update(this.context.viewport, { zRange, modelMatrix });
+    const { isLoaded } = tileset;
+    const loadingStateChanged = this.state.isLoaded !== isLoaded;
+    const tilesetChanged = this.state.frameNumber !== frameNumber;
+    if (isLoaded && (loadingStateChanged || tilesetChanged)) {
+      this._onViewportLoad();
+    }
+    if (tilesetChanged) {
+      this.setState({ frameNumber });
+    }
+    this.state.isLoaded = isLoaded;
+  }
+  _onViewportLoad() {
+    const { tileset } = this.state;
+    const { onViewportLoad } = this.props;
+    if (onViewportLoad) {
+      onViewportLoad(tileset.selectedTiles);
+    }
+  }
+  _onTileLoad(tile) {
+    this.props.onTileLoad(tile);
+    tile.layers = null;
+    this.setNeedsUpdate();
+  }
+  _onTileError(error2, tile) {
+    this.props.onTileError(error2);
+    tile.layers = null;
+    this.setNeedsUpdate();
+  }
+  _onTileUnload(tile) {
+    this.props.onTileUnload(tile);
+  }
+  // Methods for subclass to override
+  getTileData(tile) {
+    const { data: data2, getTileData, fetch: fetch2 } = this.props;
+    const { signal } = tile;
+    tile.url = typeof data2 === "string" || Array.isArray(data2) ? getURLFromTemplate(data2, tile) : null;
+    if (getTileData) {
+      return getTileData(tile);
+    }
+    if (fetch2 && tile.url) {
+      return fetch2(tile.url, { propName: "data", layer: this, signal });
+    }
+    return null;
+  }
+  renderSubLayers(props) {
+    return this.props.renderSubLayers(props);
+  }
+  getSubLayerPropsByTile(tile) {
+    return null;
+  }
+  getPickingInfo(params) {
+    const sourceLayer = params.sourceLayer;
+    const sourceTile = sourceLayer.props.tile;
+    const info = params.info;
+    if (info.picked) {
+      info.tile = sourceTile;
+    }
+    info.sourceTile = sourceTile;
+    info.sourceTileSubLayer = sourceLayer;
+    return info;
+  }
+  _updateAutoHighlight(info) {
+    info.sourceTileSubLayer.updateAutoHighlight(info);
+  }
+  renderLayers() {
+    return this.state.tileset.tiles.map((tile) => {
+      const subLayerProps = this.getSubLayerPropsByTile(tile);
+      if (!tile.isLoaded && !tile.content) ;
+      else if (!tile.layers) {
+        const layers = this.renderSubLayers({
+          ...this.props,
+          ...this.getSubLayerProps({
+            id: tile.id,
+            updateTriggers: this.props.updateTriggers
+          }),
+          data: tile.content,
+          _offset: 0,
+          tile
+        });
+        tile.layers = flatten(layers, Boolean).map((layer) => layer.clone({
+          tile,
+          ...subLayerProps
+        }));
+      } else if (subLayerProps && tile.layers[0] && Object.keys(subLayerProps).some((propName) => tile.layers[0].props[propName] !== subLayerProps[propName])) {
+        tile.layers = tile.layers.map((layer) => layer.clone(subLayerProps));
+      }
+      return tile.layers;
+    });
+  }
+  filterSubLayer({ layer, cullRect }) {
+    const { tile } = layer.props;
+    return this.state.tileset.isTileVisible(tile, cullRect);
+  }
+}
+TileLayer.defaultProps = defaultProps$b;
+TileLayer.layerName = "TileLayer";
 var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
 function getDefaultExportFromCjs(x2) {
   return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
@@ -111110,11 +113044,11 @@ const littleEndianPlatform = (() => {
 })();
 class DicomTIFFImage {
   constructor(opts) {
-    console.warn(opts);
-    const bytesPerSample = 2;
     const { metadata, little_endian } = opts;
     const { tileSize } = opts.pyramids[0][0];
     const { Pixels } = metadata;
+    const rgbImage = Pixels.Type === "Uint8";
+    const bytesPerSample = rgbImage ? 3 : 2;
     this.Pixels = Pixels;
     this.level = opts.level;
     this.c = opts.c;
@@ -111124,6 +113058,7 @@ class DicomTIFFImage {
     this.bytesPerSample = bytesPerSample;
     this.tileWidth = tileSize;
     this.tileHeight = tileSize;
+    this.rgbImage = rgbImage;
   }
   getPyramid() {
     const n_levels = this.pyramids[this.c].length - 1;
@@ -111156,6 +113091,7 @@ class DicomTIFFImage {
       sample,
       signal
     ).then((tile) => {
+      const fullTile = tileHeight * tileWidth;
       const ymax = Math.min(
         tileHeight,
         height,
@@ -111166,9 +113102,29 @@ class DicomTIFFImage {
         width,
         imageWidth - origin_x
       );
+      if (this.rgbImage) {
+        const rgb = new Uint8ClampedArray(tile.data.buffer);
+        const rgba = new Uint8ClampedArray(rgb.length * 4 / 3);
+        for (let i5 = 0, j2 = 0; i5 < rgb.length; i5 += 3, j2 += 4) {
+          rgba[j2] = rgb[i5];
+          rgba[j2 + 1] = rgb[i5 + 1];
+          rgba[j2 + 2] = rgb[i5 + 2];
+          rgba[j2 + 3] = 255;
+        }
+        const samples = 4;
+        const full2 = Math.round(
+          rgba.length / samples
+        ) === fullTile;
+        return {
+          data: rgba,
+          width: full2 ? tileWidth : xmax,
+          height: full2 ? tileHeight : ymax
+        };
+      }
       const optimization = true;
       if (littleEndianPlatform == this.littleEndian && optimization) {
         const data3 = new Uint16Array(tile.data.buffer);
+        const full2 = data3.length === fullTile;
         for (let pixel_y = ymax; pixel_y < tileHeight; ++pixel_y) {
           for (let pixel_x = 0; pixel_x < tileWidth; ++pixel_x) {
             const windowCoordinate = pixel_y * tileWidth + pixel_x;
@@ -111181,8 +113137,6 @@ class DicomTIFFImage {
             data3[windowCoordinate] = 0;
           }
         }
-        const fullTile2 = tileHeight * tileWidth;
-        const full2 = data3.length === fullTile2;
         return {
           data: data3,
           width: full2 ? tileWidth : xmax,
@@ -111199,8 +113153,6 @@ class DicomTIFFImage {
           );
         }
       }
-      const fullTile = tileHeight * tileWidth;
-      const full = data2.length === fullTile;
       return {
         data: data2,
         width: full ? tileWidth : xmax,
@@ -111259,7 +113211,11 @@ class DicomPixelSource {
   async _readRasters(image2, props = {}) {
     var _a3;
     const index2 = [image2.c, props.x, props.y].join("-");
-    image2.getPyramid().frameMappings[[props.y + 1, props.x + 1, image2.c].join("-")].split("/").pop();
+    const frame_path = image2.getPyramid().frameMappings[[props.y + 1, props.x + 1, image2.c].join("-")];
+    if (!frame_path) {
+      throw "__minervaEmptyFramePath";
+    }
+    frame_path.split("/").pop();
     let raster = this.tileCache[index2];
     if (!raster) {
       raster = await image2.readRasters({
@@ -113246,7 +115202,7 @@ const MinimumIntensityProjectionExtension$1 = class MinimumIntensityProjectionEx
   }
 };
 MinimumIntensityProjectionExtension$1.extensionName = "MinimumIntensityProjectionExtension";
-const defaultProps$b = {
+const defaultProps$a = {
   colors: { type: "array", value: null, compare: true }
 };
 const BaseExtension2 = class extends LayerExtension {
@@ -113268,7 +115224,7 @@ const BaseExtension2 = class extends LayerExtension {
   }
 };
 BaseExtension2.extensionName = "BaseExtension";
-BaseExtension2.defaultProps = defaultProps$b;
+BaseExtension2.defaultProps = defaultProps$a;
 const _BEFORE_RENDER$2 = "";
 const _RENDER$2 = `  vec3 rgbCombo = vec3(0.0);
   vec3 hsvCombo = vec3(0.0);
@@ -114083,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-CNXjcJ_e.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-C_wg7GEX.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-BO1UDD0S.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-BgiudSGq.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-Ce-tuWWW.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-BZYlDRWm.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-C7iyRJ02.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-vlHj2LuL.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-CrGJBryt.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-Dis-OH2z.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-BHBnfVbH.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-V4WD6wVZ.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-lb9SqcYw.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-DZDSFgR4.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -115594,15 +117550,15 @@ function zip(a2, b2) {
   const B3 = Array.isArray(b2) ? b2 : Array.from(b2);
   return A3.map((k4, i5) => [k4, B3[i5]]);
 }
-class AbortError extends Error {
+let AbortError$1 = class AbortError2 extends Error {
   constructor(params) {
     super(params);
     if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, AbortError);
+      Error.captureStackTrace(this, AbortError2);
     }
     this.name = "AbortError";
   }
-}
+};
 class CustomAggregateError extends Error {
   constructor(errors2, message2) {
     super(message2);
@@ -115723,7 +117679,7 @@ class BlockedSource extends BaseSource {
       await Promise.allSettled(abortedBlockRequests);
     }
     if (signal && signal.aborted) {
-      throw new AbortError("Request was aborted");
+      throw new AbortError$1("Request was aborted");
     }
     const blocks = allBlockIds.map((id2) => this.blockCache.get(id2) || this.evictedBlocks.get(id2));
     const failedBlocks = blocks.filter((i5) => !i5);
@@ -115963,7 +117919,7 @@ class XHRClient extends BaseClient {
         resolve(new XHRResponse(xhr, data2));
       };
       xhr.onerror = reject;
-      xhr.onabort = () => reject(new AbortError("Request aborted"));
+      xhr.onabort = () => reject(new AbortError$1("Request aborted"));
       xhr.send();
       if (signal) {
         if (signal.aborted) {
@@ -116030,9 +117986,9 @@ class HttpClient extends BaseClient {
       request.on("error", reject);
       if (signal) {
         if (signal.aborted) {
-          request.destroy(new AbortError("Request aborted"));
+          request.destroy(new AbortError$1("Request aborted"));
         }
-        signal.addEventListener("abort", () => request.destroy(new AbortError("Request aborted")));
+        signal.addEventListener("abort", () => request.destroy(new AbortError$1("Request aborted")));
       }
     });
   }
@@ -126572,1940 +128528,6 @@ async function loadOmeTiff(source2, opts = {}) {
   const loaders = await load2(source2, opts);
   return opts.images === "all" ? loaders : loaders[0];
 }
-const STAT_QUEUED_REQUESTS = "Queued Requests";
-const STAT_ACTIVE_REQUESTS = "Active Requests";
-const STAT_CANCELLED_REQUESTS = "Cancelled Requests";
-const STAT_QUEUED_REQUESTS_EVER = "Queued Requests Ever";
-const STAT_ACTIVE_REQUESTS_EVER = "Active Requests Ever";
-const DEFAULT_PROPS = {
-  id: "request-scheduler",
-  /** Specifies if the request scheduler should throttle incoming requests, mainly for comparative testing. */
-  throttleRequests: true,
-  /** The maximum number of simultaneous active requests. Un-throttled requests do not observe this limit. */
-  maxRequests: 6,
-  /**
-   * Specifies a debounce time, in milliseconds. All requests are queued, until no new requests have
-   * been added to the queue for this amount of time.
-   */
-  debounceTime: 0
-};
-class RequestScheduler {
-  constructor(props = {}) {
-    __publicField(this, "props");
-    __publicField(this, "stats");
-    __publicField(this, "activeRequestCount", 0);
-    /** Tracks the number of active requests and prioritizes/cancels queued requests. */
-    __publicField(this, "requestQueue", []);
-    __publicField(this, "requestMap", /* @__PURE__ */ new Map());
-    __publicField(this, "updateTimer", null);
-    this.props = { ...DEFAULT_PROPS, ...props };
-    this.stats = new Stats({ id: this.props.id });
-    this.stats.get(STAT_QUEUED_REQUESTS);
-    this.stats.get(STAT_ACTIVE_REQUESTS);
-    this.stats.get(STAT_CANCELLED_REQUESTS);
-    this.stats.get(STAT_QUEUED_REQUESTS_EVER);
-    this.stats.get(STAT_ACTIVE_REQUESTS_EVER);
-  }
-  /**
-   * Called by an application that wants to issue a request, without having it deeply queued by the browser
-   *
-   * When the returned promise resolved, it is OK for the application to issue a request.
-   * The promise resolves to an object that contains a `done` method.
-   * When the application's request has completed (or failed), the application must call the `done` function
-   *
-   * @param handle
-   * @param getPriority will be called when request "slots" open up,
-   *    allowing the caller to update priority or cancel the request
-   *    Highest priority executes first, priority < 0 cancels the request
-   * @returns a promise
-   *   - resolves to a object (with a `done` field) when the request can be issued without queueing,
-   *   - resolves to `null` if the request has been cancelled (by the callback return < 0).
-   *     In this case the application should not issue the request
-   */
-  scheduleRequest(handle, getPriority = () => 0) {
-    if (!this.props.throttleRequests) {
-      return Promise.resolve({ done: () => {
-      } });
-    }
-    if (this.requestMap.has(handle)) {
-      return this.requestMap.get(handle);
-    }
-    const request = { handle, priority: 0, getPriority };
-    const promise = new Promise((resolve) => {
-      request.resolve = resolve;
-      return request;
-    });
-    this.requestQueue.push(request);
-    this.requestMap.set(handle, promise);
-    this._issueNewRequests();
-    return promise;
-  }
-  // PRIVATE
-  _issueRequest(request) {
-    const { handle, resolve } = request;
-    let isDone = false;
-    const done = () => {
-      if (!isDone) {
-        isDone = true;
-        this.requestMap.delete(handle);
-        this.activeRequestCount--;
-        this._issueNewRequests();
-      }
-    };
-    this.activeRequestCount++;
-    return resolve ? resolve({ done }) : Promise.resolve({ done });
-  }
-  /** We check requests asynchronously, to prevent multiple updates */
-  _issueNewRequests() {
-    if (this.updateTimer !== null) {
-      clearTimeout(this.updateTimer);
-    }
-    this.updateTimer = setTimeout(() => this._issueNewRequestsAsync(), this.props.debounceTime);
-  }
-  /** Refresh all requests  */
-  _issueNewRequestsAsync() {
-    if (this.updateTimer !== null) {
-      clearTimeout(this.updateTimer);
-    }
-    this.updateTimer = null;
-    const freeSlots = Math.max(this.props.maxRequests - this.activeRequestCount, 0);
-    if (freeSlots === 0) {
-      return;
-    }
-    this._updateAllRequests();
-    for (let i5 = 0; i5 < freeSlots; ++i5) {
-      const request = this.requestQueue.shift();
-      if (request) {
-        this._issueRequest(request);
-      }
-    }
-  }
-  /** Ensure all requests have updated priorities, and that no longer valid requests are cancelled */
-  _updateAllRequests() {
-    const requestQueue = this.requestQueue;
-    for (let i5 = 0; i5 < requestQueue.length; ++i5) {
-      const request = requestQueue[i5];
-      if (!this._updateRequest(request)) {
-        requestQueue.splice(i5, 1);
-        this.requestMap.delete(request.handle);
-        i5--;
-      }
-    }
-    requestQueue.sort((a2, b2) => a2.priority - b2.priority);
-  }
-  /** Update a single request by calling the callback */
-  _updateRequest(request) {
-    request.priority = request.getPriority(request.handle);
-    if (request.priority < 0) {
-      request.resolve(null);
-      return false;
-    }
-    return true;
-  }
-}
-class Tile2DHeader {
-  constructor(index2) {
-    this.index = index2;
-    this.isVisible = false;
-    this.isSelected = false;
-    this.parent = null;
-    this.children = [];
-    this.content = null;
-    this._loader = void 0;
-    this._abortController = null;
-    this._loaderId = 0;
-    this._isLoaded = false;
-    this._isCancelled = false;
-    this._needsReload = false;
-  }
-  /** @deprecated use `boundingBox` instead */
-  get bbox() {
-    return this._bbox;
-  }
-  // TODO - remove in v9
-  set bbox(value) {
-    if (this._bbox)
-      return;
-    this._bbox = value;
-    if ("west" in value) {
-      this.boundingBox = [
-        [value.west, value.south],
-        [value.east, value.north]
-      ];
-    } else {
-      this.boundingBox = [
-        [value.left, value.top],
-        [value.right, value.bottom]
-      ];
-    }
-  }
-  get data() {
-    return this.isLoading && this._loader ? this._loader.then(() => this.data) : this.content;
-  }
-  get isLoaded() {
-    return this._isLoaded && !this._needsReload;
-  }
-  get isLoading() {
-    return Boolean(this._loader) && !this._isCancelled;
-  }
-  get needsReload() {
-    return this._needsReload || this._isCancelled;
-  }
-  get byteLength() {
-    const result = this.content ? this.content.byteLength : 0;
-    if (!Number.isFinite(result)) {
-      console.error("byteLength not defined in tile data");
-    }
-    return result;
-  }
-  /* eslint-disable max-statements */
-  async _loadData({ getData, requestScheduler, onLoad, onError }) {
-    const { index: index2, id: id2, bbox, userData, zoom } = this;
-    const loaderId = this._loaderId;
-    this._abortController = new AbortController();
-    const { signal } = this._abortController;
-    const requestToken = await requestScheduler.scheduleRequest(this, (tile) => {
-      return tile.isSelected ? 1 : -1;
-    });
-    if (!requestToken) {
-      this._isCancelled = true;
-      return;
-    }
-    if (this._isCancelled) {
-      requestToken.done();
-      return;
-    }
-    let tileData = null;
-    let error2;
-    try {
-      tileData = await getData({ index: index2, id: id2, bbox, userData, zoom, signal });
-    } catch (err2) {
-      error2 = err2 || true;
-    } finally {
-      requestToken.done();
-    }
-    if (loaderId !== this._loaderId) {
-      return;
-    }
-    this._loader = void 0;
-    this.content = tileData;
-    if (this._isCancelled && !tileData) {
-      this._isLoaded = false;
-      return;
-    }
-    this._isLoaded = true;
-    this._isCancelled = false;
-    if (error2) {
-      onError(error2, this);
-    } else {
-      onLoad(this);
-    }
-  }
-  loadData(opts) {
-    this._isLoaded = false;
-    this._isCancelled = false;
-    this._needsReload = false;
-    this._loaderId++;
-    this._loader = this._loadData(opts);
-    return this._loader;
-  }
-  setNeedsReload() {
-    if (this.isLoading) {
-      this.abort();
-      this._loader = void 0;
-    }
-    this._needsReload = true;
-  }
-  abort() {
-    var _a3;
-    if (this.isLoaded) {
-      return;
-    }
-    this._isCancelled = true;
-    (_a3 = this._abortController) == null ? void 0 : _a3.abort();
-  }
-}
-const INTERSECTION = {
-  OUTSIDE: -1,
-  // Represents that an object is not contained within the frustum.
-  INTERSECTING: 0,
-  // Represents that an object intersects one of the frustum's planes.
-  INSIDE: 1
-  // Represents that an object is fully within the frustum.
-};
-const scratchVector$1 = new Vector3();
-const scratchNormal$1 = new Vector3();
-class AxisAlignedBoundingBox {
-  /**
-   * Creates an instance of an AxisAlignedBoundingBox from the minimum and maximum points along the x, y, and z axes.
-   * @param minimum=[0, 0, 0] The minimum point along the x, y, and z axes.
-   * @param maximum=[0, 0, 0] The maximum point along the x, y, and z axes.
-   * @param center The center of the box; automatically computed if not supplied.
-   */
-  constructor(minimum = [0, 0, 0], maximum = [0, 0, 0], center) {
-    center = center || scratchVector$1.copy(minimum).add(maximum).scale(0.5);
-    this.center = new Vector3(center);
-    this.halfDiagonal = new Vector3(maximum).subtract(this.center);
-    this.minimum = new Vector3(minimum);
-    this.maximum = new Vector3(maximum);
-  }
-  /**
-   * Duplicates a AxisAlignedBoundingBox instance.
-   *
-   * @returns {AxisAlignedBoundingBox} A new AxisAlignedBoundingBox instance.
-   */
-  clone() {
-    return new AxisAlignedBoundingBox(this.minimum, this.maximum, this.center);
-  }
-  /**
-   * Compares the provided AxisAlignedBoundingBox componentwise and returns
-   * <code>true</code> if they are equal, <code>false</code> otherwise.
-   *
-   * @param {AxisAlignedBoundingBox} [right] The second AxisAlignedBoundingBox to compare with.
-   * @returns {Boolean} <code>true</code> if left and right are equal, <code>false</code> otherwise.
-   */
-  equals(right) {
-    return this === right || Boolean(right) && this.minimum.equals(right.minimum) && this.maximum.equals(right.maximum);
-  }
-  /**
-   * Applies a 4x4 affine transformation matrix to a bounding sphere.
-   * @param transform The transformation matrix to apply to the bounding sphere.
-   * @returns itself, i.e. the modified BoundingVolume.
-   */
-  transform(transform2) {
-    this.center.transformAsPoint(transform2);
-    this.halfDiagonal.transform(transform2);
-    this.minimum.transform(transform2);
-    this.maximum.transform(transform2);
-    return this;
-  }
-  /**
-   * Determines which side of a plane a box is located.
-   */
-  intersectPlane(plane) {
-    const { halfDiagonal } = this;
-    const normal = scratchNormal$1.from(plane.normal);
-    const e3 = halfDiagonal.x * Math.abs(normal.x) + halfDiagonal.y * Math.abs(normal.y) + halfDiagonal.z * Math.abs(normal.z);
-    const s3 = this.center.dot(normal) + plane.distance;
-    if (s3 - e3 > 0) {
-      return INTERSECTION.INSIDE;
-    }
-    if (s3 + e3 < 0) {
-      return INTERSECTION.OUTSIDE;
-    }
-    return INTERSECTION.INTERSECTING;
-  }
-  /** Computes the estimated distance from the closest point on a bounding box to a point. */
-  distanceTo(point2) {
-    return Math.sqrt(this.distanceSquaredTo(point2));
-  }
-  /** Computes the estimated distance squared from the closest point on a bounding box to a point. */
-  distanceSquaredTo(point2) {
-    const offset = scratchVector$1.from(point2).subtract(this.center);
-    const { halfDiagonal } = this;
-    let distanceSquared = 0;
-    let d2;
-    d2 = Math.abs(offset.x) - halfDiagonal.x;
-    if (d2 > 0) {
-      distanceSquared += d2 * d2;
-    }
-    d2 = Math.abs(offset.y) - halfDiagonal.y;
-    if (d2 > 0) {
-      distanceSquared += d2 * d2;
-    }
-    d2 = Math.abs(offset.z) - halfDiagonal.z;
-    if (d2 > 0) {
-      distanceSquared += d2 * d2;
-    }
-    return distanceSquared;
-  }
-}
-const scratchVector = new Vector3();
-const scratchVector2$1 = new Vector3();
-class BoundingSphere {
-  /** Creates a bounding sphere */
-  constructor(center = [0, 0, 0], radius = 0) {
-    this.radius = -0;
-    this.center = new Vector3();
-    this.fromCenterRadius(center, radius);
-  }
-  /** Sets the bounding sphere from `center` and `radius`. */
-  fromCenterRadius(center, radius) {
-    this.center.from(center);
-    this.radius = radius;
-    return this;
-  }
-  /**
-   * Computes a bounding sphere from the corner points of an axis-aligned bounding box.  The sphere
-   * tightly and fully encompasses the box.
-   */
-  fromCornerPoints(corner, oppositeCorner) {
-    oppositeCorner = scratchVector.from(oppositeCorner);
-    this.center = new Vector3().from(corner).add(oppositeCorner).scale(0.5);
-    this.radius = this.center.distance(oppositeCorner);
-    return this;
-  }
-  /** Compares the provided BoundingSphere component wise */
-  equals(right) {
-    return this === right || Boolean(right) && this.center.equals(right.center) && this.radius === right.radius;
-  }
-  /** Duplicates a BoundingSphere instance. */
-  clone() {
-    return new BoundingSphere(this.center, this.radius);
-  }
-  /** Computes a bounding sphere that contains both the left and right bounding spheres. */
-  union(boundingSphere) {
-    const leftCenter = this.center;
-    const leftRadius = this.radius;
-    const rightCenter = boundingSphere.center;
-    const rightRadius = boundingSphere.radius;
-    const toRightCenter = scratchVector.copy(rightCenter).subtract(leftCenter);
-    const centerSeparation = toRightCenter.magnitude();
-    if (leftRadius >= centerSeparation + rightRadius) {
-      return this.clone();
-    }
-    if (rightRadius >= centerSeparation + leftRadius) {
-      return boundingSphere.clone();
-    }
-    const halfDistanceBetweenTangentPoints = (leftRadius + centerSeparation + rightRadius) * 0.5;
-    scratchVector2$1.copy(toRightCenter).scale((-leftRadius + halfDistanceBetweenTangentPoints) / centerSeparation).add(leftCenter);
-    this.center.copy(scratchVector2$1);
-    this.radius = halfDistanceBetweenTangentPoints;
-    return this;
-  }
-  /** Computes a bounding sphere by enlarging the provided sphere to contain the provided point. */
-  expand(point2) {
-    const scratchPoint = scratchVector.from(point2);
-    const radius = scratchPoint.subtract(this.center).magnitude();
-    if (radius > this.radius) {
-      this.radius = radius;
-    }
-    return this;
-  }
-  // BoundingVolume interface
-  /**
-   * Applies a 4x4 affine transformation matrix to a bounding sphere.
-   * @param sphere The bounding sphere to apply the transformation to.
-   * @param transform The transformation matrix to apply to the bounding sphere.
-   * @returns self.
-   */
-  transform(transform2) {
-    this.center.transform(transform2);
-    const scale2 = getScaling(scratchVector, transform2);
-    this.radius = Math.max(scale2[0], Math.max(scale2[1], scale2[2])) * this.radius;
-    return this;
-  }
-  /** Computes the estimated distance squared from the closest point on a bounding sphere to a point. */
-  distanceSquaredTo(point2) {
-    const d2 = this.distanceTo(point2);
-    return d2 * d2;
-  }
-  /** Computes the estimated distance from the closest point on a bounding sphere to a point. */
-  distanceTo(point2) {
-    const scratchPoint = scratchVector.from(point2);
-    const delta = scratchPoint.subtract(this.center);
-    return Math.max(0, delta.len() - this.radius);
-  }
-  /** Determines which side of a plane a sphere is located. */
-  intersectPlane(plane) {
-    const center = this.center;
-    const radius = this.radius;
-    const normal = plane.normal;
-    const distanceToPlane = normal.dot(center) + plane.distance;
-    if (distanceToPlane < -radius) {
-      return INTERSECTION.OUTSIDE;
-    }
-    if (distanceToPlane < radius) {
-      return INTERSECTION.INTERSECTING;
-    }
-    return INTERSECTION.INSIDE;
-  }
-}
-const scratchVector3$1 = new Vector3();
-const scratchOffset = new Vector3();
-const scratchVectorU = new Vector3();
-const scratchVectorV = new Vector3();
-const scratchVectorW = new Vector3();
-const scratchCorner = new Vector3();
-const scratchToCenter = new Vector3();
-const MATRIX3 = {
-  COLUMN0ROW0: 0,
-  COLUMN0ROW1: 1,
-  COLUMN0ROW2: 2,
-  COLUMN1ROW0: 3,
-  COLUMN1ROW1: 4,
-  COLUMN1ROW2: 5,
-  COLUMN2ROW0: 6,
-  COLUMN2ROW1: 7,
-  COLUMN2ROW2: 8
-};
-class OrientedBoundingBox {
-  constructor(center = [0, 0, 0], halfAxes = [0, 0, 0, 0, 0, 0, 0, 0, 0]) {
-    this.center = new Vector3().from(center);
-    this.halfAxes = new Matrix3(halfAxes);
-  }
-  /** Returns an array with three halfSizes for the bounding box */
-  get halfSize() {
-    const xAxis = this.halfAxes.getColumn(0);
-    const yAxis = this.halfAxes.getColumn(1);
-    const zAxis = this.halfAxes.getColumn(2);
-    return [new Vector3(xAxis).len(), new Vector3(yAxis).len(), new Vector3(zAxis).len()];
-  }
-  /** Returns a quaternion describing the orientation of the bounding box */
-  get quaternion() {
-    const xAxis = this.halfAxes.getColumn(0);
-    const yAxis = this.halfAxes.getColumn(1);
-    const zAxis = this.halfAxes.getColumn(2);
-    const normXAxis = new Vector3(xAxis).normalize();
-    const normYAxis = new Vector3(yAxis).normalize();
-    const normZAxis = new Vector3(zAxis).normalize();
-    return new Quaternion().fromMatrix3(new Matrix3([...normXAxis, ...normYAxis, ...normZAxis]));
-  }
-  /**
-   * Create OrientedBoundingBox from quaternion based OBB,
-   */
-  fromCenterHalfSizeQuaternion(center, halfSize, quaternion) {
-    const quaternionObject = new Quaternion(quaternion);
-    const directionsMatrix = new Matrix3().fromQuaternion(quaternionObject);
-    directionsMatrix[0] = directionsMatrix[0] * halfSize[0];
-    directionsMatrix[1] = directionsMatrix[1] * halfSize[0];
-    directionsMatrix[2] = directionsMatrix[2] * halfSize[0];
-    directionsMatrix[3] = directionsMatrix[3] * halfSize[1];
-    directionsMatrix[4] = directionsMatrix[4] * halfSize[1];
-    directionsMatrix[5] = directionsMatrix[5] * halfSize[1];
-    directionsMatrix[6] = directionsMatrix[6] * halfSize[2];
-    directionsMatrix[7] = directionsMatrix[7] * halfSize[2];
-    directionsMatrix[8] = directionsMatrix[8] * halfSize[2];
-    this.center = new Vector3().from(center);
-    this.halfAxes = directionsMatrix;
-    return this;
-  }
-  /** Duplicates a OrientedBoundingBox instance. */
-  clone() {
-    return new OrientedBoundingBox(this.center, this.halfAxes);
-  }
-  /** Compares the provided OrientedBoundingBox component wise and returns */
-  equals(right) {
-    return this === right || Boolean(right) && this.center.equals(right.center) && this.halfAxes.equals(right.halfAxes);
-  }
-  /** Computes a tight-fitting bounding sphere enclosing the provided oriented bounding box. */
-  getBoundingSphere(result = new BoundingSphere()) {
-    const halfAxes = this.halfAxes;
-    const u4 = halfAxes.getColumn(0, scratchVectorU);
-    const v2 = halfAxes.getColumn(1, scratchVectorV);
-    const w2 = halfAxes.getColumn(2, scratchVectorW);
-    const cornerVector = scratchVector3$1.copy(u4).add(v2).add(w2);
-    result.center.copy(this.center);
-    result.radius = cornerVector.magnitude();
-    return result;
-  }
-  /** Determines which side of a plane the oriented bounding box is located. */
-  intersectPlane(plane) {
-    const center = this.center;
-    const normal = plane.normal;
-    const halfAxes = this.halfAxes;
-    const normalX = normal.x;
-    const normalY = normal.y;
-    const normalZ = normal.z;
-    const radEffective = Math.abs(normalX * halfAxes[MATRIX3.COLUMN0ROW0] + normalY * halfAxes[MATRIX3.COLUMN0ROW1] + normalZ * halfAxes[MATRIX3.COLUMN0ROW2]) + Math.abs(normalX * halfAxes[MATRIX3.COLUMN1ROW0] + normalY * halfAxes[MATRIX3.COLUMN1ROW1] + normalZ * halfAxes[MATRIX3.COLUMN1ROW2]) + Math.abs(normalX * halfAxes[MATRIX3.COLUMN2ROW0] + normalY * halfAxes[MATRIX3.COLUMN2ROW1] + normalZ * halfAxes[MATRIX3.COLUMN2ROW2]);
-    const distanceToPlane = normal.dot(center) + plane.distance;
-    if (distanceToPlane <= -radEffective) {
-      return INTERSECTION.OUTSIDE;
-    } else if (distanceToPlane >= radEffective) {
-      return INTERSECTION.INSIDE;
-    }
-    return INTERSECTION.INTERSECTING;
-  }
-  /** Computes the estimated distance from the closest point on a bounding box to a point. */
-  distanceTo(point2) {
-    return Math.sqrt(this.distanceSquaredTo(point2));
-  }
-  /**
-   * Computes the estimated distance squared from the closest point
-   * on a bounding box to a point.
-   * See Geometric Tools for Computer Graphics 10.4.2
-   */
-  distanceSquaredTo(point2) {
-    const offset = scratchOffset.from(point2).subtract(this.center);
-    const halfAxes = this.halfAxes;
-    const u4 = halfAxes.getColumn(0, scratchVectorU);
-    const v2 = halfAxes.getColumn(1, scratchVectorV);
-    const w2 = halfAxes.getColumn(2, scratchVectorW);
-    const uHalf = u4.magnitude();
-    const vHalf = v2.magnitude();
-    const wHalf = w2.magnitude();
-    u4.normalize();
-    v2.normalize();
-    w2.normalize();
-    let distanceSquared = 0;
-    let d2;
-    d2 = Math.abs(offset.dot(u4)) - uHalf;
-    if (d2 > 0) {
-      distanceSquared += d2 * d2;
-    }
-    d2 = Math.abs(offset.dot(v2)) - vHalf;
-    if (d2 > 0) {
-      distanceSquared += d2 * d2;
-    }
-    d2 = Math.abs(offset.dot(w2)) - wHalf;
-    if (d2 > 0) {
-      distanceSquared += d2 * d2;
-    }
-    return distanceSquared;
-  }
-  /**
-   * The distances calculated by the vector from the center of the bounding box
-   * to position projected onto direction.
-   *
-   * - If you imagine the infinite number of planes with normal direction,
-   *   this computes the smallest distance to the closest and farthest planes
-   *   from `position` that intersect the bounding box.
-   *
-   * @param position The position to calculate the distance from.
-   * @param direction The direction from position.
-   * @param result An Interval (array of length 2) to store the nearest and farthest distances.
-   * @returns Interval (array of length 2) with nearest and farthest distances
-   *   on the bounding box from position in direction.
-   */
-  // eslint-disable-next-line max-statements
-  computePlaneDistances(position2, direction, result = [-0, -0]) {
-    let minDist = Number.POSITIVE_INFINITY;
-    let maxDist = Number.NEGATIVE_INFINITY;
-    const center = this.center;
-    const halfAxes = this.halfAxes;
-    const u4 = halfAxes.getColumn(0, scratchVectorU);
-    const v2 = halfAxes.getColumn(1, scratchVectorV);
-    const w2 = halfAxes.getColumn(2, scratchVectorW);
-    const corner = scratchCorner.copy(u4).add(v2).add(w2).add(center);
-    const toCenter = scratchToCenter.copy(corner).subtract(position2);
-    let mag = direction.dot(toCenter);
-    minDist = Math.min(mag, minDist);
-    maxDist = Math.max(mag, maxDist);
-    corner.copy(center).add(u4).add(v2).subtract(w2);
-    toCenter.copy(corner).subtract(position2);
-    mag = direction.dot(toCenter);
-    minDist = Math.min(mag, minDist);
-    maxDist = Math.max(mag, maxDist);
-    corner.copy(center).add(u4).subtract(v2).add(w2);
-    toCenter.copy(corner).subtract(position2);
-    mag = direction.dot(toCenter);
-    minDist = Math.min(mag, minDist);
-    maxDist = Math.max(mag, maxDist);
-    corner.copy(center).add(u4).subtract(v2).subtract(w2);
-    toCenter.copy(corner).subtract(position2);
-    mag = direction.dot(toCenter);
-    minDist = Math.min(mag, minDist);
-    maxDist = Math.max(mag, maxDist);
-    center.copy(corner).subtract(u4).add(v2).add(w2);
-    toCenter.copy(corner).subtract(position2);
-    mag = direction.dot(toCenter);
-    minDist = Math.min(mag, minDist);
-    maxDist = Math.max(mag, maxDist);
-    center.copy(corner).subtract(u4).add(v2).subtract(w2);
-    toCenter.copy(corner).subtract(position2);
-    mag = direction.dot(toCenter);
-    minDist = Math.min(mag, minDist);
-    maxDist = Math.max(mag, maxDist);
-    center.copy(corner).subtract(u4).subtract(v2).add(w2);
-    toCenter.copy(corner).subtract(position2);
-    mag = direction.dot(toCenter);
-    minDist = Math.min(mag, minDist);
-    maxDist = Math.max(mag, maxDist);
-    center.copy(corner).subtract(u4).subtract(v2).subtract(w2);
-    toCenter.copy(corner).subtract(position2);
-    mag = direction.dot(toCenter);
-    minDist = Math.min(mag, minDist);
-    maxDist = Math.max(mag, maxDist);
-    result[0] = minDist;
-    result[1] = maxDist;
-    return result;
-  }
-  /**
-   * Applies a 4x4 affine transformation matrix to a bounding sphere.
-   * @param transform The transformation matrix to apply to the bounding sphere.
-   * @returns itself, i.e. the modified BoundingVolume.
-   */
-  transform(transformation) {
-    this.center.transformAsPoint(transformation);
-    const xAxis = this.halfAxes.getColumn(0, scratchVectorU);
-    xAxis.transformAsPoint(transformation);
-    const yAxis = this.halfAxes.getColumn(1, scratchVectorV);
-    yAxis.transformAsPoint(transformation);
-    const zAxis = this.halfAxes.getColumn(2, scratchVectorW);
-    zAxis.transformAsPoint(transformation);
-    this.halfAxes = new Matrix3([...xAxis, ...yAxis, ...zAxis]);
-    return this;
-  }
-  getTransform() {
-    throw new Error("not implemented");
-  }
-}
-const scratchPosition = new Vector3();
-const scratchNormal = new Vector3();
-class Plane {
-  constructor(normal = [0, 0, 1], distance2 = 0) {
-    this.normal = new Vector3();
-    this.distance = -0;
-    this.fromNormalDistance(normal, distance2);
-  }
-  /** Creates a plane from a normal and a distance from the origin. */
-  fromNormalDistance(normal, distance2) {
-    assert$5(Number.isFinite(distance2));
-    this.normal.from(normal).normalize();
-    this.distance = distance2;
-    return this;
-  }
-  /** Creates a plane from a normal and a point on the plane. */
-  fromPointNormal(point2, normal) {
-    point2 = scratchPosition.from(point2);
-    this.normal.from(normal).normalize();
-    const distance2 = -this.normal.dot(point2);
-    this.distance = distance2;
-    return this;
-  }
-  /** Creates a plane from the general equation */
-  fromCoefficients(a2, b2, c2, d2) {
-    this.normal.set(a2, b2, c2);
-    assert$5(equals$2(this.normal.len(), 1));
-    this.distance = d2;
-    return this;
-  }
-  /** Duplicates a Plane instance. */
-  clone() {
-    return new Plane(this.normal, this.distance);
-  }
-  /** Compares the provided Planes by normal and distance */
-  equals(right) {
-    return equals$2(this.distance, right.distance) && equals$2(this.normal, right.normal);
-  }
-  /** Computes the signed shortest distance of a point to a plane.
-   * The sign of the distance determines which side of the plane the point is on.
-   */
-  getPointDistance(point2) {
-    return this.normal.dot(point2) + this.distance;
-  }
-  /** Transforms the plane by the given transformation matrix. */
-  transform(matrix4) {
-    const normal = scratchNormal.copy(this.normal).transformAsVector(matrix4).normalize();
-    const point2 = this.normal.scale(-this.distance).transform(matrix4);
-    return this.fromPointNormal(point2, normal);
-  }
-  projectPointOntoPlane(point2, result = [0, 0, 0]) {
-    const scratchPoint = scratchPosition.from(point2);
-    const pointDistance = this.getPointDistance(scratchPoint);
-    const scaledNormal = scratchNormal.copy(this.normal).scale(pointDistance);
-    return scratchPoint.subtract(scaledNormal).to(result);
-  }
-}
-const faces = [new Vector3([1, 0, 0]), new Vector3([0, 1, 0]), new Vector3([0, 0, 1])];
-const scratchPlaneCenter = new Vector3();
-const scratchPlaneNormal = new Vector3();
-class CullingVolume {
-  /**
-   * Create a new `CullingVolume` bounded by an array of clipping planed
-   * @param planes Array of clipping planes.
-   * */
-  constructor(planes = []) {
-    this.planes = planes;
-  }
-  /**
-   * Constructs a culling volume from a bounding sphere. Creates six planes that create a box containing the sphere.
-   * The planes are aligned to the x, y, and z axes in world coordinates.
-   */
-  fromBoundingSphere(boundingSphere) {
-    this.planes.length = 2 * faces.length;
-    const center = boundingSphere.center;
-    const radius = boundingSphere.radius;
-    let planeIndex = 0;
-    for (const faceNormal of faces) {
-      let plane0 = this.planes[planeIndex];
-      let plane1 = this.planes[planeIndex + 1];
-      if (!plane0) {
-        plane0 = this.planes[planeIndex] = new Plane();
-      }
-      if (!plane1) {
-        plane1 = this.planes[planeIndex + 1] = new Plane();
-      }
-      const plane0Center = scratchPlaneCenter.copy(faceNormal).scale(-radius).add(center);
-      plane0.fromPointNormal(plane0Center, faceNormal);
-      const plane1Center = scratchPlaneCenter.copy(faceNormal).scale(radius).add(center);
-      const negatedFaceNormal = scratchPlaneNormal.copy(faceNormal).negate();
-      plane1.fromPointNormal(plane1Center, negatedFaceNormal);
-      planeIndex += 2;
-    }
-    return this;
-  }
-  /** Determines whether a bounding volume intersects the culling volume. */
-  computeVisibility(boundingVolume) {
-    let intersect2 = INTERSECTION.INSIDE;
-    for (const plane of this.planes) {
-      const result = boundingVolume.intersectPlane(plane);
-      switch (result) {
-        case INTERSECTION.OUTSIDE:
-          return INTERSECTION.OUTSIDE;
-        case INTERSECTION.INTERSECTING:
-          intersect2 = INTERSECTION.INTERSECTING;
-          break;
-      }
-    }
-    return intersect2;
-  }
-  /**
-   * Determines whether a bounding volume intersects the culling volume.
-   *
-   * @param parentPlaneMask A bit mask from the boundingVolume's parent's check against the same culling
-   *   volume, such that if (planeMask & (1 << planeIndex) === 0), for k < 31, then
-   *   the parent (and therefore this) volume is completely inside plane[planeIndex]
-   *   and that plane check can be skipped.
-   */
-  computeVisibilityWithPlaneMask(boundingVolume, parentPlaneMask) {
-    assert$5(Number.isFinite(parentPlaneMask), "parentPlaneMask is required.");
-    if (parentPlaneMask === CullingVolume.MASK_OUTSIDE || parentPlaneMask === CullingVolume.MASK_INSIDE) {
-      return parentPlaneMask;
-    }
-    let mask = CullingVolume.MASK_INSIDE;
-    const planes = this.planes;
-    for (let k4 = 0; k4 < this.planes.length; ++k4) {
-      const flag = k4 < 31 ? 1 << k4 : 0;
-      if (k4 < 31 && (parentPlaneMask & flag) === 0) {
-        continue;
-      }
-      const plane = planes[k4];
-      const result = boundingVolume.intersectPlane(plane);
-      if (result === INTERSECTION.OUTSIDE) {
-        return CullingVolume.MASK_OUTSIDE;
-      } else if (result === INTERSECTION.INTERSECTING) {
-        mask |= flag;
-      }
-    }
-    return mask;
-  }
-}
-CullingVolume.MASK_OUTSIDE = 4294967295;
-CullingVolume.MASK_INSIDE = 0;
-CullingVolume.MASK_INDETERMINATE = 2147483647;
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-new Vector3();
-const scratchMatrix = new Matrix3();
-const scratchUnitary = new Matrix3();
-const scratchDiagonal = new Matrix3();
-const jMatrix = new Matrix3();
-const jMatrixTranspose = new Matrix3();
-function computeEigenDecomposition(matrix, result = {}) {
-  const EIGEN_TOLERANCE = EPSILON20;
-  const EIGEN_MAX_SWEEPS = 10;
-  let count2 = 0;
-  let sweep = 0;
-  const unitaryMatrix = scratchUnitary;
-  const diagonalMatrix = scratchDiagonal;
-  unitaryMatrix.identity();
-  diagonalMatrix.copy(matrix);
-  const epsilon = EIGEN_TOLERANCE * computeFrobeniusNorm(diagonalMatrix);
-  while (sweep < EIGEN_MAX_SWEEPS && offDiagonalFrobeniusNorm(diagonalMatrix) > epsilon) {
-    shurDecomposition(diagonalMatrix, jMatrix);
-    jMatrixTranspose.copy(jMatrix).transpose();
-    diagonalMatrix.multiplyRight(jMatrix);
-    diagonalMatrix.multiplyLeft(jMatrixTranspose);
-    unitaryMatrix.multiplyRight(jMatrix);
-    if (++count2 > 2) {
-      ++sweep;
-      count2 = 0;
-    }
-  }
-  result.unitary = unitaryMatrix.toTarget(result.unitary);
-  result.diagonal = diagonalMatrix.toTarget(result.diagonal);
-  return result;
-}
-function computeFrobeniusNorm(matrix) {
-  let norm = 0;
-  for (let i5 = 0; i5 < 9; ++i5) {
-    const temp = matrix[i5];
-    norm += temp * temp;
-  }
-  return Math.sqrt(norm);
-}
-const rowVal = [1, 0, 0];
-const colVal = [2, 2, 1];
-function offDiagonalFrobeniusNorm(matrix) {
-  let norm = 0;
-  for (let i5 = 0; i5 < 3; ++i5) {
-    const temp = matrix[scratchMatrix.getElementIndex(colVal[i5], rowVal[i5])];
-    norm += 2 * temp * temp;
-  }
-  return Math.sqrt(norm);
-}
-function shurDecomposition(matrix, result) {
-  const tolerance = EPSILON15;
-  let maxDiagonal = 0;
-  let rotAxis = 1;
-  for (let i5 = 0; i5 < 3; ++i5) {
-    const temp = Math.abs(matrix[scratchMatrix.getElementIndex(colVal[i5], rowVal[i5])]);
-    if (temp > maxDiagonal) {
-      rotAxis = i5;
-      maxDiagonal = temp;
-    }
-  }
-  const p4 = rowVal[rotAxis];
-  const q2 = colVal[rotAxis];
-  let c2 = 1;
-  let s3 = 0;
-  if (Math.abs(matrix[scratchMatrix.getElementIndex(q2, p4)]) > tolerance) {
-    const qq = matrix[scratchMatrix.getElementIndex(q2, q2)];
-    const pp = matrix[scratchMatrix.getElementIndex(p4, p4)];
-    const qp = matrix[scratchMatrix.getElementIndex(q2, p4)];
-    const tau = (qq - pp) / 2 / qp;
-    let t3;
-    if (tau < 0) {
-      t3 = -1 / (-tau + Math.sqrt(1 + tau * tau));
-    } else {
-      t3 = 1 / (tau + Math.sqrt(1 + tau * tau));
-    }
-    c2 = 1 / Math.sqrt(1 + t3 * t3);
-    s3 = t3 * c2;
-  }
-  Matrix3.IDENTITY.to(result);
-  result[scratchMatrix.getElementIndex(p4, p4)] = result[scratchMatrix.getElementIndex(q2, q2)] = c2;
-  result[scratchMatrix.getElementIndex(q2, p4)] = s3;
-  result[scratchMatrix.getElementIndex(p4, q2)] = -s3;
-  return result;
-}
-const scratchVector2 = new Vector3();
-const scratchVector3 = new Vector3();
-const scratchVector4 = new Vector3();
-const scratchVector5 = new Vector3();
-const scratchVector6 = new Vector3();
-const scratchCovarianceResult = new Matrix3();
-const scratchEigenResult = {
-  diagonal: new Matrix3(),
-  unitary: new Matrix3()
-};
-function makeOrientedBoundingBoxFromPoints(positions, result = new OrientedBoundingBox()) {
-  if (!positions || positions.length === 0) {
-    result.halfAxes = new Matrix3([0, 0, 0, 0, 0, 0, 0, 0, 0]);
-    result.center = new Vector3();
-    return result;
-  }
-  const length2 = positions.length;
-  const meanPoint = new Vector3(0, 0, 0);
-  for (const position2 of positions) {
-    meanPoint.add(position2);
-  }
-  const invLength = 1 / length2;
-  meanPoint.multiplyByScalar(invLength);
-  let exx = 0;
-  let exy = 0;
-  let exz = 0;
-  let eyy = 0;
-  let eyz = 0;
-  let ezz = 0;
-  for (const position2 of positions) {
-    const p4 = scratchVector2.copy(position2).subtract(meanPoint);
-    exx += p4.x * p4.x;
-    exy += p4.x * p4.y;
-    exz += p4.x * p4.z;
-    eyy += p4.y * p4.y;
-    eyz += p4.y * p4.z;
-    ezz += p4.z * p4.z;
-  }
-  exx *= invLength;
-  exy *= invLength;
-  exz *= invLength;
-  eyy *= invLength;
-  eyz *= invLength;
-  ezz *= invLength;
-  const covarianceMatrix = scratchCovarianceResult;
-  covarianceMatrix[0] = exx;
-  covarianceMatrix[1] = exy;
-  covarianceMatrix[2] = exz;
-  covarianceMatrix[3] = exy;
-  covarianceMatrix[4] = eyy;
-  covarianceMatrix[5] = eyz;
-  covarianceMatrix[6] = exz;
-  covarianceMatrix[7] = eyz;
-  covarianceMatrix[8] = ezz;
-  const { unitary } = computeEigenDecomposition(covarianceMatrix, scratchEigenResult);
-  const rotation = result.halfAxes.copy(unitary);
-  let v1 = rotation.getColumn(0, scratchVector4);
-  let v2 = rotation.getColumn(1, scratchVector5);
-  let v3 = rotation.getColumn(2, scratchVector6);
-  let u1 = -Number.MAX_VALUE;
-  let u22 = -Number.MAX_VALUE;
-  let u32 = -Number.MAX_VALUE;
-  let l1 = Number.MAX_VALUE;
-  let l22 = Number.MAX_VALUE;
-  let l3 = Number.MAX_VALUE;
-  for (const position2 of positions) {
-    scratchVector2.copy(position2);
-    u1 = Math.max(scratchVector2.dot(v1), u1);
-    u22 = Math.max(scratchVector2.dot(v2), u22);
-    u32 = Math.max(scratchVector2.dot(v3), u32);
-    l1 = Math.min(scratchVector2.dot(v1), l1);
-    l22 = Math.min(scratchVector2.dot(v2), l22);
-    l3 = Math.min(scratchVector2.dot(v3), l3);
-  }
-  v1 = v1.multiplyByScalar(0.5 * (l1 + u1));
-  v2 = v2.multiplyByScalar(0.5 * (l22 + u22));
-  v3 = v3.multiplyByScalar(0.5 * (l3 + u32));
-  result.center.copy(v1).add(v2).add(v3);
-  const scale2 = scratchVector3.set(u1 - l1, u22 - l22, u32 - l3).multiplyByScalar(0.5);
-  const scaleMatrix = new Matrix3([scale2[0], 0, 0, 0, scale2[1], 0, 0, 0, scale2[2]]);
-  result.halfAxes.multiplyRight(scaleMatrix);
-  return result;
-}
-const TILE_SIZE$1 = 512;
-const MAX_MAPS = 3;
-const REF_POINTS_5 = [
-  [0.5, 0.5],
-  [0, 0],
-  [0, 1],
-  [1, 0],
-  [1, 1]
-];
-const REF_POINTS_9 = REF_POINTS_5.concat([
-  [0, 0.5],
-  [0.5, 0],
-  [1, 0.5],
-  [0.5, 1]
-]);
-const REF_POINTS_11 = REF_POINTS_9.concat([
-  [0.25, 0.5],
-  [0.75, 0.5]
-]);
-class OSMNode {
-  constructor(x2, y3, z4) {
-    this.x = x2;
-    this.y = y3;
-    this.z = z4;
-  }
-  get children() {
-    if (!this._children) {
-      const x2 = this.x * 2;
-      const y3 = this.y * 2;
-      const z4 = this.z + 1;
-      this._children = [
-        new OSMNode(x2, y3, z4),
-        new OSMNode(x2, y3 + 1, z4),
-        new OSMNode(x2 + 1, y3, z4),
-        new OSMNode(x2 + 1, y3 + 1, z4)
-      ];
-    }
-    return this._children;
-  }
-  // eslint-disable-next-line complexity
-  update(params) {
-    const { viewport, cullingVolume, elevationBounds, minZ, maxZ, bounds, offset, project: project2 } = params;
-    const boundingVolume = this.getBoundingVolume(elevationBounds, offset, project2);
-    if (bounds && !this.insideBounds(bounds)) {
-      return false;
-    }
-    const isInside = cullingVolume.computeVisibility(boundingVolume);
-    if (isInside < 0) {
-      return false;
-    }
-    if (!this.childVisible) {
-      let { z: z4 } = this;
-      if (z4 < maxZ && z4 >= minZ) {
-        const distance2 = boundingVolume.distanceTo(viewport.cameraPosition) * viewport.scale / viewport.height;
-        z4 += Math.floor(Math.log2(distance2));
-      }
-      if (z4 >= maxZ) {
-        this.selected = true;
-        return true;
-      }
-    }
-    this.selected = false;
-    this.childVisible = true;
-    for (const child of this.children) {
-      child.update(params);
-    }
-    return true;
-  }
-  getSelected(result = []) {
-    if (this.selected) {
-      result.push(this);
-    }
-    if (this._children) {
-      for (const node2 of this._children) {
-        node2.getSelected(result);
-      }
-    }
-    return result;
-  }
-  insideBounds([minX, minY, maxX, maxY]) {
-    const scale2 = Math.pow(2, this.z);
-    const extent = TILE_SIZE$1 / scale2;
-    return this.x * extent < maxX && this.y * extent < maxY && (this.x + 1) * extent > minX && (this.y + 1) * extent > minY;
-  }
-  getBoundingVolume(zRange, worldOffset, project2) {
-    if (project2) {
-      const refPoints = this.z < 1 ? REF_POINTS_11 : this.z < 2 ? REF_POINTS_9 : REF_POINTS_5;
-      const refPointPositions = [];
-      for (const p4 of refPoints) {
-        const lngLat = osmTile2lngLat(this.x + p4[0], this.y + p4[1], this.z);
-        lngLat[2] = zRange[0];
-        refPointPositions.push(project2(lngLat));
-        if (zRange[0] !== zRange[1]) {
-          lngLat[2] = zRange[1];
-          refPointPositions.push(project2(lngLat));
-        }
-      }
-      return makeOrientedBoundingBoxFromPoints(refPointPositions);
-    }
-    const scale2 = Math.pow(2, this.z);
-    const extent = TILE_SIZE$1 / scale2;
-    const originX = this.x * extent + worldOffset * TILE_SIZE$1;
-    const originY = TILE_SIZE$1 - (this.y + 1) * extent;
-    return new AxisAlignedBoundingBox([originX, originY, zRange[0]], [originX + extent, originY + extent, zRange[1]]);
-  }
-}
-function getOSMTileIndices(viewport, maxZ, zRange, bounds) {
-  const project2 = viewport instanceof GlobeViewport && viewport.resolution ? (
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    viewport.projectPosition
-  ) : null;
-  const planes = Object.values(viewport.getFrustumPlanes()).map(({ normal, distance: distance2 }) => new Plane(normal.clone().negate(), distance2));
-  const cullingVolume = new CullingVolume(planes);
-  const unitsPerMeter2 = viewport.distanceScales.unitsPerMeter[2];
-  const elevationMin = zRange && zRange[0] * unitsPerMeter2 || 0;
-  const elevationMax = zRange && zRange[1] * unitsPerMeter2 || 0;
-  const minZ = viewport instanceof WebMercatorViewport && viewport.pitch <= 60 ? maxZ : 0;
-  if (bounds) {
-    const [minLng, minLat, maxLng, maxLat] = bounds;
-    const topLeft = lngLatToWorld([minLng, maxLat]);
-    const bottomRight = lngLatToWorld([maxLng, minLat]);
-    bounds = [topLeft[0], TILE_SIZE$1 - topLeft[1], bottomRight[0], TILE_SIZE$1 - bottomRight[1]];
-  }
-  const root2 = new OSMNode(0, 0, 0);
-  const traversalParams = {
-    viewport,
-    project: project2,
-    cullingVolume,
-    elevationBounds: [elevationMin, elevationMax],
-    minZ,
-    maxZ,
-    bounds,
-    // num. of worlds from the center. For repeated maps
-    offset: 0
-  };
-  root2.update(traversalParams);
-  if (viewport instanceof WebMercatorViewport && viewport.subViewports && viewport.subViewports.length > 1) {
-    traversalParams.offset = -1;
-    while (root2.update(traversalParams)) {
-      if (--traversalParams.offset < -3) {
-        break;
-      }
-    }
-    traversalParams.offset = 1;
-    while (root2.update(traversalParams)) {
-      if (++traversalParams.offset > MAX_MAPS) {
-        break;
-      }
-    }
-  }
-  return root2.getSelected();
-}
-const TILE_SIZE = 512;
-const DEFAULT_EXTENT = [-Infinity, -Infinity, Infinity, Infinity];
-const urlType = {
-  equal: (value1, value2) => {
-    if (value1 === value2) {
-      return true;
-    }
-    if (!Array.isArray(value1) || !Array.isArray(value2)) {
-      return false;
-    }
-    const len2 = value1.length;
-    if (len2 !== value2.length) {
-      return false;
-    }
-    for (let i5 = 0; i5 < len2; i5++) {
-      if (value1[i5] !== value2[i5]) {
-        return false;
-      }
-    }
-    return true;
-  }
-};
-function transformBox(bbox, modelMatrix) {
-  const transformedCoords = [
-    // top-left
-    modelMatrix.transformAsPoint([bbox[0], bbox[1]]),
-    // top-right
-    modelMatrix.transformAsPoint([bbox[2], bbox[1]]),
-    // bottom-left
-    modelMatrix.transformAsPoint([bbox[0], bbox[3]]),
-    // bottom-right
-    modelMatrix.transformAsPoint([bbox[2], bbox[3]])
-  ];
-  const transformedBox = [
-    // Minimum x coord
-    Math.min(...transformedCoords.map((i5) => i5[0])),
-    // Minimum y coord
-    Math.min(...transformedCoords.map((i5) => i5[1])),
-    // Max x coord
-    Math.max(...transformedCoords.map((i5) => i5[0])),
-    // Max y coord
-    Math.max(...transformedCoords.map((i5) => i5[1]))
-  ];
-  return transformedBox;
-}
-function stringHash(s3) {
-  return Math.abs(s3.split("").reduce((a2, b2) => (a2 << 5) - a2 + b2.charCodeAt(0) | 0, 0));
-}
-function getURLFromTemplate(template2, tile) {
-  if (!template2 || !template2.length) {
-    return null;
-  }
-  const { index: index2, id: id2 } = tile;
-  if (Array.isArray(template2)) {
-    const i5 = stringHash(id2) % template2.length;
-    template2 = template2[i5];
-  }
-  let url = template2;
-  for (const key of Object.keys(index2)) {
-    const regex2 = new RegExp(`{${key}}`, "g");
-    url = url.replace(regex2, String(index2[key]));
-  }
-  if (Number.isInteger(index2.y) && Number.isInteger(index2.z)) {
-    url = url.replace(/\{-y\}/g, String(Math.pow(2, index2.z) - index2.y - 1));
-  }
-  return url;
-}
-function getBoundingBox(viewport, zRange, extent) {
-  let bounds;
-  {
-    bounds = viewport.getBounds();
-  }
-  if (!viewport.isGeospatial) {
-    return [
-      // Top corner should not be more then bottom corner in either direction
-      Math.max(Math.min(bounds[0], extent[2]), extent[0]),
-      Math.max(Math.min(bounds[1], extent[3]), extent[1]),
-      // Bottom corner should not be less then top corner in either direction
-      Math.min(Math.max(bounds[2], extent[0]), extent[2]),
-      Math.min(Math.max(bounds[3], extent[1]), extent[3])
-    ];
-  }
-  return [
-    Math.max(bounds[0], extent[0]),
-    Math.max(bounds[1], extent[1]),
-    Math.min(bounds[2], extent[2]),
-    Math.min(bounds[3], extent[3])
-  ];
-}
-function getCullBounds({ viewport, z: z4, cullRect }) {
-  const subViewports = viewport.subViewports || [viewport];
-  return subViewports.map((v2) => getCullBoundsInViewport(v2, z4 || 0, cullRect));
-}
-function getCullBoundsInViewport(viewport, z4, cullRect) {
-  if (!Array.isArray(z4)) {
-    const x2 = cullRect.x - viewport.x;
-    const y3 = cullRect.y - viewport.y;
-    const { width, height } = cullRect;
-    const unprojectOption = { targetZ: z4 };
-    const topLeft = viewport.unproject([x2, y3], unprojectOption);
-    const topRight = viewport.unproject([x2 + width, y3], unprojectOption);
-    const bottomLeft = viewport.unproject([x2, y3 + height], unprojectOption);
-    const bottomRight = viewport.unproject([x2 + width, y3 + height], unprojectOption);
-    return [
-      Math.min(topLeft[0], topRight[0], bottomLeft[0], bottomRight[0]),
-      Math.min(topLeft[1], topRight[1], bottomLeft[1], bottomRight[1]),
-      Math.max(topLeft[0], topRight[0], bottomLeft[0], bottomRight[0]),
-      Math.max(topLeft[1], topRight[1], bottomLeft[1], bottomRight[1])
-    ];
-  }
-  const bounds0 = getCullBoundsInViewport(viewport, z4[0], cullRect);
-  const bounds1 = getCullBoundsInViewport(viewport, z4[1], cullRect);
-  return [
-    Math.min(bounds0[0], bounds1[0]),
-    Math.min(bounds0[1], bounds1[1]),
-    Math.max(bounds0[2], bounds1[2]),
-    Math.max(bounds0[3], bounds1[3])
-  ];
-}
-function getIndexingCoords(bbox, scale2, modelMatrixInverse) {
-  if (modelMatrixInverse) {
-    const transformedTileIndex = transformBox(bbox, modelMatrixInverse).map((i5) => i5 * scale2 / TILE_SIZE);
-    return transformedTileIndex;
-  }
-  return bbox.map((i5) => i5 * scale2 / TILE_SIZE);
-}
-function getScale(z4, tileSize) {
-  return Math.pow(2, z4) * TILE_SIZE / tileSize;
-}
-function osmTile2lngLat(x2, y3, z4) {
-  const scale2 = getScale(z4, TILE_SIZE);
-  const lng = x2 / scale2 * 360 - 180;
-  const n3 = Math.PI - 2 * Math.PI * y3 / scale2;
-  const lat = 180 / Math.PI * Math.atan(0.5 * (Math.exp(n3) - Math.exp(-n3)));
-  return [lng, lat];
-}
-function tile2XY(x2, y3, z4, tileSize) {
-  const scale2 = getScale(z4, tileSize);
-  return [x2 / scale2 * TILE_SIZE, y3 / scale2 * TILE_SIZE];
-}
-function tileToBoundingBox(viewport, x2, y3, z4, tileSize = TILE_SIZE) {
-  if (viewport.isGeospatial) {
-    const [west, north] = osmTile2lngLat(x2, y3, z4);
-    const [east, south] = osmTile2lngLat(x2 + 1, y3 + 1, z4);
-    return { west, north, east, south };
-  }
-  const [left, top] = tile2XY(x2, y3, z4, tileSize);
-  const [right, bottom] = tile2XY(x2 + 1, y3 + 1, z4, tileSize);
-  return { left, top, right, bottom };
-}
-function getIdentityTileIndices(viewport, z4, tileSize, extent, modelMatrixInverse) {
-  const bbox = getBoundingBox(viewport, null, extent);
-  const scale2 = getScale(z4, tileSize);
-  const [minX, minY, maxX, maxY] = getIndexingCoords(bbox, scale2, modelMatrixInverse);
-  const indices = [];
-  for (let x2 = Math.floor(minX); x2 < maxX; x2++) {
-    for (let y3 = Math.floor(minY); y3 < maxY; y3++) {
-      indices.push({ x: x2, y: y3, z: z4 });
-    }
-  }
-  return indices;
-}
-function getTileIndices({ viewport, maxZoom, minZoom, zRange, extent, tileSize = TILE_SIZE, modelMatrix, modelMatrixInverse, zoomOffset = 0 }) {
-  let z4 = viewport.isGeospatial ? Math.round(viewport.zoom + Math.log2(TILE_SIZE / tileSize)) + zoomOffset : Math.ceil(viewport.zoom) + zoomOffset;
-  if (typeof minZoom === "number" && Number.isFinite(minZoom) && z4 < minZoom) {
-    if (!extent) {
-      return [];
-    }
-    z4 = minZoom;
-  }
-  if (typeof maxZoom === "number" && Number.isFinite(maxZoom) && z4 > maxZoom) {
-    z4 = maxZoom;
-  }
-  let transformedExtent = extent;
-  if (modelMatrix && modelMatrixInverse && extent && !viewport.isGeospatial) {
-    transformedExtent = transformBox(extent, modelMatrix);
-  }
-  return viewport.isGeospatial ? getOSMTileIndices(viewport, z4, zRange, extent) : getIdentityTileIndices(viewport, z4, tileSize, transformedExtent || DEFAULT_EXTENT, modelMatrixInverse);
-}
-function memoize$3(compute) {
-  let cachedArgs = {};
-  let cachedResult2;
-  return (args) => {
-    for (const key in args) {
-      if (!isEqual(args[key], cachedArgs[key])) {
-        cachedResult2 = compute(args);
-        cachedArgs = args;
-        break;
-      }
-    }
-    return cachedResult2;
-  };
-}
-function isEqual(a2, b2) {
-  if (a2 === b2) {
-    return true;
-  }
-  if (Array.isArray(a2)) {
-    const len2 = a2.length;
-    if (!b2 || b2.length !== len2) {
-      return false;
-    }
-    for (let i5 = 0; i5 < len2; i5++) {
-      if (a2[i5] !== b2[i5]) {
-        return false;
-      }
-    }
-    return true;
-  }
-  return false;
-}
-const TILE_STATE_VISITED = 1;
-const TILE_STATE_VISIBLE = 2;
-const STRATEGY_NEVER = "never";
-const STRATEGY_REPLACE = "no-overlap";
-const STRATEGY_DEFAULT = "best-available";
-const DEFAULT_CACHE_SCALE = 5;
-const STRATEGIES = {
-  [STRATEGY_DEFAULT]: updateTileStateDefault,
-  [STRATEGY_REPLACE]: updateTileStateReplace,
-  [STRATEGY_NEVER]: () => {
-  }
-};
-const DEFAULT_TILESET2D_PROPS = {
-  extent: null,
-  tileSize: 512,
-  maxZoom: null,
-  minZoom: null,
-  maxCacheSize: null,
-  maxCacheByteSize: null,
-  refinementStrategy: "best-available",
-  zRange: null,
-  maxRequests: 6,
-  debounceTime: 0,
-  zoomOffset: 0,
-  // onTileLoad: (tile: Tile2DHeader) => void,  // onTileUnload: (tile: Tile2DHeader) => void,  // onTileError: (error: any, tile: Tile2DHeader) => void,  /** Called when all tiles in the current viewport are loaded. */
-  // onViewportLoad: ((tiles: Tile2DHeader<DataT>[]) => void) | null,
-  onTileLoad: () => {
-  },
-  onTileUnload: () => {
-  },
-  onTileError: () => {
-  }
-};
-class Tileset2D {
-  /**
-   * Takes in a function that returns tile data, a cache size, and a max and a min zoom level.
-   * Cache size defaults to 5 * number of tiles in the current viewport
-   */
-  constructor(opts) {
-    this._getCullBounds = memoize$3(getCullBounds);
-    this.opts = { ...DEFAULT_TILESET2D_PROPS, ...opts };
-    this.setOptions(this.opts);
-    this.onTileLoad = (tile) => {
-      var _a3, _b2;
-      (_b2 = (_a3 = this.opts).onTileLoad) == null ? void 0 : _b2.call(_a3, tile);
-      if (this.opts.maxCacheByteSize !== null) {
-        this._cacheByteSize += tile.byteLength;
-        this._resizeCache();
-      }
-    };
-    this._requestScheduler = new RequestScheduler({
-      throttleRequests: this.opts.maxRequests > 0 || this.opts.debounceTime > 0,
-      maxRequests: this.opts.maxRequests,
-      debounceTime: this.opts.debounceTime
-    });
-    this._cache = /* @__PURE__ */ new Map();
-    this._tiles = [];
-    this._dirty = false;
-    this._cacheByteSize = 0;
-    this._viewport = null;
-    this._zRange = null;
-    this._selectedTiles = null;
-    this._frameNumber = 0;
-    this._modelMatrix = new Matrix4();
-    this._modelMatrixInverse = new Matrix4();
-  }
-  /* Public API */
-  get tiles() {
-    return this._tiles;
-  }
-  get selectedTiles() {
-    return this._selectedTiles;
-  }
-  get isLoaded() {
-    return this._selectedTiles !== null && this._selectedTiles.every((tile) => tile.isLoaded);
-  }
-  get needsReload() {
-    return this._selectedTiles !== null && this._selectedTiles.some((tile) => tile.needsReload);
-  }
-  setOptions(opts) {
-    Object.assign(this.opts, opts);
-    if (Number.isFinite(opts.maxZoom)) {
-      this._maxZoom = Math.floor(opts.maxZoom);
-    }
-    if (Number.isFinite(opts.minZoom)) {
-      this._minZoom = Math.ceil(opts.minZoom);
-    }
-  }
-  // Clean up any outstanding tile requests.
-  finalize() {
-    for (const tile of this._cache.values()) {
-      if (tile.isLoading) {
-        tile.abort();
-      }
-    }
-    this._cache.clear();
-    this._tiles = [];
-    this._selectedTiles = null;
-  }
-  reloadAll() {
-    for (const id2 of this._cache.keys()) {
-      const tile = this._cache.get(id2);
-      if (!this._selectedTiles || !this._selectedTiles.includes(tile)) {
-        this._cache.delete(id2);
-      } else {
-        tile.setNeedsReload();
-      }
-    }
-  }
-  /**
-   * Update the cache with the given viewport and model matrix and triggers callback onUpdate.
-   */
-  update(viewport, { zRange, modelMatrix } = {
-    zRange: null,
-    modelMatrix: null
-  }) {
-    const modelMatrixAsMatrix4 = modelMatrix ? new Matrix4(modelMatrix) : new Matrix4();
-    const isModelMatrixNew = !modelMatrixAsMatrix4.equals(this._modelMatrix);
-    if (!this._viewport || !viewport.equals(this._viewport) || !equals$2(this._zRange, zRange) || isModelMatrixNew) {
-      if (isModelMatrixNew) {
-        this._modelMatrixInverse = modelMatrixAsMatrix4.clone().invert();
-        this._modelMatrix = modelMatrixAsMatrix4;
-      }
-      this._viewport = viewport;
-      this._zRange = zRange;
-      const tileIndices = this.getTileIndices({
-        viewport,
-        maxZoom: this._maxZoom,
-        minZoom: this._minZoom,
-        zRange,
-        modelMatrix: this._modelMatrix,
-        modelMatrixInverse: this._modelMatrixInverse
-      });
-      this._selectedTiles = tileIndices.map((index2) => this._getTile(index2, true));
-      if (this._dirty) {
-        this._rebuildTree();
-      }
-    } else if (this.needsReload) {
-      this._selectedTiles = this._selectedTiles.map((tile) => this._getTile(tile.index, true));
-    }
-    const changed = this.updateTileStates();
-    this._pruneRequests();
-    if (this._dirty) {
-      this._resizeCache();
-    }
-    if (changed) {
-      this._frameNumber++;
-    }
-    return this._frameNumber;
-  }
-  // eslint-disable-next-line complexity
-  isTileVisible(tile, cullRect) {
-    if (!tile.isVisible) {
-      return false;
-    }
-    if (cullRect && this._viewport) {
-      const boundsArr = this._getCullBounds({
-        viewport: this._viewport,
-        z: this._zRange,
-        cullRect
-      });
-      const { bbox } = tile;
-      for (const [minX, minY, maxX, maxY] of boundsArr) {
-        let overlaps;
-        if ("west" in bbox) {
-          overlaps = bbox.west < maxX && bbox.east > minX && bbox.south < maxY && bbox.north > minY;
-        } else {
-          const y0 = Math.min(bbox.top, bbox.bottom);
-          const y1 = Math.max(bbox.top, bbox.bottom);
-          overlaps = bbox.left < maxX && bbox.right > minX && y0 < maxY && y1 > minY;
-        }
-        if (overlaps) {
-          return true;
-        }
-      }
-      return false;
-    }
-    return true;
-  }
-  /* Public interface for subclassing */
-  /** Returns array of tile indices in the current viewport */
-  getTileIndices({ viewport, maxZoom, minZoom, zRange, modelMatrix, modelMatrixInverse }) {
-    const { tileSize, extent, zoomOffset } = this.opts;
-    return getTileIndices({
-      viewport,
-      maxZoom,
-      minZoom,
-      zRange,
-      tileSize,
-      extent,
-      modelMatrix,
-      modelMatrixInverse,
-      zoomOffset
-    });
-  }
-  /** Returns unique string key for a tile index */
-  getTileId(index2) {
-    return `${index2.x}-${index2.y}-${index2.z}`;
-  }
-  /** Returns a zoom level for a tile index */
-  getTileZoom(index2) {
-    return index2.z;
-  }
-  /** Returns additional metadata to add to tile, bbox by default */
-  getTileMetadata(index2) {
-    const { tileSize } = this.opts;
-    return { bbox: tileToBoundingBox(this._viewport, index2.x, index2.y, index2.z, tileSize) };
-  }
-  /** Returns index of the parent tile */
-  getParentIndex(index2) {
-    const x2 = Math.floor(index2.x / 2);
-    const y3 = Math.floor(index2.y / 2);
-    const z4 = index2.z - 1;
-    return { x: x2, y: y3, z: z4 };
-  }
-  // Returns true if any tile's visibility changed
-  updateTileStates() {
-    const refinementStrategy = this.opts.refinementStrategy || STRATEGY_DEFAULT;
-    const visibilities = new Array(this._cache.size);
-    let i5 = 0;
-    for (const tile of this._cache.values()) {
-      visibilities[i5++] = tile.isVisible;
-      tile.isSelected = false;
-      tile.isVisible = false;
-    }
-    for (const tile of this._selectedTiles) {
-      tile.isSelected = true;
-      tile.isVisible = true;
-    }
-    (typeof refinementStrategy === "function" ? refinementStrategy : STRATEGIES[refinementStrategy])(Array.from(this._cache.values()));
-    i5 = 0;
-    for (const tile of this._cache.values()) {
-      if (visibilities[i5++] !== tile.isVisible) {
-        return true;
-      }
-    }
-    return false;
-  }
-  _pruneRequests() {
-    const { maxRequests = 0 } = this.opts;
-    const abortCandidates = [];
-    let ongoingRequestCount = 0;
-    for (const tile of this._cache.values()) {
-      if (tile.isLoading) {
-        ongoingRequestCount++;
-        if (!tile.isSelected && !tile.isVisible) {
-          abortCandidates.push(tile);
-        }
-      }
-    }
-    while (maxRequests > 0 && ongoingRequestCount > maxRequests && abortCandidates.length > 0) {
-      const tile = abortCandidates.shift();
-      tile.abort();
-      ongoingRequestCount--;
-    }
-  }
-  // This needs to be called every time some tiles have been added/removed from cache
-  _rebuildTree() {
-    const { _cache } = this;
-    for (const tile of _cache.values()) {
-      tile.parent = null;
-      if (tile.children) {
-        tile.children.length = 0;
-      }
-    }
-    for (const tile of _cache.values()) {
-      const parent = this._getNearestAncestor(tile);
-      tile.parent = parent;
-      if (parent == null ? void 0 : parent.children) {
-        parent.children.push(tile);
-      }
-    }
-  }
-  /**
-   * Clear tiles that are not visible when the cache is full
-   */
-  /* eslint-disable complexity */
-  _resizeCache() {
-    var _a3, _b2;
-    const { _cache, opts } = this;
-    const maxCacheSize = opts.maxCacheSize ?? // @ts-expect-error called only when selectedTiles is initialized
-    (opts.maxCacheByteSize !== null ? Infinity : DEFAULT_CACHE_SCALE * this.selectedTiles.length);
-    const maxCacheByteSize = opts.maxCacheByteSize ?? Infinity;
-    const overflown = _cache.size > maxCacheSize || this._cacheByteSize > maxCacheByteSize;
-    if (overflown) {
-      for (const [id2, tile] of _cache) {
-        if (!tile.isVisible && !tile.isSelected) {
-          this._cacheByteSize -= opts.maxCacheByteSize !== null ? tile.byteLength : 0;
-          _cache.delete(id2);
-          (_b2 = (_a3 = this.opts).onTileUnload) == null ? void 0 : _b2.call(_a3, tile);
-        }
-        if (_cache.size <= maxCacheSize && this._cacheByteSize <= maxCacheByteSize) {
-          break;
-        }
-      }
-      this._rebuildTree();
-      this._dirty = true;
-    }
-    if (this._dirty) {
-      this._tiles = Array.from(this._cache.values()).sort((t1, t22) => t1.zoom - t22.zoom);
-      this._dirty = false;
-    }
-  }
-  _getTile(index2, create2) {
-    const id2 = this.getTileId(index2);
-    let tile = this._cache.get(id2);
-    let needsReload = false;
-    if (!tile && create2) {
-      tile = new Tile2DHeader(index2);
-      Object.assign(tile, this.getTileMetadata(tile.index));
-      Object.assign(tile, { id: id2, zoom: this.getTileZoom(tile.index) });
-      needsReload = true;
-      this._cache.set(id2, tile);
-      this._dirty = true;
-    } else if (tile && tile.needsReload) {
-      needsReload = true;
-    }
-    if (tile && needsReload) {
-      tile.loadData({
-        getData: this.opts.getTileData,
-        requestScheduler: this._requestScheduler,
-        onLoad: this.onTileLoad,
-        onError: this.opts.onTileError
-      });
-    }
-    return tile;
-  }
-  _getNearestAncestor(tile) {
-    const { _minZoom = 0 } = this;
-    let index2 = tile.index;
-    while (this.getTileZoom(index2) > _minZoom) {
-      index2 = this.getParentIndex(index2);
-      const parent = this._getTile(index2);
-      if (parent) {
-        return parent;
-      }
-    }
-    return null;
-  }
-}
-function updateTileStateDefault(allTiles) {
-  for (const tile of allTiles) {
-    tile.state = 0;
-  }
-  for (const tile of allTiles) {
-    if (tile.isSelected && !getPlaceholderInAncestors(tile)) {
-      getPlaceholderInChildren(tile);
-    }
-  }
-  for (const tile of allTiles) {
-    tile.isVisible = Boolean(tile.state & TILE_STATE_VISIBLE);
-  }
-}
-function updateTileStateReplace(allTiles) {
-  for (const tile of allTiles) {
-    tile.state = 0;
-  }
-  for (const tile of allTiles) {
-    if (tile.isSelected) {
-      getPlaceholderInAncestors(tile);
-    }
-  }
-  const sortedTiles = Array.from(allTiles).sort((t1, t22) => t1.zoom - t22.zoom);
-  for (const tile of sortedTiles) {
-    tile.isVisible = Boolean(tile.state & TILE_STATE_VISIBLE);
-    if (tile.children && (tile.isVisible || tile.state & TILE_STATE_VISITED)) {
-      for (const child of tile.children) {
-        child.state = TILE_STATE_VISITED;
-      }
-    } else if (tile.isSelected) {
-      getPlaceholderInChildren(tile);
-    }
-  }
-}
-function getPlaceholderInAncestors(startTile) {
-  let tile = startTile;
-  while (tile) {
-    if (tile.isLoaded || tile.content) {
-      tile.state |= TILE_STATE_VISIBLE;
-      return true;
-    }
-    tile = tile.parent;
-  }
-  return false;
-}
-function getPlaceholderInChildren(tile) {
-  for (const child of tile.children) {
-    if (child.isLoaded || child.content) {
-      child.state |= TILE_STATE_VISIBLE;
-    } else {
-      getPlaceholderInChildren(child);
-    }
-  }
-}
-const defaultProps$a = {
-  TilesetClass: Tileset2D,
-  data: { type: "data", value: [] },
-  dataComparator: urlType.equal,
-  renderSubLayers: { type: "function", value: (props) => new GeoJsonLayer(props) },
-  getTileData: { type: "function", optional: true, value: null },
-  // TODO - change to onViewportLoad to align with Tile3DLayer
-  onViewportLoad: { type: "function", optional: true, value: null },
-  onTileLoad: { type: "function", value: (tile) => {
-  } },
-  onTileUnload: { type: "function", value: (tile) => {
-  } },
-  // eslint-disable-next-line
-  onTileError: { type: "function", value: (err2) => console.error(err2) },
-  extent: { type: "array", optional: true, value: null, compare: true },
-  tileSize: 512,
-  maxZoom: null,
-  minZoom: 0,
-  maxCacheSize: null,
-  maxCacheByteSize: null,
-  refinementStrategy: STRATEGY_DEFAULT,
-  zRange: null,
-  maxRequests: 6,
-  debounceTime: 0,
-  zoomOffset: 0
-};
-class TileLayer extends CompositeLayer {
-  initializeState() {
-    this.state = {
-      tileset: null,
-      isLoaded: false
-    };
-  }
-  finalizeState() {
-    var _a3, _b2;
-    (_b2 = (_a3 = this.state) == null ? void 0 : _a3.tileset) == null ? void 0 : _b2.finalize();
-  }
-  get isLoaded() {
-    var _a3, _b2, _c2;
-    return Boolean((_c2 = (_b2 = (_a3 = this.state) == null ? void 0 : _a3.tileset) == null ? void 0 : _b2.selectedTiles) == null ? void 0 : _c2.every((tile) => tile.isLoaded && tile.layers && tile.layers.every((layer) => layer.isLoaded)));
-  }
-  shouldUpdateState({ changeFlags }) {
-    return changeFlags.somethingChanged;
-  }
-  updateState({ changeFlags }) {
-    let { tileset } = this.state;
-    const propsChanged = changeFlags.propsOrDataChanged || changeFlags.updateTriggersChanged;
-    const dataChanged = changeFlags.dataChanged || changeFlags.updateTriggersChanged && (changeFlags.updateTriggersChanged.all || changeFlags.updateTriggersChanged.getTileData);
-    if (!tileset) {
-      tileset = new this.props.TilesetClass(this._getTilesetOptions());
-      this.setState({ tileset });
-    } else if (propsChanged) {
-      tileset.setOptions(this._getTilesetOptions());
-      if (dataChanged) {
-        tileset.reloadAll();
-      } else {
-        tileset.tiles.forEach((tile) => {
-          tile.layers = null;
-        });
-      }
-    }
-    this._updateTileset();
-  }
-  _getTilesetOptions() {
-    const { tileSize, maxCacheSize, maxCacheByteSize, refinementStrategy, extent, maxZoom, minZoom, maxRequests, debounceTime, zoomOffset } = this.props;
-    return {
-      maxCacheSize,
-      maxCacheByteSize,
-      maxZoom,
-      minZoom,
-      tileSize,
-      refinementStrategy,
-      extent,
-      maxRequests,
-      debounceTime,
-      zoomOffset,
-      getTileData: this.getTileData.bind(this),
-      onTileLoad: this._onTileLoad.bind(this),
-      onTileError: this._onTileError.bind(this),
-      onTileUnload: this._onTileUnload.bind(this)
-    };
-  }
-  _updateTileset() {
-    const tileset = this.state.tileset;
-    const { zRange, modelMatrix } = this.props;
-    const frameNumber = tileset.update(this.context.viewport, { zRange, modelMatrix });
-    const { isLoaded } = tileset;
-    const loadingStateChanged = this.state.isLoaded !== isLoaded;
-    const tilesetChanged = this.state.frameNumber !== frameNumber;
-    if (isLoaded && (loadingStateChanged || tilesetChanged)) {
-      this._onViewportLoad();
-    }
-    if (tilesetChanged) {
-      this.setState({ frameNumber });
-    }
-    this.state.isLoaded = isLoaded;
-  }
-  _onViewportLoad() {
-    const { tileset } = this.state;
-    const { onViewportLoad } = this.props;
-    if (onViewportLoad) {
-      onViewportLoad(tileset.selectedTiles);
-    }
-  }
-  _onTileLoad(tile) {
-    this.props.onTileLoad(tile);
-    tile.layers = null;
-    this.setNeedsUpdate();
-  }
-  _onTileError(error2, tile) {
-    this.props.onTileError(error2);
-    tile.layers = null;
-    this.setNeedsUpdate();
-  }
-  _onTileUnload(tile) {
-    this.props.onTileUnload(tile);
-  }
-  // Methods for subclass to override
-  getTileData(tile) {
-    const { data: data2, getTileData, fetch: fetch2 } = this.props;
-    const { signal } = tile;
-    tile.url = typeof data2 === "string" || Array.isArray(data2) ? getURLFromTemplate(data2, tile) : null;
-    if (getTileData) {
-      return getTileData(tile);
-    }
-    if (fetch2 && tile.url) {
-      return fetch2(tile.url, { propName: "data", layer: this, signal });
-    }
-    return null;
-  }
-  renderSubLayers(props) {
-    return this.props.renderSubLayers(props);
-  }
-  getSubLayerPropsByTile(tile) {
-    return null;
-  }
-  getPickingInfo(params) {
-    const sourceLayer = params.sourceLayer;
-    const sourceTile = sourceLayer.props.tile;
-    const info = params.info;
-    if (info.picked) {
-      info.tile = sourceTile;
-    }
-    info.sourceTile = sourceTile;
-    info.sourceTileSubLayer = sourceLayer;
-    return info;
-  }
-  _updateAutoHighlight(info) {
-    info.sourceTileSubLayer.updateAutoHighlight(info);
-  }
-  renderLayers() {
-    return this.state.tileset.tiles.map((tile) => {
-      const subLayerProps = this.getSubLayerPropsByTile(tile);
-      if (!tile.isLoaded && !tile.content) ;
-      else if (!tile.layers) {
-        const layers = this.renderSubLayers({
-          ...this.props,
-          ...this.getSubLayerProps({
-            id: tile.id,
-            updateTriggers: this.props.updateTriggers
-          }),
-          data: tile.content,
-          _offset: 0,
-          tile
-        });
-        tile.layers = flatten(layers, Boolean).map((layer) => layer.clone({
-          tile,
-          ...subLayerProps
-        }));
-      } else if (subLayerProps && tile.layers[0] && Object.keys(subLayerProps).some((propName) => tile.layers[0].props[propName] !== subLayerProps[propName])) {
-        tile.layers = tile.layers.map((layer) => layer.clone(subLayerProps));
-      }
-      return tile.layers;
-    });
-  }
-  filterSubLayer({ layer, cullRect }) {
-    const { tile } = layer.props;
-    return this.state.tileset.isTileVisible(tile, cullRect);
-  }
-}
-TileLayer.defaultProps = defaultProps$a;
-TileLayer.layerName = "TileLayer";
 function range(len2) {
   return [...Array(len2).keys()];
 }
@@ -130868,7 +130890,7 @@ function getPixelSpacing(metadata) {
     Number(pixelMeasures.PixelSpacing[1])
   ];
 }
-function computeImagePyramid({ metadata }) {
+function computeImagePyramid({ metadata, bits }) {
   if (metadata.length === 0) {
     throw new Error(
       "No image metadata was provided to computate image pyramid structure."
@@ -131034,6 +131056,7 @@ function computeImagePyramid({ metadata }) {
     baseTotalPixelMatrixRows
   ];
   return {
+    bits,
     extent,
     origins: pyramidOrigins,
     resolutions: pyramidResolutions,
@@ -131086,7 +131109,7 @@ const getShapeForBinaryDownsampleLevel = (options) => {
 };
 const loadDicom = (meta) => {
   const { pyramids, series, little_endian } = meta;
-  const { width, height } = [
+  const { width, height, bits } = [
     ...pyramids[0]
   ].pop();
   const channels2 = Object.keys(pyramids).map((n3) => parseInt(n3)).toSorted((x2, y3) => x2 - y3);
@@ -131099,7 +131122,7 @@ const loadDicom = (meta) => {
     })),
     "ID": "Pixels:0",
     "DimensionOrder": "XYZCT",
-    "Type": "Uint16",
+    "Type": bits === 8 ? "Uint8" : "Uint16",
     "SizeT": 1,
     "SizeZ": 1,
     "SizeC": channels2.length,
@@ -131182,11 +131205,108 @@ function createTileLayers(meta) {
     contrastLimits,
     selections
   } = meta.settings;
-  const { pyramids, dicomSource } = meta;
-  [...pyramids["0"]].pop().height;
-  [...pyramids["0"]].pop().width;
+  const { pyramids, dicomSource, rgbImage } = meta;
+  const height = [...pyramids["0"]].pop().height;
+  const width = [...pyramids["0"]].pop().width;
   pyramids["0"][0].tileSize;
-  pyramids["0"].length;
+  const maxLevel = pyramids["0"].length;
+  const minZoom = Math.round(-(maxLevel - 1));
+  if (rgbImage) {
+    return new TileLayer({
+      id: "rgb_image",
+      getTileData: async ({ index: index2, signal }) => {
+        const { x: x2, y: y3, z: z4 } = index2;
+        const level = Math.abs(-z4);
+        console.log("z level and x,y");
+        console.log({ x: x2, y: y3, z: z4, level });
+        const source2 = dicomSource.data[level];
+        if (!source2) {
+          return null;
+        }
+        console.log("z level Has Source");
+        console.log({ x: x2, y: y3, z: z4, level }, source2);
+        const selection = { z: 0, t: 0, c: 0 };
+        let tile = null;
+        try {
+          tile = await source2.getTile({
+            x: x2,
+            y: y3,
+            selection,
+            signal
+          });
+        } catch (e3) {
+          if (e3 !== "__minervaEmptyFramePath") {
+            if (!(e3 instanceof AbortError)) {
+              console.error(e3);
+            }
+          }
+          return null;
+        }
+        if (!tile) {
+          return null;
+        }
+        console.log("x,y Has Tile");
+        console.log({ x: x2, y: y3, z: z4, level }, source2, tile);
+        return tile;
+      },
+      refinementStrategy: "best-available",
+      tileSize: 1024,
+      minZoom,
+      maxZoom: 0,
+      extent: [0, 0, width, height],
+      renderSubLayers: (props) => {
+        const { left, bottom, right, top } = props.tile.bbox;
+        const { x: x2, y: y3, z: z4 } = props.tile.index;
+        if (!props.data) {
+          return null;
+        }
+        const {
+          data: data2,
+          width: width2,
+          height: height2
+        } = props.data;
+        const imageDataArguments = [
+          data2,
+          width2,
+          height2
+        ];
+        console.log("Image Data Arguments:");
+        console.log(imageDataArguments);
+        const imageData = new ImageData(
+          ...imageDataArguments
+        );
+        console.log("Bitmap Layer Bounds:");
+        console.log([
+          left,
+          bottom,
+          right,
+          top
+        ]);
+        return new BitmapLayer$1(props, {
+          image: imageData,
+          id: `rgb-${z4}-${x2}-${y3}`,
+          bounds: [
+            left,
+            bottom,
+            right,
+            top
+          ]
+        });
+      },
+      pickable: true,
+      onClick: ({ bitmap, layer }) => {
+        if (bitmap) {
+          console.log("Picked Pixel:");
+          console.log({
+            sourceX: bitmap.pixel[0],
+            sourceY: bitmap.pixel[1],
+            sourceWidth: 1,
+            sourceHeight: 1
+          });
+        }
+      }
+    });
+  }
   const imageProps = {
     loader: dicomSource.data,
     // https://deck.gl/docs/api-reference/geo-layers/tile-layer#refinementstrategy
@@ -131204,9 +131324,9 @@ const listDicomWeb = async (series) => {
 };
 class DicomPlane {
   constructor(props) {
-    console.warn(props);
     this.meta = props.meta;
     this.dtype = props.dtype;
+    this.samples = props.samples;
     this.shape = props.shape;
     this.labels = props.labels;
     this.series = props.series;
@@ -131235,11 +131355,12 @@ const parseDicomWeb = (series, dicom_pyramids) => {
   const any_channel = [...channel_pyramids].pop();
   const levels = any_channel.toReversed();
   const data_config = levels.map((level) => {
-    const { tileSize, width, height } = level;
+    const { tileSize, width, height, bits } = level;
     const shape = [width, height, n_channels];
     return {
       "series": series,
-      "dtype": "Uint16",
+      "samples": bits === 16 ? 1 : 3,
+      "dtype": bits === 16 ? "Uint16" : "Uint8",
       "tileSize": tileSize,
       "shape": shape,
       "labels": ["x", "y", "c"],
@@ -131258,15 +131379,16 @@ const parseDicomWeb = (series, dicom_pyramids) => {
     "Description": "",
     "Pixels": {
       "Channels": channel_pyramids.map((_2, i5) => {
+        const { samples } = data_config[0];
         return {
           "ID": `Channel:0:${i5}`,
           "Name": `Channel ${i5}`,
-          "SamplesPerPixel": 1
+          "SamplesPerPixel": samples
         };
       }),
       "ID": "Pixels:0",
       "DimensionOrder": "XYC",
-      "Type": "uint16",
+      "Type": data_config[0].dtype,
       "SizeC": data_config[0].shape[2],
       "SizeY": data_config[0].shape[1],
       "SizeX": data_config[0].shape[0],
@@ -131291,12 +131413,14 @@ const parseDicomWeb = (series, dicom_pyramids) => {
 const loadDicomWeb = async (series) => {
   const instance_list = await listDicomWeb(series);
   const pyramids = await Promise.all(
-    instance_list.map(({ SOPInstanceUID }, i5) => {
+    instance_list.map((opts, i5) => {
+      const { SOPInstanceUID, BitsAllocated } = opts;
       const instance = `${series}/instances/${SOPInstanceUID}`;
       return readMetadata(instance).then(
         (instance_metadata) => {
           const pyramid = computeImagePyramid({
-            metadata: instance_metadata
+            metadata: instance_metadata,
+            bits: BitsAllocated
           });
           return pyramid;
         }
@@ -131321,7 +131445,13 @@ const loadDicomWeb = async (series) => {
       ([key, pyramid]) => [
         key,
         Object.values(pyramid).map(
-          ({ frameMappings, extent, tileSizes }) => ({
+          ({
+            frameMappings,
+            bits,
+            extent,
+            tileSizes
+          }) => ({
+            bits,
             extent,
             width: Math.abs(extent[2]),
             height: Math.abs(extent[3]),
@@ -131731,12 +131861,12 @@ const extractDistributions = async (loader) => {
 const extractChannels = (loader, groups) => {
   const init2 = initialize$1({ planes: loader.data });
   const { Channels, Type } = loader.metadata.Pixels;
-  const Colors = list_colors("sRGB");
   const SourceChannels = Channels.map(
     (channel, index2) => ({
       UUID: crypto.randomUUID(),
       Properties: {
         Name: channel.Name,
+        Samples: channel.SamplesPerPixel,
         SourceIndex: init2.indices[index2].c
       },
       Associations: {
@@ -131745,6 +131875,7 @@ const extractChannels = (loader, groups) => {
       }
     })
   );
+  const Colors = list_colors("sRGB");
   const hardcoded_crc01 = groups.reduce(
     ({ name_map: name_map2, Groups: Groups22, GroupChannels: GroupChannels2 }, g2) => {
       if (!(g2.Path in GROUP_CHANNELS_CRC01)) {
@@ -131840,6 +131971,50 @@ const extractChannels = (loader, groups) => {
       GroupChannels: GroupChannels2,
       Groups: Groups22,
       Colors
+    };
+  } else if (SourceChannels.length === 1 && SourceChannels[0].Properties.Samples === 3 && SourceChannels[0].Associations.SourceDataType.ID === "Uint8") {
+    const OneColor = [{
+      ID: "sRGB#ffffff",
+      Properties: {
+        R: 255,
+        G: 255,
+        B: 255,
+        Space: "sRGB",
+        LowerRange: 0,
+        UpperRange: 255
+      }
+    }];
+    const White = OneColor[0];
+    const Groups22 = [{
+      UUID: crypto.randomUUID(),
+      State: { Expanded: true },
+      Properties: {
+        Name: "H&E"
+      }
+    }];
+    const GroupChannels2 = SourceChannels.map(
+      (channel, index2) => {
+        const group_uuid = Groups22[0].UUID;
+        return {
+          UUID: crypto.randomUUID(),
+          State: { Expanded: true },
+          Properties: {
+            LowerRange: 0,
+            UpperRange: 255
+          },
+          Associations: {
+            SourceChannel: onlyUUID(channel),
+            Color: asID(White.ID),
+            Group: asUUID(group_uuid)
+          }
+        };
+      }
+    );
+    return {
+      SourceChannels,
+      GroupChannels: GroupChannels2,
+      Groups: Groups22,
+      Colors: OneColor
     };
   }
   const group_size = 4;
@@ -133173,6 +133348,7 @@ const readGroups = (config2) => {
 };
 const readConfig = (config2) => {
   return {
+    name: config2.Name,
     stories: readStories(config2),
     groups: readGroups(config2)
   };
@@ -133511,34 +133687,6 @@ const ellipseToPolygon = (start, end2, segments = 64) => {
   }
   return points;
 };
-const lineToPolygon = (start, end2, lineWidth = 3) => {
-  const [startX, startY] = start;
-  const [endX, endY] = end2;
-  const dx = endX - startX;
-  const dy = endY - startY;
-  const length2 = Math.sqrt(dx * dx + dy * dy);
-  if (length2 === 0) {
-    const halfWidth2 = lineWidth / 2;
-    return [
-      [startX - halfWidth2, startY - halfWidth2],
-      [startX + halfWidth2, startY - halfWidth2],
-      [startX + halfWidth2, startY + halfWidth2],
-      [startX - halfWidth2, startY + halfWidth2],
-      [startX - halfWidth2, startY - halfWidth2]
-    ];
-  }
-  const nx = -dy / length2;
-  const ny = dx / length2;
-  const halfWidth = lineWidth / 2;
-  return [
-    [startX + nx * halfWidth, startY + ny * halfWidth],
-    [endX + nx * halfWidth, endY + ny * halfWidth],
-    [endX - nx * halfWidth, endY - ny * halfWidth],
-    [startX - nx * halfWidth, startY - ny * halfWidth],
-    [startX + nx * halfWidth, startY + ny * halfWidth]
-    // Close the polygon
-  ];
-};
 const overlayInitialState = {
   overlayLayers: [],
   activeTool: "move",
@@ -133565,21 +133713,24 @@ const overlayInitialState = {
   // New: empty hidden layers set
   globalColor: [255, 255, 255, 255],
   // New: default white color
+  viewportZoom: 0,
+  // Default zoom level
   stories: [],
   // New: empty stories array
   activeStoryIndex: null,
   // New: no active story initially
   waypoints: [],
   // New: empty waypoints array
-  activeWaypointId: null
+  activeWaypointId: null,
   // New: no active waypoint initially
+  imageWidth: 0,
+  imageHeight: 0
 };
 const useOverlayStore = create$2()(
   devtools(
     (set5, get5) => ({
       ...overlayInitialState,
       setActiveTool: (tool) => {
-        console.log("Store: Tool changed to:", tool);
         set5({ activeTool: tool });
       },
       setCurrentInteraction: (interaction) => {
@@ -133608,7 +133759,6 @@ const useOverlayStore = create$2()(
         set5({ drawingState: overlayInitialState.drawingState });
       },
       handleLayerCreate: (layer) => {
-        console.log("Store: handleLayerCreate called with layer:", layer);
         if (layer === null) {
           get5().removeOverlayLayer("drawing-layer");
           return;
@@ -133616,14 +133766,12 @@ const useOverlayStore = create$2()(
         get5().addOverlayLayer(layer);
       },
       handleToolChange: (tool) => {
-        console.log("Store: Tool changed to:", tool);
         set5({ activeTool: tool });
         get5().resetDrawingState();
         get5().resetDragState();
         get5().removeOverlayLayer("drawing-layer");
       },
       handleOverlayInteraction: (type, coordinate) => {
-        console.log("Store: Overlay interaction:", type, "at coordinate:", coordinate);
         const interaction = { type, coordinate };
         set5({ currentInteraction: interaction });
         const { activeTool, drawingState, dragState } = get5();
@@ -133703,13 +133851,11 @@ const useOverlayStore = create$2()(
       },
       // New annotation actions
       addAnnotation: (annotation) => {
-        console.log("Store: Adding annotation:", annotation);
         set5((state) => ({
           annotations: [...state.annotations, annotation]
         }));
       },
       removeAnnotation: (annotationId) => {
-        console.log("Store: Removing annotation:", annotationId);
         set5((state) => {
           const newHiddenLayers = new Set(state.hiddenLayers);
           newHiddenLayers.delete(annotationId);
@@ -133720,7 +133866,6 @@ const useOverlayStore = create$2()(
         });
       },
       updateAnnotation: (annotationId, updates) => {
-        console.log("Store: Updating annotation:", annotationId, updates);
         set5((state) => ({
           annotations: state.annotations.map(
             (a2) => a2.id === annotationId ? { ...a2, ...updates } : a2
@@ -133728,7 +133873,6 @@ const useOverlayStore = create$2()(
         }));
       },
       clearAnnotations: () => {
-        console.log("Store: Clearing all annotations");
         set5({ annotations: [] });
       },
       finalizeRectangle: () => {
@@ -133752,7 +133896,6 @@ const useOverlayStore = create$2()(
               label: `Rectangle ${get5().annotations.length + 1}`
             }
           };
-          console.log("Store: Finalizing rectangle as annotation:", annotation);
           get5().addAnnotation(annotation);
           get5().resetDrawingState();
           get5().removeOverlayLayer("drawing-layer");
@@ -133779,7 +133922,6 @@ const useOverlayStore = create$2()(
               label: `Ellipse ${get5().annotations.length + 1}`
             }
           };
-          console.log("Store: Finalizing ellipse as annotation:", annotation);
           get5().addAnnotation(annotation);
           get5().resetDrawingState();
           get5().removeOverlayLayer("drawing-layer");
@@ -133803,13 +133945,11 @@ const useOverlayStore = create$2()(
               label: `Polygon ${get5().annotations.length + 1}`
             }
           };
-          console.log("Store: Finalizing lasso as annotation:", annotation);
           get5().addAnnotation(annotation);
           get5().removeOverlayLayer("drawing-layer");
         }
       },
       finalizePolyline: (points) => {
-        console.log("Store: Finalizing polyline with points:", points);
         if (points.length >= 2) {
           const annotation = {
             id: `polyline-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -133825,7 +133965,6 @@ const useOverlayStore = create$2()(
               label: `Polyline ${get5().annotations.length + 1}`
             }
           };
-          console.log("Store: Finalizing polyline as annotation:", annotation);
           get5().addAnnotation(annotation);
           get5().removeOverlayLayer("drawing-layer");
         }
@@ -133835,13 +133974,21 @@ const useOverlayStore = create$2()(
         if (drawingState.isDrawing && drawingState.dragStart && drawingState.dragEnd) {
           const [startX, startY] = drawingState.dragStart;
           const [endX, endY] = drawingState.dragEnd;
+          const linePolygon = [
+            [startX, startY],
+            [endX, endY],
+            [endX, endY],
+            [startX, startY],
+            [startX, startY]
+          ];
           const annotation = {
             id: `line-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
             type: "line",
-            polygon: lineToPolygon([startX, startY], [endX, endY], 3),
+            polygon: linePolygon,
             style: {
+              fillColor: [0, 0, 0, 0],
+              // Transparent fill
               lineColor: get5().globalColor,
-              // Use global color
               lineWidth: 3
             },
             metadata: {
@@ -133849,7 +133996,6 @@ const useOverlayStore = create$2()(
               label: `Line ${get5().annotations.length + 1}`
             }
           };
-          console.log("Store: Finalizing line as annotation:", annotation);
           get5().addAnnotation(annotation);
           get5().resetDrawingState();
           get5().removeOverlayLayer("drawing-layer");
@@ -133857,7 +134003,6 @@ const useOverlayStore = create$2()(
       },
       createTextAnnotation: (position2, text2, fontSize = 14) => {
         if (!text2.trim()) {
-          console.log("Store: Cannot create text annotation with empty text");
           return;
         }
         const annotation = {
@@ -133878,7 +134023,6 @@ const useOverlayStore = create$2()(
             label: `Text ${get5().annotations.length + 1}`
           }
         };
-        console.log("Store: Creating text annotation:", annotation);
         get5().addAnnotation(annotation);
       },
       createPointAnnotation: (position2, radius = 5) => {
@@ -133898,21 +134042,17 @@ const useOverlayStore = create$2()(
             label: `Point ${get5().annotations.length + 1}`
           }
         };
-        console.log("Store: Creating point annotation:", annotation);
         get5().addAnnotation(annotation);
       },
       updateTextAnnotation: (annotationId, newText, fontSize) => {
         if (!newText.trim()) {
-          console.log("Store: Cannot update text annotation with empty text");
           return;
         }
         const annotations = get5().annotations;
         const annotation = annotations.find((a2) => a2.id === annotationId);
         if (!annotation || annotation.type !== "text") {
-          console.log("Store: Cannot update non-text annotation or annotation not found");
           return;
         }
-        console.log("Store: Updating text annotation:", annotationId, "to:", newText.trim(), "fontSize:", fontSize);
         const updates = {
           text: newText.trim()
         };
@@ -133928,10 +134068,8 @@ const useOverlayStore = create$2()(
         const annotations = get5().annotations;
         const annotation = annotations.find((a2) => a2.id === annotationId);
         if (!annotation || annotation.type !== "text") {
-          console.log("Store: Cannot update color for non-text annotation or annotation not found");
           return;
         }
-        console.log("Store: Updating text annotation color:", annotationId, "to:", fontColor2);
         const updates = {
           style: {
             ...annotation.style,
@@ -133944,22 +134082,22 @@ const useOverlayStore = create$2()(
         const annotations = get5().annotations;
         const annotation = annotations.find((a2) => a2.id === annotationId);
         if (!annotation) {
-          console.log("Store: Annotation not found:", annotationId);
           return;
         }
         if (annotation.type === "text") {
           get5().updateTextAnnotation(annotationId, newText);
           return;
         }
-        console.log("Store: Updating shape text:", annotationId, "to:", newText);
         const updates = {
           text: newText.trim() || void 0
         };
         get5().updateAnnotation(annotationId, updates);
       },
       setGlobalColor: (color2) => {
-        console.log("Store: Setting global color to:", color2);
         set5({ globalColor: color2 });
+      },
+      setViewportZoom: (zoom) => {
+        set5({ viewportZoom: zoom });
       },
       // New layer visibility actions
       toggleLayerVisibility: (annotationId) => {
@@ -133983,7 +134121,6 @@ const useOverlayStore = create$2()(
       },
       // New drag actions for move tool
       startDrag: (annotationId, offset) => {
-        console.log("Store: Starting drag for annotation:", annotationId, "with offset:", offset);
         set5({
           dragState: {
             isDragging: true,
@@ -134021,7 +134158,6 @@ const useOverlayStore = create$2()(
         }
       },
       endDrag: () => {
-        console.log("Store: Ending drag");
         set5({
           dragState: {
             isDragging: false,
@@ -134035,7 +134171,6 @@ const useOverlayStore = create$2()(
       },
       // New hover actions for move tool
       setHoveredAnnotation: (annotationId) => {
-        console.log("Store: Setting hovered annotation:", annotationId);
         set5({
           hoverState: {
             hoveredAnnotationId: annotationId
@@ -134057,19 +134192,16 @@ const useOverlayStore = create$2()(
             createdAt: /* @__PURE__ */ new Date()
           }
         };
-        console.log("Store: Creating group:", newGroup);
         set5((state) => ({
           annotationGroups: [...state.annotationGroups, newGroup]
         }));
       },
       deleteGroup: (groupId) => {
-        console.log("Store: Deleting group:", groupId);
         set5((state) => ({
           annotationGroups: state.annotationGroups.filter((g2) => g2.id !== groupId)
         }));
       },
       addAnnotationToGroup: (groupId, annotationId) => {
-        console.log("Store: Adding annotation", annotationId, "to group", groupId);
         set5((state) => ({
           annotationGroups: state.annotationGroups.map(
             (group) => group.id === groupId ? { ...group, annotationIds: [...group.annotationIds, annotationId] } : group
@@ -134077,7 +134209,6 @@ const useOverlayStore = create$2()(
         }));
       },
       removeAnnotationFromGroup: (groupId, annotationId) => {
-        console.log("Store: Removing annotation", annotationId, "from group", groupId);
         set5((state) => ({
           annotationGroups: state.annotationGroups.map(
             (group) => group.id === groupId ? { ...group, annotationIds: group.annotationIds.filter((id2) => id2 !== annotationId) } : group
@@ -134085,7 +134216,6 @@ const useOverlayStore = create$2()(
         }));
       },
       toggleGroupExpanded: (groupId) => {
-        console.log("Store: Toggling group expanded:", groupId);
         set5((state) => ({
           annotationGroups: state.annotationGroups.map(
             (group) => group.id === groupId ? { ...group, isExpanded: !group.isExpanded } : group
@@ -134094,21 +134224,17 @@ const useOverlayStore = create$2()(
       },
       // Stories actions
       setStories: (stories) => {
-        console.log("Store: Setting stories:", stories.length);
         set5({ stories, activeStoryIndex: null });
       },
       setActiveStory: (index2) => {
-        console.log("Store: Setting active story index:", index2);
         set5({ activeStoryIndex: index2 });
       },
       addStory: (story) => {
-        console.log("Store: Adding story:", story.Properties.Name);
         set5((state) => ({
           stories: [...state.stories, story]
         }));
       },
       updateStory: (index2, updates) => {
-        console.log("Store: Updating story at index:", index2);
         set5((state) => ({
           stories: state.stories.map(
             (story, i5) => i5 === index2 ? { ...story, ...updates } : story
@@ -134116,14 +134242,12 @@ const useOverlayStore = create$2()(
         }));
       },
       removeStory: (index2) => {
-        console.log("Store: Removing story at index:", index2);
         set5((state) => ({
           stories: state.stories.filter((_2, i5) => i5 !== index2),
           activeStoryIndex: state.activeStoryIndex === index2 ? null : state.activeStoryIndex && state.activeStoryIndex > index2 ? state.activeStoryIndex - 1 : state.activeStoryIndex
         }));
       },
       reorderStories: (fromIndex, toIndex) => {
-        console.log("Store: Reordering stories from", fromIndex, "to", toIndex);
         set5((state) => {
           const newStories = [...state.stories];
           const [movedStory] = newStories.splice(fromIndex, 1);
@@ -134146,21 +134270,17 @@ const useOverlayStore = create$2()(
       },
       // Waypoints actions
       setWaypoints: (waypoints) => {
-        console.log("Store: Setting waypoints:", waypoints.length);
         set5({ waypoints, activeWaypointId: null });
       },
       setActiveWaypoint: (waypointId) => {
-        console.log("Store: Setting active waypoint ID:", waypointId);
         set5({ activeWaypointId: waypointId });
       },
       addWaypoint: (waypoint) => {
-        console.log("Store: Adding waypoint:", waypoint.Properties.Name);
         set5((state) => ({
           waypoints: [...state.waypoints, waypoint]
         }));
       },
       updateWaypoint: (waypointId, updates) => {
-        console.log("Store: Updating waypoint:", waypointId);
         set5((state) => ({
           waypoints: state.waypoints.map(
             (waypoint) => waypoint.UUID === waypointId ? { ...waypoint, ...updates } : waypoint
@@ -134168,10 +134288,128 @@ const useOverlayStore = create$2()(
         }));
       },
       removeWaypoint: (waypointId) => {
-        console.log("Store: Removing waypoint:", waypointId);
         set5((state) => ({
           waypoints: state.waypoints.filter((waypoint) => waypoint.UUID !== waypointId),
           activeWaypointId: state.activeWaypointId === waypointId ? null : state.activeWaypointId
+        }));
+      },
+      // Image dimensions actions
+      setImageDimensions: (width, height) => {
+        set5({ imageWidth: width, imageHeight: height });
+      },
+      // Import waypoint annotations actions
+      importWaypointAnnotations: (arrows, overlays) => {
+        const { imageWidth, imageHeight } = get5();
+        if (imageWidth === 0 || imageHeight === 0) {
+          return;
+        }
+        const newAnnotations = [];
+        arrows.forEach((arrow, index2) => {
+          const [normX, normY] = arrow.Point;
+          const x2 = normX * imageWidth;
+          const y3 = normY * imageHeight;
+          if (arrow.HideArrow) {
+            const textAnnotation = {
+              id: `imported-text-${Date.now()}-${index2}`,
+              type: "text",
+              position: [x2, y3],
+              text: arrow.Text,
+              style: {
+                fontSize: 16,
+                fontColor: [255, 255, 255, 255],
+                // White text
+                backgroundColor: [0, 0, 0, 150],
+                // Semi-transparent black background
+                padding: 6
+              },
+              metadata: {
+                createdAt: /* @__PURE__ */ new Date(),
+                label: arrow.Text,
+                isImported: true
+              }
+            };
+            newAnnotations.push(textAnnotation);
+          } else {
+            const angleRad = arrow.Angle * Math.PI / 180;
+            const minDimension = Math.min(imageWidth, imageHeight);
+            const lineLength = minDimension * 0.5;
+            const startX = x2 + Math.cos(angleRad) * lineLength;
+            const startY = y3 + Math.sin(angleRad) * lineLength;
+            const endX = x2;
+            const endY = y3;
+            const linePolygon = [
+              [startX, startY],
+              [endX, endY],
+              [endX, endY],
+              [startX, startY],
+              [startX, startY]
+            ];
+            const lineAnnotation = {
+              id: `imported-line-${Date.now()}-${index2}`,
+              type: "line",
+              polygon: linePolygon,
+              text: arrow.Text,
+              style: {
+                fillColor: [0, 0, 0, 0],
+                // Transparent fill
+                lineColor: [255, 255, 255, 255],
+                // White line
+                lineWidth: 3
+              },
+              metadata: {
+                createdAt: /* @__PURE__ */ new Date(),
+                label: arrow.Text,
+                isImported: true
+              }
+            };
+            newAnnotations.push(lineAnnotation);
+          }
+        });
+        overlays.forEach((overlay, index2) => {
+          const x2 = overlay.x * imageWidth;
+          const y3 = overlay.y * imageHeight;
+          const width = overlay.width * imageWidth;
+          const height = overlay.height * imageHeight;
+          const polygon = rectangleToPolygon(
+            [x2, y3],
+            [x2 + width, y3 + height]
+          );
+          const rectAnnotation = {
+            id: `imported-rect-${Date.now()}-${index2}`,
+            type: "rectangle",
+            polygon,
+            style: {
+              fillColor: [255, 255, 255, 30],
+              // White with very low opacity
+              lineColor: [255, 255, 255, 200],
+              // White border
+              lineWidth: 2
+            },
+            metadata: {
+              createdAt: /* @__PURE__ */ new Date(),
+              label: `Region ${index2 + 1}`,
+              isImported: true
+            }
+          };
+          newAnnotations.push(rectAnnotation);
+        });
+        set5((state) => ({
+          annotations: [...state.annotations, ...newAnnotations]
+        }));
+      },
+      clearImportedAnnotations: () => {
+        set5((state) => ({
+          annotations: state.annotations.filter((a2) => {
+            var _a3;
+            return !((_a3 = a2.metadata) == null ? void 0 : _a3.isImported);
+          }),
+          hiddenLayers: new Set(
+            [...state.hiddenLayers].filter((id2) => {
+              var _a3;
+              const annotation = state.annotations.find((a2) => a2.id === id2);
+              return annotation && !((_a3 = annotation.metadata) == null ? void 0 : _a3.isImported);
+            })
+          )
         }));
       },
       // channel and group actions
@@ -134187,7 +134425,7 @@ const useOverlayStore = create$2()(
   )
 );
 const createDragHandlers = (activeTool, onInteraction) => {
-  {
+  if (!onInteraction) {
     return {
       onClick: void 0,
       onDragStart: void 0,
@@ -134196,6 +134434,44 @@ const createDragHandlers = (activeTool, onInteraction) => {
       onHover: void 0
     };
   }
+  const emit = (type, coordinate) => {
+    if (coordinate) {
+      onInteraction(type, coordinate);
+    }
+  };
+  return {
+    // Single click without dragging (used for text, polyline, lasso point-by-point)
+    onClick: ({ coordinate }) => emit("click", coordinate),
+    // Start of drag operation (used for rectangle, line, lasso freehand)
+    onDragStart: ({ coordinate }) => emit("dragStart", coordinate),
+    // During drag operation (used for rectangle, line, lasso freehand)
+    onDrag: ({ coordinate }) => emit("drag", coordinate),
+    // End of drag operation (used for rectangle, line, lasso freehand)
+    onDragEnd: ({ coordinate }) => emit("dragEnd", coordinate),
+    // Hover events (for tools that need hover feedback)
+    onHover: (info) => {
+      const coordinate = info.coordinate || (info.x !== void 0 && info.y !== void 0 ? [info.x, info.y, info.z || 0] : null);
+      const layer = info.layer;
+      if (activeTool === "move") {
+        if (layer && layer.id && layer.id.startsWith("annotation-")) {
+          let annotationId = layer.id.replace("annotation-", "");
+          if (annotationId.endsWith("-text")) {
+            annotationId = annotationId.replace("-text", "");
+          }
+          useOverlayStore.getState().setHoveredAnnotation(annotationId);
+        } else {
+          useOverlayStore.getState().setHoveredAnnotation(null);
+        }
+      } else {
+        useOverlayStore.getState().setHoveredAnnotation(null);
+      }
+      if (activeTool === "move" || activeTool === "text" || activeTool === "polyline" || activeTool === "rectangle" || activeTool === "ellipse" || activeTool === "line" || activeTool === "lasso") {
+        if (coordinate) {
+          emit("hover", coordinate);
+        }
+      }
+    }
+  };
 };
 const Main$2 = qe$1.div`
   height: 100%;
@@ -134247,12 +134523,30 @@ const VivView = (props) => {
   }, [loader.data]);
   const initialViewState = reactExports.useMemo(() => {
     const n_levels = loader.data.length;
-    return {
+    const initial_view = {
       zoom: -n_levels,
       target: [imageShape.x / 2, imageShape.y / 2, 0]
     };
+    console.log("Initial View State:");
+    console.log(initial_view);
+    return initial_view;
   }, [loader.data, imageShape]);
   const [viewState, setViewState] = reactExports.useState(initialViewState);
+  const setViewportZoom = useOverlayStore((state) => state.setViewportZoom);
+  const setImageDimensions = useOverlayStore((state) => state.setImageDimensions);
+  reactExports.useEffect(() => {
+    if (loader && loader.data && loader.data.length > 0) {
+      setViewState(initialViewState);
+      if (typeof initialViewState.zoom === "number") {
+        setViewportZoom(initialViewState.zoom);
+      }
+    }
+  }, [initialViewState, loader, setViewportZoom]);
+  reactExports.useEffect(() => {
+    if (imageShape.x > 0 && imageShape.y > 0) {
+      setImageDimensions(imageShape.x, imageShape.y);
+    }
+  }, [imageShape, setImageDimensions]);
   const mainProps = reactExports.useMemo(() => ({
     ...shape,
     id: "mainLayer",
@@ -134260,6 +134554,9 @@ const VivView = (props) => {
     ...mainSettings
   }), [shape, loader.data, mainSettings]);
   const dicomSource = reactExports.useMemo(() => {
+    if (!props.series) {
+      return null;
+    }
     return loadDicom({
       pyramids: props.dicomIndex,
       series: props.series,
@@ -134269,17 +134566,26 @@ const VivView = (props) => {
     props.dicomIndex,
     props.series
   ]);
+  const { SourceChannels } = props.config.ItemRegistry;
   const dicomLayer = reactExports.useMemo(
     () => {
+      if (!props.series || !dicomSource) {
+        return null;
+      }
+      const rgbImage = SourceChannels.length === 1 && SourceChannels[0].Properties.Samples === 3 && SourceChannels[0].Associations.SourceDataType.ID === "Uint8";
       return createTileLayers({
         pyramids: props.dicomIndex,
         settings: mainSettings,
-        dicomSource
+        dicomSource,
+        rgbImage
       });
     },
     [
       dicomSource,
-      mainSettings
+      mainSettings,
+      props.series,
+      props.dicomIndex,
+      SourceChannels
     ]
   );
   const imageLayer = reactExports.useMemo(
@@ -134290,7 +134596,7 @@ const VivView = (props) => {
   );
   const allLayers = reactExports.useMemo(
     () => {
-      if (props.series) {
+      if (props.series && dicomLayer) {
         return [dicomLayer, ...overlayLayers];
       }
       return [imageLayer, ...overlayLayers];
@@ -134298,12 +134604,12 @@ const VivView = (props) => {
     [
       dicomLayer,
       imageLayer,
-      overlayLayers
+      overlayLayers,
+      props.series
     ]
   );
   const dragHandlers = reactExports.useMemo(
-    () => createDragHandlers(),
-    //createDragHandlers(activeTool, onOverlayInteraction),
+    () => createDragHandlers(activeTool, onOverlayInteraction),
     [activeTool, onOverlayInteraction]
   );
   const getCursor2 = reactExports.useCallback(({ isDragging: isDragging2, isHovering }) => {
@@ -134343,7 +134649,8 @@ const VivView = (props) => {
   const handleViewStateChange = reactExports.useCallback(({ interactionState, viewState: nextViewState }) => {
     if (isDragging || activeTool !== "move" && interactionState.isDragging) return;
     setViewState(nextViewState);
-  }, [isDragging, activeTool]);
+    setViewportZoom(nextViewState.zoom);
+  }, [isDragging, activeTool, setViewportZoom]);
   if (!loader || !mainSettings) return null;
   return /* @__PURE__ */ jsxRuntimeExports.jsx(Main$2, { slot: "image", ref: rootRef, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
     DeckGL,
@@ -134400,7 +134707,6 @@ const toSettings = (opts) => {
     );
     if (!loader) return toDefaultSettings(3);
     const full_level = loader.data[0];
-    if (!loader) return toDefaultSettings(3);
     const { labels, shape } = full_level;
     const c_idx = labels.indexOf("c");
     const selections = channels2.map((channel) => {
@@ -134424,7 +134730,7 @@ const toSettings = (opts) => {
     const channelsVisible = channels2.map(
       (c2, i5) => true
     );
-    console.log(colors, contrastLimits, channelsVisible);
+    console.log({ colors, contrastLimits, channelsVisible });
     const n_channels = shape[c_idx] || 0;
     const out = {
       ...toDefaultSettings(n_channels),
@@ -156912,6 +157218,249 @@ function defaultUrlTransform(value) {
   }
   return "";
 }
+const ARROW_ICON_URL = "/arrow.png";
+const ARROW_ICON_SIZE = 1e3;
+function createTextLayer(annotation, isHovered, pickable = true) {
+  const fontColor2 = isHovered ? [0, 120, 255, 255] : annotation.style.fontColor;
+  const backgroundColor = isHovered ? [0, 120, 255, 150] : annotation.style.backgroundColor || [0, 0, 0, 100];
+  return new TextLayer({
+    id: `annotation-${annotation.id}`,
+    data: [{
+      text: annotation.text,
+      position: [annotation.position[0], annotation.position[1], 0]
+    }],
+    getText: (d2) => d2.text,
+    getPosition: (d2) => d2.position,
+    getColor: fontColor2,
+    background: true,
+    // Enable background rendering
+    getBackgroundColor: backgroundColor,
+    getSize: annotation.style.fontSize,
+    fontFamily: "Arial, sans-serif",
+    fontWeight: "normal",
+    backgroundPadding: [6, 6],
+    // Padding around text
+    pickable
+  });
+}
+function createPointLayer(annotation, isHovered, pickable = true) {
+  const fillColor = isHovered ? [0, 120, 255, 255] : annotation.style.fillColor;
+  const lineColor = isHovered ? [0, 120, 255, 255] : annotation.style.strokeColor;
+  return new ScatterplotLayer({
+    id: `annotation-${annotation.id}`,
+    data: [{
+      position: [annotation.position[0], annotation.position[1], 0],
+      radius: annotation.style.radius
+    }],
+    getPosition: (d2) => d2.position,
+    getRadius: (d2) => d2.radius,
+    radiusMinPixels: annotation.style.radius,
+    radiusMaxPixels: annotation.style.radius,
+    getFillColor: fillColor,
+    getLineColor: lineColor,
+    getLineWidth: 10,
+    pickable
+  });
+}
+function createArrowIconLayer(annotation, isHovered, pickable = true) {
+  if (annotation.type !== "line") {
+    return null;
+  }
+  const polygon = annotation.polygon;
+  if (polygon.length < 2) return null;
+  const [startX, startY] = polygon[0];
+  const [endX, endY] = polygon[1];
+  const dx = endX - startX;
+  const dy = endY - startY;
+  const angleRad = Math.atan2(dy, dx);
+  const angleDeg = angleRad * 180 / Math.PI + 90;
+  const iconColor = isHovered ? [0, 120, 255, 255] : annotation.style.lineColor;
+  return new IconLayer({
+    id: `annotation-${annotation.id}`,
+    data: [{
+      position: [endX, endY, 0],
+      angle: angleDeg
+    }],
+    getPosition: (d2) => d2.position,
+    getIcon: () => ({
+      url: ARROW_ICON_URL,
+      width: ARROW_ICON_SIZE,
+      height: ARROW_ICON_SIZE,
+      anchorX: ARROW_ICON_SIZE / 2,
+      // Center of PNG (200,200)
+      anchorY: ARROW_ICON_SIZE / 2
+    }),
+    getSize: 300,
+    sizeUnits: "pixels",
+    sizeMinPixels: 300,
+    sizeMaxPixels: 300,
+    getAngle: (d2) => d2.angle,
+    getColor: iconColor,
+    pickable,
+    billboard: false
+    // Don't rotate to face camera
+  });
+}
+function createPolygonLayer(annotation, isHovered, pickable = true) {
+  if (annotation.type === "text" || annotation.type === "point" || annotation.type === "line") {
+    return null;
+  }
+  let fillColor = [255, 255, 255, 1];
+  let lineColor = annotation.style.lineColor;
+  const isPolyline = annotation.type === "polyline";
+  if (isPolyline) {
+    fillColor = [0, 0, 0, 0];
+  }
+  if (isHovered) {
+    fillColor = isPolyline ? [0, 0, 0, 0] : [0, 120, 255, 100];
+    lineColor = [0, 120, 255, 255];
+  }
+  return new PolygonLayer({
+    id: `annotation-${annotation.id}`,
+    data: [{ polygon: annotation.polygon }],
+    getPolygon: (d2) => d2.polygon,
+    getFillColor: fillColor,
+    getLineColor: lineColor,
+    getLineWidth: annotation.style.lineWidth * 10,
+    lineWidthScale: 1,
+    lineWidthUnits: "pixels",
+    lineWidthMinPixels: annotation.style.lineWidth,
+    lineWidthMaxPixels: annotation.style.lineWidth,
+    stroked: true,
+    filled: true,
+    pickable
+  });
+}
+function createLabelTextLayer(annotationId, text2, position2, textColor, textAnchor = "middle", pixelOffset = [0, 0]) {
+  return new TextLayer({
+    id: `annotation-${annotationId}-text`,
+    data: [{ text: text2, position: position2, pixelOffset }],
+    getText: (d2) => d2.text,
+    getPosition: (d2) => d2.position,
+    getPixelOffset: (d2) => d2.pixelOffset,
+    getColor: textColor,
+    background: true,
+    // Enable background rendering
+    getBackgroundColor: [0, 0, 0, 180],
+    // Semi-transparent grey
+    getSize: 14,
+    fontFamily: "Arial, sans-serif",
+    fontWeight: "normal",
+    backgroundPadding: [6, 6],
+    // Padding around text
+    pickable: false,
+    getTextAnchor: textAnchor
+  });
+}
+function createAnnotationLayers(annotation, hoveredAnnotationId, pickable = true) {
+  const layers = [];
+  const isHovered = hoveredAnnotationId === annotation.id;
+  if (annotation.type === "text") {
+    layers.push(createTextLayer(annotation, isHovered, pickable));
+  } else if (annotation.type === "point") {
+    layers.push(createPointLayer(annotation, isHovered, pickable));
+    if (annotation.text) {
+      const textColor = annotation.style.strokeColor || [255, 255, 255, 255];
+      layers.push(createLabelTextLayer(
+        annotation.id,
+        // @ts-ignore
+        annotation.text,
+        [annotation.position[0], annotation.position[1], 0],
+        textColor
+      ));
+    }
+  } else if (annotation.type === "line") {
+    const arrowLayer = createArrowIconLayer(annotation, isHovered, pickable);
+    if (arrowLayer) {
+      layers.push(arrowLayer);
+    }
+    if (annotation.text) {
+      const polygon = annotation.polygon;
+      const [startX, startY] = polygon[0];
+      const [endX, endY] = polygon[1];
+      const dx = startX - endX;
+      const dy = startY - endY;
+      const length2 = Math.sqrt(dx * dx + dy * dy);
+      const dirX = length2 > 0 ? dx / length2 : 0;
+      const dirY = length2 > 0 ? dy / length2 : 1;
+      const pixelOffsetMagnitude = 160;
+      const pixelOffsetX = dirX * pixelOffsetMagnitude;
+      const pixelOffsetY = dirY * pixelOffsetMagnitude;
+      const textAnchor = dx > 0 ? "start" : "end";
+      const textColor = annotation.style.lineColor || [255, 255, 255, 255];
+      layers.push(createLabelTextLayer(
+        annotation.id,
+        // @ts-ignore
+        annotation.text,
+        [endX, endY, 0],
+        // Position at icon center
+        textColor,
+        textAnchor,
+        [pixelOffsetX, pixelOffsetY]
+        // Pixel offset toward tail
+      ));
+    }
+  } else {
+    const polygonLayer = createPolygonLayer(annotation, isHovered, pickable);
+    if (polygonLayer) {
+      layers.push(polygonLayer);
+    }
+    if (annotation.text) {
+      const polygon = annotation.polygon;
+      const centerX = polygon.reduce((sum2, [x2]) => sum2 + x2, 0) / polygon.length;
+      const centerY = polygon.reduce((sum2, [, y3]) => sum2 + y3, 0) / polygon.length;
+      const textColor = annotation.style.lineColor || [255, 255, 255, 255];
+      layers.push(createLabelTextLayer(
+        annotation.id,
+        // @ts-ignore
+        annotation.text,
+        [centerX, centerY, 0],
+        textColor
+      ));
+    }
+  }
+  return layers;
+}
+function createAllAnnotationLayers(annotations, hiddenLayers, hoveredAnnotationId, pickable = true) {
+  const mainLayers = [];
+  const labelLayers = [];
+  annotations.filter((annotation) => !hiddenLayers.has(annotation.id)).forEach((annotation) => {
+    const annotationLayers = createAnnotationLayers(annotation, hoveredAnnotationId, pickable);
+    annotationLayers.forEach((layer) => {
+      if (layer.id.endsWith("-text")) {
+        labelLayers.push(layer);
+      } else {
+        mainLayers.push(layer);
+      }
+    });
+  });
+  return [...mainLayers, ...labelLayers];
+}
+function useAnnotationLayers(pickable = true) {
+  const annotations = useOverlayStore((state) => state.annotations);
+  const hiddenLayers = useOverlayStore((state) => state.hiddenLayers);
+  const hoveredAnnotationId = useOverlayStore((state) => state.hoverState.hoveredAnnotationId);
+  const annotationLayers = reactExports.useMemo(() => {
+    return createAllAnnotationLayers(annotations, hiddenLayers, hoveredAnnotationId, pickable);
+  }, [annotations, hiddenLayers, hoveredAnnotationId, pickable]);
+  reactExports.useEffect(() => {
+    const currentLayers = useOverlayStore.getState().overlayLayers;
+    const annotationLayerIds = currentLayers.filter((layer) => layer && layer.id.startsWith("annotation-")).map((layer) => layer.id);
+    annotationLayerIds.forEach((layerId) => {
+      useOverlayStore.getState().removeOverlayLayer(layerId);
+    });
+    annotationLayers.forEach((layer) => {
+      if (layer) {
+        useOverlayStore.getState().addOverlayLayer(layer);
+      }
+    });
+  }, [annotationLayers]);
+  return annotationLayers;
+}
+const AnnotationRenderer = () => {
+  useAnnotationLayers(false);
+  return null;
+};
 const Wrap = qe$1.div`
   display: grid;
   height: 100%;
@@ -156931,23 +157480,33 @@ const Wrap = qe$1.div`
   }
 `;
 const NavPane = qe$1.div`
+  border-right: 2px solid gray;
   display: grid;
-  gap: 1em;
+  gap: 0.5em;
   z-index: 1;
   overflow: hidden;
   background-color: black;
-  grid-template-rows: 50px 1fr;
+  grid-template-rows: auto 50px 1fr;
   grid-template-columns: 1fr;
   > :nth-child(1) {
     grid-column: 1;
     grid-row: 1;
+    padding: 0.5em;
   }
   > :nth-child(2) {
-    padding: 0.5em;
-    overflow-y: auto;
     grid-column: 1;
     grid-row: 2;
   }
+  > :nth-child(3) {
+    overflow-y: auto;
+    grid-column: 1;
+    grid-row: 3;
+    padding: 0.5em;
+}
+`;
+const StoryTitle = qe$1.div`
+  margin: 0;
+  line-height: 1.1;
 `;
 const Toolbar = qe$1.div`
   display: grid;
@@ -157045,14 +157604,32 @@ const SVG = (props) => {
   );
 };
 const Presentation = (props) => {
-  var _a3, _b2, _c2;
+  var _a3, _b2;
   const {
     stories,
     activeStoryIndex,
     setActiveStory,
     activeChannelGroupId,
-    setActiveChannelGroup
+    setActiveChannelGroup,
+    importWaypointAnnotations,
+    clearImportedAnnotations,
+    imageWidth,
+    imageHeight
   } = useOverlayStore();
+  reactExports.useEffect(() => {
+    if (stories.length === 0) return;
+    if (imageWidth === 0 || imageHeight === 0) return;
+    const storyIndex = activeStoryIndex ?? 0;
+    const story2 = stories[storyIndex];
+    if (story2) {
+      clearImportedAnnotations();
+      const arrows = story2.Arrows || [];
+      const overlays = story2.Overlays || [];
+      if (arrows.length > 0 || overlays.length > 0) {
+        importWaypointAnnotations(arrows, overlays);
+      }
+    }
+  }, [stories, activeStoryIndex, imageWidth, imageHeight, importWaypointAnnotations, clearImportedAnnotations]);
   const updateGroup = (activeStory) => {
     const story2 = stories[activeStory];
     const group_name = story2.Properties.Group;
@@ -157111,10 +157688,13 @@ const Presentation = (props) => {
   );
   const first_story = activeStoryIndex == 0;
   const last_story = activeStoryIndex == stories.length - 1;
+  const main_title = props.name;
   const story = stories[activeStoryIndex];
-  const story_content = ((_a3 = story == null ? void 0 : story.Properties) == null ? void 0 : _a3.Content) + ((_b2 = story == null ? void 0 : story.Properties) == null ? void 0 : _b2.Content) + ((_c2 = story == null ? void 0 : story.Properties) == null ? void 0 : _c2.Content);
+  const story_title = ((_a3 = story == null ? void 0 : story.Properties) == null ? void 0 : _a3.Name) ?? `Waypoint ${activeStoryIndex + 1}`;
+  const story_content = (_b2 = story == null ? void 0 : story.Properties) == null ? void 0 : _b2.Content;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Wrap, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs(NavPane, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(StoryTitle, { className: "h5", children: main_title }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Toolbar, { children: [
         first_story ? "" : story_left,
         count2,
@@ -157122,11 +157702,15 @@ const Presentation = (props) => {
         first_story ? "" : table_of_contents
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(StoryContent, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Markdown, { children: story_content }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "h6", children: story_title }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Markdown, { children: story_content })
+        ] }),
         last_story ? "" : story_right
       ] })
     ] }),
-    props.children
+    props.children,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(AnnotationRenderer, {})
   ] });
 };
 qe$1.div`
@@ -157204,7 +157788,7 @@ const removeKey = (container, key, idx) => {
 };
 const Index = (props) => {
   const { exhibit, setExhibit } = props;
-  const { groups, stories } = exhibit;
+  const { name: name2, groups, stories } = exhibit;
   const [ioState, setIoState] = reactExports.useState("IDLE");
   const [presenting, setPresenting] = reactExports.useState(true);
   const [zoomInEl, setZoomIn] = reactExports.useState(null);
@@ -157378,6 +157962,7 @@ const Index = (props) => {
   const channelProps = {
     hash,
     setHash,
+    name: name2,
     stories,
     groups: itemRegistryGroups,
     controlPanelElement,
@@ -157497,7 +158082,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-DEuBiJqP.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-FW6ti0_L.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
@@ -157862,13 +158447,17 @@ const Content = (props) => {
   const [valid2, setValid] = reactExports.useState({});
   if (props.demo_dicom_web) {
     reactExports.useEffect(() => {
+      const h_and_e = props.h_and_e;
       onStart(
-        "https://us-central1-idc-external-031.cloudfunctions.net/minerva_proxy/studies/2.25.112849421593762410108114587383519700602/series/1.3.6.1.4.1.5962.99.1.331207435.2054329796.1752677896971.4.0",
+        [
+          "https://us-central1-idc-external-031.cloudfunctions.net/minerva_proxy/studies/2.25.112849421593762410108114587383519700602/series/1.3.6.1.4.1.5962.99.1.331207435.2054329796.1752677896971.4.0",
+          "https://us-central1-idc-external-031.cloudfunctions.net/minerva_proxy/studies/2.25.112849421593762410108114587383519700602/series/1.3.6.1.4.1.5962.99.1.714652616.317867787.1753061342152.4.0"
+        ][+h_and_e],
         "DICOM-WEB"
       );
     }, []);
     if (loader === null) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(Wrapper, { children: "Loading DicomWeb Endpoint..." });
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(Wrapper, { children: "Retrieving DICOM metadata..." });
     }
   }
   const onSubmit = (event) => {
@@ -157901,13 +158490,11 @@ const Content = (props) => {
   ] });
 };
 const Main = (props) => {
-  if (hasFileSystemAccess()) {
+  if (props.demo_dicom_web || hasFileSystemAccess()) {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(Content, { ...props });
+  } else {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Unable to access FileSystem API." }) });
   }
-  const error_message = `<p>
-  Unable to access file system api.
-  </p>`;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: error_message });
 };
 var dist = {};
 var loremIpsum$1 = {};
@@ -160614,6 +161201,7 @@ const configWaypoints = [
   }
 ];
 const exhibit_config = {
+  Name: "Multiplexed 3D atlas of state transitions and immune interactions in colorectal cancer (Introduction)",
   Stories: [{
     Waypoints: configWaypoints.map(({ Properties, Arrows, Overlays }) => {
       const { Name, Content: Content2, Pan, Zoom, Group } = Properties;
@@ -160963,7 +161551,6 @@ const MainStyle = $e$1`
 `;
 const rootElement = document.getElementById(id);
 const root = createRoot(rootElement);
-console.log({ exhibit_config });
 root.render(
   /* @__PURE__ */ jsxRuntimeExports.jsxs(reactExports.StrictMode, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -160971,6 +161558,7 @@ root.render(
       {
         handleKeys: ["ome-dir-1"],
         demo_dicom_web: true,
+        h_and_e: false,
         exhibit_config,
         configWaypoints
       }
