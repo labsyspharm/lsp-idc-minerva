@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-BOkm4MzW.js","./pako.esm-C0YWBoLx.js","./lerc-tWvFIH-1.js","./LercDecode-q9ZAA6lz.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-B618S0oV.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-C1-wzFEU.js","./pako.esm-C0YWBoLx.js","./lerc-Co7yHF3m.js","./LercDecode-BPKdYRjq.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-BegwEjST.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-BOLtYvqG.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-BOMSuhFR.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-CzF9ZW2s.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-SMSCM3gZ.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-BbHDQZju.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-BOkm4MzW.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-1rqfhih-.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-L2D2NN_7.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-C1-wzFEU.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-CmiT_H5W.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-tWvFIH-1.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-Co7yHF3m.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-68YjLZBO.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-HpbGKMS4.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -157195,7 +157195,7 @@ function defaultUrlTransform(value) {
   }
   return "";
 }
-const ARROW_ICON_URL = "/arrow.svg";
+const ARROW_ICON_URL = `${"./"}arrow.svg`;
 const ARROW_ICON_SIZE = 250;
 function createTextLayer(annotation, isHovered, pickable = true) {
   const fontColor2 = isHovered ? [0, 120, 255, 255] : annotation.style.fontColor;
@@ -158081,7 +158081,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-B618S0oV.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-BegwEjST.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
@@ -160736,7 +160736,7 @@ const configWaypoints = [
     },
     "Properties": {
       "Name": "Tumor Budding [Immune Markers]",
-      "Content": "Immune populations were segmented into broad functional categories by lineage-specific marker expression:\n\nCytotoxic T Cell - CD45/CD3/CD8+ \n\nActivated Cytotoxic T Cell - CD45/CD3/CD8/PD-1+\n\nHelper T Cell - CD45/CD3/CD4+\n\nT Regulatory Cells - CD45/CD3/FOXP3+, CD4 or CD8\n\nMacrophages - CD45, CD68 or CD163\n\nNearest neighbor analysis and spatial correlation showed that the tumor budding region exhibited a distinctive immune microenvironment. Tumor budding cells at the tumor invasive front exhibited higher levels of PD-L1 staining. There were increased numbers of FOXP3+ Tregs in the budding microenvironment, and an increased number of PD-L1 positive macrophages. There were a reduced number of CD8-positive cytotoxic T cells in the budding niche, and those that were present were negative for PD1 suggesting that they were not activated. Collectively, these results suggest that the tumor budding network exists in an immunosuppressive environment that may facilitate stromal invasion and metastasis. ",
+      "Content": "Immune populations were segmented into broad functional categories by lineage-specific marker expression:\n\nCytotoxic T Cell - CD45/CD3/CD8+ \n\nActivated Cytotoxic T Cell - CD45/CD3/CD8/PD-1+\n\nHelper T Cell - CD45/CD3/CD4+\n\nT Regulatory Cells - CD45/CD3/FOXP3+, CD4 or CD8\n\nMacrophages - CD45 or CD163\n\nNearest neighbor analysis and spatial correlation showed that the tumor budding region exhibited a distinctive immune microenvironment. Tumor budding cells at the tumor invasive front exhibited higher levels of PD-L1 staining. There were increased numbers of FOXP3+ Tregs in the budding microenvironment, and an increased number of PD-L1 positive macrophages. There were a reduced number of CD8-positive cytotoxic T cells in the budding niche, and those that were present were negative for PD1 suggesting that they were not activated. Collectively, these results suggest that the tumor budding network exists in an immunosuppressive environment that may facilitate stromal invasion and metastasis. ",
       "Pan": [
         0.72093301316954,
         0.512300720047842
