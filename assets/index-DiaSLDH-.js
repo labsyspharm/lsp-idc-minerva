@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-Bws7tQ3I.js","./pako.esm-C0YWBoLx.js","./lerc-DsW0hJv8.js","./LercDecode-EcE-gFJX.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-GPhZrhLv.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-D7zqRV6E.js","./pako.esm-C0YWBoLx.js","./lerc-oMpEycRW.js","./LercDecode-DMMb3d-1.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-Biv9269A.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-B3ofagq3.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-CgFgUg1U.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-uGqvEAam.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-Ro3YP_YB.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-B6RZpLYK.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-Bws7tQ3I.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-BQHt4Cwp.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-BaFoqmdT.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-D7zqRV6E.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-DBmseLQK.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-DsW0hJv8.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-oMpEycRW.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-BMeguCe0.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-CaQoNQCn.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -127750,7 +127750,7 @@ function prevPowerOf2(x2) {
   return 2 ** Math.floor(Math.log2(x2));
 }
 const SIGNAL_ABORTED = "__vivSignalAborted";
-function isElement$1(node2) {
+function isElement(node2) {
   return node2.nodeType === 1;
 }
 function isText(node2) {
@@ -127775,7 +127775,7 @@ function xmlToJson(xmlNode, options) {
   }
   for (let i5 = 0; i5 < xmlNode.childNodes.length; i5++) {
     const childNode = xmlNode.childNodes[i5];
-    if (!isElement$1(childNode)) {
+    if (!isElement(childNode)) {
       continue;
     }
     const childXmlObj = xmlToJson(childNode, options);
@@ -134413,31 +134413,29 @@ const Main$2 = qe$1.div`
   position: relative;
   height: 100%;
 `;
-const isElement = (x2 = {}) => {
-  return ["Width", "Height"].every((k4) => `client${k4}` in x2);
-};
-const shapeRef = (setShape) => {
-  return (el2) => {
-    if (el2 && isElement(el2)) {
-      const height = el2.clientHeight;
-      const width = el2.clientWidth;
-      setShape({ width, height });
-    }
-  };
-};
 const VivView = (props) => {
-  const maxShape = useWindowSize();
+  const windowSize = useWindowSize();
   const { loader, groups, stories, hash, setHash, overlayLayers = [], activeTool, isDragging = false, hoveredAnnotationId = null, onOverlayInteraction } = props;
   const { v: v2, g: g2, s: s3, w: w2 } = hash;
   const {
     activeChannelGroupId
   } = useOverlayStore();
-  const [shape, setShape] = reactExports.useState(maxShape);
+  const [viewportSize, setViewportSize] = reactExports.useState(windowSize);
   const [channelSettings, setChannelSettings] = reactExports.useState({});
   const [canvas2, setCanvas] = reactExports.useState(null);
+  const rootRef = reactExports.useRef(null);
   reactExports.useMemo(() => getWaypoint(stories, s3, w2), [stories, s3, w2]);
-  const rootRef = reactExports.useMemo(() => {
-    return shapeRef(setShape);
+  reactExports.useEffect(() => {
+    const element2 = rootRef.current;
+    if (!element2) return;
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        setViewportSize({ width, height });
+      }
+    });
+    resizeObserver.observe(element2);
+    return () => resizeObserver.disconnect();
   }, []);
   const mainSettings = reactExports.useMemo(() => {
     if (!loader || !groups) {
@@ -134488,7 +134486,7 @@ const VivView = (props) => {
     if (targetWaypointPan === null && targetWaypointZoom === null) {
       return;
     }
-    if (!imageShape.x || imageShape.x <= 0 || !imageShape.y || imageShape.y <= 0 || shape.width <= 0) {
+    if (!imageShape.x || imageShape.x <= 0 || !imageShape.y || imageShape.y <= 0 || viewportSize.width <= 0) {
       return;
     }
     const newViewState = convertWaypointToViewState(
@@ -134496,20 +134494,20 @@ const VivView = (props) => {
       targetWaypointZoom,
       imageShape.x,
       imageShape.y,
-      shape.width
+      viewportSize.width
     );
     if (newViewState) {
       setViewState(newViewState);
       setViewportZoom(newViewState.zoom);
     }
     clearTargetWaypointViewState();
-  }, [targetWaypointPan, targetWaypointZoom, imageShape.x, imageShape.y, shape.width, clearTargetWaypointViewState, setViewportZoom]);
+  }, [targetWaypointPan, targetWaypointZoom, imageShape.x, imageShape.y, viewportSize.width, clearTargetWaypointViewState, setViewportZoom]);
   const mainProps = reactExports.useMemo(() => ({
-    ...shape,
+    ...viewportSize,
     id: "mainLayer",
     loader: loader.data,
     ...mainSettings
-  }), [shape, loader.data, mainSettings]);
+  }), [viewportSize, loader.data, mainSettings]);
   const dicomSource = reactExports.useMemo(() => {
     if (!props.series) {
       return null;
@@ -134555,11 +134553,11 @@ const VivView = (props) => {
     var _a3, _b2, _c2, _d2;
     const physicalSize = (_b2 = (_a3 = loader == null ? void 0 : loader.metadata) == null ? void 0 : _a3.Pixels) == null ? void 0 : _b2.PhysicalSizeX;
     const unit = ((_d2 = (_c2 = loader == null ? void 0 : loader.metadata) == null ? void 0 : _c2.Pixels) == null ? void 0 : _d2.PhysicalSizeXUnit) || "µm";
-    if (!physicalSize || shape.width <= 0 || shape.height <= 0) return null;
+    if (!physicalSize || viewportSize.width <= 0 || viewportSize.height <= 0) return null;
     const viewStateWithDimensions = {
       ...viewState,
-      width: shape.width,
-      height: shape.height
+      width: viewportSize.width,
+      height: viewportSize.height
     };
     return new ScaleBarLayer({
       id: "scale-bar",
@@ -134568,7 +134566,7 @@ const VivView = (props) => {
       size: physicalSize,
       snap: true
     });
-  }, [viewState, loader == null ? void 0 : loader.metadata, shape.width, shape.height]);
+  }, [viewState, loader == null ? void 0 : loader.metadata, viewportSize.width, viewportSize.height]);
   const allLayers = reactExports.useMemo(
     () => {
       const layers = props.series && dicomLayer ? [dicomLayer, ...overlayLayers] : [imageLayer, ...overlayLayers];
@@ -158076,7 +158074,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-GPhZrhLv.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-Biv9269A.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
