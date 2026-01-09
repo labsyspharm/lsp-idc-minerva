@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-DqfmcrHt.js","./pako.esm-C0YWBoLx.js","./lerc-DOJlS2rw.js","./LercDecode-D4s-GrLz.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-CI_oy8sS.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-C08jsDxH.js","./pako.esm-C0YWBoLx.js","./lerc-C_7wyRxg.js","./LercDecode-2ZpvoH8T.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-CCAhdfeg.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-hzwxezts.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-Bfe37KTW.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-D7yavb3j.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-DthCvgmR.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-BJ1E8ZhN.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-DqfmcrHt.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-fXT4s6WQ.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-CvXY6-jP.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-C08jsDxH.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-BAaArFFJ.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-DOJlS2rw.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-C_7wyRxg.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-CfM4LF0w.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-B92xmaDS.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -157463,18 +157463,17 @@ const Wrap = qe$1.div`
   }
 `;
 const NavPane = qe$1.div`
-  border-right: 2px solid gray;
+  border-right: 2px solid #333;
+  background: #111;
   display: grid;
   gap: 0.5em;
   z-index: 1;
   overflow: hidden;
-  background-color: black;
-  grid-template-rows: auto 50px 1fr;
+  grid-template-rows: auto 30px 1fr;
   grid-template-columns: 1fr;
   > :nth-child(1) {
     grid-column: 1;
     grid-row: 1;
-    padding: 0.5em;
   }
   > :nth-child(2) {
     grid-column: 1;
@@ -157484,96 +157483,73 @@ const NavPane = qe$1.div`
     overflow-y: auto;
     grid-column: 1;
     grid-row: 3;
-    padding: 0.5em;
-}
+    border-top: 2px solid #333;
+  }
+  > * {
+    padding: 8px 8px 0;
+    margin: 0;
+  }
 `;
 const StoryTitle = qe$1.div`
-  margin: 0;
   line-height: 1.1;
 `;
 const Toolbar = qe$1.div`
   display: grid;
-  gap: 1em;
   overflow: hidden;
-  padding-top: 0.333em;
   grid-template-rows: 1fr;
-  grid-template-columns: 50px minmax(50px,auto) 50px 1fr 50px;
-  > .left {
+  grid-template-columns: 30px 1fr 30px 50px 30px;
+  > .table-of-contents {
     grid-column: 1;
-    grid-row: 1;
+    text-align: left;
+  }
+  > .left {
+    grid-column: 3;
   }
   > .count {
-    grid-column: 2;
-    grid-row: 1;
+    grid-column: 4;
   }
   > .right {
-    grid-column: 3;
-    grid-row: 1;
-  }
-  > .table-of-contents {
     grid-column: 5;
-    grid-row: 1;
   }
   }
 `;
-const TableOfContentsRow = qe$1.div`
-  gap: 8px 6px;
+const InlineNext = qe$1.div`
   display: grid;
-  grid-template-rows: 8px;
-  grid-template-columns: 8px 30px;
-  > * {
-    background-color: white;
-  }
+  grid-template-columns: 1fr 30px;
+  margin-bottom: 1em;
   > :nth-child(1) {
-    border-radius: 4px;
-  }
-  > :nth-child(2) {
-    border-radius: 1px;
-  }
-
-`;
-const TableOfContentsIcon = qe$1.button`
-  display: grid;
-`;
-const StoryContent = qe$1.div`
-  display: grid;
-  grid-template-rows: auto 50px;
-  grid-template-columns: auto 50px;
-  > :nth-child(1) {
-    grid-column: 1/-1;
-    grid-row: 1;
+    grid-column: 1;
+    text-align: right;
+    text-decoration: underline;
+    font-style: italic;
+    cursor: pointer;
+    margin: 0;
   }
   > :nth-child(2) {
     grid-column: 2;
-    grid-row: 2;
   }
 `;
 const Count = qe$1.div`
+  text-align: center;
   display: grid;
-  grid-template-rows: 10px 10px 10px;
-  grid-template-columns: auto 10px auto;
+  grid-template-columns: 2fr 1fr 2fr;
   > :nth-child(1) {
-    text-align: right;
     grid-column: 1;
-    grid-row: 1;
   }
   > :nth-child(2) {
-    text-align: center;
     grid-column: 2;
-    grid-row: 2;
   }
   > :nth-child(3) {
     grid-column: 3;
-    grid-row: 3;
   }
 `;
 const SVG = (props) => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     "svg",
     {
-      viewBox: "0 0 20 40",
+      viewBox: "-3 0 17 40",
       height: props.px + "px",
-      width: props.px / 2 + "px",
+      width: props.px * 1.5 + "px",
       "aria-hidden": "true",
       focusable: "false",
       children: /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -157662,51 +157638,60 @@ const Presentation = (props) => {
     updateGroup(active_story);
     updateViewState(active_story);
   };
-  const buttonHeight = 50;
-  const story_left = /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "left", onClick: storyLeft, children: /* @__PURE__ */ jsxRuntimeExports.jsx(SVG, { d: "M 14 7 L 12 0 l -12 18 l 12 17 l 2 -7 L 8 18 z", px: buttonHeight }) });
+  const buttonHeight = 20;
+  const table_of_contents = /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "table-of-contents", title: "View table of contents", onClick: storyFirst, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "svg",
+    {
+      viewBox: "0 0 30 20",
+      height: buttonHeight + "px",
+      width: buttonHeight * 1.5 + "px",
+      "aria-hidden": "true",
+      focusable: "false",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "4", cy: "4", r: "2", fill: "currentColor" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "4", cy: "10", r: "2", fill: "currentColor" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "4", cy: "16", r: "2", fill: "currentColor" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 9 4 H 24", stroke: "currentColor", "stroke-width": "3" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 9 10 H 24", stroke: "currentColor", "stroke-width": "3" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 9 16 H 24", stroke: "currentColor", "stroke-width": "3" })
+      ]
+    }
+  ) });
+  const story_left = /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "left", title: "View previous waypoint", onClick: storyLeft, children: /* @__PURE__ */ jsxRuntimeExports.jsx(SVG, { d: "M 14 7 L 12 0 l -12 18 l 12 17 l 2 -7 L 8 18 z", px: buttonHeight }) });
   const count2 = /* @__PURE__ */ jsxRuntimeExports.jsxs(Count, { className: "count", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: activeStoryIndex + 1 }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "⁄" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: stories.length })
   ] });
-  const story_right = /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "right", onClick: storyRight, children: /* @__PURE__ */ jsxRuntimeExports.jsx(SVG, { d: "M 0 7 L 2 0 l 12 18 l -12 17 l -2 -7 L 6 18 z", px: buttonHeight }) });
-  const table_of_contents_row = /* @__PURE__ */ jsxRuntimeExports.jsxs(TableOfContentsRow, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", {})
-  ] });
-  const table_of_contents = /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    TableOfContentsIcon,
-    {
-      onClick: storyFirst,
-      className: "table-of-contents",
-      children: [
-        table_of_contents_row,
-        table_of_contents_row,
-        table_of_contents_row
-      ]
-    }
-  );
-  const first_story = activeStoryIndex == 0;
-  const last_story = activeStoryIndex == stories.length - 1;
+  const story_right = /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "right", title: "View next waypoint", onClick: storyRight, children: /* @__PURE__ */ jsxRuntimeExports.jsx(SVG, { d: "M 0 7 L 2 0 l 12 18 l -12 17 l -2 -7 L 6 18 z", px: buttonHeight }) });
+  const story_next = /* @__PURE__ */ jsxRuntimeExports.jsx("p", { title: "View next waypoint", onClick: storyRight, children: "Next" });
+  activeStoryIndex == stories.length - 1;
   const main_title = props.name;
   const story = stories[activeStoryIndex];
   const story_title = ((_a3 = story == null ? void 0 : story.Properties) == null ? void 0 : _a3.Name) ?? `Waypoint ${activeStoryIndex + 1}`;
   const story_content = (_b2 = story == null ? void 0 : story.Properties) == null ? void 0 : _b2.Content;
+  const contentPaneRef = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    if (contentPaneRef.current) {
+      contentPaneRef.current.scrollTop = 0;
+    }
+  }, [activeStoryIndex]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Wrap, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs(NavPane, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(StoryTitle, { className: "h5", children: main_title }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Toolbar, { children: [
-        first_story ? "" : story_left,
+        table_of_contents,
+        story_left,
         count2,
-        last_story ? "" : story_right,
-        first_story ? "" : table_of_contents
+        story_right
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(StoryContent, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "h6", children: story_title }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Markdown, { children: story_content })
-        ] }),
-        last_story ? "" : story_right
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: contentPaneRef, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "h6", children: story_title }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Markdown, { children: story_content }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(InlineNext, { children: [
+          story_next,
+          story_right
+        ] })
       ] })
     ] }),
     props.children,
@@ -158082,7 +158067,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-CI_oy8sS.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-CCAhdfeg.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
