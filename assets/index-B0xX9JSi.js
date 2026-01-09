@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-YH-3idjj.js","./pako.esm-C0YWBoLx.js","./lerc-BwevPzVs.js","./LercDecode-DQYQUGqj.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-BIvOOfyr.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-DWLT8GBI.js","./pako.esm-C0YWBoLx.js","./lerc-l0EnWpJh.js","./LercDecode-WQxkEwU8.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-zM6Ke5ZN.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-C4FGAAcb.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-DPmAjbDM.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-DA5-wmyE.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-XJXh7btu.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-DmRG5Niy.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-YH-3idjj.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-DsFrpk6b.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-IGlgtNto.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-DWLT8GBI.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-DY7uymtv.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-BwevPzVs.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-l0EnWpJh.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-BXyEcsde.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-BQdLfmT2.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -131537,8 +131537,7 @@ const GROUP_CHANNELS_CRC01 = {
     23,
     17,
     21,
-    22,
-    25
+    22
   ],
   "Lymphocytes_0__DNA1--23__CD8a--17__CD4--21__CD20--26__FOXP3": [
     0,
@@ -131622,8 +131621,7 @@ const GROUP_CHANNELS_CRC01 = {
     27,
     26,
     23,
-    19,
-    22
+    19
   ],
   "Nuclear-Lamina_0__DNA1--33__LaminABC": [
     0,
@@ -147347,52 +147345,42 @@ const WrapGroup = qe$1.div`
   gap: 1em;
 `;
 const GroupRow = (props) => {
-  const { group, stories, hash, setHash } = props;
+  const { group, stories } = props;
   const { editable } = props;
   const { name: name2 } = group;
-  const active3 = group.g === hash.g;
+  const { Groups: Groups2 } = props.config.ItemRegistry;
+  const {
+    setActiveChannelGroup,
+    activeChannelGroupId
+  } = useOverlayStore();
+  const active_group = reactExports.useMemo(
+    () => Groups2.find(
+      ({ UUID }) => UUID === activeChannelGroupId
+    ) || Groups2[0],
+    [Groups2, activeChannelGroupId]
+  );
+  const row_group = reactExports.useMemo(
+    () => Groups2.find(
+      ({ Properties }) => (Properties == null ? void 0 : Properties.Name) === name2
+    ) || Groups2[0],
+    [Groups2]
+  );
+  const active3 = active_group.UUID === row_group.UUID;
   const outline = active3 ? "var(--theme-glass-edge)" : "none";
   const color2 = active3 ? "var(--theme-dark-main-color)" : "none";
-  const toGroup = setHash.bind(null, { g: group.g });
-  const wrapGroupProps = { color: color2, outline };
-  const waypoints = getWaypoints(stories, hash.s);
-  const sameGroup = (wp) => wp.g === group.g;
-  waypoints.indexOf(waypoints.find(sameGroup));
-  const { updateGroup, updateWaypoint } = props;
-  const onPop = () => {
-    if (hash.g >= group.g) {
-      setHash({ g: Math.max(hash.g - 1, 0) });
+  const toGroup = () => {
+    if (row_group) {
+      setActiveChannelGroup(row_group.UUID);
     }
-    props.popGroup({ g: group.g });
   };
-  const setInput = (t3) => {
-    props.updateGroup({ ...group, name: t3 }, { g: group.g });
-  };
-  const uuid = `group/name/${group.g}`;
-  const statusProps = {
-    ...props,
-    md: false,
-    setInput,
-    updateCache: () => null,
-    cache: /* @__PURE__ */ new Map(),
-    uuid
-  };
-  const waypoint = getWaypoint(stories, hash.s, hash.w);
-  waypoint.g === group.g;
-  const updateWaypointGroup = () => {
-    const { s: s3, w: w2 } = hash;
-    toGroup();
-    updateWaypoint({ ...waypoint, g: group.g }, { s: s3, w: w2 });
-  };
-  const selectClick = props.editable ? updateWaypointGroup : toGroup;
-  const coreUI = /* @__PURE__ */ jsxRuntimeExports.jsx(WrapGroup, { ...wrapGroupProps, children: /* @__PURE__ */ jsxRuntimeExports.jsx(GroupName, { onClick: selectClick, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Status, { ...statusProps, children: name2 }) }) });
-  const editSwitch = [
-    [reactExports.Fragment, { children: coreUI }],
-    [PopUpdate, { onPop, children: coreUI }]
-  ];
-  const canPop = props.editable && props.total > 1;
-  const extraUI = /* @__PURE__ */ jsxRuntimeExports.jsx(Editor, { ...{ ...props, editable: canPop, editSwitch } });
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: extraUI });
+  const wrapGroupProps = { color: color2, outline };
+  const { updateGroup } = props;
+  `group/name/${group.g}`;
+  ({
+    ...props
+  });
+  const coreUI = /* @__PURE__ */ jsxRuntimeExports.jsx(WrapGroup, { ...wrapGroupProps, children: /* @__PURE__ */ jsxRuntimeExports.jsx(GroupName, { onClick: toGroup, children: name2 }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: coreUI });
 };
 const Groups = (props) => {
   const { groups } = props;
@@ -157537,8 +157525,10 @@ const InlineNext = qe$1.div`
     grid-column: 2;
   }
   .right {
-    text-decoration: underline;
     cursor: pointer;
+  }
+  .right:hover {
+    text-decoration: underline;
   }
 `;
 const Count = qe$1.div`
@@ -157574,6 +157564,15 @@ const SVG = (props) => {
     }
   );
 };
+const TocWrapper = qe$1.div`
+  li {
+    color: var(--bs-link-color);
+    cursor: pointer;
+  }
+  li:hover {
+    text-decoration: underline;
+  }
+`;
 const Presentation = (props) => {
   var _a3, _b2;
   const {
@@ -157650,8 +157649,14 @@ const Presentation = (props) => {
     updateGroup(active_story);
     updateViewState(active_story);
   };
+  const storyAt = (i5) => {
+    const active_story = Math.min(stories.length - 1, Math.max(0, i5));
+    setActiveStory(active_story);
+    updateGroup(active_story);
+    updateViewState(active_story);
+  };
   const buttonHeight = 20;
-  const table_of_contents = /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "table-of-contents", title: "View table of contents", onClick: storyFirst, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+  const toc_button = /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "table-of-contents", title: "View table of contents", onClick: storyFirst, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "svg",
     {
       viewBox: "0 0 30 20",
@@ -157683,6 +157688,18 @@ const Presentation = (props) => {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: `right ${activeClass}`, title: "View next waypoint", onClick: storyRight, children: /* @__PURE__ */ jsxRuntimeExports.jsx(SVG, { d: "M 0 7 L 2 0 l 12 18 l -12 17 l -2 -7 L 6 18 z", px: buttonHeight }) });
   };
   const story_next = /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "right", title: "View next waypoint", onClick: storyRight, children: "Next" });
+  const TableOfContents = (props2) => {
+    const { stories: stories2 } = props2;
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(TocWrapper, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "h6", children: "Table of Contents" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { children: stories2.map((wp, i5) => {
+        const goToStory = () => {
+          storyAt(i5);
+        };
+        return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { onClick: goToStory, children: wp.Properties.Name });
+      }) })
+    ] });
+  };
   const first_story = activeStoryIndex == 0;
   const last_story = activeStoryIndex == stories.length - 1;
   const main_title = props.name;
@@ -157699,7 +157716,7 @@ const Presentation = (props) => {
     /* @__PURE__ */ jsxRuntimeExports.jsxs(NavPane, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(StoryTitle, { className: "h5", children: main_title }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Toolbar, { children: [
-        table_of_contents,
+        toc_button,
         /* @__PURE__ */ jsxRuntimeExports.jsx(StoryLeft, { active: !first_story }),
         count2,
         /* @__PURE__ */ jsxRuntimeExports.jsx(StoryRight, { active: !last_story })
@@ -157707,7 +157724,12 @@ const Presentation = (props) => {
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: contentPaneRef, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "h6", children: story_title }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Markdown, { children: story_content }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(InlineNext, { children: last_story ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "End" }) : [story_next, /* @__PURE__ */ jsxRuntimeExports.jsx(StoryRight, { active: !last_story })] })
+        first_story && /* @__PURE__ */ jsxRuntimeExports.jsx(TableOfContents, { ...{ stories } }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(InlineNext, { children: last_story ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "End" }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          story_next,
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx(StoryRight, { active: !last_story })
+        ] }) })
       ] })
     ] }),
     props.children,
@@ -158087,7 +158109,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-BIvOOfyr.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-zM6Ke5ZN.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
@@ -159608,6 +159630,24 @@ const require$$4 = {
   exports2["default"] = _default2;
 })(dist);
 const configWaypoints = [
+  {
+    "UUID": "8320f08c-9456-49a3-a104-8ab3d5daab2a",
+    "State": {
+      "Expanded": true
+    },
+    "Properties": {
+      "Name": "Introduction",
+      "Content": "This Minerva introduction accompanies the analysis in Lin et al 2021 of specimen CRC1, a poorly differentiated stage IIIB adenocarcinoma (pT3N1bM0) with microsatellite instability (MSI-H) and a BRAFV600E (c.1799T>A) mutation. The tumor along with adjacent normal tissue was imaged using 24-plex cyclic immunofluorescence at a nominal resolution of 0.5 micron.",
+      "Pan": [
+        0.481913716814159,
+        0.5
+      ],
+      "Zoom": 0.518359375,
+      "Group": "Histology"
+    },
+    "Arrows": [],
+    "Overlays": []
+  },
   {
     "UUID": "29180ca9-990e-4eca-8489-4d72db82adee",
     "State": {
@@ -161197,7 +161237,7 @@ const configWaypoints = [
   }
 ];
 const exhibit_config = {
-  Name: "Multiplexed 3D atlas of state transitions and immune interactions in colorectal cancer (Introduction)",
+  Name: "Multiplexed 3D atlas of state transitions and immune interactions in colorectal cancer",
   Stories: [{
     Waypoints: configWaypoints.map(({ Properties, Arrows, Overlays }) => {
       const { Name, Content: Content2, Pan, Zoom, Group } = Properties;
@@ -161274,8 +161314,7 @@ const exhibit_config = {
         "CD8a",
         "CD4",
         "CD20",
-        "CD68",
-        "CD163"
+        "CD68"
       ],
       "Colors": [
         "0000ff",
@@ -161283,8 +161322,7 @@ const exhibit_config = {
         "ff0000",
         "ff00ff",
         "ffff00",
-        "00ff00",
-        "00ffff"
+        "00ff00"
       ],
       "Name": "Immune Populations",
       "Path": "Immune-Populations_0__DNA1--18__CD45--23__CD8a--17__CD4--21__CD20--22__CD68--25__CD163",
@@ -161294,8 +161332,7 @@ const exhibit_config = {
         15e3,
         8e3,
         45e3,
-        15e3,
-        1e4
+        15e3
       ],
       "Lows": [
         500,
@@ -161303,8 +161340,7 @@ const exhibit_config = {
         3e3,
         3e3,
         500,
-        3e3,
-        2e3
+        3e3
       ]
     },
     {
