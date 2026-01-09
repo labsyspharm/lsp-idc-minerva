@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-DWLT8GBI.js","./pako.esm-C0YWBoLx.js","./lerc-l0EnWpJh.js","./LercDecode-WQxkEwU8.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-zM6Ke5ZN.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-Cz43EUnq.js","./pako.esm-C0YWBoLx.js","./lerc-Kk1wZSq0.js","./LercDecode-Cvzgtv1b.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-CGMriQhd.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-DA5-wmyE.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-XJXh7btu.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-0_NwpZ2r.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-BH0T-nWb.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-IGlgtNto.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-DWLT8GBI.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-DY7uymtv.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-I1bmU7bu.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-Cz43EUnq.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-BAvoKOZY.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-l0EnWpJh.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-Kk1wZSq0.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-BQdLfmT2.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-DBd9qrf1.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -134500,8 +134500,8 @@ const VivView = (props) => {
         transitionDuration: 1e3,
         // 1 second transition
         transitionInterpolator: new LinearInterpolator(["target", "zoom"]),
-        transitionEasing: (t3) => t3 * (2 - t3)
-        // ease-out-quad for smooth deceleration
+        transitionEasing: (x2) => x2 === 1 ? 1 : 1 - Math.pow(2, -10 * x2)
+        // ease out exponential https://easings.net/#easeOutExpo
       };
       setViewState(viewStateWithTransition);
       setViewportZoom(newViewState.zoom);
@@ -158109,7 +158109,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-zM6Ke5ZN.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-CGMriQhd.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
