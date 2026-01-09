@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-Cjhoai9B.js","./pako.esm-C0YWBoLx.js","./lerc-BygXjJYR.js","./LercDecode-D_eR-hGU.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-CWpNPDTL.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-YH-3idjj.js","./pako.esm-C0YWBoLx.js","./lerc-BwevPzVs.js","./LercDecode-DQYQUGqj.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-BIvOOfyr.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-Dqiw1Xha.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-DROLcafJ.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-C4FGAAcb.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-DPmAjbDM.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-D68Vr83Q.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-Cjhoai9B.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-B_u9aGex.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-DmRG5Niy.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-YH-3idjj.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-DsFrpk6b.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-BygXjJYR.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-BwevPzVs.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-CX0n1bhi.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-BXyEcsde.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -147555,17 +147555,17 @@ const TextWrap = qe$1.div`
     color: #eee;
     grid-row: 1;
     grid-column: 2;
+    margin-bottom: 4px;
     transition: transform 0.5s ease 0s;
   }
-`;
-const TextHide = qe$1.div`
-  > div.core {
-    transform: translateX(100%);
+  > div.core.hide {
+    transform: translateX(100%); 
   }
 `;
 const TextOther = qe$1.div`
   grid-row: 1;
   grid-column: 1 / -1;
+  background-color: blue;
 `;
 const Channel = (props) => {
   const hide = props.hiddenChannel;
@@ -147574,7 +147574,11 @@ const Channel = (props) => {
   const { hash } = props;
   const group = props.groups[hash.g];
   const legendProps = { ...props, ...group };
-  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "core", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Content$1, { ...props, children: [
+  const hideClass = [
+    "show core",
+    "hide core"
+  ][+hide];
+  const channelMenu = /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: hideClass, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Content$1, { ...props, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       Toolbar$1,
       {
@@ -147593,16 +147597,10 @@ const Channel = (props) => {
       children: props.children
     }
   );
-  const content2 = /* @__PURE__ */ jsxRuntimeExports.jsx(TextOther, { children: minerva_author_ui });
-  if (hide) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(TextHide, { children: [
-      content2,
-      ""
-    ] });
-  }
+  const content2 = props.authorMode ? /* @__PURE__ */ jsxRuntimeExports.jsx(TextOther, { children: minerva_author_ui }) : props.children;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(TextWrap, { children: [
     content2,
-    ""
+    channelMenu
   ] });
 };
 function ok$1() {
@@ -157453,6 +157451,7 @@ const AnnotationRenderer = () => {
 const Wrap = qe$1.div`
   display: grid;
   height: 100%;
+  overflow: hidden;
   grid-template-rows: 1fr;
   grid-template-columns: 350px 1fr;
   > :nth-child(1) {
@@ -157460,6 +157459,7 @@ const Wrap = qe$1.div`
     grid-row: 1;
   }
   > :nth-child(2) {
+    max-height: 100vh;
     grid-column: 2;
     grid-row: 1;
   }
@@ -157472,10 +157472,10 @@ const NavPane = qe$1.div`
   border-right: 2px solid #333;
   background: #111;
   display: grid;
-  gap: 0.5em;
+  gap: 0.4em;
   z-index: 1;
   overflow: hidden;
-  grid-template-rows: auto 30px 1fr;
+  grid-template-rows: auto 24px 1fr;
   grid-template-columns: 1fr;
   > :nth-child(1) {
     grid-column: 1;
@@ -157484,6 +157484,7 @@ const NavPane = qe$1.div`
   > :nth-child(2) {
     grid-column: 1;
     grid-row: 2;
+    padding-top: 0;
   }
   > :nth-child(3) {
     overflow-y: auto;
@@ -157723,7 +157724,10 @@ const Main$1 = (props) => {
   const { stopExport } = props;
   let out = /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
   if (props.presenting) {
-    out = /* @__PURE__ */ jsxRuntimeExports.jsx(Presentation, { ...props, children: props.children });
+    out = /* @__PURE__ */ jsxRuntimeExports.jsxs(Presentation, { ...props, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Channel, { ...props }),
+      props.children
+    ] });
   } else if (props.ioState == "IDLE") {
     out = /* @__PURE__ */ jsxRuntimeExports.jsx(Channel, { ...props });
   } else if (props.ioState == "EXPORTING") {
@@ -157798,11 +157802,13 @@ const Index = (props) => {
     return window.innerWidth > 600;
   };
   const [twoNavOk, setTwoNavOk] = reactExports.useState(checkWindow());
-  const [hidden, setHidden] = reactExports.useState([false, !twoNavOk]);
+  const [hiddenWaypoint, setHideWaypoint] = reactExports.useState(false);
+  const [hiddenChannel, setHideChannel] = reactExports.useState(!twoNavOk);
   const handleResize = () => {
     const twoNavPossible = checkWindow();
     if (!twoNavPossible) {
-      setHidden([false, true]);
+      setHiddenWaypoint(false);
+      setHiddenChannel(true);
     }
     setTwoNavOk(twoNavPossible);
   };
@@ -157814,19 +157820,17 @@ const Index = (props) => {
   const toggleEditor = () => setEditable2(!editable);
   const onZoomInEl = onLoaded(setZoomIn);
   const onZoomOutEl = onLoaded(setZoomOut);
-  const hiddenWaypoint = hidden[0];
-  const hiddenChannel = hidden[1];
   const setHiddenChannel = (v2) => {
     if (!twoNavOk && !v2) {
-      return setHidden([!v2, v2]);
+      setHideWaypoint(true);
     }
-    setHidden([hiddenWaypoint, v2]);
+    setHideChannel(v2);
   };
   const setHiddenWaypoint = (v2) => {
     if (!twoNavOk && !v2) {
-      return setHidden([v2, !v2]);
+      setHideChannel(true);
     }
-    setHidden([v2, hiddenChannel]);
+    setHideWaypoint(v2);
   };
   const updateWaypoint = (newWaypoint, { s: s3, w: w2 }) => {
     var _a3;
@@ -157964,6 +157968,7 @@ const Index = (props) => {
     setHash,
     name: name2,
     stories,
+    authorMode: !presenting,
     groups: itemRegistryGroups,
     controlPanelElement,
     config: props.config,
@@ -158082,7 +158087,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-CWpNPDTL.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-BIvOOfyr.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
@@ -158246,12 +158251,11 @@ class Pool2 extends Pool$1 {
 const Wrapper = qe$1.div`
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr auto 1fr; 
-  grid-template-rows: 33vh 1fr 33vh; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 1fr; 
 `;
 const Full = qe$1.div`
-  grid-row: 1 / -1;
-  grid-column: 1 / -1;
+  max-height: 100vh;
 `;
 const Scrollable = qe$1.div`
   z-index: 2;
@@ -161786,7 +161790,7 @@ root.render(
       {
         handleKeys: ["ome-dir-1"],
         demo_dicom_web: true,
-        h_and_e: true,
+        h_and_e: false,
         exhibit_config,
         configWaypoints
       }
