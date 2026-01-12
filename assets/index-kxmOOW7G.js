@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-vC2dpnDj.js","./pako.esm-C0YWBoLx.js","./lerc-D6RXsV2V.js","./LercDecode-BKLHFO4V.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-Ctep-iTo.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-CT-e6N0x.js","./pako.esm-C0YWBoLx.js","./lerc-D1BQxGhB.js","./LercDecode-Bf7Y7R4l.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-BuyuDq5r.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-Cxv_uji0.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-CCgN4slo.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-tpFEC49R.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-C1e-0oyk.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-MEkWVa7D.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-vC2dpnDj.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-B-J6urZ8.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-ErtEA9Jt.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-CT-e6N0x.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-CDS8h6OH.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-D6RXsV2V.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-D1BQxGhB.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-DjP0d2mx.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-pt9uoK1-.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -131205,7 +131205,13 @@ function createTileLayers(meta) {
     contrastLimits,
     selections
   } = meta.settings;
-  const { pyramids, dicomSource, rgbImage } = meta;
+  const visible = channelsVisible.some((x2) => x2);
+  const {
+    imageID,
+    pyramids,
+    dicomSource,
+    rgbImage
+  } = meta;
   const height = [...pyramids["0"]].pop().height;
   const width = [...pyramids["0"]].pop().width;
   pyramids["0"][0].tileSize;
@@ -131213,6 +131219,7 @@ function createTileLayers(meta) {
   const minZoom = Math.round(-(maxLevel - 1));
   if (rgbImage) {
     return new TileLayer({
+      visible,
       id: "rgb_image",
       getTileData: async ({ index: index2, signal }) => {
         const { x: x2, y: y3, z: z4 } = index2;
@@ -131308,10 +131315,11 @@ function createTileLayers(meta) {
     });
   }
   const imageProps = {
+    visible,
     loader: dicomSource.data,
     // https://deck.gl/docs/api-reference/geo-layers/tile-layer#refinementstrategy
     refinementStrategy: "no-overlap",
-    id: "multichannel-tiled-image",
+    id: imageID,
     channelsVisible,
     colors,
     contrastLimits,
@@ -131753,7 +131761,7 @@ const extractDistributions = async (loader) => {
     SourceDistributionEntries
   );
 };
-const extractChannels = (loader, groups) => {
+const extractChannels = (loader, modality, groups) => {
   const init2 = initialize$1({ planes: loader.data });
   const { Channels, Type } = loader.metadata.Pixels;
   const SourceChannels = Channels.map(
@@ -131766,7 +131774,8 @@ const extractChannels = (loader, groups) => {
       },
       Associations: {
         SourceDataType: asID(Type),
-        SourceImage: asUUID("TODO")
+        SourceImage: asUUID(modality)
+        //TODO
       }
     })
   );
@@ -131907,7 +131916,7 @@ const extractChannels = (loader, groups) => {
       UUID: crypto.randomUUID(),
       State: { Expanded: true },
       Properties: {
-        Name: "H&E"
+        Name: "Histology"
       }
     }];
     const GroupChannels2 = SourceChannels.map(
@@ -131928,6 +131937,9 @@ const extractChannels = (loader, groups) => {
         };
       }
     );
+    if (SourceChannels.length === 1) {
+      SourceChannels[0].Properties.Name = "Brightfield";
+    }
     return {
       SourceChannels,
       GroupChannels: GroupChannels2,
@@ -132142,7 +132154,7 @@ const validateDicom = async (opts) => {
     return valid_keys.includes(k4);
   });
   if (validated && "url" in formOut) {
-    onStart(formOut.url, "DICOM-WEB");
+    onStart([[formOut.url, "Colorimetric", "DICOM-WEB"]]);
   }
   return toValid(need_keys, valid_keys);
 };
@@ -132168,7 +132180,7 @@ const validateAny = async (opts) => {
     return valid_keys.includes(k4);
   });
   if (validated && "path" in formOut) {
-    onStart(formOut.path, "OME-TIFF");
+    onStart([[formOut.path, "Colorimetric", "OME-TIFF"]]);
   }
   return toValid(need_keys, valid_keys);
 };
@@ -134413,7 +134425,7 @@ const Main$2 = qe$1.div`
 `;
 const VivView = (props) => {
   const windowSize = useWindowSize();
-  const { loader, groups, stories, hash, setHash, overlayLayers = [], activeTool, isDragging = false, hoveredAnnotationId = null, onOverlayInteraction } = props;
+  const { loaderOmeTiff, dicomIndexList, groups, stories, hash, setHash, overlayLayers = [], activeTool, isDragging = false, hoveredAnnotationId = null, onOverlayInteraction } = props;
   const { v: v2, g: g2, s: s3, w: w2 } = hash;
   const {
     activeChannelGroupId
@@ -134435,32 +134447,85 @@ const VivView = (props) => {
     resizeObserver.observe(element2);
     return () => resizeObserver.disconnect();
   }, []);
-  const mainSettings = reactExports.useMemo(() => {
-    if (!loader || !groups) {
+  reactExports.useMemo(() => (
+    // Show only ome-tiff if available
+    loaderOmeTiff !== null ? [loaderOmeTiff] : dicomIndexList
+  ), [
+    loaderOmeTiff,
+    dicomIndexList
+  ]);
+  const toSettings2 = (loader, modality, groups2, activeChannelGroupId2) => {
+    if (loader === null || !groups2) {
       return props.viewerConfig.toSettings(
-        activeChannelGroupId
+        activeChannelGroupId2,
+        modality
       );
     }
     return props.viewerConfig.toSettings(
-      activeChannelGroupId,
+      activeChannelGroupId2,
+      modality,
       loader,
-      groups
+      groups2
     );
-  }, [loader, groups, activeChannelGroupId]);
+  };
+  const mainSettingsOmeTiff = reactExports.useMemo(() => {
+    const modality = "Colorimetric";
+    return toSettings2(
+      loaderOmeTiff,
+      modality,
+      groups,
+      activeChannelGroupId
+    );
+  }, [
+    loaderOmeTiff,
+    groups,
+    activeChannelGroupId
+  ]);
+  const mainSettingsDicomList = reactExports.useMemo(() => {
+    return dicomIndexList.map((dicomIndex) => {
+      const { modality } = dicomIndex;
+      return toSettings2(
+        dicomIndex.loader,
+        modality,
+        groups,
+        activeChannelGroupId
+      );
+    });
+  }, [
+    dicomIndexList,
+    groups,
+    activeChannelGroupId
+  ]);
+  const mainSettingsList = reactExports.useMemo(() => loaderOmeTiff !== null ? [mainSettingsOmeTiff] : mainSettingsDicomList, [
+    mainSettingsOmeTiff,
+    mainSettingsDicomList
+  ]);
+  const firstLoader = reactExports.useMemo(() => mainSettingsList.length > 0 ? mainSettingsList[0].loader : {
+    data: null,
+    metadata: null
+  }, [
+    mainSettingsList
+  ]);
   const imageShape = reactExports.useMemo(() => {
-    const shape_labels = loader.data[0].labels;
-    const shape_values = loader.data[0].shape;
+    if (firstLoader.data === null) {
+      return {
+        x: viewportSize.width,
+        y: viewportSize.height
+      };
+    }
+    const shape_labels = firstLoader.data[0].labels;
+    const shape_values = firstLoader.data[0].shape;
     return Object.fromEntries(
       shape_labels.map((k4, i5) => [k4, shape_values[i5]])
     );
-  }, [loader.data]);
+  }, [mainSettingsList, firstLoader]);
   const initialViewState = reactExports.useMemo(() => {
-    const n_levels = loader.data.length;
+    const n_levels = firstLoader.data === null ? 1 : firstLoader.data.length;
     return {
       zoom: -n_levels,
       target: [imageShape.x / 2, imageShape.y / 2, 0]
     };
-  }, [loader.data, imageShape]);
+  }, [mainSettingsList, imageShape]);
   const [viewState, setViewState] = reactExports.useState(initialViewState);
   const setViewportZoom = useOverlayStore((state) => state.setViewportZoom);
   const setImageDimensions = useOverlayStore((state) => state.setImageDimensions);
@@ -134468,13 +134533,13 @@ const VivView = (props) => {
   const targetWaypointZoom = useOverlayStore((state) => state.targetWaypointZoom);
   const clearTargetWaypointViewState = useOverlayStore((state) => state.clearTargetWaypointViewState);
   reactExports.useEffect(() => {
-    if (loader && loader.data && loader.data.length > 0) {
+    if (firstLoader.data !== null) {
       setViewState(initialViewState);
       if (typeof initialViewState.zoom === "number") {
         setViewportZoom(initialViewState.zoom);
       }
     }
-  }, [initialViewState, loader, setViewportZoom]);
+  }, [initialViewState, firstLoader, setViewportZoom]);
   reactExports.useEffect(() => {
     if (imageShape.x > 0 && imageShape.y > 0) {
       setImageDimensions(imageShape.x, imageShape.y);
@@ -134508,57 +134573,66 @@ const VivView = (props) => {
     }
     clearTargetWaypointViewState();
   }, [targetWaypointPan, targetWaypointZoom, imageShape.x, imageShape.y, viewportSize.width, clearTargetWaypointViewState, setViewportZoom]);
-  const mainProps = reactExports.useMemo(() => ({
-    ...viewportSize,
-    id: "mainLayer",
-    loader: loader.data,
-    ...mainSettings
-  }), [viewportSize, loader.data, mainSettings]);
-  const dicomSource = reactExports.useMemo(() => {
-    if (!props.series) {
-      return null;
-    }
-    return loadDicom({
-      pyramids: props.dicomIndex,
-      series: props.series,
-      little_endian: true
+  const omeTiffPropsList = reactExports.useMemo(() => {
+    return mainSettingsList.map((mainSettings, i5) => {
+      return {
+        ...viewportSize,
+        id: `mainLayer-${i5}`,
+        ...mainSettings,
+        loader: mainSettings.loader.data
+      };
+    });
+  }, [viewportSize, mainSettingsList]);
+  const dicomSources = reactExports.useMemo(() => {
+    return dicomIndexList.map((opts) => {
+      const { series, pyramids, modality } = opts;
+      return {
+        series,
+        pyramids,
+        modality,
+        ...loadDicom({
+          pyramids,
+          series,
+          little_endian: true
+        })
+      };
     });
   }, [
-    props.dicomIndex,
-    props.series
+    dicomIndexList
   ]);
-  const { SourceChannels } = props.config.ItemRegistry;
-  const dicomLayer = reactExports.useMemo(
+  const dicomLayers = reactExports.useMemo(
     () => {
-      if (!props.series || !dicomSource) {
-        return null;
+      if (loaderOmeTiff !== null) {
+        return [];
       }
-      const rgbImage = SourceChannels.length === 1 && SourceChannels[0].Properties.Samples === 3 && SourceChannels[0].Associations.SourceDataType.ID === "Uint8";
-      return createTileLayers({
-        pyramids: props.dicomIndex,
-        settings: mainSettings,
-        dicomSource,
-        rgbImage
+      return dicomSources.map((dicomSource, i5) => {
+        const { series, pyramids, modality } = dicomSource;
+        const rgbImage = modality === "Brightfield";
+        const imageID = crypto.randomUUID();
+        return createTileLayers({
+          pyramids,
+          dicomSource,
+          settings: mainSettingsList[i5],
+          rgbImage,
+          imageID
+        });
       });
     },
     [
-      dicomSource,
-      mainSettings,
-      props.series,
-      props.dicomIndex,
-      SourceChannels
+      dicomSources,
+      mainSettingsList
     ]
   );
-  const imageLayer = reactExports.useMemo(
-    () => {
-      return new MultiscaleImageLayer(mainProps);
-    },
-    [mainProps]
+  const omeTiffLayers = reactExports.useMemo(
+    () => loaderOmeTiff === null ? [] : omeTiffPropsList.map(
+      (layerProps) => new MultiscaleImageLayer(layerProps)
+    ),
+    [loaderOmeTiff, omeTiffPropsList]
   );
   const scaleBarLayer = reactExports.useMemo(() => {
     var _a3, _b2, _c2, _d2;
-    const physicalSize = (_b2 = (_a3 = loader == null ? void 0 : loader.metadata) == null ? void 0 : _a3.Pixels) == null ? void 0 : _b2.PhysicalSizeX;
-    const unit = ((_d2 = (_c2 = loader == null ? void 0 : loader.metadata) == null ? void 0 : _c2.Pixels) == null ? void 0 : _d2.PhysicalSizeXUnit) || "µm";
+    const physicalSize = (_b2 = (_a3 = firstLoader.metadata) == null ? void 0 : _a3.Pixels) == null ? void 0 : _b2.PhysicalSizeX;
+    const unit = ((_d2 = (_c2 = firstLoader.metadata) == null ? void 0 : _c2.Pixels) == null ? void 0 : _d2.PhysicalSizeXUnit) || "µm";
     if (!physicalSize || viewportSize.width <= 0 || viewportSize.height <= 0) return null;
     const viewStateWithDimensions = {
       ...viewState,
@@ -134572,20 +134646,19 @@ const VivView = (props) => {
       size: physicalSize,
       snap: true
     });
-  }, [viewState, loader == null ? void 0 : loader.metadata, viewportSize.width, viewportSize.height]);
+  }, [viewState, firstLoader, viewportSize.width, viewportSize.height]);
   const allLayers = reactExports.useMemo(
     () => {
-      const layers = props.series && dicomLayer ? [dicomLayer, ...overlayLayers] : [imageLayer, ...overlayLayers];
+      const layers = 0 === omeTiffLayers.length ? [...dicomLayers, ...overlayLayers] : [...omeTiffLayers, ...overlayLayers];
       if (scaleBarLayer) {
         layers.push(scaleBarLayer);
       }
       return layers;
     },
     [
-      dicomLayer,
-      imageLayer,
+      dicomLayers,
+      omeTiffLayers,
       overlayLayers,
-      props.series,
       scaleBarLayer
     ]
   );
@@ -134632,7 +134705,9 @@ const VivView = (props) => {
     setViewState(nextViewState);
     setViewportZoom(nextViewState.zoom);
   }, [isDragging, activeTool, setViewportZoom]);
-  if (!loader || !mainSettings) return null;
+  if (mainSettingsList.length === 0) {
+    return null;
+  }
   return /* @__PURE__ */ jsxRuntimeExports.jsx(Main$2, { slot: "image", ref: rootRef, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
     DeckGL,
     {
@@ -134656,6 +134731,7 @@ const toDefaultSettings = (n3) => {
   const n_shown = 3;
   const n_sub = n_shown;
   return {
+    loader: null,
     selections: chan_range.map((c2) => {
       return { z: 0, t: 0, c: c2 };
     }).slice(0, n_sub),
@@ -134680,7 +134756,7 @@ const hexToRGB = (hex) => {
   return [r4, g2, b2];
 };
 const toSettings = (opts) => {
-  return (activeChannelGroupId, loader, groups) => {
+  return (activeChannelGroupId, modality, loader, groups) => {
     const { ItemRegistry } = opts.config;
     const { GroupChannels, SourceChannels } = ItemRegistry;
     const channels2 = GroupChannels.filter(
@@ -134709,16 +134785,22 @@ const toSettings = (opts) => {
       return [LowerRange, UpperRange];
     });
     const channelsVisible = channels2.map(
-      (c2, i5) => true
+      (c2, i5) => {
+        const source_channel = SourceChannels.find(
+          (source_channel2) => c2.Associations.SourceChannel.UUID === source_channel2.UUID
+        );
+        const image_id = source_channel.Associations.SourceImage.UUID;
+        return image_id === modality;
+      }
     );
-    console.log({ colors, contrastLimits, channelsVisible });
     const n_channels = shape[c_idx] || 0;
     const out = {
       ...toDefaultSettings(n_channels),
       selections,
       colors,
       contrastLimits,
-      channelsVisible
+      channelsVisible,
+      loader
     };
     return out;
   };
@@ -134736,7 +134818,7 @@ const toImageProps = (opts) => {
 };
 const ImageView = (props) => {
   const { overlayLayers, activeTool, isDragging, hoveredAnnotationId, onOverlayInteraction, ...rest } = props;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(VivView, { ...rest, overlayLayers, activeTool, isDragging, hoveredAnnotationId, onOverlayInteraction, series: props.series });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(VivView, { ...rest, overlayLayers, activeTool, isDragging, hoveredAnnotationId, onOverlayInteraction });
 };
 const toFilename = (index2) => {
   const level = -index2.z;
@@ -157970,7 +158052,7 @@ const Index = (props) => {
   const {
     in_f,
     handle,
-    loader,
+    loaderOmeTiff,
     hash,
     setHash,
     controlPanelElement,
@@ -158054,10 +158136,11 @@ const Index = (props) => {
     popWaypoint
   };
   const imageProps = reactExports.useMemo(() => {
+    const { dicomIndexList } = props;
     return toImageProps({
       props: {
-        loader,
-        dicomIndex: props.dicomIndex,
+        loaderOmeTiff,
+        dicomIndexList,
         marker_names: itemRegistryMarkerNames,
         ...channelProps
       },
@@ -158100,7 +158183,6 @@ const Index = (props) => {
     ImageView,
     {
       ...imageProps,
-      series: props.dicomSeries,
       overlayLayers,
       activeTool,
       isDragging: dragState.isDragging,
@@ -158141,7 +158223,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-Ctep-iTo.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-BuyuDq5r.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
@@ -158332,10 +158414,9 @@ const Content = (props) => {
     _setHash({ ...hash, ...partial_hash });
   };
   const [handle, setHandle] = reactExports.useState(null);
-  const [loader, setLoader] = reactExports.useState(null);
-  const [dicomSeries, setDicomSeries] = reactExports.useState(null);
-  const [dicomIndex, setDicomIndex] = reactExports.useState(
-    {}
+  const [loaderOmeTiff, setLoaderOmeTiff] = reactExports.useState(null);
+  const [dicomIndexList, setDicomIndexList] = reactExports.useState(
+    []
   );
   const [config2, setConfig] = reactExports.useState({
     ItemRegistry: {
@@ -158394,20 +158475,20 @@ const Content = (props) => {
   };
   const onStartOmeTiff = async (in_f) => {
     if (handle === null) return;
-    const loader2 = await toLoader$1({ handle, in_f, pool: new Pool2() });
+    const loader = await toLoader$1({ handle, in_f, pool: new Pool2() });
     const {
       SourceChannels,
       GroupChannels,
       Groups: Groups2,
       Colors
-    } = extractChannels(loader2, []);
+    } = extractChannels(loader, "Colorimetric", []);
     resetItems({
       SourceChannels,
       GroupChannels,
       Groups: Groups2,
       Colors
     });
-    extractDistributions(loader2).then(
+    extractDistributions(loader).then(
       (sourceDistributionMap) => {
         const SourceDistributions = sourceDistributionMap.values();
         resetItems({
@@ -158424,50 +158505,101 @@ const Content = (props) => {
         });
       }
     );
-    setLoader(loader2);
+    setLoaderOmeTiff(loader);
     setFileName(in_f);
   };
-  const onStart = (s3, type) => {
-    if (type == "DICOM-WEB") {
-      onStartDicomWeb(s3, props.exhibit_config.Groups);
+  const onStart = async (imagePropList) => {
+    if (imagePropList.length === 0) {
+      return;
     }
-    onStartOmeTiff(s3);
+    const dicomPropList = imagePropList.filter(
+      ([series, modality, type]) => type === "DICOM-WEB"
+    ).map(
+      ([series, modality]) => [series, modality]
+    );
+    if (dicomPropList.length > 0) {
+      await onStartDicomWeb(
+        dicomPropList,
+        props.exhibit_config.Groups
+      );
+    }
+    const omeTiffPropList = imagePropList.filter(
+      ([path, modality, type]) => type === "OME-TIFF"
+    ).map(
+      ([path]) => [path]
+    );
+    if (omeTiffPropList.length > 0) {
+      await onStartOmeTiff(omeTiffPropList[0][0]);
+    }
   };
-  const onStartDicomWeb = async (series, groups) => {
-    setDicomSeries(series);
-    const dicomIndex2 = await loadDicomWeb(series);
-    const loader2 = parseDicomWeb(series, dicomIndex2);
-    setDicomIndex(dicomIndex2);
-    setLoader(loader2);
+  const onStartDicomWeb = async (imagePropList, groups) => {
+    const indexList = await Promise.all(
+      imagePropList.map(
+        async ([series, modality]) => {
+          const pyramids = await loadDicomWeb(series);
+          const loader = parseDicomWeb(series, pyramids);
+          return {
+            series,
+            pyramids,
+            modality,
+            loader
+          };
+        }
+      )
+    );
+    setDicomIndexList(indexList);
     const {
       SourceChannels,
       GroupChannels,
       Groups: Groups2,
       Colors
-    } = extractChannels(loader2, groups);
+    } = indexList.reduce(
+      (registry2, { loader, modality }) => {
+        const relevant_groups = groups.filter(
+          ({ Image: Image2 }) => Image2.Method === modality
+        );
+        const {
+          SourceChannels: SourceChannels2,
+          GroupChannels: GroupChannels2,
+          Groups: Groups22,
+          Colors: Colors2
+        } = extractChannels(
+          loader,
+          modality,
+          relevant_groups
+        );
+        return {
+          SourceChannels: [
+            ...registry2.SourceChannels,
+            ...SourceChannels2
+          ],
+          GroupChannels: [
+            ...registry2.GroupChannels,
+            ...GroupChannels2
+          ],
+          Groups: [
+            ...registry2.Groups,
+            ...Groups22
+          ],
+          Colors: [
+            ...registry2.Colors,
+            ...Colors2
+          ]
+        };
+      },
+      {
+        SourceChannels: [],
+        GroupChannels: [],
+        Groups: [],
+        Colors: []
+      }
+    );
     resetItems({
       SourceChannels,
       GroupChannels,
       Groups: Groups2,
       Colors
     });
-    extractDistributions(loader2).then(
-      (sourceDistributionMap) => {
-        const SourceDistributions = sourceDistributionMap.values();
-        resetItems({
-          SourceDistributions: [...SourceDistributions],
-          SourceChannels: SourceChannels.map((sourceChannel) => ({
-            ...sourceChannel,
-            Associations: {
-              ...sourceChannel.Associations,
-              SourceDistribution: sourceDistributionMap.get(
-                sourceChannel.Properties.SourceIndex
-              )
-            }
-          }))
-        });
-      }
-    );
   };
   const mutableFields = [
     "GroupChannels"
@@ -158481,14 +158613,14 @@ const Content = (props) => {
     ...config2,
     ItemRegistry
   }), [config2.ID]);
-  const imager = loader === null ? "" : /* @__PURE__ */ jsxRuntimeExports.jsx(Full, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Index, { ...{
-    dicomIndex,
-    dicomSeries,
+  const noLoader = loaderOmeTiff === null && dicomIndexList.length === 0;
+  const imager = noLoader ? "" : /* @__PURE__ */ jsxRuntimeExports.jsx(Full, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Index, { ...{
+    dicomIndexList,
     config: config2,
     controlPanelElement,
     exhibit,
     setExhibit,
-    loader,
+    loaderOmeTiff,
     in_f: fileName,
     handle,
     hash,
@@ -158497,16 +158629,22 @@ const Content = (props) => {
   const [valid2, setValid] = reactExports.useState({});
   if (props.demo_dicom_web) {
     reactExports.useEffect(() => {
-      const h_and_e = props.h_and_e;
-      onStart(
-        [
-          "https://us-central1-idc-external-031.cloudfunctions.net/minerva_proxy/studies/2.25.112849421593762410108114587383519700602/series/1.3.6.1.4.1.5962.99.1.331207435.2054329796.1752677896971.4.0",
-          "https://us-central1-idc-external-031.cloudfunctions.net/minerva_proxy/studies/2.25.112849421593762410108114587383519700602/series/1.3.6.1.4.1.5962.99.1.2507374895.494638264.1767738966319.4.0"
-        ][+h_and_e],
-        "DICOM-WEB"
-      );
+      (async () => {
+        await onStart([
+          [
+            "https://us-central1-idc-external-031.cloudfunctions.net/minerva_proxy/studies/2.25.112849421593762410108114587383519700602/series/1.3.6.1.4.1.5962.99.1.2507374895.494638264.1767738966319.4.0",
+            "Brightfield",
+            "DICOM-WEB"
+          ],
+          [
+            "https://us-central1-idc-external-031.cloudfunctions.net/minerva_proxy/studies/2.25.112849421593762410108114587383519700602/series/1.3.6.1.4.1.5962.99.1.331207435.2054329796.1752677896971.4.0",
+            "Colorimetric",
+            "DICOM-WEB"
+          ]
+        ]);
+      })();
     }, []);
-    if (loader === null) {
+    if (dicomIndexList.length === 0) {
       return /* @__PURE__ */ jsxRuntimeExports.jsx(Wrapper, { children: "Retrieving DICOM metadata..." });
     }
   }
@@ -158533,7 +158671,7 @@ const Content = (props) => {
     onAllow,
     onRecall
   };
-  const importer = loader !== null ? "" : /* @__PURE__ */ jsxRuntimeExports.jsx(Scrollable, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Upload, { ...uploadProps }) });
+  const importer = !noLoader ? "" : /* @__PURE__ */ jsxRuntimeExports.jsx(Scrollable, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Upload, { ...uploadProps }) });
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Wrapper, { children: [
     imager,
     importer
@@ -161286,6 +161424,9 @@ const exhibit_config = {
   }],
   Groups: [
     {
+      "Image": {
+        "Method": "Brightfield"
+      },
       "Channels": [
         "Hematoxylin",
         "Eosin"
@@ -161308,6 +161449,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "PanCK",
@@ -161340,6 +161484,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "CD45",
@@ -161376,6 +161523,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "CD8a",
@@ -161408,6 +161558,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "CD68",
@@ -161432,6 +161585,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "PCNA",
@@ -161464,6 +161620,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "PanCK",
@@ -161492,6 +161651,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "CD4",
@@ -161516,6 +161678,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "CD8a",
@@ -161540,6 +161705,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "CD8a",
@@ -161564,6 +161732,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "PanCK",
@@ -161588,6 +161759,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "PanCK",
@@ -161612,6 +161786,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "ASMA",
@@ -161644,6 +161821,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "CD4",
@@ -161676,6 +161856,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "PDL1",
@@ -161704,6 +161887,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "PanCK",
@@ -161732,6 +161918,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "PanCK",
@@ -161768,6 +161957,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "LaminABC"
@@ -161788,6 +161980,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "DNA10"
@@ -161808,6 +162003,9 @@ const exhibit_config = {
       ]
     },
     {
+      "Image": {
+        "Method": "Colorimetric"
+      },
       "Channels": [
         "DNA1",
         "PanCK",
@@ -161858,7 +162056,6 @@ root.render(
       {
         handleKeys: ["ome-dir-1"],
         demo_dicom_web: true,
-        h_and_e: false,
         exhibit_config,
         configWaypoints
       }
