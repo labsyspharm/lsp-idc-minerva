@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-BnrkTdcQ.js","./pako.esm-C0YWBoLx.js","./lerc-CTdcITy_.js","./LercDecode-Buz1jqhV.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-CubA0C4M.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-DMKwPcEn.js","./pako.esm-C0YWBoLx.js","./lerc-BXYAQrVU.js","./LercDecode-BKrU45os.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-Crg7Sgjb.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -56732,24 +56732,24 @@ async function makeResponse$1(resource) {
   if (isResponse$1(resource)) {
     return resource;
   }
-  const headers2 = {};
+  const headers = {};
   const contentLength = getResourceContentLength$1(resource);
   if (contentLength >= 0) {
-    headers2["content-length"] = String(contentLength);
+    headers["content-length"] = String(contentLength);
   }
   const url = getResourceUrl$1(resource);
   const type = getResourceMIMEType$1(resource);
   if (type) {
-    headers2["content-type"] = type;
+    headers["content-type"] = type;
   }
   const initialDataUrl = await getInitialDataUrl$1(resource);
   if (initialDataUrl) {
-    headers2["x-first-bytes"] = initialDataUrl;
+    headers["x-first-bytes"] = initialDataUrl;
   }
   if (typeof resource === "string") {
     resource = new TextEncoder().encode(resource);
   }
-  const response = new Response(resource, { headers: headers2 });
+  const response = new Response(resource, { headers });
   Object.defineProperty(response, "url", { value: url });
   return response;
 }
@@ -57450,8 +57450,8 @@ async function parseWithLoader$1(loader, data2, options, context) {
   if (isResponse$1(data2)) {
     const response = data2;
     const { ok: ok2, redirected, status, statusText, type, url } = response;
-    const headers2 = Object.fromEntries(response.headers.entries());
-    context.response = { headers: headers2, ok: ok2, redirected, status, statusText, type, url };
+    const headers = Object.fromEntries(response.headers.entries());
+    context.response = { headers, ok: ok2, redirected, status, statusText, type, url };
   }
   data2 = await getArrayBufferOrStringFromData$1(data2, loader, options);
   const loaderWithParser = loader;
@@ -92396,25 +92396,25 @@ async function makeResponse(resource) {
   if (isResponse(resource)) {
     return resource;
   }
-  const headers2 = {};
+  const headers = {};
   const contentLength = getResourceContentLength(resource);
   if (contentLength >= 0) {
-    headers2["content-length"] = String(contentLength);
+    headers["content-length"] = String(contentLength);
   }
   const url = getResourceUrl(resource);
   const type = getResourceMIMEType(resource);
   if (type) {
-    headers2["content-type"] = type;
+    headers["content-type"] = type;
   }
   const initialDataUrl = await getInitialDataUrl(resource);
   if (initialDataUrl) {
-    headers2["x-first-bytes"] = initialDataUrl;
+    headers["x-first-bytes"] = initialDataUrl;
   }
   if (typeof resource === "string") {
     resource = new TextEncoder().encode(resource);
   }
   const response = new Response(resource, {
-    headers: headers2
+    headers
   });
   Object.defineProperty(response, "url", {
     value: url
@@ -93132,9 +93132,9 @@ async function parseWithLoader(loader, data2, options, context) {
       type,
       url
     } = response;
-    const headers2 = Object.fromEntries(response.headers.entries());
+    const headers = Object.fromEntries(response.headers.entries());
     context.response = {
-      headers: headers2,
+      headers,
       ok: ok2,
       redirected,
       status,
@@ -113025,12 +113025,12 @@ ValueRepresentation.setTagClass(Tag);
 Tag.setDicomMessageClass(DicomMessage);
 const fetchFrame = async ({ series, subpath, signal }) => {
   const url = `${series}/instances/${subpath}`;
-  const headers2 = {
+  const headers = {
     Accept: "multipart/related; type=application/octet-stream; transfer-syntax=1.2.840.10008.1.2.1"
   };
   const response = await fetch(
     url,
-    { headers: headers2, signal }
+    { headers, signal }
   );
   const blob = await response.blob();
   const buffer2 = await blob.arrayBuffer();
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-BNl42nZV.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-BznoUk6i.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-CgePW6O1.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-BUXQz7-5.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-DRf0jOLR.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-BnrkTdcQ.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-zrl2ZZvf.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-9yE9slby.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-DMKwPcEn.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-BtOEC1Sk.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-CTdcITy_.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-BXYAQrVU.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-DGRRUa5N.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-DF5gCX_t.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -117267,12 +117267,12 @@ function parseByteRanges(responseArrayBuffer, boundary) {
       break;
     }
     const endOfHeaders = innerText.indexOf(CRLFCRLF);
-    const headers2 = parseHeaders(innerText.substr(0, endOfHeaders));
-    const { start, end: end2, total } = parseContentRange(headers2["content-range"]);
+    const headers = parseHeaders(innerText.substr(0, endOfHeaders));
+    const { start, end: end2, total } = parseContentRange(headers["content-range"]);
     const startOfData = offset + startBoundary.length + endOfHeaders + CRLFCRLF.length;
     const length2 = parseInt(end2, 10) + 1 - parseInt(start, 10);
     out.push({
-      headers: headers2,
+      headers,
       data: responseArrayBuffer.slice(startOfData, startOfData + length2),
       offset: start,
       length: length2,
@@ -117842,7 +117842,7 @@ class BaseClient {
    * @param {{headers: HeadersInit, signal: AbortSignal}} [options={}]
    * @returns {Promise<BaseResponse>}
    */
-  async request({ headers: headers2, signal } = {}) {
+  async request({ headers, signal } = {}) {
     throw new Error("request is not implemented");
   }
 }
@@ -117875,9 +117875,9 @@ class FetchClient extends BaseClient {
    * @param {{headers: HeadersInit, signal: AbortSignal}} [options={}]
    * @returns {Promise<FetchResponse>}
    */
-  async request({ headers: headers2, signal } = {}) {
+  async request({ headers, signal } = {}) {
     const response = await fetch(this.url, {
-      headers: headers2,
+      headers,
       credentials: this.credentials,
       signal
     });
@@ -117906,12 +117906,12 @@ class XHRResponse extends BaseResponse {
   }
 }
 class XHRClient extends BaseClient {
-  constructRequest(headers2, signal) {
+  constructRequest(headers, signal) {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open("GET", this.url);
       xhr.responseType = "arraybuffer";
-      for (const [key, value] of Object.entries(headers2)) {
+      for (const [key, value] of Object.entries(headers)) {
         xhr.setRequestHeader(key, value);
       }
       xhr.onload = () => {
@@ -117929,8 +117929,8 @@ class XHRClient extends BaseClient {
       }
     });
   }
-  async request({ headers: headers2, signal } = {}) {
-    const response = await this.constructRequest(headers2, signal);
+  async request({ headers, signal } = {}) {
+    const response = await this.constructRequest(headers, signal);
     return response;
   }
 }
@@ -117961,12 +117961,12 @@ class HttpClient extends BaseClient {
     this.parsedUrl = fs$g.parse(this.url);
     this.httpApi = this.parsedUrl.protocol === "http:" ? fs$g : fs$g;
   }
-  constructRequest(headers2, signal) {
+  constructRequest(headers, signal) {
     return new Promise((resolve, reject) => {
       const request = this.httpApi.get(
         {
           ...this.parsedUrl,
-          headers: headers2
+          headers
         },
         (response) => {
           const dataPromise = new Promise((resolveData) => {
@@ -117992,8 +117992,8 @@ class HttpClient extends BaseClient {
       }
     });
   }
-  async request({ headers: headers2, signal } = {}) {
-    const response = await this.constructRequest(headers2, signal);
+  async request({ headers, signal } = {}) {
+    const response = await this.constructRequest(headers, signal);
     return response;
   }
 }
@@ -118005,10 +118005,10 @@ class RemoteSource extends BaseSource {
    * @param {numbers} maxRanges
    * @param {boolean} allowFullFile
    */
-  constructor(client, headers2, maxRanges, allowFullFile) {
+  constructor(client, headers, maxRanges, allowFullFile) {
     super();
     this.client = client;
-    this.headers = headers2;
+    this.headers = headers;
     this.maxRanges = maxRanges;
     this.allowFullFile = allowFullFile;
     this._fileSize = null;
@@ -118111,19 +118111,19 @@ function maybeWrapInBlockedSource(source2, { blockSize, cacheSize }) {
   }
   return new BlockedSource(source2, { blockSize, cacheSize });
 }
-function makeFetchSource(url, { headers: headers2 = {}, credentials, maxRanges = 0, allowFullFile = false, ...blockOptions } = {}) {
+function makeFetchSource(url, { headers = {}, credentials, maxRanges = 0, allowFullFile = false, ...blockOptions } = {}) {
   const client = new FetchClient(url, credentials);
-  const source2 = new RemoteSource(client, headers2, maxRanges, allowFullFile);
+  const source2 = new RemoteSource(client, headers, maxRanges, allowFullFile);
   return maybeWrapInBlockedSource(source2, blockOptions);
 }
-function makeXHRSource(url, { headers: headers2 = {}, maxRanges = 0, allowFullFile = false, ...blockOptions } = {}) {
+function makeXHRSource(url, { headers = {}, maxRanges = 0, allowFullFile = false, ...blockOptions } = {}) {
   const client = new XHRClient(url);
-  const source2 = new RemoteSource(client, headers2, maxRanges, allowFullFile);
+  const source2 = new RemoteSource(client, headers, maxRanges, allowFullFile);
   return maybeWrapInBlockedSource(source2, blockOptions);
 }
-function makeHttpSource(url, { headers: headers2 = {}, maxRanges = 0, allowFullFile = false, ...blockOptions } = {}) {
+function makeHttpSource(url, { headers = {}, maxRanges = 0, allowFullFile = false, ...blockOptions } = {}) {
   const client = new HttpClient(url);
-  const source2 = new RemoteSource(client, headers2, maxRanges, allowFullFile);
+  const source2 = new RemoteSource(client, headers, maxRanges, allowFullFile);
   return maybeWrapInBlockedSource(source2, blockOptions);
 }
 function makeRemoteSource(url, { forceXHR = false, ...clientOptions } = {}) {
@@ -127880,7 +127880,7 @@ function getTiffTileSize(image2) {
   const size = Math.min(tileWidth, tileHeight);
   return prevPowerOf2(size);
 }
-function createGeoTiffObject(source2, { headers: headers2 }) {
+function createGeoTiffObject(source2, { headers }) {
   if (source2 instanceof Blob) {
     return fromBlob(source2);
   }
@@ -127888,7 +127888,7 @@ function createGeoTiffObject(source2, { headers: headers2 }) {
   if (url.protocol === "file:") {
     return fromFile(url.pathname);
   }
-  return fromUrl(url.href, { headers: headers2, cacheSize: Number.POSITIVE_INFINITY });
+  return fromUrl(url.href, { headers, cacheSize: Number.POSITIVE_INFINITY });
 }
 async function createGeoTiff(source2, options = {}) {
   const tiff = await createGeoTiffObject(source2, options);
@@ -128471,8 +128471,8 @@ function createSingleFileOmeTiffPyramidalIndexer(tiff, image2) {
   }, image2);
 }
 async function loadSingleFileOmeTiff(source2, options = {}) {
-  const { offsets, headers: headers2, pool } = options;
-  const tiff = await createGeoTiff(source2, { headers: headers2, offsets });
+  const { offsets, headers, pool } = options;
+  const tiff = await createGeoTiff(source2, { headers, offsets });
   const firstImage = await tiff.getImage();
   const { rootMeta, levels } = resolveMetadata(
     fromString(firstImage.fileDirectory.ImageDescription),
@@ -138208,16 +138208,6 @@ const faPlus = {
   iconName: "plus",
   icon: [448, 512, [10133, 61543, "add"], "2b", "M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"]
 };
-const faChevronLeft = {
-  prefix: "fas",
-  iconName: "chevron-left",
-  icon: [320, 512, [9001], "f053", "M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"]
-};
-const faChevronRight = {
-  prefix: "fas",
-  iconName: "chevron-right",
-  icon: [320, 512, [9002], "f054", "M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"]
-};
 const defineIcon = ({ icon: icon2, onClick, color: color2 }) => {
   return {
     size: "1em",
@@ -147346,12 +147336,13 @@ const WrapBox = qe$1.div`
   grid-template-columns: auto 1fr;
   justify-items: left;
   display: grid;
-  gap: 0.25em;
+  gap: 0.5em;
 `;
 const Box = qe$1.div`
   background-color: #${({ color: color2 }) => color2};
   height: 1em;
   width: 1em;
+  margin-top: 2px;
 `;
 const defaultChannels = [
   { color: "0000FF", name: "DNA" },
@@ -147417,6 +147408,7 @@ const Legend = (props) => {
   });
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(RightAlign, { children: extraUI }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "h6", children: "Channels" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(WrapRows$1, { children: rows })
   ] });
 };
@@ -147426,25 +147418,18 @@ const WrapRows = qe$1.div`
   gap: 0.25em;
 `;
 const GroupName = qe$1.div`
-  grid-area: name;
-`;
-qe$1.div`
-  grid-area: waypoint;
-  text-decoration: underline;
-`;
-const WrapGroup = qe$1.div`
-  display: grid;
-  grid-template-areas:
-    "name ."
-    "name waypoint";
-  grid-template-columns: 80% auto;
-  grid-template-rows: auto auto;
   outline: 1px solid ${({ outline }) => outline};
   background-color: ${({ color: color2 }) => color2};
   cursor: pointer;
-  border-radius: 4px;
-  padding: 0.5em;
-  gap: 1em;
+  border-radius: 2px;
+  margin-bottom: 0.15em;
+  padding: 2px 2px 2px 21px;
+  text-indent: -1em;
+  line-height: 1.2em;
+
+  :hover {
+    text-decoration: underline;
+  }
 `;
 const GroupRow = (props) => {
   const { group, stories } = props;
@@ -147475,13 +147460,21 @@ const GroupRow = (props) => {
       setActiveChannelGroup(row_group.UUID);
     }
   };
-  const wrapGroupProps = { color: color2, outline };
+  const ref = reactExports.useRef(null);
+  const nameProps = { color: color2, outline, ref };
   const { updateGroup } = props;
+  reactExports.useEffect(() => {
+    if (active3 && ref.current !== null) {
+      window.requestAnimationFrame(() => {
+        ref.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    }
+  }, [active3]);
   `group/name/${group.g}`;
   ({
     ...props
   });
-  const coreUI = /* @__PURE__ */ jsxRuntimeExports.jsx(WrapGroup, { ...wrapGroupProps, children: /* @__PURE__ */ jsxRuntimeExports.jsx(GroupName, { onClick: toGroup, children: name2 }) });
+  const coreUI = /* @__PURE__ */ jsxRuntimeExports.jsx(GroupName, { ...nameProps, onClick: toGroup, children: name2 });
   return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: coreUI });
 };
 const Groups = (props) => {
@@ -147492,32 +147485,6 @@ const Groups = (props) => {
   });
   return /* @__PURE__ */ jsxRuntimeExports.jsx(WrapRows, { children: rows });
 };
-const fontStack = ({ font: font2 }) => {
-  return [font2, "sans-serif"].join(",");
-};
-const headers = /* @__PURE__ */ new Map([
-  [
-    "h3",
-    qe$1.h3`
-      font-weight: 300;
-      font-family: ${fontStack};
-    `
-  ],
-  [
-    "h4",
-    qe$1.h4`
-      font-weight: 300;
-      font-family: ${fontStack};
-    `
-  ]
-]);
-const Header = (props) => {
-  const font2 = "Verdana";
-  const { children, h: h2 } = props;
-  const level = [3, 4].includes(h2) ? h2 : 4;
-  const HeaderLevel = headers.get(`h${level}`);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(HeaderLevel, { font: font2, children });
-};
 const WrapContent = qe$1.div`
   height: 100%;
   display: grid;
@@ -147527,13 +147494,13 @@ const WrapContent = qe$1.div`
   transform: translate(-150px);
 `;
 const WrapCore = qe$1.div`
-  padding: 1em;
+  padding: 0.5em;
   grid-column: 3;
   grid-row: 1 / 3;
   overflow: scroll;
   pointer-events: all;
   word-wrap: break-word;
-  outline: 1px solid var(--theme-glass-edge);
+  border: 2px solid var(--theme-glass-edge);
   background-color: var(--dark-glass);
   border-radius: var(--radius-0001);
 `;
@@ -147543,8 +147510,9 @@ const WrapNav = qe$1.div`
   padding: 0.8em;
   font-size: 16px;
   pointer-events: all;
-  padding-top: calc(1.5*var(--theme-gap-tiny));
-  outline: 1px solid var(--theme-glass-edge);
+  padding: 0.5em 0.75em;
+  border: 2px solid var(--theme-glass-edge);
+  border-right: 0;
   background-color: var(--dark-glass);
   border-radius: var(--radius-0001);
 `;
@@ -147552,6 +147520,8 @@ const WrapColumns = qe$1.div`
   grid-template-columns: auto 1fr;
   display: grid;
   gap: 0.25em;
+`;
+const Header = qe$1.h2`
 `;
 const Content$1 = (props) => {
   const { children, groups, stories } = props;
@@ -147582,9 +147552,9 @@ const Content$1 = (props) => {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(Editor, { ...{ ...props, editSwitch } });
   };
   const allGroups = groups.length || props.editable ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Header, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(WrapColumns, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Header, { className: "h6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(WrapColumns, { children: [
       extraUI(3),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Channel Groups:" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Channel Groups" })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Groups, { ...{ ...groupProps, groups } })
   ] }) : null;
@@ -147593,31 +147563,12 @@ const Content$1 = (props) => {
     /* @__PURE__ */ jsxRuntimeExports.jsx(WrapCore, { children: allGroups })
   ] });
 };
-const WrapIcons = qe$1.div`
-  gap: 1.333em;
-  display: grid;
-  grid-template-rows: auto;
-  justify-items: ${({ justify }) => justify};
-`;
-const Toolbar$1 = (props) => {
-  const { hide, togglePanel } = props;
-  const faToggle = hide ? faChevronLeft : faChevronRight;
-  const icon2 = {
-    size: "16px",
-    width: "34px",
-    height: "34px",
-    color: "inherit",
-    icon: faToggle,
-    onClick: togglePanel
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(WrapIcons, { justify: "start", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { ...icon2 }) });
-};
 const theme = {};
 const TextWrap = qe$1.div`
   height: 100%;
   display: grid;
   grid-template-rows: 100%;
-  grid-template-columns: 1fr 200px;
+  grid-template-columns: 1fr 220px;
   > div.core {
     color: #eee;
     grid-row: 1;
@@ -147637,8 +147588,7 @@ const TextOther = qe$1.div`
 const Channel = (props) => {
   var _a3, _b2;
   const hide = props.hiddenChannel;
-  const setHide = props.setHiddenChannel;
-  const togglePanel = () => setHide(!hide);
+  props.setHiddenChannel;
   const { Groups: Groups2 } = props.config.ItemRegistry;
   const {
     activeChannelGroupId
@@ -147657,18 +147607,7 @@ const Channel = (props) => {
     "show core",
     "hide core"
   ][+hide];
-  const channelMenu = /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: hideClass, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Content$1, { ...props, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Toolbar$1,
-      {
-        ...{
-          togglePanel,
-          hide
-        }
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Legend, { ...legendProps })
-  ] }) });
+  const channelMenu = /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: hideClass, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Content$1, { ...props, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Legend, { ...legendProps }) }) });
   const minerva_author_ui = reactExports.createElement(
     props.controlPanelElement,
     {
@@ -157539,8 +157478,8 @@ const Wrap = qe$1.div`
   }
 `;
 const NavPane = qe$1.div`
-  border-right: 2px solid #333;
-  background: #111;
+  border-right: 2px solid var(--theme-glass-edge);
+  background: var(--theme-dim-gray-color);
   display: grid;
   gap: 0.4em;
   z-index: 1;
@@ -157560,7 +157499,7 @@ const NavPane = qe$1.div`
     overflow-y: auto;
     grid-column: 1;
     grid-row: 3;
-    border-top: 2px solid #333;
+    border-top: 2px solid var(--theme-glass-edge);
   }
   > * {
     padding: 8px 8px 0;
@@ -158271,7 +158210,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-CubA0C4M.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-Crg7Sgjb.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
