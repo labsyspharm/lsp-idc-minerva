@@ -1,7 +1,7 @@
 import { i as inflate_1 } from "./pako.esm-C0YWBoLx.js";
-import { L as Lerc } from "./LercDecode-CAljwBQW.js";
+import { L as Lerc } from "./LercDecode-B4ZGBVAH.js";
 import { B as BaseDecoder } from "./basedecoder-RlaJh0FT.js";
-import "./index-JU_RqXXJ.js";
+import "./index-LiolEo40.js";
 const LercParameters = {
   AddCompression: 1
 };

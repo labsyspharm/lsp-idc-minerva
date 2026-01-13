@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-BY3G-vcs.js","./pako.esm-C0YWBoLx.js","./lerc-DWf4CXHU.js","./LercDecode-CAljwBQW.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-CYn1a3sE.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-0gq-BGzG.js","./pako.esm-C0YWBoLx.js","./lerc-CWNDBIR-.js","./LercDecode-B4ZGBVAH.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-m-4p-K5w.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-DgjpI_FF.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-A6lgev0x.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-BYvoigPj.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-8oQ6mHuB.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-C8oGUdiV.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-BY3G-vcs.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-BLUDdPr6.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-CETx1I_S.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-0gq-BGzG.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-CSfdxw0N.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-DWf4CXHU.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-CWNDBIR-.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-C92V8Shc.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-CdqWIvY4.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -134237,7 +134237,7 @@ const useOverlayStore = create$2()(
         set5({ imageWidth: width, imageHeight: height });
       },
       // Import waypoint annotations actions
-      importWaypointAnnotations: (arrows, overlays) => {
+      importWaypointAnnotations: (arrows, overlays, clearExisting = false) => {
         const { imageWidth, imageHeight } = get5();
         if (imageWidth === 0 || imageHeight === 0) {
           return;
@@ -134332,9 +134332,23 @@ const useOverlayStore = create$2()(
           };
           newAnnotations.push(rectAnnotation);
         });
-        set5((state) => ({
-          annotations: [...state.annotations, ...newAnnotations]
-        }));
+        set5((state) => {
+          const existingAnnotations = clearExisting ? state.annotations.filter((a2) => {
+            var _a3;
+            return !((_a3 = a2.metadata) == null ? void 0 : _a3.isImported);
+          }) : state.annotations;
+          const newHiddenLayers = clearExisting ? new Set(
+            [...state.hiddenLayers].filter((id2) => {
+              var _a3;
+              const annotation = state.annotations.find((a2) => a2.id === id2);
+              return annotation && !((_a3 = annotation.metadata) == null ? void 0 : _a3.isImported);
+            })
+          ) : state.hiddenLayers;
+          return {
+            annotations: [...existingAnnotations, ...newAnnotations],
+            hiddenLayers: newHiddenLayers
+          };
+        });
       },
       clearImportedAnnotations: () => {
         set5((state) => ({
@@ -157281,226 +157295,212 @@ function defaultUrlTransform(value) {
 const ArrowIconUrl = "" + new URL("arrow-annotation-DaaDD1B4.svg", import.meta.url).href;
 const ARROW_ICON_URL = ArrowIconUrl;
 const ARROW_ICON_SIZE = 250;
-function createTextLayer(annotation, isHovered, pickable = true) {
-  const fontColor2 = isHovered ? [0, 120, 255, 255] : annotation.style.fontColor;
-  const backgroundColor = isHovered ? [0, 120, 255, 150] : annotation.style.backgroundColor || [0, 0, 0, 100];
-  return new TextLayer({
-    id: `annotation-${annotation.id}`,
-    data: [{
-      text: annotation.text,
-      position: [annotation.position[0], annotation.position[1], 0]
-    }],
-    getText: (d2) => d2.text,
-    getPosition: (d2) => d2.position,
-    maxWidth: 10,
-    getColor: fontColor2,
-    background: true,
-    // Enable background rendering
-    getBackgroundColor: backgroundColor,
-    getSize: annotation.style.fontSize,
-    fontFamily: "Arial, sans-serif",
-    fontWeight: "normal",
-    backgroundPadding: [6, 6],
-    // Padding around text
-    pickable
-  });
-}
-function createPointLayer(annotation, isHovered, pickable = true) {
-  const fillColor = isHovered ? [0, 120, 255, 255] : annotation.style.fillColor;
-  const lineColor = isHovered ? [0, 120, 255, 255] : annotation.style.strokeColor;
-  return new ScatterplotLayer({
-    id: `annotation-${annotation.id}`,
-    data: [{
-      position: [annotation.position[0], annotation.position[1], 0],
-      radius: annotation.style.radius
-    }],
-    getPosition: (d2) => d2.position,
-    getRadius: (d2) => d2.radius,
-    radiusMinPixels: annotation.style.radius,
-    radiusMaxPixels: annotation.style.radius,
-    getFillColor: fillColor,
-    getLineColor: lineColor,
-    getLineWidth: 10,
-    pickable
-  });
-}
-function createArrowIconLayer(annotation, isHovered, pickable = true) {
-  if (annotation.type !== "line") {
-    return null;
-  }
-  const polygon = annotation.polygon;
-  if (polygon.length < 2) return null;
-  const [startX, startY] = polygon[0];
-  const [endX, endY] = polygon[1];
-  const dx = endX - startX;
-  const dy = endY - startY;
-  const angleRad = Math.atan2(dy, dx);
-  const angleDeg = angleRad * 180 / Math.PI + 90;
-  const iconColor = isHovered ? [0, 120, 255, 255] : annotation.style.lineColor;
-  return new IconLayer({
-    id: `annotation-${annotation.id}-arrow`,
-    data: [{
-      position: [endX, endY, 0],
-      angle: angleDeg
-    }],
-    getPosition: (d2) => d2.position,
-    getIcon: () => ({
-      url: ARROW_ICON_URL,
-      width: ARROW_ICON_SIZE,
-      height: ARROW_ICON_SIZE,
-      anchorX: ARROW_ICON_SIZE / 2,
-      // Center of SVG (125,125)
-      anchorY: ARROW_ICON_SIZE / 2
-    }),
-    getSize: ARROW_ICON_SIZE,
-    sizeUnits: "pixels",
-    sizeMinPixels: ARROW_ICON_SIZE,
-    sizeMaxPixels: ARROW_ICON_SIZE,
-    getAngle: (d2) => d2.angle,
-    getColor: iconColor,
-    pickable,
-    billboard: false
-    // Don't rotate to face camera
-  });
-}
-function createPolygonLayer(annotation, isHovered, pickable = true) {
-  if (annotation.type === "text" || annotation.type === "point" || annotation.type === "line") {
-    return null;
-  }
-  let fillColor = [255, 255, 255, 1];
-  let lineColor = annotation.style.lineColor;
-  const isPolyline = annotation.type === "polyline";
-  if (isPolyline) {
-    fillColor = [0, 0, 0, 0];
-  }
-  if (isHovered) {
-    fillColor = isPolyline ? [0, 0, 0, 0] : [0, 120, 255, 100];
-    lineColor = [0, 120, 255, 255];
-  }
-  return new PolygonLayer({
-    id: `annotation-${annotation.id}`,
-    data: [{ polygon: annotation.polygon }],
-    getPolygon: (d2) => d2.polygon,
-    getFillColor: fillColor,
-    getLineColor: lineColor,
-    getLineWidth: annotation.style.lineWidth * 10,
-    lineWidthScale: 1,
-    lineWidthUnits: "pixels",
-    lineWidthMinPixels: annotation.style.lineWidth,
-    lineWidthMaxPixels: annotation.style.lineWidth,
-    stroked: true,
-    filled: true,
-    pickable
-  });
-}
-function createLabelTextLayer(annotationId, text2, position2, textColor, textAnchor = "middle", pixelOffset = [0, 0]) {
-  return new TextLayer({
-    id: `annotation-${annotationId}-text`,
-    data: [{ text: text2, position: position2, pixelOffset }],
-    getText: (d2) => d2.text,
-    getPosition: (d2) => d2.position,
-    getPixelOffset: (d2) => d2.pixelOffset,
-    maxWidth: 10,
-    getColor: textColor,
-    background: true,
-    // Enable background rendering
-    getBackgroundColor: [0, 0, 0, 180],
-    // Semi-transparent grey
-    getSize: 14,
-    fontFamily: "Arial, sans-serif",
-    fontWeight: "normal",
-    backgroundPadding: [6, 6],
-    // Padding around text
-    pickable: false,
-    getTextAnchor: textAnchor
-  });
-}
-function createAnnotationLayers(annotation, hoveredAnnotationId, pickable = true) {
+function createAllAnnotationLayers(annotations, hiddenLayers, hoveredAnnotationId, pickable = true) {
+  const visibleAnnotations = annotations.filter((annotation) => !hiddenLayers.has(annotation.id));
   const layers = [];
-  const isHovered = hoveredAnnotationId === annotation.id;
-  if (annotation.type === "text") {
-    layers.push(createTextLayer(annotation, isHovered, pickable));
-  } else if (annotation.type === "point") {
-    layers.push(createPointLayer(annotation, isHovered, pickable));
-    if (annotation.text) {
-      const textColor = annotation.style.strokeColor || [255, 255, 255, 255];
-      layers.push(createLabelTextLayer(
-        annotation.id,
-        // @ts-ignore
-        annotation.text,
-        [annotation.position[0], annotation.position[1], 0],
-        textColor
-      ));
-    }
-  } else if (annotation.type === "line") {
-    const arrowLayer = createArrowIconLayer(annotation, isHovered, pickable);
-    if (arrowLayer) {
-      layers.push(arrowLayer);
-    }
-    if (annotation.text) {
+  const polygonData = [];
+  const textData = [];
+  const pointData = [];
+  const arrowData = [];
+  const labelData = [];
+  visibleAnnotations.forEach((annotation) => {
+    const isHovered = hoveredAnnotationId === annotation.id;
+    if (annotation.type === "text") {
+      const fontColor2 = isHovered ? [0, 120, 255, 255] : annotation.style.fontColor;
+      const backgroundColor = isHovered ? [0, 120, 255, 150] : annotation.style.backgroundColor || [0, 0, 0, 100];
+      textData.push({
+        text: annotation.text,
+        position: [annotation.position[0], annotation.position[1], 0],
+        color: fontColor2,
+        backgroundColor,
+        fontSize: annotation.style.fontSize,
+        id: annotation.id
+      });
+    } else if (annotation.type === "point") {
+      const fillColor = isHovered ? [0, 120, 255, 255] : annotation.style.fillColor;
+      const lineColor = isHovered ? [0, 120, 255, 255] : annotation.style.strokeColor;
+      pointData.push({
+        position: [annotation.position[0], annotation.position[1], 0],
+        radius: annotation.style.radius,
+        fillColor,
+        lineColor,
+        id: annotation.id
+      });
+      if (annotation.text) {
+        const textColor = annotation.style.strokeColor || [255, 255, 255, 255];
+        labelData.push({
+          // @ts-ignore
+          text: annotation.text,
+          position: [annotation.position[0], annotation.position[1], 0],
+          pixelOffset: [0, 0],
+          color: textColor,
+          textAnchor: "middle",
+          id: `${annotation.id}-text`
+        });
+      }
+    } else if (annotation.type === "line") {
       const polygon = annotation.polygon;
-      const [startX, startY] = polygon[0];
-      const [endX, endY] = polygon[1];
-      const dx = startX - endX;
-      const dy = startY - endY;
-      const length2 = Math.sqrt(dx * dx + dy * dy);
-      const dirX = length2 > 0 ? dx / length2 : 0;
-      const dirY = length2 > 0 ? dy / length2 : 1;
-      const pixelOffsetMagnitude = ARROW_ICON_SIZE / 2 + 12;
-      const pixelOffsetX = dirX * pixelOffsetMagnitude;
-      const pixelOffsetY = dirY * pixelOffsetMagnitude;
-      const textAnchor = dx > 0 ? "start" : "end";
-      const textColor = annotation.style.lineColor || [255, 255, 255, 255];
-      layers.push(createLabelTextLayer(
-        annotation.id,
-        // @ts-ignore
-        annotation.text,
-        [endX, endY, 0],
-        // Position at icon center
-        textColor,
-        textAnchor,
-        [pixelOffsetX, pixelOffsetY]
-        // Pixel offset toward tail
-      ));
+      if (polygon.length >= 2) {
+        const [startX, startY] = polygon[0];
+        const [endX, endY] = polygon[1];
+        const dx = endX - startX;
+        const dy = endY - startY;
+        const angleRad = Math.atan2(dy, dx);
+        const angleDeg = angleRad * 180 / Math.PI + 90;
+        const iconColor = isHovered ? [0, 120, 255, 255] : annotation.style.lineColor;
+        arrowData.push({
+          position: [endX, endY, 0],
+          angle: angleDeg,
+          color: iconColor,
+          id: `${annotation.id}-arrow`
+        });
+        if (annotation.text) {
+          const labelDx = startX - endX;
+          const labelDy = startY - endY;
+          const length2 = Math.sqrt(labelDx * labelDx + labelDy * labelDy);
+          const dirX = length2 > 0 ? labelDx / length2 : 0;
+          const dirY = length2 > 0 ? labelDy / length2 : 1;
+          const pixelOffsetMagnitude = ARROW_ICON_SIZE / 2 + 12;
+          const pixelOffsetX = dirX * pixelOffsetMagnitude;
+          const pixelOffsetY = dirY * pixelOffsetMagnitude;
+          const textAnchor = labelDx > 0 ? "start" : "end";
+          const textColor = annotation.style.lineColor || [255, 255, 255, 255];
+          labelData.push({
+            // @ts-ignore
+            text: annotation.text,
+            position: [endX, endY, 0],
+            pixelOffset: [pixelOffsetX, pixelOffsetY],
+            color: textColor,
+            textAnchor,
+            id: `${annotation.id}-text`
+          });
+        }
+      }
+    } else {
+      let fillColor = [255, 255, 255, 1];
+      let lineColor = annotation.style.lineColor;
+      const isPolyline = annotation.type === "polyline";
+      if (isPolyline) {
+        fillColor = [0, 0, 0, 0];
+      }
+      if (isHovered) {
+        fillColor = isPolyline ? [0, 0, 0, 0] : [0, 120, 255, 100];
+        lineColor = [0, 120, 255, 255];
+      }
+      polygonData.push({
+        polygon: annotation.polygon,
+        fillColor,
+        lineColor,
+        lineWidth: annotation.style.lineWidth,
+        id: annotation.id
+      });
+      if (annotation.text) {
+        const polygon = annotation.polygon;
+        const centerX = polygon.reduce((sum2, [x2]) => sum2 + x2, 0) / polygon.length;
+        const centerY = polygon.reduce((sum2, [, y3]) => sum2 + y3, 0) / polygon.length;
+        const textColor = annotation.style.lineColor || [255, 255, 255, 255];
+        labelData.push({
+          // @ts-ignore
+          text: annotation.text,
+          position: [centerX, centerY, 0],
+          pixelOffset: [0, 0],
+          color: textColor,
+          textAnchor: "middle",
+          id: `${annotation.id}-text`
+        });
+      }
     }
-  } else {
-    const polygonLayer = createPolygonLayer(annotation, isHovered, pickable);
-    if (polygonLayer) {
-      layers.push(polygonLayer);
-    }
-    if (annotation.text) {
-      const polygon = annotation.polygon;
-      const centerX = polygon.reduce((sum2, [x2]) => sum2 + x2, 0) / polygon.length;
-      const centerY = polygon.reduce((sum2, [, y3]) => sum2 + y3, 0) / polygon.length;
-      const textColor = annotation.style.lineColor || [255, 255, 255, 255];
-      layers.push(createLabelTextLayer(
-        annotation.id,
-        // @ts-ignore
-        annotation.text,
-        [centerX, centerY, 0],
-        textColor
-      ));
-    }
+  });
+  if (polygonData.length > 0) {
+    layers.push(new PolygonLayer({
+      id: "annotation-polygons",
+      data: polygonData,
+      getPolygon: (d2) => d2.polygon,
+      getFillColor: (d2) => d2.fillColor,
+      getLineColor: (d2) => d2.lineColor,
+      getLineWidth: (d2) => d2.lineWidth,
+      lineWidthScale: 1,
+      lineWidthUnits: "pixels",
+      lineWidthMinPixels: 1,
+      lineWidthMaxPixels: 100,
+      stroked: true,
+      filled: true,
+      pickable
+    }));
+  }
+  if (pointData.length > 0) {
+    layers.push(new ScatterplotLayer({
+      id: "annotation-points",
+      data: pointData,
+      getPosition: (d2) => d2.position,
+      getRadius: (d2) => d2.radius,
+      radiusMinPixels: 3,
+      radiusMaxPixels: 20,
+      getFillColor: (d2) => d2.fillColor,
+      getLineColor: (d2) => d2.lineColor,
+      getLineWidth: 10,
+      pickable
+    }));
+  }
+  if (textData.length > 0) {
+    layers.push(new TextLayer({
+      id: "annotation-texts",
+      data: textData,
+      getText: (d2) => d2.text,
+      getPosition: (d2) => d2.position,
+      maxWidth: 10,
+      getColor: (d2) => d2.color,
+      background: true,
+      getBackgroundColor: (d2) => d2.backgroundColor,
+      getSize: (d2) => d2.fontSize,
+      fontFamily: "Arial, sans-serif",
+      fontWeight: "normal",
+      backgroundPadding: [6, 6],
+      pickable
+    }));
+  }
+  if (arrowData.length > 0) {
+    layers.push(new IconLayer({
+      id: "annotation-arrows",
+      data: arrowData,
+      getPosition: (d2) => d2.position,
+      getIcon: () => ({
+        url: ARROW_ICON_URL,
+        width: ARROW_ICON_SIZE,
+        height: ARROW_ICON_SIZE,
+        anchorX: ARROW_ICON_SIZE / 2,
+        anchorY: ARROW_ICON_SIZE / 2
+      }),
+      getSize: ARROW_ICON_SIZE,
+      sizeUnits: "pixels",
+      sizeMinPixels: ARROW_ICON_SIZE,
+      sizeMaxPixels: ARROW_ICON_SIZE,
+      getAngle: (d2) => d2.angle,
+      getColor: (d2) => d2.color,
+      pickable,
+      billboard: false
+    }));
+  }
+  if (labelData.length > 0) {
+    layers.push(new TextLayer({
+      id: "annotation-labels",
+      data: labelData,
+      getText: (d2) => d2.text,
+      getPosition: (d2) => d2.position,
+      getPixelOffset: (d2) => d2.pixelOffset,
+      maxWidth: 10,
+      getColor: (d2) => d2.color,
+      background: true,
+      getBackgroundColor: [0, 0, 0, 180],
+      getSize: 14,
+      fontFamily: "Arial, sans-serif",
+      fontWeight: "normal",
+      backgroundPadding: [6, 6],
+      pickable: false,
+      getTextAnchor: (d2) => d2.textAnchor
+    }));
   }
   return layers;
-}
-function createAllAnnotationLayers(annotations, hiddenLayers, hoveredAnnotationId, pickable = true) {
-  const shapeLayers = [];
-  const arrowLayers = [];
-  const labelLayers = [];
-  annotations.filter((annotation) => !hiddenLayers.has(annotation.id)).forEach((annotation) => {
-    const annotationLayers = createAnnotationLayers(annotation, hoveredAnnotationId, pickable);
-    annotationLayers.forEach((layer) => {
-      if (layer.id.endsWith("-text")) {
-        labelLayers.push(layer);
-      } else if (layer.id.endsWith("-arrow")) {
-        arrowLayers.push(layer);
-      } else {
-        shapeLayers.push(layer);
-      }
-    });
-  });
-  return [...shapeLayers, ...arrowLayers, ...labelLayers];
 }
 function useAnnotationLayers(pickable = true) {
   const annotations = useOverlayStore((state) => state.annotations);
@@ -157510,9 +157510,14 @@ function useAnnotationLayers(pickable = true) {
     return createAllAnnotationLayers(annotations, hiddenLayers, hoveredAnnotationId, pickable);
   }, [annotations, hiddenLayers, hoveredAnnotationId, pickable]);
   reactExports.useEffect(() => {
-    const currentLayers = useOverlayStore.getState().overlayLayers;
-    const annotationLayerIds = currentLayers.filter((layer) => layer && layer.id.startsWith("annotation-")).map((layer) => layer.id);
-    annotationLayerIds.forEach((layerId) => {
+    const consolidatedLayerIds = [
+      "annotation-polygons",
+      "annotation-points",
+      "annotation-texts",
+      "annotation-arrows",
+      "annotation-labels"
+    ];
+    consolidatedLayerIds.forEach((layerId) => {
       useOverlayStore.getState().removeOverlayLayer(layerId);
     });
     annotationLayers.forEach((layer) => {
@@ -157687,21 +157692,22 @@ const Presentation = (props) => {
   reactExports.useEffect(() => {
     if (stories.length === 0) return;
     if (imageWidth === 0 || imageHeight === 0) return;
-    const storyIndex = activeStoryIndex ?? 0;
-    const story2 = stories[storyIndex];
+    if (activeStoryIndex === null) return;
+    const story2 = stories[activeStoryIndex];
     if (story2) {
-      clearImportedAnnotations();
       const arrows = story2.Arrows || [];
       const overlays = story2.Overlays || [];
       if (arrows.length > 0 || overlays.length > 0) {
-        importWaypointAnnotations(arrows, overlays);
+        importWaypointAnnotations(arrows, overlays, true);
+      } else {
+        clearImportedAnnotations();
       }
       const { Pan, Zoom } = story2.Properties;
       if (Pan !== void 0 || Zoom !== void 0) {
         setTargetWaypointViewState(Pan || null, Zoom ?? null);
       }
     }
-  }, [stories, activeStoryIndex, imageWidth, imageHeight, importWaypointAnnotations, clearImportedAnnotations, setTargetWaypointViewState]);
+  }, [stories, activeStoryIndex, imageWidth, imageHeight]);
   const updateGroup = (activeStory) => {
     const story2 = stories[activeStory];
     const group_name = story2.Properties.Group;
@@ -157793,7 +157799,7 @@ const Presentation = (props) => {
         const goToStory = () => {
           storyAt(i5);
         };
-        return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { onClick: goToStory, children: wp.Properties.Name });
+        return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { onClick: goToStory, children: wp.Properties.Name }, i5);
       }) })
     ] });
   };
@@ -158232,7 +158238,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-CYn1a3sE.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-m-4p-K5w.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
