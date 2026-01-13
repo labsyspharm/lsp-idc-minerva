@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-CME_FVEg.js","./pako.esm-C0YWBoLx.js","./lerc-CmEMHY1E.js","./LercDecode-pXFqojc-.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-ILDYq01a.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-BnrkTdcQ.js","./pako.esm-C0YWBoLx.js","./lerc-CTdcITy_.js","./LercDecode-Buz1jqhV.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-CubA0C4M.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-CkCgYIub.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-BGaCVYBs.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-BNl42nZV.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-BznoUk6i.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-DITiXbhG.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-CME_FVEg.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-BKOnTf_M.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-DRf0jOLR.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-BnrkTdcQ.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-zrl2ZZvf.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-CmEMHY1E.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-CTdcITy_.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-JNGbv6wT.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-DGRRUa5N.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -131804,10 +131804,10 @@ const extractChannels = (loader, modality, groups) => {
     }, [
       ...list_colors("sRGB"),
       {
-        ID: "sRGB#ffffff",
+        ID: "sRGB#cc00ff",
         Properties: {
-          R: 255,
-          G: 255,
+          R: 204,
+          G: 0,
           B: 255,
           Space: "sRGB",
           LowerRange: 0,
@@ -131912,11 +131912,13 @@ const extractChannels = (loader, modality, groups) => {
       Colors
     };
   } else if (SourceChannels.length === 1 && SourceChannels[0].Properties.Samples === 3 && SourceChannels[0].Associations.SourceDataType.ID === "Uint8") {
+    const groupName = "Hematoxylin & Eosin";
+    const channelName = "H&E";
     const Groups22 = [{
       UUID: crypto.randomUUID(),
       State: { Expanded: true },
       Properties: {
-        Name: "Histology"
+        Name: groupName
       }
     }];
     const GroupChannels2 = SourceChannels.map(
@@ -131931,14 +131933,14 @@ const extractChannels = (loader, modality, groups) => {
           },
           Associations: {
             SourceChannel: onlyUUID(channel),
-            Color: asID("sRGB#ffffff"),
+            Color: asID("sRGB#cc00ff"),
             Group: asUUID(group_uuid)
           }
         };
       }
     );
     if (SourceChannels.length === 1) {
-      SourceChannels[0].Properties.Name = "Brightfield";
+      SourceChannels[0].Properties.Name = channelName;
     }
     return {
       SourceChannels,
@@ -147551,24 +147553,11 @@ const WrapColumns = qe$1.div`
   display: grid;
   gap: 0.25em;
 `;
-const splitGroups = (groups) => {
-  return groups.reduce(
-    (out, group) => {
-      const { channels: channels2 } = group;
-      if (channels2.length <= 1) {
-        return { ...out, solo: out.solo.concat([group]) };
-      }
-      return { ...out, poly: out.poly.concat([group]) };
-    },
-    { poly: [], solo: [] }
-  );
-};
 const Content$1 = (props) => {
   const { children, groups, stories } = props;
   const { pushGroup } = props;
   const { hash, setHash } = props;
   const { editable } = props;
-  const { poly, solo } = splitGroups(groups);
   const total = groups.length;
   const groupProps = { ...props, total, editable, hash, setHash, stories };
   const pushFunction = (numChannels) => {
@@ -147592,26 +147581,16 @@ const Content$1 = (props) => {
     ];
     return /* @__PURE__ */ jsxRuntimeExports.jsx(Editor, { ...{ ...props, editSwitch } });
   };
-  const polyGroups = poly.length || props.editable ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+  const allGroups = groups.length || props.editable ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Header, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(WrapColumns, { children: [
       extraUI(3),
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Channel Groups:" })
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Groups, { ...{ ...groupProps, groups: poly } })
-  ] }) : null;
-  const soloGroups = solo.length || props.editable ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Header, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(WrapColumns, { children: [
-      extraUI(1),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Channels:" })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Groups, { ...{ ...groupProps, groups: solo } })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Groups, { ...{ ...groupProps, groups } })
   ] }) : null;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(WrapContent, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(WrapNav, { children }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(WrapCore, { children: [
-      polyGroups,
-      soloGroups
-    ] })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(WrapCore, { children: allGroups })
   ] });
 };
 const WrapIcons = qe$1.div`
@@ -158292,7 +158271,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-ILDYq01a.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-CubA0C4M.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
@@ -159882,7 +159861,7 @@ const configWaypoints = [
         0.5
       ],
       "Zoom": 0.518359375,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [],
     "Overlays": []
@@ -159900,7 +159879,7 @@ const configWaypoints = [
         0.5
       ],
       "Zoom": 0.518359375,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [],
     "Overlays": []
@@ -159918,7 +159897,7 @@ const configWaypoints = [
         0.5
       ],
       "Zoom": 0.518359375,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [
       {
@@ -160244,7 +160223,7 @@ const configWaypoints = [
         0.5
       ],
       "Zoom": 0.518359375,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [
       {
@@ -160326,7 +160305,7 @@ const configWaypoints = [
         0.35257607017735
       ],
       "Zoom": 1.85737536,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [
       {
@@ -160439,7 +160418,7 @@ const configWaypoints = [
         0.900233576549723
       ],
       "Zoom": 3.20954462208,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [
       {
@@ -160510,7 +160489,7 @@ const configWaypoints = [
         0.883446929780717
       ],
       "Zoom": 3.851453546496,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [
       {
@@ -160581,7 +160560,7 @@ const configWaypoints = [
         0.624786478173739
       ],
       "Zoom": 2.228850432,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [
       {
@@ -160661,7 +160640,7 @@ const configWaypoints = [
         0.516461979517963
       ],
       "Zoom": 6.65531172834508,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [
       {
@@ -160732,7 +160711,7 @@ const configWaypoints = [
         0.675930909892408
       ],
       "Zoom": 3.0956256,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [
       {
@@ -160821,7 +160800,7 @@ const configWaypoints = [
         0.521758434263343
       ],
       "Zoom": 3.851453546496,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [
       {
@@ -161142,7 +161121,7 @@ const configWaypoints = [
         0.506602504369754
       ],
       "Zoom": 4.6217442557952,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [
       {
@@ -161284,7 +161263,7 @@ const configWaypoints = [
         0.472953356472153
       ],
       "Zoom": 5.54609310695424,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [
       {
@@ -161390,7 +161369,7 @@ const configWaypoints = [
         0.409558554502176
       ],
       "Zoom": 5.54609310695424,
-      "Group": "Histology"
+      "Group": "Hematoxylin & Eosin"
     },
     "Arrows": [
       {
@@ -161504,7 +161483,7 @@ const exhibit_config = {
         "8233CC",
         "FF8080"
       ],
-      "Name": "Histology",
+      "Name": "Hematoxylin & Eosin",
       "Path": "Histology_40__HE-r--41__HE-g--42__HE-b",
       "Highs": [
         65600,
