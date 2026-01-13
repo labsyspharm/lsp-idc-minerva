@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-DMKwPcEn.js","./pako.esm-C0YWBoLx.js","./lerc-BXYAQrVU.js","./LercDecode-BKrU45os.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-Crg7Sgjb.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-BdP7hR3p.js","./pako.esm-C0YWBoLx.js","./lerc-BN-BamII.js","./LercDecode-DI3M8ICH.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-dB9WVeJ2.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-CgePW6O1.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-BUXQz7-5.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-CAl0V3jE.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-CjyvTsoe.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-9yE9slby.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-DMKwPcEn.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-BtOEC1Sk.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-Der_a5gX.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-BdP7hR3p.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-mrd1TNkx.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-BXYAQrVU.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-BN-BamII.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-DF5gCX_t.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-DerNM9p5.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -134541,26 +134541,28 @@ const VivView = (props) => {
       zoom: -n_levels,
       target: [imageShape.x / 2, imageShape.y / 2, 0]
     };
-  }, [mainSettingsList, imageShape]);
+  }, [firstLoader.data, imageShape]);
   const [viewState, setViewState] = reactExports.useState(initialViewState);
+  const hasInitialized = reactExports.useRef(false);
   const setViewportZoom = useOverlayStore((state) => state.setViewportZoom);
   const setImageDimensions = useOverlayStore((state) => state.setImageDimensions);
   const targetWaypointPan = useOverlayStore((state) => state.targetWaypointPan);
   const targetWaypointZoom = useOverlayStore((state) => state.targetWaypointZoom);
   const clearTargetWaypointViewState = useOverlayStore((state) => state.clearTargetWaypointViewState);
   reactExports.useEffect(() => {
-    if (firstLoader.data !== null) {
+    if (firstLoader.data !== null && !hasInitialized.current) {
       setViewState(initialViewState);
       if (typeof initialViewState.zoom === "number") {
         setViewportZoom(initialViewState.zoom);
       }
+      hasInitialized.current = true;
     }
-  }, [initialViewState, firstLoader, setViewportZoom]);
+  }, [initialViewState, firstLoader.data]);
   reactExports.useEffect(() => {
     if (imageShape.x > 0 && imageShape.y > 0) {
       setImageDimensions(imageShape.x, imageShape.y);
     }
-  }, [imageShape, setImageDimensions]);
+  }, [imageShape]);
   reactExports.useEffect(() => {
     if (targetWaypointPan === null && targetWaypointZoom === null) {
       return;
@@ -134592,7 +134594,7 @@ const VivView = (props) => {
       }, 0);
       clearTargetWaypointViewState();
     }
-  }, [targetWaypointPan, targetWaypointZoom, imageShape.x, imageShape.y, viewportSize.width, setViewportZoom, clearTargetWaypointViewState]);
+  }, [targetWaypointPan, targetWaypointZoom, imageShape.x, imageShape.y, viewportSize.width]);
   const omeTiffPropsList = reactExports.useMemo(() => {
     return mainSettingsList.map((mainSettings, i5) => {
       return {
@@ -134628,7 +134630,7 @@ const VivView = (props) => {
       return dicomSources.map((dicomSource, i5) => {
         const { series, pyramids, modality } = dicomSource;
         const rgbImage = modality === "Brightfield";
-        const imageID = crypto.randomUUID();
+        const imageID = `dicom-${series}-${i5}`;
         return createTileLayers({
           pyramids,
           dicomSource,
@@ -134724,7 +134726,7 @@ const VivView = (props) => {
     if (isDragging || activeTool !== "move" && interactionState.isDragging) return;
     setViewState(nextViewState);
     setViewportZoom(nextViewState.zoom);
-  }, [isDragging, activeTool, setViewportZoom]);
+  }, [isDragging, activeTool]);
   if (mainSettingsList.length === 0) {
     return null;
   }
@@ -158159,7 +158161,7 @@ const Index = (props) => {
       setStories(props.config.ItemRegistry.Stories);
       setWaypoints([]);
     }
-  }, [props.config.ItemRegistry.Stories, setStories, setWaypoints]);
+  }, [props.config.ItemRegistry.Stories]);
   reactExports.useEffect(() => {
     const hasStories = _stories.length;
     if (hasStories && activeStoryIndex === null) {
@@ -158210,7 +158212,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-Crg7Sgjb.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-dB9WVeJ2.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
