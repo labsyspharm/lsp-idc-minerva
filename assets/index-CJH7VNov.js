@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-0gq-BGzG.js","./pako.esm-C0YWBoLx.js","./lerc-CWNDBIR-.js","./LercDecode-B4ZGBVAH.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-m-4p-K5w.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-CME_FVEg.js","./pako.esm-C0YWBoLx.js","./lerc-CmEMHY1E.js","./LercDecode-pXFqojc-.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-ILDYq01a.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-BYvoigPj.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-8oQ6mHuB.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-CkCgYIub.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-BGaCVYBs.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-CETx1I_S.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-0gq-BGzG.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-CSfdxw0N.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-DITiXbhG.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-CME_FVEg.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-BKOnTf_M.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-CWNDBIR-.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-CmEMHY1E.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-CdqWIvY4.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-JNGbv6wT.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -134574,19 +134574,23 @@ const VivView = (props) => {
       viewportSize.width
     );
     if (newViewState) {
-      const viewStateWithTransition = {
-        ...newViewState,
-        transitionDuration: 1e3,
-        // 1 second transition
-        transitionInterpolator: new LinearInterpolator(["target", "zoom"]),
-        transitionEasing: (x2) => x2 === 1 ? 1 : 1 - Math.pow(2, -10 * x2)
-        // ease out exponential https://easings.net/#easeOutExpo
-      };
-      setViewState(viewStateWithTransition);
-      setViewportZoom(newViewState.zoom);
+      setViewState((currentViewState) => ({
+        ...currentViewState,
+        transitionDuration: 0
+      }));
+      setTimeout(() => {
+        const viewStateWithTransition = {
+          ...newViewState,
+          transitionDuration: 1e3,
+          transitionInterpolator: new LinearInterpolator(["target", "zoom"]),
+          transitionEasing: (x2) => x2 === 1 ? 1 : 1 - Math.pow(2, -10 * x2)
+        };
+        setViewState(viewStateWithTransition);
+        setViewportZoom(newViewState.zoom);
+      }, 0);
+      clearTargetWaypointViewState();
     }
-    clearTargetWaypointViewState();
-  }, [targetWaypointPan, targetWaypointZoom, imageShape.x, imageShape.y, viewportSize.width, clearTargetWaypointViewState, setViewportZoom]);
+  }, [targetWaypointPan, targetWaypointZoom, imageShape.x, imageShape.y, viewportSize.width, setViewportZoom, clearTargetWaypointViewState]);
   const omeTiffPropsList = reactExports.useMemo(() => {
     return mainSettingsList.map((mainSettings, i5) => {
       return {
@@ -147665,7 +147669,10 @@ const Channel = (props) => {
   )) == null ? void 0 : _a3.Properties) == null ? void 0 : _b2.Name;
   const group = props.groups.find(
     ({ name: name2 }) => group_name === name2
-  );
+  ) || {
+    g: 0,
+    channels: []
+  };
   const legendProps = { ...props, ...group };
   const hideClass = [
     "show core",
@@ -157448,7 +157455,7 @@ function createAllAnnotationLayers(annotations, hiddenLayers, hoveredAnnotationI
       data: textData,
       getText: (d2) => d2.text,
       getPosition: (d2) => d2.position,
-      maxWidth: 10,
+      maxWidth: 9,
       getColor: (d2) => d2.color,
       background: true,
       getBackgroundColor: (d2) => d2.backgroundColor,
@@ -157488,7 +157495,7 @@ function createAllAnnotationLayers(annotations, hiddenLayers, hoveredAnnotationI
       getText: (d2) => d2.text,
       getPosition: (d2) => d2.position,
       getPixelOffset: (d2) => d2.pixelOffset,
-      maxWidth: 10,
+      maxWidth: 9,
       getColor: (d2) => d2.color,
       background: true,
       getBackgroundColor: [0, 0, 0, 180],
@@ -157759,27 +157766,50 @@ const Presentation = (props) => {
     updateViewState(active_story);
   };
   const buttonHeight = 20;
-  const toc_button = /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "table-of-contents", title: "View table of contents", onClick: storyFirst, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "svg",
+  const toc_button = /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "button",
     {
-      viewBox: "0 0 30 20",
-      height: buttonHeight + "px",
-      width: buttonHeight * 1.5 + "px",
-      "aria-hidden": "true",
-      focusable: "false",
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "4", cy: "4", r: "2", fill: "currentColor" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "4", cy: "10", r: "2", fill: "currentColor" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "4", cy: "16", r: "2", fill: "currentColor" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 9 4 H 24", stroke: "currentColor", strokeWidth: "3" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 9 10 H 24", stroke: "currentColor", strokeWidth: "3" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 9 16 H 24", stroke: "currentColor", strokeWidth: "3" })
-      ]
+      className: "table-of-contents",
+      title: "View table of contents",
+      onMouseDown: (e3) => {
+        e3.preventDefault();
+        storyFirst();
+      },
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "svg",
+        {
+          viewBox: "0 0 30 20",
+          height: buttonHeight + "px",
+          width: buttonHeight * 1.5 + "px",
+          "aria-hidden": "true",
+          focusable: "false",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "4", cy: "4", r: "2", fill: "currentColor" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "4", cy: "10", r: "2", fill: "currentColor" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "4", cy: "16", r: "2", fill: "currentColor" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 9 4 H 24", stroke: "currentColor", strokeWidth: "3" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 9 10 H 24", stroke: "currentColor", strokeWidth: "3" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 9 16 H 24", stroke: "currentColor", strokeWidth: "3" })
+          ]
+        }
+      )
     }
-  ) });
+  );
   const StoryLeft = (props2) => {
     const activeClass = props2.active ? "" : "inactive";
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: `left ${activeClass}`, title: "View previous waypoint", onClick: storyLeft, children: /* @__PURE__ */ jsxRuntimeExports.jsx(SVG, { d: "M 14 7 L 12 0 l -12 18 l 12 17 l 2 -7 L 8 18 z", px: buttonHeight }) });
+    const handleMouseDown = (e3) => {
+      e3.preventDefault();
+      storyLeft();
+    };
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "button",
+      {
+        className: `left ${activeClass}`,
+        title: "View previous waypoint",
+        onMouseDown: handleMouseDown,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(SVG, { d: "M 14 7 L 12 0 l -12 18 l 12 17 l 2 -7 L 8 18 z", px: buttonHeight })
+      }
+    );
   };
   const count2 = /* @__PURE__ */ jsxRuntimeExports.jsxs(Count, { className: "count", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { title: "Current waypoint", children: activeStoryIndex + 1 }),
@@ -157788,18 +157818,42 @@ const Presentation = (props) => {
   ] });
   const StoryRight = (props2) => {
     const activeClass = props2.active ? "" : "inactive";
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: `right ${activeClass}`, title: "View next waypoint", onClick: storyRight, children: /* @__PURE__ */ jsxRuntimeExports.jsx(SVG, { d: "M 0 7 L 2 0 l 12 18 l -12 17 l -2 -7 L 6 18 z", px: buttonHeight }) });
+    const handleMouseDown = (e3) => {
+      e3.preventDefault();
+      storyRight();
+    };
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "button",
+      {
+        className: `right ${activeClass}`,
+        title: "View next waypoint",
+        onMouseDown: handleMouseDown,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(SVG, { d: "M 0 7 L 2 0 l 12 18 l -12 17 l -2 -7 L 6 18 z", px: buttonHeight })
+      }
+    );
   };
-  const story_next = /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "right", title: "View next waypoint", onClick: storyRight, children: "Next" });
+  const story_next = /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "p",
+    {
+      className: "right",
+      title: "View next waypoint",
+      onMouseDown: (e3) => {
+        e3.preventDefault();
+        storyRight();
+      },
+      children: "Next"
+    }
+  );
   const TableOfContents = (props2) => {
     const { stories: stories2 } = props2;
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(TocWrapper, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "h6", children: "Table of Contents" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { children: stories2.map((wp, i5) => {
-        const goToStory = () => {
+        const goToStory = (e3) => {
+          e3.preventDefault();
           storyAt(i5);
         };
-        return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { onClick: goToStory, children: wp.Properties.Name }, i5);
+        return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { onMouseDown: goToStory, children: wp.Properties.Name }, i5);
       }) })
     ] });
   };
@@ -158238,7 +158292,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-m-4p-K5w.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-ILDYq01a.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
