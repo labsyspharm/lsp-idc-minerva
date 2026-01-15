@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-DA8IcN5B.js","./pako.esm-C0YWBoLx.js","./lerc-CnkE4S2s.js","./LercDecode-B7mSveLL.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-Bl7pqzos.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-BC-74AUc.js","./pako.esm-C0YWBoLx.js","./lerc-nu-_2OuY.js","./LercDecode-alLs8Nr8.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-CJBcXVJm.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-DgydRZnp.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-B26Fg0bS.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-UCmGwOIE.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-KQeBp7N2.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-rxlnBdA1.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-DA8IcN5B.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-BJCmuyVj.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-Cj3tuUfe.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-BC-74AUc.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-oPpM4lgm.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-CnkE4S2s.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-nu-_2OuY.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-B36Z8lqA.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-YNsRNmat.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -134389,6 +134389,50 @@ const useOverlayStore = create$2()(
     }
   )
 );
+const LoadingWidget = reactExports.forwardRef(({
+  placement = "top-left",
+  label = "Loading layer data"
+}, ref) => {
+  const [loading, setLoading] = reactExports.useState(true);
+  const onRedraw = reactExports.useCallback(({ layers }) => {
+    const isLoading = layers.some((layer) => !layer.isLoaded);
+    setLoading((prev) => prev !== isLoading ? isLoading : prev);
+  }, []);
+  reactExports.useImperativeHandle(ref, () => ({ onRedraw }), [onRedraw]);
+  if (!loading) {
+    return null;
+  }
+  const positionStyles = {
+    position: "absolute",
+    zIndex: 2,
+    ...placement === "top-left" && { top: "8px", left: "8px" },
+    ...placement === "top-right" && { top: "8px", right: "8px" },
+    ...placement === "bottom-left" && { bottom: "8px", left: "8px" },
+    ...placement === "bottom-right" && { bottom: "8px", right: "8px" }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "deck-widget-loading", style: positionStyles, title: label, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "div",
+      {
+        style: {
+          width: "24px",
+          height: "24px",
+          border: "3px solid rgba(255, 255, 255, 0.3)",
+          borderTop: "3px solid rgba(255, 255, 255, 0.9)",
+          borderRadius: "50%",
+          animation: "spin 1s linear infinite"
+        }
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      ` })
+  ] });
+});
+LoadingWidget.displayName = "LoadingWidget";
 const createDragHandlers = (activeTool, onInteraction) => {
   if (!onInteraction) {
     return {
@@ -134731,25 +134775,35 @@ const VivView = (props) => {
     setViewState(nextViewState);
     setViewportZoom(nextViewState.zoom);
   }, [isDragging, activeTool]);
+  const loadingWidgetRef = reactExports.useRef(null);
+  const handleAfterRender = reactExports.useCallback(() => {
+    if (loadingWidgetRef.current) {
+      loadingWidgetRef.current.onRedraw({ layers: allLayers });
+    }
+  }, [allLayers]);
   if (mainSettingsList.length === 0) {
     return null;
   }
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Main$2, { slot: "image", ref: rootRef, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-    DeckGL,
-    {
-      getCursor: getCursor2,
-      layers: allLayers,
-      controller: controllerConfig,
-      viewState: { "ortho": viewState },
-      onViewStateChange: handleViewStateChange,
-      onClick: dragHandlers.onClick,
-      onDragStart: dragHandlers.onDragStart,
-      onDrag: dragHandlers.onDrag,
-      onDragEnd: dragHandlers.onDragEnd,
-      onHover: dragHandlers.onHover,
-      views
-    }
-  ) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Main$2, { slot: "image", ref: rootRef, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      DeckGL,
+      {
+        getCursor: getCursor2,
+        layers: allLayers,
+        controller: controllerConfig,
+        viewState: { "ortho": viewState },
+        onViewStateChange: handleViewStateChange,
+        onClick: dragHandlers.onClick,
+        onDragStart: dragHandlers.onDragStart,
+        onDrag: dragHandlers.onDrag,
+        onDragEnd: dragHandlers.onDragEnd,
+        onHover: dragHandlers.onHover,
+        onAfterRender: handleAfterRender,
+        views
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingWidget, { ref: loadingWidgetRef })
+  ] });
 };
 VivView.displayName = "VivView";
 const toDefaultSettings = (n3) => {
@@ -147597,6 +147651,7 @@ const Channel = (props) => {
   const hide = props.hiddenChannel;
   props.setHiddenChannel;
   const { Groups: Groups2 } = props.config.ItemRegistry;
+  const hidden = props.retrievingMetadata;
   const {
     activeChannelGroupId
   } = useOverlayStore();
@@ -147625,7 +147680,7 @@ const Channel = (props) => {
   const content2 = props.authorMode ? /* @__PURE__ */ jsxRuntimeExports.jsx(TextOther, { children: minerva_author_ui }) : props.children;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(TextWrap, { children: [
     content2,
-    channelMenu
+    hidden ? "" : channelMenu
   ] });
 };
 function ok$1() {
@@ -157857,10 +157912,7 @@ const Main$1 = (props) => {
   const { stopExport } = props;
   let out = /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
   if (props.presenting) {
-    out = /* @__PURE__ */ jsxRuntimeExports.jsxs(Presentation, { ...props, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Channel, { ...props }),
-      props.children
-    ] });
+    out = /* @__PURE__ */ jsxRuntimeExports.jsx(Presentation, { ...props, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Channel, { ...props }) });
   } else if (props.ioState == "IDLE") {
     out = /* @__PURE__ */ jsxRuntimeExports.jsx(Channel, { ...props });
   } else if (props.ioState == "EXPORTING") {
@@ -157873,6 +157925,14 @@ const Main$1 = (props) => {
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: out });
 };
+const Wrapper$1 = qe$1.div`
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr; 
+  grid-template-rows: 1fr; 
+  justify-items: center;
+  align-items: center;
+`;
 const onLoaded = (setter) => {
   return (el2) => el2 ? setter(el2) : null;
 };
@@ -158115,6 +158175,7 @@ const Index = (props) => {
     pushChannel,
     popChannel
   };
+  const retrievingMetadata = props.dicomIndexList.length === 0 && props.demo_dicom_web;
   const mainProps = {
     ...channelProps,
     in_f,
@@ -158123,6 +158184,7 @@ const Index = (props) => {
     presenting,
     hiddenWaypoint,
     setHiddenWaypoint,
+    retrievingMetadata,
     onZoomInEl,
     onZoomOutEl,
     startExport,
@@ -158176,7 +158238,8 @@ const Index = (props) => {
       setActiveStory(0);
     }
   }, [_stories]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Main$1, { ...mainProps, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+  const retrieving_status = /* @__PURE__ */ jsxRuntimeExports.jsx(Wrapper$1, { children: "Retrieving DICOM metadata..." });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Main$1, { ...mainProps, children: retrievingMetadata ? retrieving_status : /* @__PURE__ */ jsxRuntimeExports.jsx(
     ImageView,
     {
       ...imageProps,
@@ -158220,7 +158283,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-Bl7pqzos.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-CJBcXVJm.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
@@ -158610,7 +158673,7 @@ const Content = (props) => {
     ...config2,
     ItemRegistry
   }), [config2.ID]);
-  const noLoader = loaderOmeTiff === null && dicomIndexList.length === 0;
+  const noLoader = loaderOmeTiff === null && dicomIndexList.length === 0 && !props.demo_dicom_web;
   const imager = noLoader ? "" : /* @__PURE__ */ jsxRuntimeExports.jsx(Full, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Index, { ...{
     dicomIndexList,
     config: config2,
@@ -158621,7 +158684,8 @@ const Content = (props) => {
     in_f: fileName,
     handle,
     hash,
-    setHash
+    setHash,
+    demo_dicom_web: props.demo_dicom_web
   } }) });
   const [valid2, setValid] = reactExports.useState({});
   if (props.demo_dicom_web) {
@@ -158641,9 +158705,6 @@ const Content = (props) => {
         ]);
       })();
     }, []);
-    if (dicomIndexList.length === 0) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(Wrapper, { children: "Retrieving DICOM metadata..." });
-    }
   }
   const onSubmit = (event) => {
     const form = event.currentTarget;
