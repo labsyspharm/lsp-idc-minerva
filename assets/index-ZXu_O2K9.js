@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-BC-74AUc.js","./pako.esm-C0YWBoLx.js","./lerc-nu-_2OuY.js","./LercDecode-alLs8Nr8.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-CJBcXVJm.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./deflate-B7wQWfUr.js","./pako.esm-C0YWBoLx.js","./lerc-CF0BlnIt.js","./LercDecode-CvmX6flb.js","./raw-CQeAqXQw.js","./basedecoder-RlaJh0FT.js","./lzw-kmdQUqnI.js","./jpeg-CtQzS-S2.js","./deflate-_X0BzjB2.js","./packbits-Ds9W8fyQ.js","./lerc-DH7Fxgvh.js","./zstd-_9TUrvAT.js","./webimage-d8IPIyfb.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -373,7 +373,7 @@ var scheduler_production_min = {};
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-(function(exports2) {
+(function(exports) {
   function f3(a2, b2) {
     var c2 = a2.length;
     a2.push(b2);
@@ -406,12 +406,12 @@ var scheduler_production_min = {};
   }
   if ("object" === typeof performance && "function" === typeof performance.now) {
     var l3 = performance;
-    exports2.unstable_now = function() {
+    exports.unstable_now = function() {
       return l3.now();
     };
   } else {
     var p4 = Date, q2 = p4.now();
-    exports2.unstable_now = function() {
+    exports.unstable_now = function() {
       return p4.now() - q2;
     };
   }
@@ -447,7 +447,7 @@ var scheduler_production_min = {};
           v2.callback = null;
           y3 = v2.priorityLevel;
           var e3 = d2(v2.expirationTime <= b2);
-          b2 = exports2.unstable_now();
+          b2 = exports.unstable_now();
           "function" === typeof e3 ? v2.callback = e3 : v2 === h2(r4) && k4(r4);
           G3(b2);
         } else k4(r4);
@@ -466,11 +466,11 @@ var scheduler_production_min = {};
   }
   var N5 = false, O2 = null, L4 = -1, P3 = 5, Q3 = -1;
   function M4() {
-    return exports2.unstable_now() - Q3 < P3 ? false : true;
+    return exports.unstable_now() - Q3 < P3 ? false : true;
   }
   function R4() {
     if (null !== O2) {
-      var a2 = exports2.unstable_now();
+      var a2 = exports.unstable_now();
       Q3 = a2;
       var b2 = true;
       try {
@@ -499,31 +499,31 @@ var scheduler_production_min = {};
   }
   function K2(a2, b2) {
     L4 = D3(function() {
-      a2(exports2.unstable_now());
+      a2(exports.unstable_now());
     }, b2);
   }
-  exports2.unstable_IdlePriority = 5;
-  exports2.unstable_ImmediatePriority = 1;
-  exports2.unstable_LowPriority = 4;
-  exports2.unstable_NormalPriority = 3;
-  exports2.unstable_Profiling = null;
-  exports2.unstable_UserBlockingPriority = 2;
-  exports2.unstable_cancelCallback = function(a2) {
+  exports.unstable_IdlePriority = 5;
+  exports.unstable_ImmediatePriority = 1;
+  exports.unstable_LowPriority = 4;
+  exports.unstable_NormalPriority = 3;
+  exports.unstable_Profiling = null;
+  exports.unstable_UserBlockingPriority = 2;
+  exports.unstable_cancelCallback = function(a2) {
     a2.callback = null;
   };
-  exports2.unstable_continueExecution = function() {
+  exports.unstable_continueExecution = function() {
     A3 || z4 || (A3 = true, I3(J2));
   };
-  exports2.unstable_forceFrameRate = function(a2) {
+  exports.unstable_forceFrameRate = function(a2) {
     0 > a2 || 125 < a2 ? console.error("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported") : P3 = 0 < a2 ? Math.floor(1e3 / a2) : 5;
   };
-  exports2.unstable_getCurrentPriorityLevel = function() {
+  exports.unstable_getCurrentPriorityLevel = function() {
     return y3;
   };
-  exports2.unstable_getFirstCallbackNode = function() {
+  exports.unstable_getFirstCallbackNode = function() {
     return h2(r4);
   };
-  exports2.unstable_next = function(a2) {
+  exports.unstable_next = function(a2) {
     switch (y3) {
       case 1:
       case 2:
@@ -541,11 +541,11 @@ var scheduler_production_min = {};
       y3 = c2;
     }
   };
-  exports2.unstable_pauseExecution = function() {
+  exports.unstable_pauseExecution = function() {
   };
-  exports2.unstable_requestPaint = function() {
+  exports.unstable_requestPaint = function() {
   };
-  exports2.unstable_runWithPriority = function(a2, b2) {
+  exports.unstable_runWithPriority = function(a2, b2) {
     switch (a2) {
       case 1:
       case 2:
@@ -564,8 +564,8 @@ var scheduler_production_min = {};
       y3 = c2;
     }
   };
-  exports2.unstable_scheduleCallback = function(a2, b2, c2) {
-    var d2 = exports2.unstable_now();
+  exports.unstable_scheduleCallback = function(a2, b2, c2) {
+    var d2 = exports.unstable_now();
     "object" === typeof c2 && null !== c2 ? (c2 = c2.delay, c2 = "number" === typeof c2 && 0 < c2 ? d2 + c2 : d2) : c2 = d2;
     switch (a2) {
       case 1:
@@ -588,8 +588,8 @@ var scheduler_production_min = {};
     c2 > d2 ? (a2.sortIndex = c2, f3(t3, a2), null === h2(r4) && a2 === h2(t3) && (B3 ? (E3(L4), L4 = -1) : B3 = true, K2(H4, c2 - d2))) : (a2.sortIndex = e3, f3(r4, a2), A3 || z4 || (A3 = true, I3(J2)));
     return a2;
   };
-  exports2.unstable_shouldYield = M4;
-  exports2.unstable_wrapCallback = function(a2) {
+  exports.unstable_shouldYield = M4;
+  exports.unstable_wrapCallback = function(a2) {
     var b2 = y3;
     return function() {
       var c2 = y3;
@@ -7062,7 +7062,7 @@ function defaultGetStore() {
   }
   return defaultGetStoreFunc;
 }
-function get$5(key, customStore = defaultGetStore()) {
+function get$1(key, customStore = defaultGetStore()) {
   return customStore("readonly", (store) => promisifyRequest(store.get(key)));
 }
 function set$2(key, value, customStore = defaultGetStore()) {
@@ -7684,7 +7684,7 @@ var unitlessKeys = {
   strokeOpacity: 1,
   strokeWidth: 1
 };
-function memoize$5(fn) {
+function memoize$2(fn) {
   var cache2 = /* @__PURE__ */ Object.create(null);
   return function(arg) {
     if (cache2[arg] === void 0) cache2[arg] = fn(arg);
@@ -7692,7 +7692,7 @@ function memoize$5(fn) {
   };
 }
 var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|disableRemotePlayback|download|draggable|encType|enterKeyHint|fetchpriority|fetchPriority|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
-var isPropValid = /* @__PURE__ */ memoize$5(
+var isPropValid = /* @__PURE__ */ memoize$2(
   function(prop) {
     return reactPropsRegex.test(prop) || prop.charCodeAt(0) === 111 && prop.charCodeAt(1) === 110 && prop.charCodeAt(2) < 91;
   }
@@ -7847,7 +7847,7 @@ function getStatics(component) {
   }
   return TYPE_STATICS[component["$$typeof"]] || REACT_STATICS;
 }
-var defineProperty$4 = Object.defineProperty;
+var defineProperty$1 = Object.defineProperty;
 var getOwnPropertyNames = Object.getOwnPropertyNames;
 var getOwnPropertySymbols = Object.getOwnPropertySymbols;
 var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
@@ -7872,7 +7872,7 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
       if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
         var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
         try {
-          defineProperty$4(targetComponent, key, descriptor);
+          defineProperty$1(targetComponent, key, descriptor);
         } catch (e3) {
         }
       }
@@ -8554,13 +8554,13 @@ function r$p(data2, state = {}) {
   const isArray3 = Array.isArray(data2);
   const children = [];
   const proxySource = isArray3 ? [] : Object.create(data2, {});
-  for (const property2 in data2) {
-    const entry = data2[property2];
+  for (const property in data2) {
+    const entry = data2[property];
     if (typeof entry === "object" && entry !== null) {
-      proxySource[property2] = !isR(entry) ? r$p(entry) : entry;
-      children.push(property2);
+      proxySource[property] = !isR(entry) ? r$p(entry) : entry;
+      children.push(property);
     } else {
-      proxySource[property2] = entry;
+      proxySource[property] = entry;
     }
   }
   const dep = (a2) => (p4, c2) => {
@@ -8579,8 +8579,8 @@ function r$p(data2, state = {}) {
   };
   const $on = dep("add");
   const $off = dep("delete");
-  const _em = (property2, newValue, oldValue) => {
-    observers.has(property2) && observers.get(property2).forEach((c2) => c2(newValue, oldValue));
+  const _em = (property, newValue, oldValue) => {
+    observers.has(property) && observers.get(property).forEach((c2) => c2(newValue, oldValue));
   };
   const _st = () => {
     return {
@@ -8613,10 +8613,10 @@ function r$p(data2, state = {}) {
       return value;
     },
     set(...args) {
-      const [target, property2, value] = args;
-      const old = Reflect.get(target, property2);
-      if (Reflect.has(depProps, property2)) {
-        return Reflect.set(depProps, property2, value);
+      const [target, property, value] = args;
+      const old = Reflect.get(target, property);
+      if (Reflect.has(depProps, property)) {
+        return Reflect.set(depProps, property, value);
       }
       if (value && isR(old)) {
         const o3 = old;
@@ -8624,16 +8624,16 @@ function r$p(data2, state = {}) {
         const newR = isR(value) ? reactiveMerge(value, o3) : r$p(value, oldState);
         Reflect.set(
           target,
-          property2,
+          property,
           // Create a new reactive object
           newR
         );
-        _em(property2, newR);
-        oldState.o.forEach((_c2, property3) => {
-          const oldValue = Reflect.get(old, property3);
-          const newValue = Reflect.get(newR, property3);
+        _em(property, newR);
+        oldState.o.forEach((_c2, property2) => {
+          const oldValue = Reflect.get(old, property2);
+          const newValue = Reflect.get(newR, property2);
           if (oldValue !== newValue) {
-            o3._em(property3, newValue, oldValue);
+            o3._em(property2, newValue, oldValue);
           }
         });
         return true;
@@ -8641,7 +8641,7 @@ function r$p(data2, state = {}) {
       const didSet = Reflect.set(...args);
       if (didSet) {
         if (old !== value) {
-          _em(property2, value, old);
+          _em(property, value, old);
         }
         if (proxy._p) {
           proxy._p[1]._em(...proxy._p);
@@ -8657,14 +8657,14 @@ function r$p(data2, state = {}) {
   });
   return proxy;
 }
-function addDep(proxy, property2) {
+function addDep(proxy, property) {
   dependencyCollector.forEach((tracker) => {
     let properties = tracker.get(proxy);
     if (!properties) {
       properties = /* @__PURE__ */ new Set();
       tracker.set(proxy, properties);
     }
-    properties.add(property2);
+    properties.add(property);
   });
 }
 function arrayOperation(op, arr, proxy, native) {
@@ -8672,8 +8672,8 @@ function arrayOperation(op, arr, proxy, native) {
     const retVal = Array.prototype[op].call(arr, ...args);
     arr.forEach((item, i5) => proxy._em(String(i5), item));
     if (proxy._p) {
-      const [property2, parent] = proxy._p;
-      parent._em(property2, proxy);
+      const [property, parent] = proxy._p;
+      parent._em(property, proxy);
     }
     return retVal;
   };
@@ -8699,9 +8699,9 @@ function arrayOperation(op, arr, proxy, native) {
 function reactiveMerge(reactiveTarget, reactiveSource) {
   const state = reactiveSource._st();
   if (state.o) {
-    state.o.forEach((callbacks, property2) => {
+    state.o.forEach((callbacks, property) => {
       callbacks.forEach((c2) => {
-        reactiveTarget.$on(property2, c2);
+        reactiveTarget.$on(property, c2);
       });
     });
   }
@@ -8769,7 +8769,7 @@ function t$o(strings2, ...expSlots) {
     }
     return html3 + expression;
   };
-  const toString3 = () => {
+  const toString2 = () => {
     if (!str2) {
       if (!expSlots.length && strings2.length === 1 && strings2[0] === "") {
         str2 = "<!---->";
@@ -8783,13 +8783,13 @@ function t$o(strings2, ...expSlots) {
     return str2;
   };
   const template2 = (el2) => {
-    const dom2 = createNodes(toString3());
+    const dom2 = createNodes(toString2());
     const frag = fragment$1(dom2, { i: 0, e: expressions });
     return el2 ? frag(el2) : frag();
   };
   template2.isT = true;
   template2._k = 0;
-  template2._h = () => [toString3(), expressions, template2._k];
+  template2._h = () => [toString2(), expressions, template2._k];
   template2.key = (key) => {
     template2._k = key;
     return template2;
@@ -9429,7 +9429,7 @@ function defineElement(element2, options = {}) {
       ].join("-");
     }
     if (el2.define) {
-      let get5 = function(...args) {
+      let get4 = function(...args) {
         if (args[1] !== "metadata") {
           return Reflect.get(...args);
         }
@@ -9437,7 +9437,7 @@ function defineElement(element2, options = {}) {
       };
       (class extends el2 {
         static getMetadata() {
-          return new Proxy(el2.getMetadata(), { get: get5 });
+          return new Proxy(el2.getMetadata(), { get: get4 });
         }
       }).define();
       return tag;
@@ -25207,9 +25207,9 @@ class ContentMatch {
   @internal
   */
   computeWrapping(target) {
-    let seen2 = /* @__PURE__ */ Object.create(null), active3 = [{ match: this, type: null, via: null }];
-    while (active3.length) {
-      let current = active3.shift(), match2 = current.match;
+    let seen2 = /* @__PURE__ */ Object.create(null), active = [{ match: this, type: null, via: null }];
+    while (active.length) {
+      let current = active.shift(), match2 = current.match;
       if (match2.matchType(target)) {
         let result = [];
         for (let obj = current; obj.type; obj = obj.via)
@@ -25219,7 +25219,7 @@ class ContentMatch {
       for (let i5 = 0; i5 < match2.next.length; i5++) {
         let { type, next: next3 } = match2.next[i5];
         if (!type.isLeaf && !type.hasRequiredAttrs() && !(type.name in seen2) && (!current.type || next3.validEnd)) {
-          active3.push({ match: type.contentMatch, type, via: current });
+          active.push({ match: type.contentMatch, type, via: current });
           seen2[type.name] = true;
         }
       }
@@ -25394,15 +25394,15 @@ function nfa(expr) {
         connect(next3, from2 = node2());
       }
     } else if (expr2.type == "star") {
-      let loop2 = node2();
-      edge(from2, loop2);
-      connect(compile2(expr2.expr, loop2), loop2);
-      return [edge(loop2)];
+      let loop = node2();
+      edge(from2, loop);
+      connect(compile2(expr2.expr, loop), loop);
+      return [edge(loop)];
     } else if (expr2.type == "plus") {
-      let loop2 = node2();
-      connect(compile2(expr2.expr, from2), loop2);
-      connect(compile2(expr2.expr, loop2), loop2);
-      return [edge(loop2)];
+      let loop = node2();
+      connect(compile2(expr2.expr, from2), loop);
+      connect(compile2(expr2.expr, loop), loop);
+      return [edge(loop)];
     } else if (expr2.type == "opt") {
       return [edge(from2)].concat(compile2(expr2.expr, from2));
     } else if (expr2.type == "range") {
@@ -26617,28 +26617,28 @@ class DOMSerializer {
   serializeFragment(fragment2, options = {}, target) {
     if (!target)
       target = doc$1(options).createDocumentFragment();
-    let top = target, active3 = [];
+    let top = target, active = [];
     fragment2.forEach((node2) => {
-      if (active3.length || node2.marks.length) {
+      if (active.length || node2.marks.length) {
         let keep = 0, rendered = 0;
-        while (keep < active3.length && rendered < node2.marks.length) {
+        while (keep < active.length && rendered < node2.marks.length) {
           let next3 = node2.marks[rendered];
           if (!this.marks[next3.type.name]) {
             rendered++;
             continue;
           }
-          if (!next3.eq(active3[keep][0]) || next3.type.spec.spanning === false)
+          if (!next3.eq(active[keep][0]) || next3.type.spec.spanning === false)
             break;
           keep++;
           rendered++;
         }
-        while (keep < active3.length)
-          top = active3.pop()[1];
+        while (keep < active.length)
+          top = active.pop()[1];
         while (rendered < node2.marks.length) {
           let add3 = node2.marks[rendered++];
           let markDOM = this.serializeMark(add3, node2.isInline, options);
           if (markDOM) {
-            active3.push([add3, top]);
+            active.push([add3, top]);
             top.appendChild(markDOM.dom);
             top = markDOM.contentDOM || markDOM.dom;
           }
@@ -27587,7 +27587,7 @@ function decodeHTML(str2, mode = DecodingMode.Legacy) {
 function _class$1(obj) {
   return Object.prototype.toString.call(obj);
 }
-function isString$2(obj) {
+function isString$1(obj) {
   return _class$1(obj) === "[object String]";
 }
 const _hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -27781,7 +27781,7 @@ function normalizeReference(str2) {
   }
   return str2.toLowerCase().toUpperCase();
 }
-const lib$1 = { mdurl, ucmicro };
+const lib = { mdurl, ucmicro };
 const utils$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   arrayReplaceAt,
@@ -27793,10 +27793,10 @@ const utils$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   isMdAsciiPunct,
   isPunctChar,
   isSpace,
-  isString: isString$2,
+  isString: isString$1,
   isValidEntityCode,
   isWhiteSpace,
-  lib: lib$1,
+  lib,
   normalizeReference,
   unescapeAll,
   unescapeMd
@@ -31078,16 +31078,16 @@ function assign$2(obj) {
 function _class(obj) {
   return Object.prototype.toString.call(obj);
 }
-function isString$1(obj) {
+function isString(obj) {
   return _class(obj) === "[object String]";
 }
-function isObject$b(obj) {
+function isObject$3(obj) {
   return _class(obj) === "[object Object]";
 }
 function isRegExp(obj) {
   return _class(obj) === "[object RegExp]";
 }
-function isFunction$6(obj) {
+function isFunction$2(obj) {
   return _class(obj) === "[object Function]";
 }
 function escapeRE(str2) {
@@ -31208,15 +31208,15 @@ function compile(self2) {
     }
     const compiled = { validate: null, link: null };
     self2.__compiled__[name2] = compiled;
-    if (isObject$b(val)) {
+    if (isObject$3(val)) {
       if (isRegExp(val.validate)) {
         compiled.validate = createValidator(val.validate);
-      } else if (isFunction$6(val.validate)) {
+      } else if (isFunction$2(val.validate)) {
         compiled.validate = val.validate;
       } else {
         schemaError(name2, val);
       }
-      if (isFunction$6(val.normalize)) {
+      if (isFunction$2(val.normalize)) {
         compiled.normalize = val.normalize;
       } else if (!val.normalize) {
         compiled.normalize = createNormalizer();
@@ -31225,7 +31225,7 @@ function compile(self2) {
       }
       return;
     }
-    if (isString$1(val)) {
+    if (isString(val)) {
       aliases.push(name2);
       return;
     }
@@ -31436,7 +31436,7 @@ const stringFromCharCode = String.fromCharCode;
 function error(type) {
   throw new RangeError(errors[type]);
 }
-function map$4(array, callback) {
+function map$2(array, callback) {
   const result = [];
   let length2 = array.length;
   while (length2--) {
@@ -31453,7 +31453,7 @@ function mapDomain(domain, callback) {
   }
   domain = domain.replace(regexSeparators, ".");
   const labels = domain.split(".");
-  const encoded = map$4(labels, callback).join(".");
+  const encoded = map$2(labels, callback).join(".");
   return result + encoded;
 }
 function ucs2decode$1(string2) {
@@ -31853,7 +31853,7 @@ function MarkdownIt(presetName, options) {
     return new MarkdownIt(presetName, options);
   }
   if (!options) {
-    if (!isString$2(presetName)) {
+    if (!isString$1(presetName)) {
       options = presetName || {};
       presetName = "default";
     }
@@ -31880,7 +31880,7 @@ MarkdownIt.prototype.set = function(options) {
 };
 MarkdownIt.prototype.configure = function(presets) {
   const self2 = this;
-  if (isString$2(presets)) {
+  if (isString$1(presets)) {
     const presetName = presets;
     presets = config$2[presetName];
     if (!presets) {
@@ -32592,7 +32592,7 @@ class MarkdownSerializerState {
   */
   renderInline(parent, fromBlockStart = true) {
     this.atBlockStart = fromBlockStart;
-    let active3 = [], trailing = "";
+    let active = [], trailing = "";
     let progress = (node2, offset, index2) => {
       let marks = node2 ? node2.marks : [];
       if (node2 && node2.type.name === this.options.hardBreakNodeName)
@@ -32606,14 +32606,14 @@ class MarkdownSerializerState {
       trailing = "";
       if (node2 && node2.isText && marks.some((mark2) => {
         let info = this.getMark(mark2.type.name);
-        return info && info.expelEnclosingWhitespace && !mark2.isInSet(active3);
+        return info && info.expelEnclosingWhitespace && !mark2.isInSet(active);
       })) {
         let [_2, lead, rest] = /^(\s*)(.*)$/m.exec(node2.text);
         if (lead) {
           leading += lead;
           node2 = rest ? node2.withText(rest) : null;
           if (!node2)
-            marks = active3;
+            marks = active;
         }
       }
       if (node2 && node2.isText && marks.some((mark2) => {
@@ -32625,7 +32625,7 @@ class MarkdownSerializerState {
           trailing = trail;
           node2 = rest ? node2.withText(rest) : null;
           if (!node2)
-            marks = active3;
+            marks = active;
         }
       }
       let inner = marks.length ? marks[marks.length - 1] : null;
@@ -32635,8 +32635,8 @@ class MarkdownSerializerState {
         let mark2 = marks[i5];
         if (!this.getMark(mark2.type.name).mixable)
           break;
-        for (let j2 = 0; j2 < active3.length; j2++) {
-          let other = active3[j2];
+        for (let j2 = 0; j2 < active.length; j2++) {
+          let other = active[j2];
           if (!this.getMark(other.type.name).mixable)
             break;
           if (mark2.eq(other)) {
@@ -32649,16 +32649,16 @@ class MarkdownSerializerState {
         }
       }
       let keep = 0;
-      while (keep < Math.min(active3.length, len2) && marks[keep].eq(active3[keep]))
+      while (keep < Math.min(active.length, len2) && marks[keep].eq(active[keep]))
         ++keep;
-      while (keep < active3.length)
-        this.text(this.markString(active3.pop(), false, parent, index2), false);
+      while (keep < active.length)
+        this.text(this.markString(active.pop(), false, parent, index2), false);
       if (leading)
         this.text(leading);
       if (node2) {
-        while (active3.length < len2) {
-          let add3 = marks[active3.length];
-          active3.push(add3);
+        while (active.length < len2) {
+          let add3 = marks[active.length];
+          active.push(add3);
           this.text(this.markString(add3, true, parent, index2), false);
           this.atBlockStart = false;
         }
@@ -35429,11 +35429,11 @@ class Plugin {
     return state[this.key];
   }
 }
-const keys$8 = /* @__PURE__ */ Object.create(null);
+const keys$1 = /* @__PURE__ */ Object.create(null);
 function createKey(name2) {
-  if (name2 in keys$8)
-    return name2 + "$" + ++keys$8[name2];
-  keys$8[name2] = 0;
+  if (name2 in keys$1)
+    return name2 + "$" + ++keys$1[name2];
+  keys$1[name2] = 0;
   return name2 + "$";
 }
 class PluginKey {
@@ -35997,18 +35997,18 @@ function flattenH(rect, top) {
   return { top: y3, bottom: y3, left: rect.left, right: rect.right };
 }
 function withFlushedState(view, state, f3) {
-  let viewState = view.state, active3 = view.root.activeElement;
+  let viewState = view.state, active = view.root.activeElement;
   if (viewState != state)
     view.updateState(state);
-  if (active3 != view.dom)
+  if (active != view.dom)
     view.focus();
   try {
     return f3();
   } finally {
     if (viewState != state)
       view.updateState(viewState);
-    if (active3 != view.dom && active3)
-      active3.focus();
+    if (active != view.dom && active)
+      active.focus();
   }
 }
 function endOfTextblockVertical(view, state, dir) {
@@ -37306,7 +37306,7 @@ function iterDeco(parent, deco, onWidget, onNode2) {
     }
     return;
   }
-  let decoIndex = 0, active3 = [], restNode = null;
+  let decoIndex = 0, active = [], restNode = null;
   for (let parentIndex = 0; ; ) {
     let widget, widgets;
     while (decoIndex < locals.length && locals[decoIndex].to == offset) {
@@ -37338,19 +37338,19 @@ function iterDeco(parent, deco, onWidget, onNode2) {
     } else {
       break;
     }
-    for (let i5 = 0; i5 < active3.length; i5++)
-      if (active3[i5].to <= offset)
-        active3.splice(i5--, 1);
+    for (let i5 = 0; i5 < active.length; i5++)
+      if (active[i5].to <= offset)
+        active.splice(i5--, 1);
     while (decoIndex < locals.length && locals[decoIndex].from <= offset && locals[decoIndex].to > offset)
-      active3.push(locals[decoIndex++]);
+      active.push(locals[decoIndex++]);
     let end2 = offset + child.nodeSize;
     if (child.isText) {
       let cutAt = end2;
       if (decoIndex < locals.length && locals[decoIndex].from < cutAt)
         cutAt = locals[decoIndex].from;
-      for (let i5 = 0; i5 < active3.length; i5++)
-        if (active3[i5].to < cutAt)
-          cutAt = active3[i5].to;
+      for (let i5 = 0; i5 < active.length; i5++)
+        if (active[i5].to < cutAt)
+          cutAt = active[i5].to;
       if (cutAt < end2) {
         restNode = child.cut(cutAt - offset);
         child = child.cut(0, cutAt - offset);
@@ -37361,7 +37361,7 @@ function iterDeco(parent, deco, onWidget, onNode2) {
       while (decoIndex < locals.length && locals[decoIndex].to < end2)
         decoIndex++;
     }
-    let outerDeco = child.isInline && !child.isLeaf ? active3.filter((d2) => !d2.inline) : active3.slice();
+    let outerDeco = child.isInline && !child.isLeaf ? active.filter((d2) => !d2.inline) : active.slice();
     onNode2(child, outerDeco, deco.forChild(offset, child), index2);
     offset = end2;
   }
@@ -37617,7 +37617,7 @@ function moveSelectionBlock(state, dir) {
   let $start = !$side.parent.inlineContent ? $side : $side.depth ? state.doc.resolve(dir > 0 ? $side.after() : $side.before()) : null;
   return $start && Selection.findFrom($start, dir);
 }
-function apply$1(view, sel) {
+function apply(view, sel) {
   view.dispatch(view.state.tr.setSelection(sel).scrollIntoView());
   return true;
 }
@@ -37629,13 +37629,13 @@ function selectHorizontally(view, dir, mods) {
       if (!node2 || node2.isText || !node2.isLeaf)
         return false;
       let $newHead = view.state.doc.resolve($head.pos + node2.nodeSize * (dir < 0 ? -1 : 1));
-      return apply$1(view, new TextSelection(sel.$anchor, $newHead));
+      return apply(view, new TextSelection(sel.$anchor, $newHead));
     } else if (!sel.empty) {
       return false;
     } else if (view.endOfTextblock(dir > 0 ? "forward" : "backward")) {
       let next3 = moveSelectionBlock(view.state, dir);
       if (next3 && next3 instanceof NodeSelection)
-        return apply$1(view, next3);
+        return apply(view, next3);
       return false;
     } else if (!(mac$2 && mods.indexOf("m") > -1)) {
       let $head = sel.$head, node2 = $head.textOffset ? null : dir < 0 ? $head.nodeBefore : $head.nodeAfter, desc;
@@ -37645,19 +37645,19 @@ function selectHorizontally(view, dir, mods) {
       if (!(node2.isAtom || (desc = view.docView.descAt(nodePos)) && !desc.contentDOM))
         return false;
       if (NodeSelection.isSelectable(node2)) {
-        return apply$1(view, new NodeSelection(dir < 0 ? view.state.doc.resolve($head.pos - node2.nodeSize) : $head));
+        return apply(view, new NodeSelection(dir < 0 ? view.state.doc.resolve($head.pos - node2.nodeSize) : $head));
       } else if (webkit) {
-        return apply$1(view, new TextSelection(view.state.doc.resolve(dir < 0 ? nodePos : nodePos + node2.nodeSize)));
+        return apply(view, new TextSelection(view.state.doc.resolve(dir < 0 ? nodePos : nodePos + node2.nodeSize)));
       } else {
         return false;
       }
     }
   } else if (sel instanceof NodeSelection && sel.node.isInline) {
-    return apply$1(view, new TextSelection(dir > 0 ? sel.$to : sel.$from));
+    return apply(view, new TextSelection(dir > 0 ? sel.$to : sel.$from));
   } else {
     let next3 = moveSelectionBlock(view.state, dir);
     if (next3)
-      return apply$1(view, next3);
+      return apply(view, next3);
     return false;
   }
 }
@@ -37854,12 +37854,12 @@ function selectVertically(view, dir, mods) {
   if (!$from.parent.inlineContent || view.endOfTextblock(dir < 0 ? "up" : "down")) {
     let next3 = moveSelectionBlock(view.state, dir);
     if (next3 && next3 instanceof NodeSelection)
-      return apply$1(view, next3);
+      return apply(view, next3);
   }
   if (!$from.parent.inlineContent) {
     let side = dir < 0 ? $from : $to;
     let beyond = sel instanceof AllSelection ? Selection.near(side, dir) : Selection.findFrom(side, dir);
-    return beyond ? apply$1(view, beyond) : false;
+    return beyond ? apply(view, beyond) : false;
   }
   return false;
 }
@@ -38267,10 +38267,10 @@ editHandlers.keydown = (view, _event) => {
   if (event.keyCode != 229)
     view.domObserver.forceFlush();
   if (ios && event.keyCode == 13 && !event.ctrlKey && !event.altKey && !event.metaKey) {
-    let now2 = Date.now();
-    view.input.lastIOSEnter = now2;
+    let now = Date.now();
+    view.input.lastIOSEnter = now;
     view.input.lastIOSEnterFallbackTimeout = setTimeout(() => {
-      if (view.input.lastIOSEnter == now2) {
+      if (view.input.lastIOSEnter == now) {
         view.someProp("handleKeyDown", (f3) => f3(view, keyEvent(13, "Enter")));
         view.input.lastIOSEnter = 0;
       }
@@ -38403,14 +38403,14 @@ handlers$1.mousedown = (view, _event) => {
   let event = _event;
   view.input.shiftKey = event.shiftKey;
   let flushed = forceDOMFlush(view);
-  let now2 = Date.now(), type = "singleClick";
-  if (now2 - view.input.lastClick.time < 500 && isNear(event, view.input.lastClick) && !event[selectNodeModifier] && view.input.lastClick.button == event.button) {
+  let now = Date.now(), type = "singleClick";
+  if (now - view.input.lastClick.time < 500 && isNear(event, view.input.lastClick) && !event[selectNodeModifier] && view.input.lastClick.button == event.button) {
     if (view.input.lastClick.type == "singleClick")
       type = "doubleClick";
     else if (view.input.lastClick.type == "doubleClick")
       type = "tripleClick";
   }
-  view.input.lastClick = { time: now2, x: event.clientX, y: event.clientY, type, button: event.button };
+  view.input.lastClick = { time: now, x: event.clientX, y: event.clientY, type, button: event.button };
   let pos = view.posAtCoords(eventCoords(event));
   if (!pos)
     return;
@@ -40813,7 +40813,7 @@ class Branch {
       remap = this.remapping(end2, this.items.length);
       mapFrom = remap.maps.length;
     }
-    let transform2 = state.tr;
+    let transform = state.tr;
     let selection, remaining;
     let addAfter = [], addBefore = [];
     this.items.forEach((item, i5) => {
@@ -40829,15 +40829,15 @@ class Branch {
       if (remap) {
         addBefore.push(new Item(item.map));
         let step = item.step.map(remap.slice(mapFrom)), map3;
-        if (step && transform2.maybeStep(step).doc) {
-          map3 = transform2.mapping.maps[transform2.mapping.maps.length - 1];
+        if (step && transform.maybeStep(step).doc) {
+          map3 = transform.mapping.maps[transform.mapping.maps.length - 1];
           addAfter.push(new Item(map3, void 0, void 0, addAfter.length + addBefore.length));
         }
         mapFrom--;
         if (map3)
           remap.appendMap(map3, mapFrom);
       } else {
-        transform2.maybeStep(item.step);
+        transform.maybeStep(item.step);
       }
       if (item.selection) {
         selection = remap ? item.selection.map(remap.slice(mapFrom)) : item.selection;
@@ -40845,15 +40845,15 @@ class Branch {
         return false;
       }
     }, this.items.length, 0);
-    return { remaining, transform: transform2, selection };
+    return { remaining, transform, selection };
   }
   // Create a new branch with the given transform added.
-  addTransform(transform2, selection, histOptions, preserveItems) {
+  addTransform(transform, selection, histOptions, preserveItems) {
     let newItems = [], eventCount = this.eventCount;
     let oldItems = this.items, lastItem = !preserveItems && oldItems.length ? oldItems.get(oldItems.length - 1) : null;
-    for (let i5 = 0; i5 < transform2.steps.length; i5++) {
-      let step = transform2.steps[i5].invert(transform2.docs[i5]);
-      let item = new Item(transform2.mapping.maps[i5], step, selection), merged;
+    for (let i5 = 0; i5 < transform.steps.length; i5++) {
+      let step = transform.steps[i5].invert(transform.docs[i5]);
+      let item = new Item(transform.mapping.maps[i5], step, selection), merged;
       if (merged = lastItem && lastItem.merge(item)) {
         item = merged;
         if (i5)
@@ -41035,13 +41035,13 @@ function applyTransaction(history2, state, tr, options) {
     return new HistoryState(history2.done.addMaps(tr.mapping.maps), history2.undone.addMaps(tr.mapping.maps), mapRanges(history2.prevRanges, tr.mapping), history2.prevTime, history2.prevComposition);
   }
 }
-function isAdjacentTo(transform2, prevRanges) {
+function isAdjacentTo(transform, prevRanges) {
   if (!prevRanges)
     return false;
-  if (!transform2.docChanged)
+  if (!transform.docChanged)
     return true;
   let adjacent = false;
-  transform2.mapping.maps[0].forEach((start, end2) => {
+  transform.mapping.maps[0].forEach((start, end2) => {
     for (let i5 = 0; i5 < prevRanges.length; i5 += 2)
       if (start <= prevRanges[i5 + 1] && end2 >= prevRanges[i5])
         adjacent = true;
@@ -41947,8 +41947,8 @@ class MenuItem {
         dom2.classList.toggle(prefix$1 + "-disabled", !enabled);
       }
       if (spec.active) {
-        const active3 = enabled && spec.active(state) || false;
-        dom2.classList.toggle(prefix$1 + "-active", active3);
+        const active = enabled && spec.active(state) || false;
+        dom2.classList.toggle(prefix$1 + "-active", active);
       }
       return true;
     };
@@ -42685,10 +42685,10 @@ const _MDEditor = class _MDEditor extends sourceItemMap(
     return (Properties || {})[this.elementState.property] || "";
   }
   set contentValue(v2) {
-    const { property: property2 } = this.elementState;
+    const { property } = this.elementState;
     const { Properties } = this.itemSource || {};
-    if (Properties && property2 in Properties) {
-      Properties[property2] = v2;
+    if (Properties && property in Properties) {
+      Properties[property] = v2;
     }
   }
   attributeChangedCallback(k4, old_v, v2) {
@@ -42808,7 +42808,7 @@ function isFocusable($elem) {
   );
 }
 const timeouts = /* @__PURE__ */ new Map();
-function debounce$2(cb2, ms, id2) {
+function debounce$1(cb2, ms, id2) {
   const timeout = timeouts.get(id2);
   if (timeout != null) {
     window.clearTimeout(timeout);
@@ -42948,7 +42948,7 @@ class FocusTrap extends HTMLElement {
    * @param value
    */
   updateFocused(value) {
-    debounce$2(() => {
+    debounce$1(() => {
       if (this.focused !== value) {
         this._focused = value;
         this.render();
@@ -44781,8 +44781,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 */
 let modules = {};
 let lcModules = {};
-function setModule(id2, module2) {
-  modules[id2] = lcModules[id2.toLowerCase()] = module2;
+function setModule(id2, module) {
+  modules[id2] = lcModules[id2.toLowerCase()] = module;
 }
 function findModule(id2) {
   return modules[id2] || lcModules[id2.toLowerCase()];
@@ -44966,9 +44966,9 @@ function stylesFromModuleImports(moduleId) {
   let m2 = importModule(moduleId);
   return m2 ? _stylesFromModuleImports(m2) : [];
 }
-function _stylesFromModuleImports(module2) {
+function _stylesFromModuleImports(module) {
   const styles2 = [];
-  const p$ = module2.querySelectorAll(MODULE_STYLE_LINK_SELECTOR);
+  const p$ = module.querySelectorAll(MODULE_STYLE_LINK_SELECTOR);
   for (let i5 = 0; i5 < p$.length; i5++) {
     let p4 = p$[i5];
     if (p4.import) {
@@ -45008,7 +45008,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 function isPath(path) {
   return path.indexOf(".") >= 0;
 }
-function root$d(path) {
+function root$3(path) {
   let dotIndex = path.indexOf(".");
   if (dotIndex === -1) {
     return path;
@@ -45044,7 +45044,7 @@ function split(path) {
   }
   return path.toString().split(".");
 }
-function get$4(root2, path, info) {
+function get2(root2, path, info) {
   let prop = root2;
   let parts = split(path);
   for (let i5 = 0; i5 < parts.length; i5++) {
@@ -45208,8 +45208,8 @@ const PropertiesChanged = dedupingMixin(
        * @protected
        * @nocollapse
        */
-      static attributeNameForProperty(property2) {
-        return property2.toLowerCase();
+      static attributeNameForProperty(property) {
+        return property.toLowerCase();
       }
       /**
        * Override point to provide a type to which to deserialize a value to
@@ -45239,14 +45239,14 @@ const PropertiesChanged = dedupingMixin(
        * @protected
        * @override
        */
-      _createPropertyAccessor(property2, readOnly) {
-        this._addPropertyToAttributeMap(property2);
+      _createPropertyAccessor(property, readOnly) {
+        this._addPropertyToAttributeMap(property);
         if (!this.hasOwnProperty(JSCompiler_renameProperty("__dataHasAccessor", this))) {
           this.__dataHasAccessor = Object.assign({}, this.__dataHasAccessor);
         }
-        if (!this.__dataHasAccessor[property2]) {
-          this.__dataHasAccessor[property2] = true;
-          this._definePropertyAccessor(property2, readOnly);
+        if (!this.__dataHasAccessor[property]) {
+          this.__dataHasAccessor[property] = true;
+          this._definePropertyAccessor(property, readOnly);
         }
       }
       /**
@@ -45257,14 +45257,14 @@ const PropertiesChanged = dedupingMixin(
        * @param {string} property Name of the property
        * @override
        */
-      _addPropertyToAttributeMap(property2) {
+      _addPropertyToAttributeMap(property) {
         if (!this.hasOwnProperty(JSCompiler_renameProperty("__dataAttributes", this))) {
           this.__dataAttributes = Object.assign({}, this.__dataAttributes);
         }
-        let attr = this.__dataAttributes[property2];
+        let attr = this.__dataAttributes[property];
         if (!attr) {
-          attr = this.constructor.attributeNameForProperty(property2);
-          this.__dataAttributes[attr] = property2;
+          attr = this.constructor.attributeNameForProperty(property);
+          this.__dataAttributes[attr] = property;
         }
         return attr;
       }
@@ -45275,17 +45275,17 @@ const PropertiesChanged = dedupingMixin(
        * @return {void}
        * @override
        */
-      _definePropertyAccessor(property2, readOnly) {
-        Object.defineProperty(this, property2, {
+      _definePropertyAccessor(property, readOnly) {
+        Object.defineProperty(this, property, {
           /* eslint-disable valid-jsdoc */
           /** @this {PropertiesChanged} */
           get() {
-            return this.__data[property2];
+            return this.__data[property];
           },
           /** @this {PropertiesChanged} */
           set: readOnly ? function() {
           } : function(value) {
-            if (this._setPendingProperty(property2, value, true)) {
+            if (this._setPendingProperty(property, value, true)) {
               this._invalidateProperties();
             }
           }
@@ -45370,8 +45370,8 @@ const PropertiesChanged = dedupingMixin(
        * @protected
        * @override
        */
-      _setProperty(property2, value) {
-        if (this._setPendingProperty(property2, value)) {
+      _setProperty(property, value) {
+        if (this._setPendingProperty(property, value)) {
           this._invalidateProperties();
         }
       }
@@ -45382,8 +45382,8 @@ const PropertiesChanged = dedupingMixin(
        * @protected
        * @override
        */
-      _getProperty(property2) {
-        return this.__data[property2];
+      _getProperty(property) {
+        return this.__data[property];
       }
       /* eslint-disable no-unused-vars */
       /**
@@ -45399,19 +45399,19 @@ const PropertiesChanged = dedupingMixin(
        * @protected
        * @override
        */
-      _setPendingProperty(property2, value, ext) {
-        let old = this.__data[property2];
-        let changed = this._shouldPropertyChange(property2, value, old);
+      _setPendingProperty(property, value, ext) {
+        let old = this.__data[property];
+        let changed = this._shouldPropertyChange(property, value, old);
         if (changed) {
           if (!this.__dataPending) {
             this.__dataPending = {};
             this.__dataOld = {};
           }
-          if (this.__dataOld && !(property2 in this.__dataOld)) {
-            this.__dataOld[property2] = old;
+          if (this.__dataOld && !(property in this.__dataOld)) {
+            this.__dataOld[property] = old;
           }
-          this.__data[property2] = value;
-          this.__dataPending[property2] = value;
+          this.__data[property] = value;
+          this.__dataPending[property] = value;
         }
         return changed;
       }
@@ -45420,8 +45420,8 @@ const PropertiesChanged = dedupingMixin(
        * @param {string} property Name of the property
        * @return {boolean} Returns true if the property is pending.
        */
-      _isPropertyPending(property2) {
-        return !!(this.__dataPending && this.__dataPending.hasOwnProperty(property2));
+      _isPropertyPending(property) {
+        return !!(this.__dataPending && this.__dataPending.hasOwnProperty(property));
       }
       /**
        * Marks the properties as invalid, and enqueues an async
@@ -45536,7 +45536,7 @@ const PropertiesChanged = dedupingMixin(
        * @protected
        * @override
        */
-      _shouldPropertyChange(property2, value, old) {
+      _shouldPropertyChange(property, value, old) {
         return (
           // Strict equality check
           old !== value && // This ensures (old==NaN, value==NaN) always returns false
@@ -45579,8 +45579,8 @@ const PropertiesChanged = dedupingMixin(
       _attributeToProperty(attribute2, value, type) {
         if (!this.__serializing) {
           const map3 = this.__dataAttributes;
-          const property2 = map3 && map3[attribute2] || attribute2;
-          this[property2] = this._deserializeValue(value, type || this.constructor.typeForProperty(property2));
+          const property = map3 && map3[attribute2] || attribute2;
+          this[property] = this._deserializeValue(value, type || this.constructor.typeForProperty(property));
         }
       }
       /**
@@ -45594,14 +45594,14 @@ const PropertiesChanged = dedupingMixin(
        * @return {void}
        * @override
        */
-      _propertyToAttribute(property2, attribute2, value) {
+      _propertyToAttribute(property, attribute2, value) {
         this.__serializing = true;
-        value = arguments.length < 3 ? this[property2] : value;
+        value = arguments.length < 3 ? this[property] : value;
         this._valueToNodeAttribute(
           /** @type {!HTMLElement} */
           this,
           value,
-          attribute2 || this.constructor.attributeNameForProperty(property2)
+          attribute2 || this.constructor.attributeNameForProperty(property)
         );
         this.__serializing = false;
       }
@@ -45710,19 +45710,19 @@ const isTrustedType = (() => {
   }
   return (val) => trustedTypes.isHTML(val) || trustedTypes.isScript(val) || trustedTypes.isScriptURL(val);
 })();
-function saveAccessorValue(model, property2) {
-  if (!nativeProperties[property2]) {
-    let value = model[property2];
+function saveAccessorValue(model, property) {
+  if (!nativeProperties[property]) {
+    let value = model[property];
     if (value !== void 0) {
       if (model.__data) {
-        model._setPendingProperty(property2, value);
+        model._setPendingProperty(property, value);
       } else {
         if (!model.__dataProto) {
           model.__dataProto = {};
         } else if (!model.hasOwnProperty(JSCompiler_renameProperty("__dataProto", model))) {
           model.__dataProto = Object.create(model.__dataProto);
         }
-        model.__dataProto[property2] = value;
+        model.__dataProto[property] = value;
       }
     }
   }
@@ -45758,8 +45758,8 @@ const PropertyAccessors = dedupingMixin((superClass) => {
      * @protected
      * @nocollapse
      */
-    static attributeNameForProperty(property2) {
-      return camelToDashCase(property2);
+    static attributeNameForProperty(property) {
+      return camelToDashCase(property);
     }
     /**
      * Overrides PropertiesChanged implementation to initialize values for
@@ -45914,9 +45914,9 @@ const PropertyAccessors = dedupingMixin((superClass) => {
      * @return {void}
      * @override
      */
-    _definePropertyAccessor(property2, readOnly) {
-      saveAccessorValue(this, property2);
-      super._definePropertyAccessor(property2, readOnly);
+    _definePropertyAccessor(property, readOnly) {
+      saveAccessorValue(this, property);
+      super._definePropertyAccessor(property, readOnly);
     }
     /**
      * Returns true if this library created an accessor for the given property.
@@ -45925,8 +45925,8 @@ const PropertyAccessors = dedupingMixin((superClass) => {
      * @return {boolean} True if an accessor was created
      * @override
      */
-    _hasAccessor(property2) {
-      return this.__dataHasAccessor && this.__dataHasAccessor[property2];
+    _hasAccessor(property) {
+      return this.__dataHasAccessor && this.__dataHasAccessor[property];
     }
     /**
      * Returns true if the specified property has a pending change.
@@ -46481,7 +46481,7 @@ function runEffects(inst, effects, props, oldProps, hasPaths, extraArgs) {
     let ran = false;
     const id2 = dedupeId++;
     for (let prop in props) {
-      let rootProperty = hasPaths ? root$d(prop) : prop;
+      let rootProperty = hasPaths ? root$3(prop) : prop;
       let fxs = effects[rootProperty];
       if (fxs) {
         for (let i5 = 0, l3 = fxs.length, fx; i5 < l3 && (fx = fxs[i5]); i5++) {
@@ -46501,7 +46501,7 @@ function runEffects(inst, effects, props, oldProps, hasPaths, extraArgs) {
 }
 function runEffectsForProperty(inst, effects, dedupeId2, prop, props, oldProps, hasPaths, extraArgs) {
   let ran = false;
-  let rootProperty = hasPaths ? root$d(prop) : prop;
+  let rootProperty = hasPaths ? root$3(prop) : prop;
   let fxs = effects[rootProperty];
   if (fxs) {
     for (let i5 = 0, l3 = fxs.length, fx; i5 < l3 && (fx = fxs[i5]); i5++) {
@@ -46527,7 +46527,7 @@ function pathMatchesTrigger(path, trigger) {
     return true;
   }
 }
-function runObserverEffect(inst, property2, props, oldProps, info) {
+function runObserverEffect(inst, property, props, oldProps, info) {
   let fn = typeof info.method === "string" ? inst[info.method] : info.method;
   let changedProp = info.property;
   if (fn) {
@@ -46555,7 +46555,7 @@ function runNotifyEffects(inst, notifyProps, props, oldProps, hasPaths) {
   }
 }
 function notifyPath(inst, path, props) {
-  let rootProperty = root$d(path);
+  let rootProperty = root$3(path);
   if (rootProperty !== path) {
     let eventName = camelToDashCase(rootProperty) + "-changed";
     dispatchNotifyEvent(inst, eventName, props[path], path);
@@ -46576,12 +46576,12 @@ function dispatchNotifyEvent(inst, eventName, value, path) {
     inst
   ).dispatchEvent(new CustomEvent(eventName, { detail }));
 }
-function runNotifyEffect(inst, property2, props, oldProps, info, hasPaths) {
-  let rootProperty = hasPaths ? root$d(property2) : property2;
-  let path = rootProperty != property2 ? property2 : null;
-  let value = path ? get$4(inst, path) : inst.__data[property2];
+function runNotifyEffect(inst, property, props, oldProps, info, hasPaths) {
+  let rootProperty = hasPaths ? root$3(property) : property;
+  let path = rootProperty != property ? property : null;
+  let value = path ? get2(inst, path) : inst.__data[property];
   if (path && value === void 0) {
-    value = props[property2];
+    value = props[property];
   }
   dispatchNotifyEvent(inst, info.eventName, value, path);
 }
@@ -46605,8 +46605,8 @@ function handleNotification(event, inst, fromProp, toPath, negate2) {
     }
   }
 }
-function runReflectEffect(inst, property2, props, oldProps, info) {
-  let value = inst.__data[property2];
+function runReflectEffect(inst, property, props, oldProps, info) {
+  let value = inst.__data[property];
   if (sanitizeDOMValue) {
     value = sanitizeDOMValue(
       value,
@@ -46616,7 +46616,7 @@ function runReflectEffect(inst, property2, props, oldProps, info) {
       inst
     );
   }
-  inst._propertyToAttribute(property2, info.attrName, value);
+  inst._propertyToAttribute(property, info.attrName, value);
 }
 function runComputedEffects(inst, changedProps, oldProps, hasPaths) {
   let computeEffects = inst[TYPES.COMPUTE];
@@ -46686,7 +46686,7 @@ const insertEffect = (info, queue2, order2) => {
   queue2.splice(idx, 0, info);
 };
 const enqueueEffectsFor = (prop, computeEffects, queue2, order2, hasPaths) => {
-  const rootProperty = hasPaths ? root$d(prop) : prop;
+  const rootProperty = hasPaths ? root$3(prop) : prop;
   const fxs = computeEffects[rootProperty];
   if (fxs) {
     for (let i5 = 0; i5 < fxs.length; i5++) {
@@ -46746,8 +46746,8 @@ function dependencyCounts(inst) {
   }
   return { counts, ready, total };
 }
-function runComputedEffect(inst, property2, changedProps, oldProps, info) {
-  let result = runMethodEffect(inst, property2, changedProps, oldProps, info);
+function runComputedEffect(inst, property, changedProps, oldProps, info) {
+  let result = runMethodEffect(inst, property, changedProps, oldProps, info);
   if (result === NOOP$2) {
     return false;
   }
@@ -46940,11 +46940,11 @@ function createMethodEffect(model, sig, type, effectFn, methodInfo, dynamicFn) {
   }
   return info;
 }
-function runMethodEffect(inst, property2, props, oldProps, info) {
+function runMethodEffect(inst, property, props, oldProps, info) {
   let context = inst._methodHost || inst;
   let fn = context[info.methodName];
   if (fn) {
-    let args = inst._marshalArgs(info.args, property2, props);
+    let args = inst._marshalArgs(info.args, property, props);
     return args === NOOP$2 ? NOOP$2 : fn.apply(context, args);
   } else if (!info.dynamicFn) {
     console.warn("method `" + info.methodName + "` not defined");
@@ -47023,7 +47023,7 @@ function parseArg(rawArg) {
       break;
   }
   if (!a2.literal) {
-    a2.rootProperty = root$d(arg);
+    a2.rootProperty = root$3(arg);
     a2.structured = isPath(arg);
     if (a2.structured) {
       a2.wildcard = arg.slice(-2) == ".*";
@@ -47035,7 +47035,7 @@ function parseArg(rawArg) {
   return a2;
 }
 function getArgValue(data2, props, path) {
-  let value = get$4(data2, path);
+  let value = get2(data2, path);
   if (value === void 0) {
     value = props[path];
   }
@@ -47164,11 +47164,11 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @return {void}
      * @protected
      */
-    _addPropertyEffect(property2, type, effect) {
-      this._createPropertyAccessor(property2, type == TYPES.READ_ONLY);
-      let effects = ensureOwnEffectMap(this, type, true)[property2];
+    _addPropertyEffect(property, type, effect) {
+      this._createPropertyAccessor(property, type == TYPES.READ_ONLY);
+      let effects = ensureOwnEffectMap(this, type, true)[property];
       if (!effects) {
-        effects = this[type][property2] = [];
+        effects = this[type][property] = [];
       }
       effects.push(effect);
     }
@@ -47181,8 +47181,8 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @param {Object=} effect Effect metadata object to remove
      * @return {void}
      */
-    _removePropertyEffect(property2, type, effect) {
-      let effects = ensureOwnEffectMap(this, type, true)[property2];
+    _removePropertyEffect(property, type, effect) {
+      let effects = ensureOwnEffectMap(this, type, true)[property];
       let idx = effects.indexOf(effect);
       if (idx >= 0) {
         effects.splice(idx, 1);
@@ -47199,9 +47199,9 @@ const PropertyEffects = dedupingMixin((superClass) => {
      *     type
      * @protected
      */
-    _hasPropertyEffect(property2, type) {
+    _hasPropertyEffect(property, type) {
       let effects = this[type];
-      return Boolean(effects && effects[property2]);
+      return Boolean(effects && effects[property]);
     }
     /**
      * Returns whether the current prototype/instance has a "read only"
@@ -47213,8 +47213,8 @@ const PropertyEffects = dedupingMixin((superClass) => {
      *     type
      * @protected
      */
-    _hasReadOnlyEffect(property2) {
-      return this._hasPropertyEffect(property2, TYPES.READ_ONLY);
+    _hasReadOnlyEffect(property) {
+      return this._hasPropertyEffect(property, TYPES.READ_ONLY);
     }
     /**
      * Returns whether the current prototype/instance has a "notify"
@@ -47226,8 +47226,8 @@ const PropertyEffects = dedupingMixin((superClass) => {
      *     type
      * @protected
      */
-    _hasNotifyEffect(property2) {
-      return this._hasPropertyEffect(property2, TYPES.NOTIFY);
+    _hasNotifyEffect(property) {
+      return this._hasPropertyEffect(property, TYPES.NOTIFY);
     }
     /**
      * Returns whether the current prototype/instance has a "reflect to
@@ -47239,8 +47239,8 @@ const PropertyEffects = dedupingMixin((superClass) => {
      *     type
      * @protected
      */
-    _hasReflectEffect(property2) {
-      return this._hasPropertyEffect(property2, TYPES.REFLECT);
+    _hasReflectEffect(property) {
+      return this._hasPropertyEffect(property, TYPES.REFLECT);
     }
     /**
      * Returns whether the current prototype/instance has a "computed"
@@ -47252,8 +47252,8 @@ const PropertyEffects = dedupingMixin((superClass) => {
      *     type
      * @protected
      */
-    _hasComputedEffect(property2) {
-      return this._hasPropertyEffect(property2, TYPES.COMPUTE);
+    _hasComputedEffect(property) {
+      return this._hasPropertyEffect(property, TYPES.COMPUTE);
     }
     // Runtime ----------------------------------------
     /**
@@ -47286,9 +47286,9 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @protected
      */
     _setPendingPropertyOrPath(path, value, shouldNotify, isPathNotification) {
-      if (isPathNotification || root$d(Array.isArray(path) ? path[0] : path) !== path) {
+      if (isPathNotification || root$3(Array.isArray(path) ? path[0] : path) !== path) {
         if (!isPathNotification) {
-          let old = get$4(this, path);
+          let old = get2(this, path);
           path = /** @type {string} */
           set$1(this, path, value);
           if (!path || !super._shouldPropertyChange(path, value, old)) {
@@ -47390,26 +47390,26 @@ const PropertyEffects = dedupingMixin((superClass) => {
      *   event (applies only for `notify: true` properties)
      * @return {boolean} Returns true if the property changed
      */
-    _setPendingProperty(property2, value, shouldNotify) {
-      let propIsPath = this.__dataHasPaths && isPath(property2);
+    _setPendingProperty(property, value, shouldNotify) {
+      let propIsPath = this.__dataHasPaths && isPath(property);
       let prevProps = propIsPath ? this.__dataTemp : this.__data;
-      if (this._shouldPropertyChange(property2, value, prevProps[property2])) {
+      if (this._shouldPropertyChange(property, value, prevProps[property])) {
         if (!this.__dataPending) {
           this.__dataPending = {};
           this.__dataOld = {};
         }
-        if (!(property2 in this.__dataOld)) {
-          this.__dataOld[property2] = this.__data[property2];
+        if (!(property in this.__dataOld)) {
+          this.__dataOld[property] = this.__data[property];
         }
         if (propIsPath) {
-          this.__dataTemp[property2] = value;
+          this.__dataTemp[property] = value;
         } else {
-          this.__data[property2] = value;
+          this.__data[property] = value;
         }
-        this.__dataPending[property2] = value;
-        if (propIsPath || this[TYPES.NOTIFY] && this[TYPES.NOTIFY][property2]) {
+        this.__dataPending[property] = value;
+        if (propIsPath || this[TYPES.NOTIFY] && this[TYPES.NOTIFY][property]) {
           this.__dataToNotify = this.__dataToNotify || {};
-          this.__dataToNotify[property2] = shouldNotify;
+          this.__dataToNotify[property] = shouldNotify;
         }
         return true;
       }
@@ -47424,8 +47424,8 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @param {*} value Value to set
      * @return {void}
      */
-    _setProperty(property2, value) {
-      if (this._setPendingProperty(property2, value, true)) {
+    _setProperty(property, value) {
+      if (this._setPendingProperty(property, value, true)) {
         this._invalidateProperties();
       }
     }
@@ -47698,7 +47698,7 @@ const PropertyEffects = dedupingMixin((superClass) => {
       let info = { path: "" };
       let array = (
         /** @type {Array} */
-        get$4(this, path, info)
+        get2(this, path, info)
       );
       notifySplices(this, array, info.path, splices);
     }
@@ -47723,7 +47723,7 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @public
      */
     get(path, root2) {
-      return get$4(root2 || this, path);
+      return get2(root2 || this, path);
     }
     /**
      * Convenience method for setting a value to a path and notifying any
@@ -47780,7 +47780,7 @@ const PropertyEffects = dedupingMixin((superClass) => {
       let info = { path: "" };
       let array = (
         /** @type {Array}*/
-        get$4(this, path, info)
+        get2(this, path, info)
       );
       let len2 = array.length;
       let ret = array.push(...items);
@@ -47807,7 +47807,7 @@ const PropertyEffects = dedupingMixin((superClass) => {
       let info = { path: "" };
       let array = (
         /** @type {Array} */
-        get$4(this, path, info)
+        get2(this, path, info)
       );
       let hadLength = Boolean(array.length);
       let ret = array.pop();
@@ -47838,7 +47838,7 @@ const PropertyEffects = dedupingMixin((superClass) => {
       let info = { path: "" };
       let array = (
         /** @type {Array} */
-        get$4(this, path, info)
+        get2(this, path, info)
       );
       if (start < 0) {
         start = array.length - Math.floor(-start);
@@ -47874,7 +47874,7 @@ const PropertyEffects = dedupingMixin((superClass) => {
       let info = { path: "" };
       let array = (
         /** @type {Array} */
-        get$4(this, path, info)
+        get2(this, path, info)
       );
       let hadLength = Boolean(array.length);
       let ret = array.shift();
@@ -47902,7 +47902,7 @@ const PropertyEffects = dedupingMixin((superClass) => {
       let info = { path: "" };
       let array = (
         /** @type {Array} */
-        get$4(this, path, info)
+        get2(this, path, info)
       );
       let ret = array.unshift(...items);
       if (items.length) {
@@ -47928,7 +47928,7 @@ const PropertyEffects = dedupingMixin((superClass) => {
       let propPath;
       if (arguments.length == 1) {
         let info = { path: "" };
-        value = get$4(this, path, info);
+        value = get2(this, path, info);
         propPath = info.path;
       } else if (Array.isArray(path)) {
         propPath = normalize$6(path);
@@ -47952,12 +47952,12 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @return {void}
      * @protected
      */
-    _createReadOnlyProperty(property2, protectedSetter) {
-      this._addPropertyEffect(property2, TYPES.READ_ONLY);
+    _createReadOnlyProperty(property, protectedSetter) {
+      this._addPropertyEffect(property, TYPES.READ_ONLY);
       if (protectedSetter) {
-        this["_set" + upper(property2)] = /** @this {PropertyEffects} */
+        this["_set" + upper(property)] = /** @this {PropertyEffects} */
         function(value) {
-          this._setProperty(property2, value);
+          this._setProperty(property, value);
         };
       }
     }
@@ -47975,12 +47975,12 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @return {void}
      * @protected
      */
-    _createPropertyObserver(property2, method, dynamicFn) {
-      let info = { property: property2, method, dynamicFn: Boolean(dynamicFn) };
-      this._addPropertyEffect(property2, TYPES.OBSERVE, {
+    _createPropertyObserver(property, method, dynamicFn) {
+      let info = { property, method, dynamicFn: Boolean(dynamicFn) };
+      this._addPropertyEffect(property, TYPES.OBSERVE, {
         fn: runObserverEffect,
         info,
-        trigger: { name: property2 }
+        trigger: { name: property }
       });
       if (dynamicFn) {
         this._addPropertyEffect(
@@ -48024,12 +48024,12 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @return {void}
      * @protected
      */
-    _createNotifyingProperty(property2) {
-      this._addPropertyEffect(property2, TYPES.NOTIFY, {
+    _createNotifyingProperty(property) {
+      this._addPropertyEffect(property, TYPES.NOTIFY, {
         fn: runNotifyEffect,
         info: {
-          eventName: camelToDashCase(property2) + "-changed",
-          property: property2
+          eventName: camelToDashCase(property) + "-changed",
+          property
         }
       });
     }
@@ -48044,12 +48044,12 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @protected
      * @suppress {missingProperties} go/missingfnprops
      */
-    _createReflectedProperty(property2) {
-      let attr = this.constructor.attributeNameForProperty(property2);
+    _createReflectedProperty(property) {
+      let attr = this.constructor.attributeNameForProperty(property);
       if (attr[0] === "-") {
-        console.warn("Property " + property2 + " cannot be reflected to attribute " + attr + ' because "-" is not a valid starting attribute name. Use a lowercase first letter for the property instead.');
+        console.warn("Property " + property + " cannot be reflected to attribute " + attr + ' because "-" is not a valid starting attribute name. Use a lowercase first letter for the property instead.');
       } else {
-        this._addPropertyEffect(property2, TYPES.REFLECT, {
+        this._addPropertyEffect(property, TYPES.REFLECT, {
           fn: runReflectEffect,
           info: {
             attrName: attr
@@ -48070,13 +48070,13 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @return {void}
      * @protected
      */
-    _createComputedProperty(property2, expression, dynamicFn) {
+    _createComputedProperty(property, expression, dynamicFn) {
       let sig = parseMethod(expression);
       if (!sig) {
         throw new Error("Malformed computed expression '" + expression + "'");
       }
-      const info = createMethodEffect(this, sig, TYPES.COMPUTE, runComputedEffect, property2, dynamicFn);
-      ensureOwnEffectMap(this, COMPUTE_INFO)[property2] = info;
+      const info = createMethodEffect(this, sig, TYPES.COMPUTE, runComputedEffect, property, dynamicFn);
+      ensureOwnEffectMap(this, COMPUTE_INFO)[property] = info;
     }
     /**
      * Gather the argument values for a method specified in the provided array
@@ -48103,7 +48103,7 @@ const PropertyEffects = dedupingMixin((superClass) => {
             value = {
               path: matches2 ? path : name2,
               value: pathValue,
-              base: matches2 ? get$4(data2, name2) : pathValue
+              base: matches2 ? get2(data2, name2) : pathValue
             };
           } else {
             value = structured ? getArgValue(data2, props, name2) : data2[name2];
@@ -48154,8 +48154,8 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @protected
      * @nocollapse
      */
-    static addPropertyEffect(property2, type, effect) {
-      this.prototype._addPropertyEffect(property2, type, effect);
+    static addPropertyEffect(property, type, effect) {
+      this.prototype._addPropertyEffect(property, type, effect);
     }
     /**
      * Creates a single-property observer for the given property.
@@ -48168,8 +48168,8 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @protected
      * @nocollapse
      */
-    static createPropertyObserver(property2, method, dynamicFn) {
-      this.prototype._createPropertyObserver(property2, method, dynamicFn);
+    static createPropertyObserver(property, method, dynamicFn) {
+      this.prototype._createPropertyObserver(property, method, dynamicFn);
     }
     /**
      * Creates a multi-property "method observer" based on the provided
@@ -48197,8 +48197,8 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @protected
      * @nocollapse
      */
-    static createNotifyingProperty(property2) {
-      this.prototype._createNotifyingProperty(property2);
+    static createNotifyingProperty(property) {
+      this.prototype._createNotifyingProperty(property);
     }
     /**
      * Creates a read-only accessor for the given property.
@@ -48217,8 +48217,8 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @protected
      * @nocollapse
      */
-    static createReadOnlyProperty(property2, protectedSetter) {
-      this.prototype._createReadOnlyProperty(property2, protectedSetter);
+    static createReadOnlyProperty(property, protectedSetter) {
+      this.prototype._createReadOnlyProperty(property, protectedSetter);
     }
     /**
      * Causes the setter for the given property to reflect the property value
@@ -48229,8 +48229,8 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @protected
      * @nocollapse
      */
-    static createReflectedProperty(property2) {
-      this.prototype._createReflectedProperty(property2);
+    static createReflectedProperty(property) {
+      this.prototype._createReflectedProperty(property);
     }
     /**
      * Creates a computed property whose value is set to the result of the
@@ -48247,8 +48247,8 @@ const PropertyEffects = dedupingMixin((superClass) => {
      * @protected
      * @nocollapse
      */
-    static createComputedProperty(property2, expression, dynamicFn) {
-      this.prototype._createComputedProperty(property2, expression, dynamicFn);
+    static createComputedProperty(property, expression, dynamicFn) {
+      this.prototype._createComputedProperty(property, expression, dynamicFn);
     }
     /**
      * Parses the provided template to ensure binding effects are created
@@ -48717,10 +48717,10 @@ const PropertyEffects = dedupingMixin((superClass) => {
       if (part.signature) {
         value = runMethodEffect(inst, path, props, oldProps, part.signature);
       } else if (path != part.source) {
-        value = get$4(inst, part.source);
+        value = get2(inst, part.source);
       } else {
         if (hasPaths && isPath(path)) {
-          value = get$4(inst, path);
+          value = get2(inst, path);
         } else {
           value = inst.__data[path];
         }
@@ -49225,11 +49225,11 @@ const ElementMixin$1 = dedupingMixin((base2) => {
         if (meta) {
           this._importPath = pathFromUrl(meta.url);
         } else {
-          const module2 = DomModule.import(
+          const module = DomModule.import(
             /** @type {PolymerElementConstructor} */
             this.is
           );
-          this._importPath = module2 && module2.assetpath || Object.getPrototypeOf(
+          this._importPath = module && module.assetpath || Object.getPrototypeOf(
             /** @type {PolymerElementConstructor}*/
             this.prototype
           ).constructor.importPath;
@@ -49291,8 +49291,8 @@ const ElementMixin$1 = dedupingMixin((base2) => {
      * @param {string} property Name of the property
      * @return {boolean} Returns true if the property default can be applied.
      */
-    _canApplyPropertyDefault(property2) {
-      return !this.hasOwnProperty(property2);
+    _canApplyPropertyDefault(property) {
+      return !this.hasOwnProperty(property);
     }
     /**
      * Gather style text for a style element in the template.
@@ -52859,10 +52859,10 @@ const ValidateMixin = dedupingMixin(
      * @return {boolean} True if the value is valid.
      */
     validate() {
-      const isValid3 = this.checkValidity();
-      this._setInvalid(!isValid3);
-      this.dispatchEvent(new CustomEvent("validated", { detail: { valid: isValid3 } }));
-      return isValid3;
+      const isValid2 = this.checkValidity();
+      this._setInvalid(!isValid2);
+      this.dispatchEvent(new CustomEvent("validated", { detail: { valid: isValid2 } }));
+      return isValid2;
     }
     /**
      * Returns true if the field value satisfies all constraints (if any).
@@ -53797,7 +53797,7 @@ class Field extends HTMLElement {
       const {
         markdown,
         label,
-        property: property2,
+        property,
         dialog,
         notice
       } = this.elementState;
@@ -53805,7 +53805,7 @@ class Field extends HTMLElement {
         const mdEditorElement = choose_editor(dialog);
         const editor = () => {
           return toElement(mdEditorElement)``({
-            property: property2,
+            property,
             linking: () => notice == "LINK-NOTICE"
           });
         };
@@ -53819,7 +53819,7 @@ class Field extends HTMLElement {
       const textFieldElement = choose_text(dialog);
       return toElement(textFieldElement)``({
         label,
-        property: property2
+        property
       });
     };
     return toElement("div")`${field}`({
@@ -54950,9 +54950,9 @@ const nav_config = new Proxy({}, {
   }
 });
 var foobarIpsum$1 = { exports: {} };
-(function(module2, exports2) {
+(function(module, exports) {
   (function webpackUniversalModuleDefinition(root2, factory) {
-    module2.exports = factory();
+    module.exports = factory();
   })(typeof self !== "undefined" ? self : commonjsGlobal$1, function() {
     return (
       /******/
@@ -54962,7 +54962,7 @@ var foobarIpsum$1 = { exports: {} };
           if (installedModules[moduleId]) {
             return installedModules[moduleId].exports;
           }
-          var module3 = installedModules[moduleId] = {
+          var module2 = installedModules[moduleId] = {
             /******/
             i: moduleId,
             /******/
@@ -54971,15 +54971,15 @@ var foobarIpsum$1 = { exports: {} };
             exports: {}
             /******/
           };
-          modules2[moduleId].call(module3.exports, module3, module3.exports, __webpack_require__);
-          module3.l = true;
-          return module3.exports;
+          modules2[moduleId].call(module2.exports, module2, module2.exports, __webpack_require__);
+          module2.l = true;
+          return module2.exports;
         }
         __webpack_require__.m = modules2;
         __webpack_require__.c = installedModules;
-        __webpack_require__.d = function(exports3, name2, getter) {
-          if (!__webpack_require__.o(exports3, name2)) {
-            Object.defineProperty(exports3, name2, {
+        __webpack_require__.d = function(exports2, name2, getter) {
+          if (!__webpack_require__.o(exports2, name2)) {
+            Object.defineProperty(exports2, name2, {
               /******/
               configurable: false,
               /******/
@@ -54990,31 +54990,31 @@ var foobarIpsum$1 = { exports: {} };
             });
           }
         };
-        __webpack_require__.n = function(module3) {
-          var getter = module3 && module3.__esModule ? (
+        __webpack_require__.n = function(module2) {
+          var getter = module2 && module2.__esModule ? (
             /******/
             function getDefault() {
-              return module3["default"];
+              return module2["default"];
             }
           ) : (
             /******/
             function getModuleExports() {
-              return module3;
+              return module2;
             }
           );
           __webpack_require__.d(getter, "a", getter);
           return getter;
         };
-        __webpack_require__.o = function(object, property2) {
-          return Object.prototype.hasOwnProperty.call(object, property2);
+        __webpack_require__.o = function(object, property) {
+          return Object.prototype.hasOwnProperty.call(object, property);
         };
         __webpack_require__.p = "dist/";
         return __webpack_require__(__webpack_require__.s = 0);
       }([
         /* 0 */
         /***/
-        function(module3, exports3, __webpack_require__) {
-          Object.defineProperty(exports3, "__esModule", {
+        function(module2, exports2, __webpack_require__) {
+          Object.defineProperty(exports2, "__esModule", {
             value: true
           });
           var _createClass2 = /* @__PURE__ */ function() {
@@ -55105,13 +55105,13 @@ var foobarIpsum$1 = { exports: {} };
             }]);
             return _class3;
           }();
-          exports3.default = _class2;
-          module3.exports = exports3["default"];
+          exports2.default = _class2;
+          module2.exports = exports2["default"];
         },
         /* 1 */
         /***/
-        function(module3, exports3) {
-          module3.exports = { "words": ["ad", "adipisicing", "Aenean", "aliqua", "aliquip", "amet", "anim", "aute", "bar", "barfoo", "cillum", "commodo", "consectetur", "consequat", "culpa", "cupidatat", "deserunt", "do", "dolor", "dolore", "duis", "ea", "eget", "eiusmod", "eleifend", "elit", "enim", "esse", "est", "et", "eu", "ex", "excepteur", "exercitation", "foo", "foobar", "fugiat", "id", "in", "incididunt", "ipsum", "irure", "labore", "laboris", "laborum", "leo", "Lorem", "magna", "minim", "mollit", "nam", "nec", "nisi", "non", "nostrud", "nulla", "occaecat", "officia", "pariatur", "parturient", "proident", "qui", "quis", "reprehenderit", "sint", "sit", "sunt", "tellus", "tempor", "tempus", "ullamco", "ut", "velit", "veniam", "Vivamus", "voluptate"] };
+        function(module2, exports2) {
+          module2.exports = { "words": ["ad", "adipisicing", "Aenean", "aliqua", "aliquip", "amet", "anim", "aute", "bar", "barfoo", "cillum", "commodo", "consectetur", "consequat", "culpa", "cupidatat", "deserunt", "do", "dolor", "dolore", "duis", "ea", "eget", "eiusmod", "eleifend", "elit", "enim", "esse", "est", "et", "eu", "ex", "excepteur", "exercitation", "foo", "foobar", "fugiat", "id", "in", "incididunt", "ipsum", "irure", "labore", "laboris", "laborum", "leo", "Lorem", "magna", "minim", "mollit", "nam", "nec", "nisi", "non", "nostrud", "nulla", "occaecat", "officia", "pariatur", "parturient", "proident", "qui", "quis", "reprehenderit", "sint", "sit", "sunt", "tellus", "tempor", "tempus", "ullamco", "ut", "velit", "veniam", "Vivamus", "voluptate"] };
         }
         /******/
       ])
@@ -56015,8 +56015,8 @@ let WorkerThread$1 = class WorkerThread {
   _createNodeWorker() {
     let worker;
     if (this.url) {
-      const absolute2 = this.url.includes(":/") || this.url.startsWith("/");
-      const url = absolute2 ? this.url : `./${this.url}`;
+      const absolute = this.url.includes(":/") || this.url.startsWith("/");
+      const url = absolute ? this.url : `./${this.url}`;
       worker = new NodeWorker(url, { eval: false });
     } else if (this.source) {
       worker = new NodeWorker(this.source, { eval: true });
@@ -56580,11 +56580,11 @@ function resolvePath$1(filename2) {
 function toArrayBuffer$3(buffer2) {
   return buffer2;
 }
-function isBuffer$8(value) {
+function isBuffer$3(value) {
   return value && typeof value === "object" && value.isBuffer;
 }
 function toArrayBuffer$2(data2) {
-  if (isBuffer$8(data2)) {
+  if (isBuffer$3(data2)) {
     return toArrayBuffer$3(data2);
   }
   if (data2 instanceof ArrayBuffer) {
@@ -56615,16 +56615,16 @@ function dirname$2(url) {
   return slashIndex >= 0 ? url.substr(0, slashIndex) : "";
 }
 const isBoolean$1 = (x2) => typeof x2 === "boolean";
-const isFunction$5 = (x2) => typeof x2 === "function";
-const isObject$a = (x2) => x2 !== null && typeof x2 === "object";
-const isPureObject$1 = (x2) => isObject$a(x2) && x2.constructor === {}.constructor;
+const isFunction$1 = (x2) => typeof x2 === "function";
+const isObject$2 = (x2) => x2 !== null && typeof x2 === "object";
+const isPureObject$1 = (x2) => isObject$2(x2) && x2.constructor === {}.constructor;
 const isIterable$1 = (x2) => Boolean(x2) && typeof x2[Symbol.iterator] === "function";
 const isAsyncIterable$2 = (x2) => x2 && typeof x2[Symbol.asyncIterator] === "function";
 const isResponse$1 = (x2) => typeof Response !== "undefined" && x2 instanceof Response || x2 && x2.arrayBuffer && x2.text && x2.json;
 const isBlob$1 = (x2) => typeof Blob !== "undefined" && x2 instanceof Blob;
-const isBuffer$7 = (x2) => x2 && typeof x2 === "object" && x2.isBuffer;
-const isReadableDOMStream$1 = (x2) => typeof ReadableStream !== "undefined" && x2 instanceof ReadableStream || isObject$a(x2) && isFunction$5(x2.tee) && isFunction$5(x2.cancel) && isFunction$5(x2.getReader);
-const isReadableNodeStream$1 = (x2) => isObject$a(x2) && isFunction$5(x2.read) && isFunction$5(x2.pipe) && isBoolean$1(x2.readable);
+const isBuffer$2 = (x2) => x2 && typeof x2 === "object" && x2.isBuffer;
+const isReadableDOMStream$1 = (x2) => typeof ReadableStream !== "undefined" && x2 instanceof ReadableStream || isObject$2(x2) && isFunction$1(x2.tee) && isFunction$1(x2.cancel) && isFunction$1(x2.getReader);
+const isReadableNodeStream$1 = (x2) => isObject$2(x2) && isFunction$1(x2.read) && isFunction$1(x2.pipe) && isBoolean$1(x2.readable);
 const isReadableStream$1 = (x2) => isReadableDOMStream$1(x2) || isReadableNodeStream$1(x2);
 class FetchError extends Error {
   constructor(message2, info) {
@@ -56944,7 +56944,7 @@ function validateOptionsObject$1(options, id2, defaultOptions2, deprecatedOption
   const loaderName = id2 || "Top level";
   const prefix2 = id2 ? `${id2}.` : "";
   for (const key in options) {
-    const isSubOptions = !id2 && isObject$a(options[key]);
+    const isSubOptions = !id2 && isObject$2(options[key]);
     const isBaseUriOption = key === "baseUri" && !id2;
     const isWorkerUrlOption = key === "workerUrl" && id2;
     if (!(key in defaultOptions2) && !isBaseUriOption && !isWorkerUrlOption) {
@@ -57326,7 +57326,7 @@ function getArrayBufferOrStringFromDataSync$1(data2, loader, options) {
   if (loader.text && typeof data2 === "string") {
     return data2;
   }
-  if (isBuffer$7(data2)) {
+  if (isBuffer$2(data2)) {
     data2 = data2.buffer;
   }
   if (data2 instanceof ArrayBuffer) {
@@ -57378,7 +57378,7 @@ function getFetchFunction$1(options, context) {
   if (typeof loaderOptions.fetch === "function") {
     return loaderOptions.fetch;
   }
-  if (isObject$a(loaderOptions.fetch)) {
+  if (isObject$2(loaderOptions.fetch)) {
     return (url) => fetchFile$1(url, loaderOptions.fetch);
   }
   if (context == null ? void 0 : context.fetch) {
@@ -58100,19 +58100,19 @@ function injectShader(source2, stage, inject, injectStandardStubs = false) {
   return source2;
 }
 function initializeShaderModules(modules2) {
-  modules2.map((module2) => initializeShaderModule(module2));
+  modules2.map((module) => initializeShaderModule(module));
 }
-function initializeShaderModule(module2) {
-  if (module2.instance) {
+function initializeShaderModule(module) {
+  if (module.instance) {
     return;
   }
-  initializeShaderModules(module2.dependencies || []);
+  initializeShaderModules(module.dependencies || []);
   const {
     propTypes: propTypes2 = {},
     deprecations: deprecations2 = [],
     // defines = {},
     inject = {}
-  } = module2;
+  } = module;
   const instance = {
     normalizedInjections: normalizeInjections(inject),
     parsedDeprecations: parseDeprecationDefinitions(deprecations2)
@@ -58120,7 +58120,7 @@ function initializeShaderModule(module2) {
   if (propTypes2) {
     instance.propValidators = makePropValidators(propTypes2);
   }
-  module2.instance = instance;
+  module.instance = instance;
   let defaultProps2 = {};
   if (propTypes2) {
     defaultProps2 = Object.entries(propTypes2).reduce((obj, [key, propType]) => {
@@ -58131,7 +58131,7 @@ function initializeShaderModule(module2) {
       return obj;
     }, {});
   }
-  module2.defaultUniforms = { ...module2.defaultUniforms, ...defaultProps2 };
+  module.defaultUniforms = { ...module.defaultUniforms, ...defaultProps2 };
 }
 function checkShaderModuleDeprecations(shaderModule, shaderSource, log3) {
   var _a3;
@@ -58172,15 +58172,15 @@ function getDependencyGraph(options) {
   if (level >= 5) {
     throw new Error("Possible loop in shader dependency graph");
   }
-  for (const module2 of modules2) {
-    moduleMap[module2.name] = module2;
-    if (moduleDepth[module2.name] === void 0 || moduleDepth[module2.name] < level) {
-      moduleDepth[module2.name] = level;
+  for (const module of modules2) {
+    moduleMap[module.name] = module;
+    if (moduleDepth[module.name] === void 0 || moduleDepth[module.name] < level) {
+      moduleDepth[module.name] = level;
     }
   }
-  for (const module2 of modules2) {
-    if (module2.dependencies) {
-      getDependencyGraph({ modules: module2.dependencies, level: level + 1, moduleMap, moduleDepth });
+  for (const module of modules2) {
+    if (module.dependencies) {
+      getDependencyGraph({ modules: module.dependencies, level: level + 1, moduleMap, moduleDepth });
     }
   }
 }
@@ -58441,13 +58441,13 @@ function assembleShaderWGSL(platformInfo, options) {
     }
   }
   const modulesToInject = modules2;
-  for (const module2 of modulesToInject) {
+  for (const module of modulesToInject) {
     if (log3) {
-      checkShaderModuleDeprecations(module2, coreSource, log3);
+      checkShaderModuleDeprecations(module, coreSource, log3);
     }
-    const moduleSource = getShaderModuleSource(module2, "wgsl");
+    const moduleSource = getShaderModuleSource(module, "wgsl");
     assembledSource += moduleSource;
-    const injections = ((_a3 = module2.injections) == null ? void 0 : _a3[stage]) || {};
+    const injections = ((_a3 = module.injections) == null ? void 0 : _a3[stage]) || {};
     for (const key in injections) {
       const match2 = /^(v|f)s:#([\w-]+)$/.exec(key);
       if (match2) {
@@ -58478,8 +58478,8 @@ function assembleShaderGLSL(platformInfo, options) {
   const sourceLines = source2.split("\n");
   const coreSource = sourceLines.slice(1).join("\n");
   const allDefines = {};
-  modules2.forEach((module2) => {
-    Object.assign(allDefines, module2.defines);
+  modules2.forEach((module) => {
+    Object.assign(allDefines, module.defines);
   });
   Object.assign(allDefines, defines2);
   let assembledSource = "";
@@ -58527,13 +58527,13 @@ ${getApplicationDefines(allDefines)}
       mainInjections[key] = [injection];
     }
   }
-  for (const module2 of modules2) {
+  for (const module of modules2) {
     if (log3) {
-      checkShaderModuleDeprecations(module2, coreSource, log3);
+      checkShaderModuleDeprecations(module, coreSource, log3);
     }
-    const moduleSource = getShaderModuleSource(module2, stage);
+    const moduleSource = getShaderModuleSource(module, stage);
     assembledSource += moduleSource;
-    const injections = ((_a3 = module2.instance) == null ? void 0 : _a3.normalizedInjections[stage]) || {};
+    const injections = ((_a3 = module.instance) == null ? void 0 : _a3.normalizedInjections[stage]) || {};
     for (const key in injections) {
       const match2 = /^(v|f)s:#([\w-]+)$/.exec(key);
       if (match2) {
@@ -58562,8 +58562,8 @@ function assembleGetUniforms(modules2) {
   return function getUniforms2(opts) {
     var _a3;
     const uniforms = {};
-    for (const module2 of modules2) {
-      const moduleUniforms = (_a3 = module2.getUniforms) == null ? void 0 : _a3.call(module2, opts, uniforms);
+    for (const module of modules2) {
+      const moduleUniforms = (_a3 = module.getUniforms) == null ? void 0 : _a3.call(module, opts, uniforms);
       Object.assign(uniforms, moduleUniforms);
     }
     return uniforms;
@@ -58586,26 +58586,26 @@ function getApplicationDefines(defines2 = {}) {
   }
   return sourceText;
 }
-function getShaderModuleSource(module2, stage) {
+function getShaderModuleSource(module, stage) {
   let moduleSource;
   switch (stage) {
     case "vertex":
-      moduleSource = module2.vs || "";
+      moduleSource = module.vs || "";
       break;
     case "fragment":
-      moduleSource = module2.fs || "";
+      moduleSource = module.fs || "";
       break;
     case "wgsl":
-      moduleSource = module2.source || "";
+      moduleSource = module.source || "";
       break;
     default:
       assert$6(false);
   }
-  if (!module2.name) {
+  if (!module.name) {
     throw new Error("Shader module must have a name");
   }
-  const moduleName = module2.name.toUpperCase().replace(/[^0-9a-z]/gi, "_");
-  let source2 = `// ----- MODULE ${module2.name} ---------------
+  const moduleName = module.name.toUpperCase().replace(/[^0-9a-z]/gi, "_");
+  let source2 = `// ----- MODULE ${module.name} ---------------
 
 `;
   if (stage !== "wgsl") {
@@ -58656,16 +58656,16 @@ const _ShaderAssembler = class _ShaderAssembler {
   /**
    * Add a default module that does not have to be provided with every call to assembleShaders()
    */
-  addDefaultModule(module2) {
-    if (!this._defaultModules.find((m2) => m2.name === (typeof module2 === "string" ? module2 : module2.name))) {
-      this._defaultModules.push(module2);
+  addDefaultModule(module) {
+    if (!this._defaultModules.find((m2) => m2.name === (typeof module === "string" ? module : module.name))) {
+      this._defaultModules.push(module);
     }
   }
   /**
    * Remove a default module
    */
-  removeDefaultModule(module2) {
-    const moduleName = typeof module2 === "string" ? module2 : module2.name;
+  removeDefaultModule(module) {
+    const moduleName = typeof module === "string" ? module : module.name;
     this._defaultModules = this._defaultModules.filter((m2) => m2.name !== moduleName);
   }
   /**
@@ -58726,16 +58726,16 @@ const _ShaderAssembler = class _ShaderAssembler {
     const seen2 = {};
     let count2 = 0;
     for (let i5 = 0, len2 = this._defaultModules.length; i5 < len2; ++i5) {
-      const module2 = this._defaultModules[i5];
-      const name2 = module2.name;
-      modules2[count2++] = module2;
+      const module = this._defaultModules[i5];
+      const name2 = module.name;
+      modules2[count2++] = module;
       seen2[name2] = true;
     }
     for (let i5 = 0, len2 = appModules.length; i5 < len2; ++i5) {
-      const module2 = appModules[i5];
-      const name2 = module2.name;
+      const module = appModules[i5];
+      const name2 = module.name;
       if (!seen2[name2]) {
-        modules2[count2++] = module2;
+        modules2[count2++] = module;
         seen2[name2] = true;
       }
     }
@@ -58950,7 +58950,7 @@ function selectivelyMerge(props, defaultProps2) {
   }
   return mergedProps;
 }
-let Buffer$3 = (_h = class extends Resource$1 {
+let Buffer$1 = (_h = class extends Resource$1 {
   constructor(device, props) {
     const deducedProps = { ...props };
     if ((props.usage || 0) & _h.INDEX && !props.indexType) {
@@ -59507,7 +59507,7 @@ const _Device = class _Device {
       props = { data: props };
     }
     const newProps = { ...props };
-    if ((props.usage || 0) & Buffer$3.INDEX && !props.indexType) {
+    if ((props.usage || 0) & Buffer$1.INDEX && !props.indexType) {
       if (props.data instanceof Uint32Array) {
         newProps.indexType = "uint32";
       } else if (props.data instanceof Uint16Array) {
@@ -60951,14 +60951,14 @@ function getScratchArray(Type, length2) {
   const scratchArrayBuffer = getScratchArrayBuffer(Type.BYTES_PER_ELEMENT * length2);
   return new Type(scratchArrayBuffer, 0, length2);
 }
-function isTypedArray$5(value) {
+function isTypedArray$1(value) {
   return ArrayBuffer.isView(value) && !(value instanceof DataView);
 }
 function isNumberArray$1(value) {
   if (Array.isArray(value)) {
     return value.length === 0 || typeof value[0] === "number";
   }
-  return isTypedArray$5(value);
+  return isTypedArray$1(value);
 }
 const minBufferSize = 1024;
 class UniformBufferLayout {
@@ -61157,7 +61157,7 @@ class UniformStore {
     }
     const byteLength = this.getUniformBufferByteLength(uniformBufferName);
     const uniformBuffer = device.createBuffer({
-      usage: Buffer$3.UNIFORM | Buffer$3.COPY_DST,
+      usage: Buffer$1.UNIFORM | Buffer$1.COPY_DST,
       byteLength
     });
     const uniformBufferData = this.getUniformBufferData(uniformBufferName);
@@ -61169,7 +61169,7 @@ class UniformStore {
     if (!this.uniformBuffers.get(uniformBufferName)) {
       const byteLength = this.getUniformBufferByteLength(uniformBufferName);
       const uniformBuffer = device.createBuffer({
-        usage: Buffer$3.UNIFORM | Buffer$3.COPY_DST,
+        usage: Buffer$1.UNIFORM | Buffer$1.COPY_DST,
         byteLength
       });
       this.uniformBuffers.set(uniformBufferName, uniformBuffer);
@@ -66753,14 +66753,14 @@ function formatValue(value, { precision = config$1.precision } = {}) {
   value = round$1(value);
   return `${parseFloat(value.toPrecision(precision))}`;
 }
-function isArray$g(value) {
+function isArray$3(value) {
   return Array.isArray(value) || ArrayBuffer.isView(value) && !(value instanceof DataView);
 }
 function clamp$1(value, min2, max2) {
-  return map$3(value, (value2) => Math.max(min2, Math.min(max2, value2)));
+  return map$1(value, (value2) => Math.max(min2, Math.min(max2, value2)));
 }
 function lerp$6(a2, b2, t3) {
-  if (isArray$g(a2)) {
+  if (isArray$3(a2)) {
     return a2.map((ai2, i5) => lerp$6(ai2, b2[i5], t3));
   }
   return t3 * b2 + (1 - t3) * a2;
@@ -66771,7 +66771,7 @@ function equals$2(a2, b2, epsilon) {
     if (a2 === b2) {
       return true;
     }
-    if (isArray$g(a2) && isArray$g(b2)) {
+    if (isArray$3(a2) && isArray$3(b2)) {
       if (a2.length !== b2.length) {
         return false;
       }
@@ -66802,8 +66802,8 @@ function round$1(value) {
 function duplicateArray(array) {
   return array.clone ? array.clone() : new Array(array.length);
 }
-function map$3(value, func, result) {
-  if (isArray$g(value)) {
+function map$1(value, func, result) {
+  if (isArray$3(value)) {
     const array = value;
     result = result || duplicateArray(array);
     for (let i5 = 0; i5 < result.length && i5 < array.length; ++i5) {
@@ -66848,7 +66848,7 @@ class MathArray extends Array {
     if (arrayOrObject === this) {
       return this;
     }
-    return isArray$g(arrayOrObject) ? this.toArray(arrayOrObject) : this.toObject(arrayOrObject);
+    return isArray$3(arrayOrObject) ? this.toArray(arrayOrObject) : this.toObject(arrayOrObject);
   }
   toTarget(target) {
     return target ? this.to(target) : this;
@@ -67515,7 +67515,7 @@ class Vector3 extends Vector {
    */
   constructor(x2 = 0, y3 = 0, z4 = 0) {
     super(-0, -0, -0);
-    if (arguments.length === 1 && isArray$g(x2)) {
+    if (arguments.length === 1 && isArray$3(x2)) {
       this.copy(x2);
     } else {
       if (config$1.debug) {
@@ -67627,7 +67627,7 @@ class Vector4 extends Vector {
   }
   constructor(x2 = 0, y3 = 0, z4 = 0, w2 = 0) {
     super(-0, -0, -0, -0);
-    if (isArray$g(x2) && arguments.length === 1) {
+    if (isArray$3(x2) && arguments.length === 1) {
       this.copy(x2);
     } else {
       if (config$1.debug) {
@@ -68159,7 +68159,7 @@ function getIdentityMatrix$1() {
   }
   return IDENTITY_MATRIX3;
 }
-function identity$6(out) {
+function identity$2(out) {
   out[0] = 1;
   out[1] = 0;
   out[2] = 0;
@@ -68741,7 +68741,7 @@ function lookAt(out, eye, center, up) {
   const centery = center[1];
   const centerz = center[2];
   if (Math.abs(eyex - centerx) < EPSILON$3 && Math.abs(eyey - centery) < EPSILON$3 && Math.abs(eyez - centerz) < EPSILON$3) {
-    return identity$6(out);
+    return identity$2(out);
   }
   z0 = eyex - centerx;
   z1 = eyey - centery;
@@ -69449,7 +69449,7 @@ function create$4() {
   out[3] = 1;
   return out;
 }
-function identity$5(out) {
+function identity$1(out) {
   out[0] = 0;
   out[1] = 0;
   out[2] = 0;
@@ -69724,7 +69724,7 @@ class Quaternion extends MathArray {
   }
   /** Set a quat to the identity quaternion */
   identity() {
-    identity$5(this);
+    identity$1(this);
     return this.check();
   }
   // Set the components of a quat to the given values
@@ -71401,10 +71401,10 @@ class PointerEventInput extends Input$1 {
   }
 }
 const VENDOR_PREFIXES = ["", "webkit", "Moz", "MS", "ms", "o"];
-function prefixed(obj, property2) {
-  const camelProp = property2[0].toUpperCase() + property2.slice(1);
+function prefixed(obj, property) {
+  const camelProp = property[0].toUpperCase() + property.slice(1);
   for (const prefix2 of VENDOR_PREFIXES) {
-    const prop = prefix2 ? prefix2 + camelProp : property2;
+    const prop = prefix2 ? prefix2 + camelProp : property;
     if (prop in obj) {
       return prop;
     }
@@ -71881,10 +71881,10 @@ class AttrRecognizer extends Recognizer {
     const { state } = this;
     const { eventType } = input;
     const isRecognized = state & (RecognizerState.Began | RecognizerState.Changed);
-    const isValid3 = this.attrTest(input);
-    if (isRecognized && (eventType & InputEvent.Cancel || !isValid3)) {
+    const isValid2 = this.attrTest(input);
+    if (isRecognized && (eventType & InputEvent.Cancel || !isValid2)) {
       return state | RecognizerState.Cancelled;
-    } else if (isRecognized || isValid3) {
+    } else if (isRecognized || isValid2) {
       if (eventType & InputEvent.End) {
         return state | RecognizerState.Ended;
       } else if (!(state & RecognizerState.Began)) {
@@ -72756,7 +72756,7 @@ function isEqual$1(a2, b2) {
   }
   return false;
 }
-function memoize$4(compute) {
+function memoize$1(compute) {
   let cachedArgs = {};
   let cachedResult2;
   return (args) => {
@@ -72775,7 +72775,7 @@ const VECTOR_TO_POINT_MATRIX$1 = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0
 const IDENTITY_MATRIX = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 const DEFAULT_PIXELS_PER_UNIT2 = [0, 0, 0];
 const DEFAULT_COORDINATE_ORIGIN$1 = [0, 0, 0];
-const getMemoizedViewportUniforms = memoize$4(calculateViewportUniforms);
+const getMemoizedViewportUniforms = memoize$1(calculateViewportUniforms);
 function getOffsetOrigin(viewport, coordinateSystem, coordinateOrigin = DEFAULT_COORDINATE_ORIGIN$1) {
   if (coordinateOrigin.length < 3) {
     coordinateOrigin = [coordinateOrigin[0], coordinateOrigin[1], 0];
@@ -73916,8 +73916,8 @@ const fs$d = `
 ${uniformBlock$8}
 ${fragment}
 `;
-const getMemoizedViewportCenterPosition = memoize$4(getViewportCenterPosition);
-const getMemoizedViewProjectionMatrices = memoize$4(getViewProjectionMatrices);
+const getMemoizedViewportCenterPosition = memoize$1(getViewportCenterPosition);
+const getMemoizedViewProjectionMatrices = memoize$1(getViewProjectionMatrices);
 const DEFAULT_SHADOW_COLOR$1 = [0, 0, 0, 1];
 const VECTOR_TO_POINT_MATRIX = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0];
 function screenToCommonSpace(xyz, pixelUnprojectionMatrix) {
@@ -75826,7 +75826,7 @@ class GPUGeometry {
     this.vertexCount = props.vertexCount;
     this.bufferLayout = props.bufferLayout || [];
     if (this.indices) {
-      if (!(this.indices.usage & Buffer$3.INDEX)) {
+      if (!(this.indices.usage & Buffer$1.INDEX)) {
         throw new Error("Index buffer must have INDEX usage");
       }
     }
@@ -75871,7 +75871,7 @@ function getIndexBufferFromGeometry(device, geometry2) {
     return void 0;
   }
   const data2 = geometry2.indices.value;
-  return device.createBuffer({ usage: Buffer$3.INDEX, data: data2 });
+  return device.createBuffer({ usage: Buffer$1.INDEX, data: data2 });
 }
 function getAttributeBuffersFromGeometry(device, geometry2) {
   const bufferLayout = [];
@@ -76131,7 +76131,7 @@ function deepEqual$2(a2, b2, depth) {
   }
   return false;
 }
-function isTypedArray$4(value) {
+function isTypedArray(value) {
   return ArrayBuffer.isView(value) && !(value instanceof DataView);
 }
 function isNumberArray(value) {
@@ -76141,7 +76141,7 @@ function isNumberArray(value) {
   return false;
 }
 function isNumericArray(value) {
-  return isTypedArray$4(value) || isNumberArray(value);
+  return isTypedArray(value) || isNumberArray(value);
 }
 function isUniformValue$1(value) {
   return isNumericArray(value) || typeof value === "number" || typeof value === "boolean";
@@ -76180,7 +76180,7 @@ class ShaderInputs {
     /** Stores the uniform bindings for each module  */
     __publicField(this, "moduleBindings");
     Object.assign(this.options, options);
-    const resolvedModules = getShaderModuleDependencies(Object.values(modules2).filter((module2) => module2.dependencies));
+    const resolvedModules = getShaderModuleDependencies(Object.values(modules2).filter((module) => module.dependencies));
     for (const resolvedModule of resolvedModules) {
       modules2[resolvedModule.name] = resolvedModule;
     }
@@ -76188,10 +76188,10 @@ class ShaderInputs {
     this.modules = modules2;
     this.moduleUniforms = {};
     this.moduleBindings = {};
-    for (const [name2, module2] of Object.entries(modules2)) {
-      this._addModule(module2);
-      if (module2.name && name2 !== module2.name && !this.options.disableWarnings) {
-        log$3.warn(`Module name: ${name2} vs ${module2.name}`)();
+    for (const [name2, module] of Object.entries(modules2)) {
+      this._addModule(module);
+      if (module.name && name2 !== module.name && !this.options.disableWarnings) {
+        log$3.warn(`Module name: ${name2} vs ${module.name}`)();
       }
     }
   }
@@ -76206,8 +76206,8 @@ class ShaderInputs {
     for (const name2 of Object.keys(props)) {
       const moduleName = name2;
       const moduleProps = props[moduleName] || {};
-      const module2 = this.modules[moduleName];
-      if (!module2) {
+      const module = this.modules[moduleName];
+      if (!module) {
         if (!this.options.disableWarnings) {
           log$3.warn(`Module ${name2} not found`)();
         }
@@ -76215,7 +76215,7 @@ class ShaderInputs {
       }
       const oldUniforms = this.moduleUniforms[moduleName];
       const oldBindings = this.moduleBindings[moduleName];
-      const uniformsAndBindings = ((_a3 = module2.getUniforms) == null ? void 0 : _a3.call(module2, moduleProps, oldUniforms)) || moduleProps;
+      const uniformsAndBindings = ((_a3 = module.getUniforms) == null ? void 0 : _a3.call(module, moduleProps, oldUniforms)) || moduleProps;
       const { uniforms, bindings } = splitUniformsAndBindings$1(uniformsAndBindings);
       this.moduleUniforms[moduleName] = { ...oldUniforms, ...uniforms };
       this.moduleBindings[moduleName] = { ...oldBindings, ...bindings };
@@ -76245,8 +76245,8 @@ class ShaderInputs {
   getDebugTable() {
     var _a3;
     const table2 = {};
-    for (const [moduleName, module2] of Object.entries(this.moduleUniforms)) {
-      for (const [key, value] of Object.entries(module2)) {
+    for (const [moduleName, module] of Object.entries(this.moduleUniforms)) {
+      for (const [key, value] of Object.entries(module)) {
         table2[`${moduleName}.${key}`] = {
           type: (_a3 = this.modules[moduleName].uniformTypes) == null ? void 0 : _a3[key],
           value: String(value)
@@ -76255,9 +76255,9 @@ class ShaderInputs {
     }
     return table2;
   }
-  _addModule(module2) {
-    const moduleName = module2.name;
-    this.moduleUniforms[moduleName] = module2.defaultUniforms || {};
+  _addModule(module) {
+    const moduleName = module.name;
+    this.moduleUniforms[moduleName] = module.defaultUniforms || {};
     this.moduleBindings[moduleName] = {};
   }
 }
@@ -76443,7 +76443,7 @@ const _Model = class _Model {
     this.id = props.id || uid$1("model");
     this.device = device;
     Object.assign(this.userData, props.userData);
-    const moduleMap = Object.fromEntries(((_a3 = this.props.modules) == null ? void 0 : _a3.map((module2) => [module2.name, module2])) || []);
+    const moduleMap = Object.fromEntries(((_a3 = this.props.modules) == null ? void 0 : _a3.map((module) => [module.name, module])) || []);
     const shaderInputs = props.shaderInputs || new ShaderInputs(moduleMap, { disableWarnings: this.props.disableWarnings });
     this.setShaderInputs(shaderInputs);
     const platformInfo = getPlatformInfo(device);
@@ -76691,8 +76691,8 @@ const _Model = class _Model {
   setShaderInputs(shaderInputs) {
     this.shaderInputs = shaderInputs;
     this._uniformStore = new UniformStore(this.shaderInputs.modules);
-    for (const [moduleName, module2] of Object.entries(this.shaderInputs.modules)) {
-      if (shaderModuleHasUniforms(module2)) {
+    for (const [moduleName, module] of Object.entries(this.shaderInputs.modules)) {
+      if (shaderModuleHasUniforms(module)) {
         const uniformBuffer = this._uniformStore.getManagedUniformBuffer(this.device, moduleName);
         this.bindings[`${moduleName}Uniforms`] = uniformBuffer;
       }
@@ -76841,7 +76841,7 @@ const _Model = class _Model {
     for (const binding of Object.values(this.bindings)) {
       if (binding instanceof TextureView) {
         timestamp = Math.max(timestamp, binding.texture.updateTimestamp);
-      } else if (binding instanceof Buffer$3 || binding instanceof Texture) {
+      } else if (binding instanceof Buffer$1 || binding instanceof Texture) {
         timestamp = Math.max(timestamp, binding.updateTimestamp);
       } else if (binding instanceof AsyncTexture) {
         timestamp = binding.texture ? Math.max(timestamp, binding.texture.updateTimestamp) : (
@@ -76984,7 +76984,7 @@ const _Model = class _Model {
   // TODO - fix typing of luma data types
   _getBufferOrConstantValues(attribute2, dataType) {
     const TypedArrayConstructor = getTypedArrayFromDataType(dataType);
-    const typedArray = attribute2 instanceof Buffer$3 ? new TypedArrayConstructor(attribute2.debugData) : attribute2;
+    const typedArray = attribute2 instanceof Buffer$1 ? new TypedArrayConstructor(attribute2.debugData) : attribute2;
     return typedArray.toString();
   }
 };
@@ -77016,8 +77016,8 @@ __publicField(_Model, "defaultProps", {
   disableWarnings: void 0
 });
 let Model = _Model;
-function shaderModuleHasUniforms(module2) {
-  return Boolean(module2.uniformTypes && !isObjectEmpty$3(module2.uniformTypes));
+function shaderModuleHasUniforms(module) {
+  return Boolean(module.uniformTypes && !isObjectEmpty$3(module.uniformTypes));
 }
 function getPlatformInfo(device) {
   return {
@@ -77096,7 +77096,7 @@ const _BufferTransform = class _BufferTransform {
     if (!result) {
       throw new Error("BufferTransform#getBuffer");
     }
-    if (result instanceof Buffer$3) {
+    if (result instanceof Buffer$1) {
       return result.readAsync();
     }
     const { buffer: buffer2, byteOffset = 0, byteLength = buffer2.byteLength } = result;
@@ -77182,8 +77182,8 @@ class Geometry {
     }
     let vertexCount = Infinity;
     for (const attribute2 of Object.values(attributes)) {
-      const { value, size, constant: constant2 } = attribute2;
-      if (!constant2 && value && size !== void 0 && size >= 1) {
+      const { value, size, constant } = attribute2;
+      if (!constant && value && size !== void 0 && size >= 1) {
         vertexCount = Math.min(vertexCount, value.length / size);
       }
     }
@@ -77639,17 +77639,17 @@ class LayerManager {
     this._nextLayers = null;
   }
   /** Register a default shader module */
-  addDefaultShaderModule(module2) {
+  addDefaultShaderModule(module) {
     const { defaultShaderModules } = this.context;
-    if (!defaultShaderModules.find((m2) => m2.name === module2.name)) {
-      defaultShaderModules.push(module2);
+    if (!defaultShaderModules.find((m2) => m2.name === module.name)) {
+      defaultShaderModules.push(module);
       this._defaultShaderModulesChanged = true;
     }
   }
   /** Deregister a default shader module */
-  removeDefaultShaderModule(module2) {
+  removeDefaultShaderModule(module) {
     const { defaultShaderModules } = this.context;
-    const i5 = defaultShaderModules.findIndex((m2) => m2.name === module2.name);
+    const i5 = defaultShaderModules.findIndex((m2) => m2.name === module.name);
     if (i5 >= 0) {
       defaultShaderModules.splice(i5, 1);
       this._defaultShaderModulesChanged = true;
@@ -78277,8 +78277,8 @@ const DEFAULT_EASING = (t3) => t3;
 const DEFAULT_INTERRUPTION = TRANSITION_EVENTS.BREAK;
 class TransitionManager {
   constructor(opts) {
-    this._onTransitionUpdate = (transition2) => {
-      const { time, settings: { interpolator, startProps, endProps, duration, easing } } = transition2;
+    this._onTransitionUpdate = (transition) => {
+      const { time, settings: { interpolator, startProps, endProps, duration, easing } } = transition;
       const t3 = easing(time / duration);
       const viewport = interpolator.interpolateProps(startProps, endProps, t3);
       this.propsInTransition = this.getControllerState({
@@ -78380,7 +78380,7 @@ class TransitionManager {
     this.updateTransition();
   }
   _onTransitionEnd(callback) {
-    return (transition2) => {
+    return (transition) => {
       this.propsInTransition = null;
       this.onStateChange({
         inTransition: false,
@@ -78388,7 +78388,7 @@ class TransitionManager {
         isPanning: false,
         isRotating: false
       });
-      callback == null ? void 0 : callback(transition2);
+      callback == null ? void 0 : callback(transition);
     };
   }
 }
@@ -79076,18 +79076,18 @@ class Controller {
     return true;
   }
   _getTransitionProps(opts) {
-    const { transition: transition2 } = this;
-    if (!transition2 || !transition2.transitionInterpolator) {
+    const { transition } = this;
+    if (!transition || !transition.transitionInterpolator) {
       return NO_TRANSITION_PROPS;
     }
     return opts ? {
-      ...transition2,
+      ...transition,
       transitionInterpolator: new LinearInterpolator({
         ...opts,
-        ...transition2.transitionInterpolator.opts,
+        ...transition.transitionInterpolator.opts,
         makeViewport: this.controllerState.makeViewport
       })
-    } : transition2;
+    } : transition;
   }
 }
 class ViewState {
@@ -81142,7 +81142,7 @@ const bindBuffer = (gl2, value, key) => {
   const glTarget = bindingMap[key];
   gl2.bindBuffer(glTarget, value);
 };
-function isArray$f(array) {
+function isArray$2(array) {
   return Array.isArray(array) || ArrayBuffer.isView(array) && !(array instanceof DataView);
 }
 const GL_PARAMETER_SETTERS = {
@@ -81281,37 +81281,37 @@ const GL_PARAMETER_SETTERS = {
   scissor: (gl2, value) => gl2.scissor(...value),
   stencilTest: (gl2, value) => value ? gl2.enable(2960) : gl2.disable(2960),
   stencilMask: (gl2, value) => {
-    value = isArray$f(value) ? value : [value, value];
+    value = isArray$2(value) ? value : [value, value];
     const [mask, backMask] = value;
     gl2.stencilMaskSeparate(1028, mask);
     gl2.stencilMaskSeparate(1029, backMask);
   },
   stencilFunc: (gl2, args) => {
-    args = isArray$f(args) && args.length === 3 ? [...args, ...args] : args;
+    args = isArray$2(args) && args.length === 3 ? [...args, ...args] : args;
     const [func, ref, mask, backFunc, backRef, backMask] = args;
     gl2.stencilFuncSeparate(1028, func, ref, mask);
     gl2.stencilFuncSeparate(1029, backFunc, backRef, backMask);
   },
   stencilOp: (gl2, args) => {
-    args = isArray$f(args) && args.length === 3 ? [...args, ...args] : args;
+    args = isArray$2(args) && args.length === 3 ? [...args, ...args] : args;
     const [sfail, dpfail, dppass, backSfail, backDpfail, backDppass] = args;
     gl2.stencilOpSeparate(1028, sfail, dpfail, dppass);
     gl2.stencilOpSeparate(1029, backSfail, backDpfail, backDppass);
   },
   viewport: (gl2, value) => gl2.viewport(...value)
 };
-function getValue$3(glEnum, values2, cache2) {
+function getValue(glEnum, values2, cache2) {
   return values2[glEnum] !== void 0 ? values2[glEnum] : cache2[glEnum];
 }
 const GL_COMPOSITE_PARAMETER_SETTERS = {
-  blendEquation: (gl2, values2, cache2) => gl2.blendEquationSeparate(getValue$3(32777, values2, cache2), getValue$3(34877, values2, cache2)),
-  blendFunc: (gl2, values2, cache2) => gl2.blendFuncSeparate(getValue$3(32969, values2, cache2), getValue$3(32968, values2, cache2), getValue$3(32971, values2, cache2), getValue$3(32970, values2, cache2)),
-  polygonOffset: (gl2, values2, cache2) => gl2.polygonOffset(getValue$3(32824, values2, cache2), getValue$3(10752, values2, cache2)),
-  sampleCoverage: (gl2, values2, cache2) => gl2.sampleCoverage(getValue$3(32938, values2, cache2), getValue$3(32939, values2, cache2)),
-  stencilFuncFront: (gl2, values2, cache2) => gl2.stencilFuncSeparate(1028, getValue$3(2962, values2, cache2), getValue$3(2967, values2, cache2), getValue$3(2963, values2, cache2)),
-  stencilFuncBack: (gl2, values2, cache2) => gl2.stencilFuncSeparate(1029, getValue$3(34816, values2, cache2), getValue$3(36003, values2, cache2), getValue$3(36004, values2, cache2)),
-  stencilOpFront: (gl2, values2, cache2) => gl2.stencilOpSeparate(1028, getValue$3(2964, values2, cache2), getValue$3(2965, values2, cache2), getValue$3(2966, values2, cache2)),
-  stencilOpBack: (gl2, values2, cache2) => gl2.stencilOpSeparate(1029, getValue$3(34817, values2, cache2), getValue$3(34818, values2, cache2), getValue$3(34819, values2, cache2))
+  blendEquation: (gl2, values2, cache2) => gl2.blendEquationSeparate(getValue(32777, values2, cache2), getValue(34877, values2, cache2)),
+  blendFunc: (gl2, values2, cache2) => gl2.blendFuncSeparate(getValue(32969, values2, cache2), getValue(32968, values2, cache2), getValue(32971, values2, cache2), getValue(32970, values2, cache2)),
+  polygonOffset: (gl2, values2, cache2) => gl2.polygonOffset(getValue(32824, values2, cache2), getValue(10752, values2, cache2)),
+  sampleCoverage: (gl2, values2, cache2) => gl2.sampleCoverage(getValue(32938, values2, cache2), getValue(32939, values2, cache2)),
+  stencilFuncFront: (gl2, values2, cache2) => gl2.stencilFuncSeparate(1028, getValue(2962, values2, cache2), getValue(2967, values2, cache2), getValue(2963, values2, cache2)),
+  stencilFuncBack: (gl2, values2, cache2) => gl2.stencilFuncSeparate(1029, getValue(34816, values2, cache2), getValue(36003, values2, cache2), getValue(36004, values2, cache2)),
+  stencilOpFront: (gl2, values2, cache2) => gl2.stencilOpSeparate(1028, getValue(2964, values2, cache2), getValue(2965, values2, cache2), getValue(2966, values2, cache2)),
+  stencilOpBack: (gl2, values2, cache2) => gl2.stencilOpSeparate(1029, getValue(34817, values2, cache2), getValue(34818, values2, cache2), getValue(34819, values2, cache2))
 };
 const GL_HOOKED_SETTERS = {
   // GENERIC SETTERS
@@ -81653,7 +81653,7 @@ class WebGLStateTracker {
 }
 function installGetterOverride(gl2, functionName) {
   const originalGetterFunc = gl2[functionName].bind(gl2);
-  gl2[functionName] = function get5(pname) {
+  gl2[functionName] = function get4(pname) {
     if (pname === void 0 || NON_CACHE_PARAMETERS.has(pname)) {
       return originalGetterFunc(pname);
     }
@@ -82601,7 +82601,7 @@ function uid(id2 = "id") {
   const count2 = uidCounters[id2]++;
   return `${id2}-${count2}`;
 }
-class WEBGLBuffer extends Buffer$3 {
+class WEBGLBuffer extends Buffer$1 {
   constructor(device, props = {}) {
     super(device, props);
     __publicField(this, "device");
@@ -82695,25 +82695,25 @@ class WEBGLBuffer extends Buffer$3 {
   }
 }
 function getWebGLTarget(usage) {
-  if (usage & Buffer$3.INDEX) {
+  if (usage & Buffer$1.INDEX) {
     return 34963;
   }
-  if (usage & Buffer$3.VERTEX) {
+  if (usage & Buffer$1.VERTEX) {
     return 34962;
   }
-  if (usage & Buffer$3.UNIFORM) {
+  if (usage & Buffer$1.UNIFORM) {
     return 35345;
   }
   return 34962;
 }
 function getWebGLUsage(usage) {
-  if (usage & Buffer$3.INDEX) {
+  if (usage & Buffer$1.INDEX) {
     return 35044;
   }
-  if (usage & Buffer$3.VERTEX) {
+  if (usage & Buffer$1.VERTEX) {
     return 35044;
   }
-  if (usage & Buffer$3.UNIFORM) {
+  if (usage & Buffer$1.UNIFORM) {
     return 35048;
   }
   return 35044;
@@ -82886,7 +82886,7 @@ function setDeviceParameters(device, parameters) {
     }
   }
   if (parameters.frontFace) {
-    gl2.frontFace(map$2("frontFace", parameters.frontFace, {
+    gl2.frontFace(map2("frontFace", parameters.frontFace, {
       ccw: 2305,
       cw: 2304
     }));
@@ -82904,7 +82904,7 @@ function setDeviceParameters(device, parameters) {
     if (device.features.has("provoking-vertex-webgl")) {
       const extensions = webglDevice.getExtension("WEBGL_provoking_vertex");
       const ext = extensions.WEBGL_provoking_vertex;
-      const vertex2 = map$2("provokingVertex", parameters.provokingVertex, {
+      const vertex2 = map2("provokingVertex", parameters.provokingVertex, {
         first: 36429,
         last: 36430
       });
@@ -82916,7 +82916,7 @@ function setDeviceParameters(device, parameters) {
       if (parameters.polygonMode) {
         const extensions = webglDevice.getExtension("WEBGL_polygon_mode");
         const ext = extensions.WEBGL_polygon_mode;
-        const mode = map$2("polygonMode", parameters.polygonMode, {
+        const mode = map2("polygonMode", parameters.polygonMode, {
           fill: 6914,
           line: 6913
         });
@@ -83003,7 +83003,7 @@ function setDeviceParameters(device, parameters) {
   }
 }
 function convertCompareFunction(parameter, value) {
-  return map$2(parameter, value, {
+  return map2(parameter, value, {
     never: 512,
     less: 513,
     equal: 514,
@@ -83015,7 +83015,7 @@ function convertCompareFunction(parameter, value) {
   });
 }
 function convertStencilOperation(parameter, value) {
-  return map$2(parameter, value, {
+  return map2(parameter, value, {
     keep: 7680,
     zero: 0,
     replace: 7681,
@@ -83027,7 +83027,7 @@ function convertStencilOperation(parameter, value) {
   });
 }
 function convertBlendOperationToEquation(parameter, value) {
-  return map$2(parameter, value, {
+  return map2(parameter, value, {
     add: 32774,
     subtract: 32778,
     "reverse-subtract": 32779,
@@ -83036,7 +83036,7 @@ function convertBlendOperationToEquation(parameter, value) {
   });
 }
 function convertBlendFactorToFunction(parameter, value) {
-  return map$2(parameter, value, {
+  return map2(parameter, value, {
     one: 1,
     zero: 0,
     "src-color": 768,
@@ -83057,7 +83057,7 @@ function convertBlendFactorToFunction(parameter, value) {
 function message$1(parameter, value) {
   return `Illegal parameter ${value} for ${parameter}`;
 }
-function map$2(parameter, value, valueMap) {
+function map2(parameter, value, valueMap) {
   if (!(value in valueMap)) {
     throw new Error(message$1(parameter, value));
   }
@@ -85073,9 +85073,9 @@ class WEBGLVertexArray extends VertexArray {
    */
   _applyConstantAttributes() {
     for (let location = 0; location < this.maxVertexAttributes; ++location) {
-      const constant2 = this.attributes[location];
-      if (ArrayBuffer.isView(constant2)) {
-        this.device.setConstantAttributeWebGL(location, constant2);
+      const constant = this.attributes[location];
+      if (ArrayBuffer.isView(constant)) {
+        this.device.setConstantAttributeWebGL(location, constant);
       }
     }
   }
@@ -85250,7 +85250,7 @@ class WEBGLTransformFeedback extends TransformFeedback {
     }
   }
   getBuffer(locationOrName) {
-    if (isIndex$4(locationOrName)) {
+    if (isIndex(locationOrName)) {
       return this.buffers[locationOrName] || null;
     }
     const location = this._getVaryingIndex(locationOrName);
@@ -85286,7 +85286,7 @@ class WEBGLTransformFeedback extends TransformFeedback {
     return { buffer: buffer2, byteOffset, byteLength };
   }
   _getVaryingIndex(locationOrName) {
-    if (isIndex$4(locationOrName)) {
+    if (isIndex(locationOrName)) {
       return Number(locationOrName);
     }
     for (const varying of this.layout.varyings) {
@@ -85320,7 +85320,7 @@ class WEBGLTransformFeedback extends TransformFeedback {
     }
   }
 }
-function isIndex$4(value) {
+function isIndex(value) {
   if (typeof value === "number") {
     return Number.isInteger(value);
   }
@@ -85728,23 +85728,23 @@ class WebGLDevice extends Device {
    * so they need to be updated before every render
    * @todo - remember/cache values to avoid setting them unnecessarily?
    */
-  setConstantAttributeWebGL(location, constant2) {
+  setConstantAttributeWebGL(location, constant) {
     const maxVertexAttributes = this.limits.maxVertexAttributes;
     this._constants = this._constants || new Array(maxVertexAttributes).fill(null);
     const currentConstant = this._constants[location];
-    if (currentConstant && compareConstantArrayValues(currentConstant, constant2)) {
+    if (currentConstant && compareConstantArrayValues(currentConstant, constant)) {
       log$3.info(1, `setConstantAttributeWebGL(${location}) could have been skipped, value unchanged`)();
     }
-    this._constants[location] = constant2;
-    switch (constant2.constructor) {
+    this._constants[location] = constant;
+    switch (constant.constructor) {
       case Float32Array:
-        setConstantFloatArray(this, location, constant2);
+        setConstantFloatArray(this, location, constant);
         break;
       case Int32Array:
-        setConstantIntArray(this, location, constant2);
+        setConstantIntArray(this, location, constant);
         break;
       case Uint32Array:
-        setConstantUintArray(this, location, constant2);
+        setConstantUintArray(this, location, constant);
         break;
       default:
         throw new Error("constant");
@@ -86320,12 +86320,12 @@ class Deck {
   _addDefaultEffect(effect) {
     this.effectManager.addDefaultEffect(effect);
   }
-  _addDefaultShaderModule(module2) {
-    this.layerManager.addDefaultShaderModule(module2);
+  _addDefaultShaderModule(module) {
+    this.layerManager.addDefaultShaderModule(module);
   }
-  _removeDefaultShaderModule(module2) {
+  _removeDefaultShaderModule(module) {
     var _a3;
-    (_a3 = this.layerManager) == null ? void 0 : _a3.removeDefaultShaderModule(module2);
+    (_a3 = this.layerManager) == null ? void 0 : _a3.removeDefaultShaderModule(module);
   }
   _pick(method, statKey, opts) {
     assert$3(this.deckPicker);
@@ -86868,7 +86868,7 @@ class DataColumn {
     let opts;
     if (ArrayBuffer.isView(data2)) {
       opts = { value: data2 };
-    } else if (data2 instanceof Buffer$3) {
+    } else if (data2 instanceof Buffer$1) {
       opts = { buffer: data2 };
     } else {
       opts = data2;
@@ -87053,7 +87053,7 @@ class DataColumn {
       ...(_a3 = this._buffer) == null ? void 0 : _a3.props,
       id: this.id,
       // TODO(ibgreen) - WebGPU requires COPY_DST and COPY_SRC to allow write / read
-      usage: (isIndexed ? Buffer$3.INDEX : Buffer$3.VERTEX) | Buffer$3.COPY_DST,
+      usage: (isIndexed ? Buffer$1.INDEX : Buffer$1.VERTEX) | Buffer$1.COPY_DST,
       indexType: isIndexed ? type : void 0,
       byteLength
     });
@@ -87422,7 +87422,7 @@ class Attribute2 extends DataColumn {
       }
     }
     const { settings, state, value, size, startIndices } = attribute2;
-    const { accessor, transform: transform2 } = settings;
+    const { accessor, transform } = settings;
     let accessorFunc = state.binaryAccessor || // @ts-ignore
     (typeof accessor === "function" ? accessor : props[accessor]);
     if (typeof accessorFunc !== "function") {
@@ -87434,8 +87434,8 @@ class Attribute2 extends DataColumn {
     for (const object of iterable) {
       objectInfo.index++;
       let objectValue = accessorFunc(object, objectInfo);
-      if (transform2) {
-        objectValue = transform2.call(this, objectValue);
+      if (transform) {
+        objectValue = transform.call(this, objectValue);
       }
       if (startIndices) {
         const numVertices = (objectInfo.index < startIndices.length - 1 ? startIndices[objectInfo.index + 1] : numInstances) - startIndices[objectInfo.index];
@@ -87739,8 +87739,8 @@ class GPUInterpolationTransition extends GPUTransitionBase {
       target: buffers[1]
     });
     this.setBuffer(buffers[1]);
-    const { transform: transform2 } = this;
-    const model = transform2.model;
+    const { transform } = this;
+    const model = transform.model;
     let vertexCount = Math.floor(this.currentLength / attribute2.size);
     if (useFp64(attribute2)) {
       vertexCount /= 2;
@@ -87755,7 +87755,7 @@ class GPUInterpolationTransition extends GPUTransitionBase {
         aTo: attribute2.getBuffer()
       });
     }
-    transform2.transformFeedback.setBuffers({ vCurrent: buffers[1] });
+    transform.transformFeedback.setBuffers({ vCurrent: buffers[1] });
   }
   onUpdate() {
     const { duration, easing } = this.settings;
@@ -87917,19 +87917,19 @@ class GPUSpringTransition extends GPUTransitionBase {
     }
   }
   onUpdate() {
-    const { buffers, transform: transform2, framebuffer, transition: transition2 } = this;
+    const { buffers, transform, framebuffer, transition } = this;
     const settings = this.settings;
-    transform2.model.setAttributes({
+    transform.model.setAttributes({
       aPrev: buffers[0],
       aCur: buffers[1]
     });
-    transform2.transformFeedback.setBuffers({ vNext: buffers[2] });
+    transform.transformFeedback.setBuffers({ vNext: buffers[2] });
     const springProps = {
       stiffness: settings.stiffness,
       damping: settings.damping
     };
-    transform2.model.shaderInputs.setProps({ spring: springProps });
-    transform2.run({
+    transform.model.shaderInputs.setProps({ spring: springProps });
+    transform.run({
       framebuffer,
       discard: false,
       parameters: { viewport: [0, 0, 1, 1] },
@@ -87939,7 +87939,7 @@ class GPUSpringTransition extends GPUTransitionBase {
     this.setBuffer(buffers[1]);
     const isTransitioning = this.device.readPixelsToArrayWebGL(framebuffer)[0] > 0;
     if (!isTransitioning) {
-      transition2.end();
+      transition.end();
     }
   }
   delete() {
@@ -88086,16 +88086,16 @@ class AttributeTransitionManager {
   }
   // Returns `true` if attribute is transition-enabled
   hasAttribute(attributeName) {
-    const transition2 = this.transitions[attributeName];
-    return transition2 && transition2.inProgress;
+    const transition = this.transitions[attributeName];
+    return transition && transition.inProgress;
   }
   // Get all the animated attributes
   getAttributes() {
     const animatedAttributes = {};
     for (const attributeName in this.transitions) {
-      const transition2 = this.transitions[attributeName];
-      if (transition2.inProgress) {
-        animatedAttributes[attributeName] = transition2.attributeInTransition;
+      const transition = this.transitions[attributeName];
+      if (transition.inProgress) {
+        animatedAttributes[attributeName] = transition.attributeInTransition;
       }
     }
     return animatedAttributes;
@@ -88126,10 +88126,10 @@ class AttributeTransitionManager {
   // Check an attributes for updates
   // Returns a transition object if a new transition is triggered.
   _updateAttribute(attributeName, attribute2, settings) {
-    const transition2 = this.transitions[attributeName];
-    let isNew = !transition2 || transition2.type !== settings.type;
+    const transition = this.transitions[attributeName];
+    let isNew = !transition || transition.type !== settings.type;
     if (isNew) {
-      if (transition2) {
+      if (transition) {
         this._removeTransition(attributeName);
       }
       const TransitionType = TRANSITION_TYPES$1[settings.type];
@@ -88158,7 +88158,7 @@ const TRACE_ATTRIBUTE_ALLOCATE = "attribute.allocate";
 const TRACE_ATTRIBUTE_UPDATE_END = "attribute.updateEnd";
 class AttributeManager {
   constructor(device, { id: id2 = "attribute-manager", stats, timeline } = {}) {
-    this.mergeBoundsMemoized = memoize$4(mergeBounds);
+    this.mergeBoundsMemoized = memoize$1(mergeBounds);
     this.id = id2;
     this.device = device;
     this.attributes = {};
@@ -88451,8 +88451,8 @@ class UniformTransitionManager {
   add(key, fromValue, toValue, settings) {
     const { transitions } = this;
     if (transitions.has(key)) {
-      const transition3 = transitions.get(key);
-      const { value = transition3.settings.fromValue } = transition3;
+      const transition2 = transitions.get(key);
+      const { value = transition2.settings.fromValue } = transition2;
       fromValue = value;
       this.remove(key);
     }
@@ -88465,13 +88465,13 @@ class UniformTransitionManager {
       defaultLogger.error(`unsupported transition type '${settings.type}'`)();
       return;
     }
-    const transition2 = new TransitionType(this.timeline);
-    transition2.start({
+    const transition = new TransitionType(this.timeline);
+    transition.start({
       ...settings,
       fromValue,
       toValue
     });
-    transitions.set(key, transition2);
+    transitions.set(key, transition);
   }
   remove(key) {
     const { transitions } = this;
@@ -88482,10 +88482,10 @@ class UniformTransitionManager {
   }
   update() {
     const propsInTransition = {};
-    for (const [key, transition2] of this.transitions) {
-      transition2.update();
-      propsInTransition[key] = transition2.value;
-      if (!transition2.inProgress) {
+    for (const [key, transition] of this.transitions) {
+      transition.update();
+      propsInTransition[key] = transition.value;
+      if (!transition.inProgress) {
         this.remove(key);
       }
     }
@@ -88675,7 +88675,7 @@ function diffUpdateTrigger(props, oldProps, triggerName) {
 const ERR_NOT_OBJECT = "count(): argument not an object";
 const ERR_NOT_CONTAINER = "count(): argument not a container";
 function count(container) {
-  if (!isObject$9(container)) {
+  if (!isObject$1(container)) {
     throw new Error(ERR_NOT_OBJECT);
   }
   if (typeof container.count === "function") {
@@ -88687,15 +88687,15 @@ function count(container) {
   if (Number.isFinite(container.length)) {
     return container.length;
   }
-  if (isPlainObject$4(container)) {
+  if (isPlainObject$2(container)) {
     return Object.keys(container).length;
   }
   throw new Error(ERR_NOT_CONTAINER);
 }
-function isPlainObject$4(value) {
+function isPlainObject$2(value) {
   return value !== null && typeof value === "object" && value.constructor === Object;
 }
-function isObject$9(value) {
+function isObject$1(value) {
   return value !== null && typeof value === "object";
 }
 function mergeShaders(target, source2) {
@@ -88708,8 +88708,8 @@ function mergeShaders(target, source2) {
   }
   if ("modules" in source2) {
     result.modules = (target.modules || []).concat(source2.modules);
-    if (source2.modules.some((module2) => module2.name === "project64")) {
-      const index2 = result.modules.findIndex((module2) => module2.name === "project32");
+    if (source2.modules.some((module) => module.name === "project64")) {
+      const index2 = result.modules.findIndex((module) => module.name === "project32");
       if (index2 >= 0) {
         result.modules.splice(index2, 1);
       }
@@ -88786,7 +88786,7 @@ const TYPE_DEFINITIONS = {
   },
   color: {
     validate(value, propType) {
-      return propType.optional && !value || isArray$e(value) && (value.length === 3 || value.length === 4);
+      return propType.optional && !value || isArray$1(value) && (value.length === 3 || value.length === 4);
     },
     equal(value1, value2, propType) {
       return deepEqual$1(value1, value2, 1);
@@ -88806,7 +88806,7 @@ const TYPE_DEFINITIONS = {
   },
   array: {
     validate(value, propType) {
-      return propType.optional && !value || isArray$e(value);
+      return propType.optional && !value || isArray$1(value);
     },
     equal(value1, value2, propType) {
       const { compare } = propType;
@@ -88905,11 +88905,11 @@ function normalizePropDefinition(name2, propDef) {
   }
   return { name: name2, ...TYPE_DEFINITIONS[propDef.type], ...propDef };
 }
-function isArray$e(value) {
+function isArray$1(value) {
   return Array.isArray(value) || ArrayBuffer.isView(value);
 }
 function getTypeOf(value) {
-  if (isArray$e(value)) {
+  if (isArray$1(value)) {
     return "array";
   }
   if (value === null) {
@@ -88983,7 +88983,7 @@ function createPropsPrototypeAndTypes(componentClass, extensions) {
   addDeprecatedPropsToPropPrototype(defaultProps2, deprecatedProps);
   defaultProps2[PROP_TYPES_SYMBOL] = propTypes2;
   defaultProps2[DEPRECATED_PROPS_SYMBOL] = deprecatedProps;
-  if (extensions.length === 0 && !hasOwnProperty$q(componentClass, "_propTypes")) {
+  if (extensions.length === 0 && !hasOwnProperty$1(componentClass, "_propTypes")) {
     componentClass._propTypes = propTypes2;
   }
   return defaultProps2;
@@ -89005,7 +89005,7 @@ function addDeprecatedPropsToPropPrototype(defaultProps2, deprecatedProps) {
       set(newValue) {
         const nameStr = `${this.id}: ${propName}`;
         for (const newPropName of deprecatedProps[propName]) {
-          if (!hasOwnProperty$q(this, newPropName)) {
+          if (!hasOwnProperty$1(this, newPropName)) {
             this[newPropName] = newValue;
           }
         }
@@ -89058,11 +89058,11 @@ function getDescriptorForAsyncProp(name2) {
     }
   };
 }
-function hasOwnProperty$q(object, prop) {
+function hasOwnProperty$1(object, prop) {
   return Object.prototype.hasOwnProperty.call(object, prop);
 }
 function getOwnProperty(object, prop) {
-  return hasOwnProperty$q(object, prop) && object[prop];
+  return hasOwnProperty$1(object, prop) && object[prop];
 }
 function getComponentName(componentClass) {
   const componentName = componentClass.componentName;
@@ -89361,7 +89361,7 @@ const TRACE_FINALIZE = "layer.finalize";
 const TRACE_MATCHED = "layer.matched";
 const MAX_PICKING_COLOR_CACHE_SIZE = 2 ** 24 - 1;
 const EMPTY_ARRAY$1 = Object.freeze([]);
-const areViewportsEqual = memoize$4(({ oldViewport, viewport }) => {
+const areViewportsEqual = memoize$1(({ oldViewport, viewport }) => {
   return oldViewport.equals(viewport);
 });
 let pickingColorCache = new Uint8ClampedArray(0);
@@ -89880,7 +89880,7 @@ class Layer extends Component {
       const values2 = changedAttributes[name2].getValue();
       for (const attributeName in values2) {
         const value = values2[attributeName];
-        if (value instanceof Buffer$3) {
+        if (value instanceof Buffer$1) {
           if (changedAttributes[name2].settings.isIndexed) {
             model.setIndexBuffer(value);
           } else {
@@ -91151,7 +91151,7 @@ class Tesselator {
       instanceCount = vertexStarts[data2.length] || 0;
       if (ArrayBuffer.isView(geometryBuffer)) {
         instanceCount = instanceCount || geometryBuffer.length / this.positionSize;
-      } else if (geometryBuffer instanceof Buffer$3) {
+      } else if (geometryBuffer instanceof Buffer$1) {
         const byteStride = this.positionSize * 4;
         instanceCount = instanceCount || geometryBuffer.byteLength / byteStride;
       } else if (geometryBuffer.buffer) {
@@ -91522,7 +91522,7 @@ let BitmapLayer$1 = class BitmapLayer extends Layer {
   draw(opts) {
     const { shaderModuleProps } = opts;
     const { model, coordinateConversion, bounds, disablePicking } = this.state;
-    const { image: image2, desaturate: desaturate2, transparentColor, tintColor } = this.props;
+    const { image: image2, desaturate, transparentColor, tintColor } = this.props;
     if (shaderModuleProps.picking.isActive && disablePicking) {
       return;
     }
@@ -91531,7 +91531,7 @@ let BitmapLayer$1 = class BitmapLayer extends Layer {
         bitmapTexture: image2,
         bounds,
         coordinateConversion,
-        desaturate: desaturate2,
+        desaturate,
         tintColor: tintColor.slice(0, 3).map((x2) => x2 / 255),
         transparentColor: transparentColor.map((x2) => x2 / 255)
       };
@@ -91702,29 +91702,29 @@ const isBrowser = typeof process !== "object" || String(process) !== "[object pr
 const isMobile = typeof window !== "undefined" && typeof window.orientation !== "undefined";
 const matches = typeof process !== "undefined" && process.version && /v([0-9]*)/.exec(process.version);
 matches && parseFloat(matches[1]) || 0;
-function _typeof$3(o3) {
+function _typeof$2(o3) {
   "@babel/helpers - typeof";
-  return _typeof$3 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o4) {
+  return _typeof$2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o4) {
     return typeof o4;
   } : function(o4) {
     return o4 && "function" == typeof Symbol && o4.constructor === Symbol && o4 !== Symbol.prototype ? "symbol" : typeof o4;
-  }, _typeof$3(o3);
+  }, _typeof$2(o3);
 }
 function toPrimitive(t3, r4) {
-  if ("object" != _typeof$3(t3) || !t3) return t3;
+  if ("object" != _typeof$2(t3) || !t3) return t3;
   var e3 = t3[Symbol.toPrimitive];
   if (void 0 !== e3) {
     var i5 = e3.call(t3, r4);
-    if ("object" != _typeof$3(i5)) return i5;
+    if ("object" != _typeof$2(i5)) return i5;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return ("string" === r4 ? String : Number)(t3);
 }
 function toPropertyKey(t3) {
   var i5 = toPrimitive(t3, "string");
-  return "symbol" == _typeof$3(i5) ? i5 : i5 + "";
+  return "symbol" == _typeof$2(i5) ? i5 : i5 + "";
 }
-function _defineProperty$6(e3, r4, t3) {
+function _defineProperty$4(e3, r4, t3) {
   return (r4 = toPropertyKey(r4)) in e3 ? Object.defineProperty(e3, r4, {
     value: t3,
     enumerable: true,
@@ -91734,13 +91734,13 @@ function _defineProperty$6(e3, r4, t3) {
 }
 class WorkerJob2 {
   constructor(jobName, workerThread) {
-    _defineProperty$6(this, "name", void 0);
-    _defineProperty$6(this, "workerThread", void 0);
-    _defineProperty$6(this, "isRunning", true);
-    _defineProperty$6(this, "result", void 0);
-    _defineProperty$6(this, "_resolve", () => {
+    _defineProperty$4(this, "name", void 0);
+    _defineProperty$4(this, "workerThread", void 0);
+    _defineProperty$4(this, "isRunning", true);
+    _defineProperty$4(this, "result", void 0);
+    _defineProperty$4(this, "_resolve", () => {
     });
-    _defineProperty$6(this, "_reject", () => {
+    _defineProperty$4(this, "_reject", () => {
     });
     this.name = jobName;
     this.workerThread = workerThread;
@@ -91846,14 +91846,14 @@ class WorkerThread2 {
     return typeof Worker !== "undefined" && isBrowser || typeof Worker$2 !== "undefined" && !isBrowser;
   }
   constructor(props) {
-    _defineProperty$6(this, "name", void 0);
-    _defineProperty$6(this, "source", void 0);
-    _defineProperty$6(this, "url", void 0);
-    _defineProperty$6(this, "terminated", false);
-    _defineProperty$6(this, "worker", void 0);
-    _defineProperty$6(this, "onMessage", void 0);
-    _defineProperty$6(this, "onError", void 0);
-    _defineProperty$6(this, "_loadableURL", "");
+    _defineProperty$4(this, "name", void 0);
+    _defineProperty$4(this, "source", void 0);
+    _defineProperty$4(this, "url", void 0);
+    _defineProperty$4(this, "terminated", false);
+    _defineProperty$4(this, "worker", void 0);
+    _defineProperty$4(this, "onMessage", void 0);
+    _defineProperty$4(this, "onError", void 0);
+    _defineProperty$4(this, "_loadableURL", "");
     const {
       name: name2,
       source: source2,
@@ -91916,8 +91916,8 @@ class WorkerThread2 {
   _createNodeWorker() {
     let worker;
     if (this.url) {
-      const absolute2 = this.url.includes(":/") || this.url.startsWith("/");
-      const url = absolute2 ? this.url : "./".concat(this.url);
+      const absolute = this.url.includes(":/") || this.url.startsWith("/");
+      const url = absolute ? this.url : "./".concat(this.url);
       worker = new Worker$2(url, {
         eval: false
       });
@@ -91944,19 +91944,19 @@ class WorkerPool2 {
     return WorkerThread2.isSupported();
   }
   constructor(props) {
-    _defineProperty$6(this, "name", "unnamed");
-    _defineProperty$6(this, "source", void 0);
-    _defineProperty$6(this, "url", void 0);
-    _defineProperty$6(this, "maxConcurrency", 1);
-    _defineProperty$6(this, "maxMobileConcurrency", 1);
-    _defineProperty$6(this, "onDebug", () => {
+    _defineProperty$4(this, "name", "unnamed");
+    _defineProperty$4(this, "source", void 0);
+    _defineProperty$4(this, "url", void 0);
+    _defineProperty$4(this, "maxConcurrency", 1);
+    _defineProperty$4(this, "maxMobileConcurrency", 1);
+    _defineProperty$4(this, "onDebug", () => {
     });
-    _defineProperty$6(this, "reuseWorkers", true);
-    _defineProperty$6(this, "props", {});
-    _defineProperty$6(this, "jobQueue", []);
-    _defineProperty$6(this, "idleQueue", []);
-    _defineProperty$6(this, "count", 0);
-    _defineProperty$6(this, "isDestroyed", false);
+    _defineProperty$4(this, "reuseWorkers", true);
+    _defineProperty$4(this, "props", {});
+    _defineProperty$4(this, "jobQueue", []);
+    _defineProperty$4(this, "idleQueue", []);
+    _defineProperty$4(this, "count", 0);
+    _defineProperty$4(this, "isDestroyed", false);
     this.source = props.source;
     this.url = props.url;
     this.setProps(props);
@@ -92077,8 +92077,8 @@ class WorkerFarm {
     return WorkerFarm._workerFarm;
   }
   constructor(props) {
-    _defineProperty$6(this, "props", void 0);
-    _defineProperty$6(this, "workerPools", /* @__PURE__ */ new Map());
+    _defineProperty$4(this, "props", void 0);
+    _defineProperty$4(this, "workerPools", /* @__PURE__ */ new Map());
     this.props = {
       ...DEFAULT_PROPS$1
     };
@@ -92127,7 +92127,7 @@ class WorkerFarm {
     };
   }
 }
-_defineProperty$6(WorkerFarm, "_workerFarm", void 0);
+_defineProperty$4(WorkerFarm, "_workerFarm", void 0);
 const NPM_TAG = "latest";
 function getWorkerURL(worker) {
   let options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
@@ -92272,11 +92272,11 @@ function resolvePath(filename2) {
 function toArrayBuffer$1(buffer2) {
   return buffer2;
 }
-function isBuffer$6(value) {
+function isBuffer$1(value) {
   return value && typeof value === "object" && value.isBuffer;
 }
 function toArrayBuffer(data2) {
-  if (isBuffer$6(data2)) {
+  if (isBuffer$1(data2)) {
     return toArrayBuffer$1(data2);
   }
   if (data2 instanceof ArrayBuffer) {
@@ -92307,16 +92307,16 @@ function dirname$1(url) {
   return slashIndex >= 0 ? url.substr(0, slashIndex) : "";
 }
 const isBoolean = (x2) => typeof x2 === "boolean";
-const isFunction$4 = (x2) => typeof x2 === "function";
-const isObject$8 = (x2) => x2 !== null && typeof x2 === "object";
-const isPureObject = (x2) => isObject$8(x2) && x2.constructor === {}.constructor;
+const isFunction = (x2) => typeof x2 === "function";
+const isObject = (x2) => x2 !== null && typeof x2 === "object";
+const isPureObject = (x2) => isObject(x2) && x2.constructor === {}.constructor;
 const isIterable = (x2) => x2 && typeof x2[Symbol.iterator] === "function";
 const isAsyncIterable = (x2) => x2 && typeof x2[Symbol.asyncIterator] === "function";
 const isResponse = (x2) => typeof Response !== "undefined" && x2 instanceof Response || x2 && x2.arrayBuffer && x2.text && x2.json;
 const isBlob = (x2) => typeof Blob !== "undefined" && x2 instanceof Blob;
-const isBuffer$5 = (x2) => x2 && typeof x2 === "object" && x2.isBuffer;
-const isReadableDOMStream = (x2) => typeof ReadableStream !== "undefined" && x2 instanceof ReadableStream || isObject$8(x2) && isFunction$4(x2.tee) && isFunction$4(x2.cancel) && isFunction$4(x2.getReader);
-const isReadableNodeStream = (x2) => isObject$8(x2) && isFunction$4(x2.read) && isFunction$4(x2.pipe) && isBoolean(x2.readable);
+const isBuffer = (x2) => x2 && typeof x2 === "object" && x2.isBuffer;
+const isReadableDOMStream = (x2) => typeof ReadableStream !== "undefined" && x2 instanceof ReadableStream || isObject(x2) && isFunction(x2.tee) && isFunction(x2.cancel) && isFunction(x2.getReader);
+const isReadableNodeStream = (x2) => isObject(x2) && isFunction(x2.read) && isFunction(x2.pipe) && isBoolean(x2.readable);
 const isReadableStream = (x2) => isReadableDOMStream(x2) || isReadableNodeStream(x2);
 const DATA_URL_PATTERN = /^data:([-\w.]+\/[-\w.+]+)(;|,)/;
 const MIME_TYPE_PATTERN = /^([-\w.]+\/[-\w.+]+)/;
@@ -92506,7 +92506,7 @@ class NullLog2 {
 }
 class ConsoleLog2 {
   constructor() {
-    _defineProperty$6(this, "console", void 0);
+    _defineProperty$4(this, "console", void 0);
     this.console = console;
   }
   log() {
@@ -92604,7 +92604,7 @@ function validateOptionsObject(options, id2, defaultOptions2, deprecatedOptions,
   const loaderName = id2 || "Top level";
   const prefix2 = id2 ? "".concat(id2, ".") : "";
   for (const key in options) {
-    const isSubOptions = !id2 && isObject$8(options[key]);
+    const isSubOptions = !id2 && isObject(options[key]);
     const isBaseUriOption = key === "baseUri" && !id2;
     const isWorkerUrlOption = key === "workerUrl" && id2;
     if (!(key in defaultOptions2) && !isBaseUriOption && !isWorkerUrlOption) {
@@ -93002,7 +93002,7 @@ function getArrayBufferOrStringFromDataSync(data2, loader, options) {
   if (loader.text && typeof data2 === "string") {
     return data2;
   }
-  if (isBuffer$5(data2)) {
+  if (isBuffer(data2)) {
     data2 = data2.buffer;
   }
   if (data2 instanceof ArrayBuffer) {
@@ -93054,7 +93054,7 @@ function getFetchFunction(options, context) {
   if (typeof fetchOptions.fetch === "function") {
     return fetchOptions.fetch;
   }
-  if (isObject$8(fetchOptions.fetch)) {
+  if (isObject(fetchOptions.fetch)) {
     return (url) => fetchFile(url, fetchOptions);
   }
   if (context !== null && context !== void 0 && context.fetch) {
@@ -97719,18 +97719,18 @@ class TextBackgroundLayer extends Layer {
   }
   draw({ uniforms }) {
     const { billboard, sizeScale, sizeUnits, sizeMinPixels, sizeMaxPixels, getLineWidth } = this.props;
-    let { padding, borderRadius: borderRadius2 } = this.props;
+    let { padding, borderRadius } = this.props;
     if (padding.length < 4) {
       padding = [padding[0], padding[1], padding[0], padding[1]];
     }
-    if (!Array.isArray(borderRadius2)) {
-      borderRadius2 = [borderRadius2, borderRadius2, borderRadius2, borderRadius2];
+    if (!Array.isArray(borderRadius)) {
+      borderRadius = [borderRadius, borderRadius, borderRadius, borderRadius];
     }
     const model = this.state.model;
     const textBackgroundProps = {
       billboard,
       stroked: Boolean(getLineWidth),
-      borderRadius: borderRadius2,
+      borderRadius,
       padding,
       sizeUnits: UNIT[sizeUnits],
       sizeScale,
@@ -98907,11 +98907,11 @@ class AxisAlignedBoundingBox {
    * @param transform The transformation matrix to apply to the bounding sphere.
    * @returns itself, i.e. the modified BoundingVolume.
    */
-  transform(transform2) {
-    this.center.transformAsPoint(transform2);
-    this.halfDiagonal.transform(transform2);
-    this.minimum.transform(transform2);
-    this.maximum.transform(transform2);
+  transform(transform) {
+    this.center.transformAsPoint(transform);
+    this.halfDiagonal.transform(transform);
+    this.minimum.transform(transform);
+    this.maximum.transform(transform);
     return this;
   }
   /**
@@ -99024,9 +99024,9 @@ class BoundingSphere {
    * @param transform The transformation matrix to apply to the bounding sphere.
    * @returns self.
    */
-  transform(transform2) {
-    this.center.transform(transform2);
-    const scale2 = getScaling(scratchVector, transform2);
+  transform(transform) {
+    this.center.transform(transform);
+    const scale2 = getScaling(scratchVector, transform);
     this.radius = Math.max(scale2[0], Math.max(scale2[1], scale2[2])) * this.radius;
     return this;
   }
@@ -99933,7 +99933,7 @@ function getTileIndices({ viewport, maxZoom, minZoom, zRange, extent, tileSize =
   }
   return viewport.isGeospatial ? getOSMTileIndices(viewport, z4, zRange, extent) : getIdentityTileIndices(viewport, z4, tileSize, transformedExtent || DEFAULT_EXTENT, modelMatrixInverse);
 }
-function memoize$3(compute) {
+function memoize(compute) {
   let cachedArgs = {};
   let cachedResult2;
   return (args) => {
@@ -100004,7 +100004,7 @@ class Tileset2D {
    * Cache size defaults to 5 * number of tiles in the current viewport
    */
   constructor(opts) {
-    this._getCullBounds = memoize$3(getCullBounds);
+    this._getCullBounds = memoize(getCullBounds);
     this.opts = { ...DEFAULT_TILESET2D_PROPS, ...opts };
     this.setOptions(this.opts);
     this.onTileLoad = (tile) => {
@@ -100546,10 +100546,10 @@ function getDefaultExportFromCjs(x2) {
   return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
 }
 var loglevel = { exports: {} };
-(function(module2) {
+(function(module) {
   (function(root2, definition2) {
-    if (module2.exports) {
-      module2.exports = definition2();
+    if (module.exports) {
+      module.exports = definition2();
     } else {
       root2.log = definition2();
     }
@@ -100796,7 +100796,7 @@ var log$1 = /* @__PURE__ */ getDefaultExportFromCjs(loglevelExports);
 log$1.setLevel("warn");
 var validationLog = log$1.getLogger("validation.dcmjs");
 function _callSuper(t3, o3, e3) {
-  return o3 = _getPrototypeOf(o3), _possibleConstructorReturn$a(t3, _isNativeReflectConstruct() ? Reflect.construct(o3, e3 || [], _getPrototypeOf(t3).constructor) : o3.apply(t3, e3));
+  return o3 = _getPrototypeOf(o3), _possibleConstructorReturn(t3, _isNativeReflectConstruct() ? Reflect.construct(o3, e3 || [], _getPrototypeOf(t3).constructor) : o3.apply(t3, e3));
 }
 function _isNativeReflectConstruct() {
   try {
@@ -100843,7 +100843,7 @@ function _objectSpread2$2(e3) {
   for (var r4 = 1; r4 < arguments.length; r4++) {
     var t3 = null != arguments[r4] ? arguments[r4] : {};
     r4 % 2 ? ownKeys$3(Object(t3), true).forEach(function(r5) {
-      _defineProperty$5(e3, r5, t3[r5]);
+      _defineProperty$3(e3, r5, t3[r5]);
     }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e3, Object.getOwnPropertyDescriptors(t3)) : ownKeys$3(Object(t3)).forEach(function(r5) {
       Object.defineProperty(e3, r5, Object.getOwnPropertyDescriptor(t3, r5));
     });
@@ -100864,15 +100864,15 @@ function _toPropertyKey$1(t3) {
   var i5 = _toPrimitive$1(t3, "string");
   return "symbol" == typeof i5 ? i5 : String(i5);
 }
-function _typeof$2(o3) {
+function _typeof$1(o3) {
   "@babel/helpers - typeof";
-  return _typeof$2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o4) {
+  return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o4) {
     return typeof o4;
   } : function(o4) {
     return o4 && "function" == typeof Symbol && o4.constructor === Symbol && o4 !== Symbol.prototype ? "symbol" : typeof o4;
-  }, _typeof$2(o3);
+  }, _typeof$1(o3);
 }
-function _classCallCheck$a(instance, Constructor) {
+function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
@@ -100886,7 +100886,7 @@ function _defineProperties(target, props) {
     Object.defineProperty(target, _toPropertyKey$1(descriptor.key), descriptor);
   }
 }
-function _createClass$8(Constructor, protoProps, staticProps) {
+function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
   Object.defineProperty(Constructor, "prototype", {
@@ -100894,7 +100894,7 @@ function _createClass$8(Constructor, protoProps, staticProps) {
   });
   return Constructor;
 }
-function _defineProperty$5(obj, key, value) {
+function _defineProperty$3(obj, key, value) {
   key = _toPropertyKey$1(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -100908,7 +100908,7 @@ function _defineProperty$5(obj, key, value) {
   }
   return obj;
 }
-function _inherits$a(subClass, superClass) {
+function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
@@ -100943,7 +100943,7 @@ function _assertThisInitialized(self2) {
   }
   return self2;
 }
-function _possibleConstructorReturn$a(self2, call) {
+function _possibleConstructorReturn(self2, call) {
   if (call && (typeof call === "object" || typeof call === "function")) {
     return call;
   } else if (call !== void 0) {
@@ -100951,8 +100951,8 @@ function _possibleConstructorReturn$a(self2, call) {
   }
   return _assertThisInitialized(self2);
 }
-function _superPropBase(object, property2) {
-  while (!Object.prototype.hasOwnProperty.call(object, property2)) {
+function _superPropBase(object, property) {
+  while (!Object.prototype.hasOwnProperty.call(object, property)) {
     object = _getPrototypeOf(object);
     if (object === null) break;
   }
@@ -100962,10 +100962,10 @@ function _get() {
   if (typeof Reflect !== "undefined" && Reflect.get) {
     _get = Reflect.get.bind();
   } else {
-    _get = function _get2(target, property2, receiver) {
-      var base2 = _superPropBase(target, property2);
+    _get = function _get2(target, property, receiver) {
+      var base2 = _superPropBase(target, property);
       if (!base2) return;
-      var desc = Object.getOwnPropertyDescriptor(base2, property2);
+      var desc = Object.getOwnPropertyDescriptor(base2, property);
       if (desc.get) {
         return desc.get.call(arguments.length < 3 ? target : receiver);
       }
@@ -105033,7 +105033,7 @@ function GZheader$1() {
   this.done = false;
 }
 var gzheader$1 = GZheader$1;
-const toString$6 = Object.prototype.toString;
+const toString$3 = Object.prototype.toString;
 const {
   Z_NO_FLUSH: Z_NO_FLUSH$3,
   Z_FINISH: Z_FINISH$4,
@@ -105083,7 +105083,7 @@ function Inflate$1$1(options) {
   if (opt.dictionary) {
     if (typeof opt.dictionary === "string") {
       opt.dictionary = strings$1.string2buf(opt.dictionary);
-    } else if (toString$6.call(opt.dictionary) === "[object ArrayBuffer]") {
+    } else if (toString$3.call(opt.dictionary) === "[object ArrayBuffer]") {
       opt.dictionary = new Uint8Array(opt.dictionary);
     }
     if (opt.raw) {
@@ -105102,7 +105102,7 @@ Inflate$1$1.prototype.push = function(data2, flush_mode) {
   if (this.ended) return false;
   if (flush_mode === ~~flush_mode) _flush_mode = flush_mode;
   else _flush_mode = flush_mode === true ? Z_FINISH$4 : Z_NO_FLUSH$3;
-  if (toString$6.call(data2) === "[object ArrayBuffer]") {
+  if (toString$3.call(data2) === "[object ArrayBuffer]") {
     strm.input = new Uint8Array(data2);
   } else {
     strm.input = data2;
@@ -105236,7 +105236,7 @@ function toFloat(val) {
 }
 var BufferStream = /* @__PURE__ */ function() {
   function BufferStream2(sizeOrBuffer, littleEndian) {
-    _classCallCheck$a(this, BufferStream2);
+    _classCallCheck(this, BufferStream2);
     this.buffer = typeof sizeOrBuffer == "number" ? new ArrayBuffer(sizeOrBuffer) : sizeOrBuffer;
     if (!this.buffer) {
       this.buffer = new ArrayBuffer(0);
@@ -105247,7 +105247,7 @@ var BufferStream = /* @__PURE__ */ function() {
     this.size = 0;
     this.encoder = new TextEncoder("utf-8");
   }
-  _createClass$8(BufferStream2, [{
+  _createClass(BufferStream2, [{
     key: "setEndian",
     value: function setEndian(isLittle) {
       this.isLittleEndian = isLittle;
@@ -105543,7 +105543,7 @@ var BufferStream = /* @__PURE__ */ function() {
   return BufferStream2;
 }();
 var ReadBufferStream = /* @__PURE__ */ function(_BufferStream) {
-  _inherits$a(ReadBufferStream2, _BufferStream);
+  _inherits(ReadBufferStream2, _BufferStream);
   function ReadBufferStream2(buffer2, littleEndian) {
     var _this;
     var options = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {
@@ -105551,7 +105551,7 @@ var ReadBufferStream = /* @__PURE__ */ function(_BufferStream) {
       stop: null,
       noCopy: false
     };
-    _classCallCheck$a(this, ReadBufferStream2);
+    _classCallCheck(this, ReadBufferStream2);
     _this = _callSuper(this, ReadBufferStream2, [buffer2, littleEndian]);
     _this.offset = options.start || 0;
     _this.size = options.stop || _this.buffer.byteLength;
@@ -105561,7 +105561,7 @@ var ReadBufferStream = /* @__PURE__ */ function(_BufferStream) {
     _this.decoder = new TextDecoder("latin1");
     return _this;
   }
-  _createClass$8(ReadBufferStream2, [{
+  _createClass(ReadBufferStream2, [{
     key: "setDecoder",
     value: function setDecoder(decoder) {
       this.decoder = decoder;
@@ -105668,24 +105668,24 @@ var ReadBufferStream = /* @__PURE__ */ function(_BufferStream) {
   return ReadBufferStream2;
 }(BufferStream);
 var DeflatedReadBufferStream = /* @__PURE__ */ function(_ReadBufferStream) {
-  _inherits$a(DeflatedReadBufferStream2, _ReadBufferStream);
+  _inherits(DeflatedReadBufferStream2, _ReadBufferStream);
   function DeflatedReadBufferStream2(stream, options) {
-    _classCallCheck$a(this, DeflatedReadBufferStream2);
+    _classCallCheck(this, DeflatedReadBufferStream2);
     var inflatedBuffer = pako$1.inflateRaw(stream.getBuffer(stream.offset, stream.size));
     return _callSuper(this, DeflatedReadBufferStream2, [inflatedBuffer.buffer, stream.littleEndian, options]);
   }
-  return _createClass$8(DeflatedReadBufferStream2);
+  return _createClass(DeflatedReadBufferStream2);
 }(ReadBufferStream);
 var WriteBufferStream = /* @__PURE__ */ function(_BufferStream2) {
-  _inherits$a(WriteBufferStream2, _BufferStream2);
+  _inherits(WriteBufferStream2, _BufferStream2);
   function WriteBufferStream2(buffer2, littleEndian) {
     var _this2;
-    _classCallCheck$a(this, WriteBufferStream2);
+    _classCallCheck(this, WriteBufferStream2);
     _this2 = _callSuper(this, WriteBufferStream2, [buffer2, littleEndian]);
     _this2.size = 0;
     return _this2;
   }
-  return _createClass$8(WriteBufferStream2);
+  return _createClass(WriteBufferStream2);
 }(BufferStream);
 var IMPLICIT_LITTLE_ENDIAN = "1.2.840.10008.1.2";
 var EXPLICIT_LITTLE_ENDIAN$1 = "1.2.840.10008.1.2.1";
@@ -105702,7 +105702,7 @@ var handler = {
    * Note that the property value get works even if you update the underlying object.
    * Also, return true of proxy.__isProxy in order to distinguish proxies and not double proxy them.
    */
-  get: function get2(target, prop) {
+  get: function get3(target, prop) {
     if (prop == "__isProxy") return true;
     if (prop in target) return target[prop];
     return target[0][prop];
@@ -105722,7 +105722,7 @@ var addAccessors = function addAccessors2(dest, sqZero) {
   if (dest.__isProxy) return dest;
   var itemZero = sqZero;
   if (itemZero === void 0) {
-    if (_typeof$2(dest) !== "object") return dest;
+    if (_typeof$1(dest) !== "object") return dest;
     if (Array.isArray(dest) && dest.length !== 1) return dest;
     itemZero = Array.isArray(dest) ? dest[0] : dest;
   }
@@ -105736,11 +105736,11 @@ var addAccessors = function addAccessors2(dest, sqZero) {
 };
 var DicomMetaDictionary = /* @__PURE__ */ function() {
   function DicomMetaDictionary2(customDictionary) {
-    _classCallCheck$a(this, DicomMetaDictionary2);
+    _classCallCheck(this, DicomMetaDictionary2);
     this.customDictionary = customDictionary;
     this.customNameMap = DicomMetaDictionary2._generateCustomNameMap(customDictionary);
   }
-  _createClass$8(DicomMetaDictionary2, [{
+  _createClass(DicomMetaDictionary2, [{
     key: "denaturalizeDataset",
     value: (
       // denaturalizes dataset using custom dictionary and nameMap
@@ -105887,7 +105887,7 @@ var DicomMetaDictionary = /* @__PURE__ */ function() {
           }
           if (naturalDataset[naturalName].length === 1) {
             var sqZero = naturalDataset[naturalName][0];
-            if (sqZero && _typeof$2(sqZero) === "object" && !sqZero.length) {
+            if (sqZero && _typeof$1(sqZero) === "object" && !sqZero.length) {
               naturalDataset[naturalName] = addAccessors(naturalDataset[naturalName], sqZero);
             } else {
               naturalDataset[naturalName] = sqZero;
@@ -105992,20 +105992,20 @@ var DicomMetaDictionary = /* @__PURE__ */ function() {
   }, {
     key: "date",
     value: function date() {
-      var now2 = /* @__PURE__ */ new Date();
-      return now2.toISOString().replace(/-/g, "").slice(0, 8);
+      var now = /* @__PURE__ */ new Date();
+      return now.toISOString().replace(/-/g, "").slice(0, 8);
     }
   }, {
     key: "time",
     value: function time() {
-      var now2 = /* @__PURE__ */ new Date();
-      return now2.toISOString().replace(/:/g, "").slice(11, 17);
+      var now = /* @__PURE__ */ new Date();
+      return now.toISOString().replace(/:/g, "").slice(11, 17);
     }
   }, {
     key: "dateTime",
     value: function dateTime() {
-      var now2 = /* @__PURE__ */ new Date();
-      return now2.toISOString().replace(/[:\-TZ]/g, "");
+      var now = /* @__PURE__ */ new Date();
+      return now.toISOString().replace(/[:\-TZ]/g, "");
     }
   }, {
     key: "_generateNameMap",
@@ -106180,7 +106180,7 @@ var DicomMessage$3, Tag$1;
 var binaryVRs = ["FL", "FD", "SL", "SS", "UL", "US", "AT"], explicitVRs = ["OB", "OW", "OF", "SQ", "UC", "UR", "UT", "UN", "OD"], singleVRs$1 = ["SQ", "OF", "OW", "OB", "UN"];
 var ValueRepresentation = /* @__PURE__ */ function() {
   function ValueRepresentation2(type) {
-    _classCallCheck$a(this, ValueRepresentation2);
+    _classCallCheck(this, ValueRepresentation2);
     this.type = type;
     this.multi = false;
     this._isBinary = binaryVRs.indexOf(this.type) != -1;
@@ -106188,7 +106188,7 @@ var ValueRepresentation = /* @__PURE__ */ function() {
     this._isExplicit = explicitVRs.indexOf(this.type) != -1;
     this._storeRaw = true;
   }
-  _createClass$8(ValueRepresentation2, [{
+  _createClass(ValueRepresentation2, [{
     key: "isBinary",
     value: function isBinary() {
       return this._isBinary;
@@ -106439,12 +106439,12 @@ var ValueRepresentation = /* @__PURE__ */ function() {
   return ValueRepresentation2;
 }();
 var AsciiStringRepresentation = /* @__PURE__ */ function(_ValueRepresentation) {
-  _inherits$a(AsciiStringRepresentation2, _ValueRepresentation);
+  _inherits(AsciiStringRepresentation2, _ValueRepresentation);
   function AsciiStringRepresentation2(type) {
-    _classCallCheck$a(this, AsciiStringRepresentation2);
+    _classCallCheck(this, AsciiStringRepresentation2);
     return _callSuper(this, AsciiStringRepresentation2, [type]);
   }
-  _createClass$8(AsciiStringRepresentation2, [{
+  _createClass(AsciiStringRepresentation2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       return stream.readAsciiString(length2);
@@ -106459,12 +106459,12 @@ var AsciiStringRepresentation = /* @__PURE__ */ function(_ValueRepresentation) {
   return AsciiStringRepresentation2;
 }(ValueRepresentation);
 var EncodedStringRepresentation = /* @__PURE__ */ function(_ValueRepresentation2) {
-  _inherits$a(EncodedStringRepresentation2, _ValueRepresentation2);
+  _inherits(EncodedStringRepresentation2, _ValueRepresentation2);
   function EncodedStringRepresentation2(type) {
-    _classCallCheck$a(this, EncodedStringRepresentation2);
+    _classCallCheck(this, EncodedStringRepresentation2);
     return _callSuper(this, EncodedStringRepresentation2, [type]);
   }
-  _createClass$8(EncodedStringRepresentation2, [{
+  _createClass(EncodedStringRepresentation2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       return stream.readEncodedString(length2);
@@ -106479,15 +106479,15 @@ var EncodedStringRepresentation = /* @__PURE__ */ function(_ValueRepresentation2
   return EncodedStringRepresentation2;
 }(ValueRepresentation);
 var BinaryRepresentation = /* @__PURE__ */ function(_ValueRepresentation3) {
-  _inherits$a(BinaryRepresentation2, _ValueRepresentation3);
+  _inherits(BinaryRepresentation2, _ValueRepresentation3);
   function BinaryRepresentation2(type) {
     var _this;
-    _classCallCheck$a(this, BinaryRepresentation2);
+    _classCallCheck(this, BinaryRepresentation2);
     _this = _callSuper(this, BinaryRepresentation2, [type]);
     _this._storeRaw = false;
     return _this;
   }
-  _createClass$8(BinaryRepresentation2, [{
+  _createClass(BinaryRepresentation2, [{
     key: "writeBytes",
     value: function writeBytes(stream, value, syntax, isEncapsulated) {
       var writeOptions = arguments.length > 4 && arguments[4] !== void 0 ? arguments[4] : {};
@@ -106650,16 +106650,16 @@ var BinaryRepresentation = /* @__PURE__ */ function(_ValueRepresentation3) {
   return BinaryRepresentation2;
 }(ValueRepresentation);
 var ApplicationEntity = /* @__PURE__ */ function(_AsciiStringRepresent) {
-  _inherits$a(ApplicationEntity2, _AsciiStringRepresent);
+  _inherits(ApplicationEntity2, _AsciiStringRepresent);
   function ApplicationEntity2() {
     var _this2;
-    _classCallCheck$a(this, ApplicationEntity2);
+    _classCallCheck(this, ApplicationEntity2);
     _this2 = _callSuper(this, ApplicationEntity2, ["AE"]);
     _this2.maxLength = 16;
     _this2.padByte = PADDING_SPACE;
     return _this2;
   }
-  _createClass$8(ApplicationEntity2, [{
+  _createClass(ApplicationEntity2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       return stream.readAsciiString(length2);
@@ -106673,16 +106673,16 @@ var ApplicationEntity = /* @__PURE__ */ function(_AsciiStringRepresent) {
   return ApplicationEntity2;
 }(AsciiStringRepresentation);
 var CodeString = /* @__PURE__ */ function(_AsciiStringRepresent2) {
-  _inherits$a(CodeString2, _AsciiStringRepresent2);
+  _inherits(CodeString2, _AsciiStringRepresent2);
   function CodeString2() {
     var _this3;
-    _classCallCheck$a(this, CodeString2);
+    _classCallCheck(this, CodeString2);
     _this3 = _callSuper(this, CodeString2, ["CS"]);
     _this3.maxLength = 16;
     _this3.padByte = PADDING_SPACE;
     return _this3;
   }
-  _createClass$8(CodeString2, [{
+  _createClass(CodeString2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       var BACKSLASH = String.fromCharCode(VM_DELIMITER);
@@ -106705,10 +106705,10 @@ var CodeString = /* @__PURE__ */ function(_AsciiStringRepresent2) {
   return CodeString2;
 }(AsciiStringRepresentation);
 var AgeString = /* @__PURE__ */ function(_AsciiStringRepresent3) {
-  _inherits$a(AgeString2, _AsciiStringRepresent3);
+  _inherits(AgeString2, _AsciiStringRepresent3);
   function AgeString2() {
     var _this4;
-    _classCallCheck$a(this, AgeString2);
+    _classCallCheck(this, AgeString2);
     _this4 = _callSuper(this, AgeString2, ["AS"]);
     _this4.maxLength = 4;
     _this4.padByte = PADDING_SPACE;
@@ -106716,13 +106716,13 @@ var AgeString = /* @__PURE__ */ function(_AsciiStringRepresent3) {
     _this4.defaultValue = "";
     return _this4;
   }
-  return _createClass$8(AgeString2);
+  return _createClass(AgeString2);
 }(AsciiStringRepresentation);
 var AttributeTag = /* @__PURE__ */ function(_ValueRepresentation4) {
-  _inherits$a(AttributeTag2, _ValueRepresentation4);
+  _inherits(AttributeTag2, _ValueRepresentation4);
   function AttributeTag2() {
     var _this5;
-    _classCallCheck$a(this, AttributeTag2);
+    _classCallCheck(this, AttributeTag2);
     _this5 = _callSuper(this, AttributeTag2, ["AT"]);
     _this5.maxLength = 4;
     _this5.valueLength = 4;
@@ -106730,7 +106730,7 @@ var AttributeTag = /* @__PURE__ */ function(_ValueRepresentation4) {
     _this5.fixed = true;
     return _this5;
   }
-  _createClass$8(AttributeTag2, [{
+  _createClass(AttributeTag2, [{
     key: "readBytes",
     value: function readBytes(stream) {
       return Tag$1.readTag(stream).value;
@@ -106744,10 +106744,10 @@ var AttributeTag = /* @__PURE__ */ function(_ValueRepresentation4) {
   return AttributeTag2;
 }(ValueRepresentation);
 var DateValue = /* @__PURE__ */ function(_AsciiStringRepresent4) {
-  _inherits$a(DateValue2, _AsciiStringRepresent4);
+  _inherits(DateValue2, _AsciiStringRepresent4);
   function DateValue2(value) {
     var _this6;
-    _classCallCheck$a(this, DateValue2);
+    _classCallCheck(this, DateValue2);
     _this6 = _callSuper(this, DateValue2, ["DA", value]);
     _this6.maxLength = 8;
     _this6.rangeMatchingMaxLength = 18;
@@ -106755,7 +106755,7 @@ var DateValue = /* @__PURE__ */ function(_AsciiStringRepresent4) {
     _this6.defaultValue = "";
     return _this6;
   }
-  _createClass$8(DateValue2, [{
+  _createClass(DateValue2, [{
     key: "checkLength",
     value: function checkLength(value) {
       if (typeof value === "string" || value instanceof String) {
@@ -106768,12 +106768,12 @@ var DateValue = /* @__PURE__ */ function(_AsciiStringRepresent4) {
   return DateValue2;
 }(AsciiStringRepresentation);
 var NumericStringRepresentation = /* @__PURE__ */ function(_AsciiStringRepresent5) {
-  _inherits$a(NumericStringRepresentation2, _AsciiStringRepresent5);
+  _inherits(NumericStringRepresentation2, _AsciiStringRepresent5);
   function NumericStringRepresentation2() {
-    _classCallCheck$a(this, NumericStringRepresentation2);
+    _classCallCheck(this, NumericStringRepresentation2);
     return _callSuper(this, NumericStringRepresentation2, arguments);
   }
-  _createClass$8(NumericStringRepresentation2, [{
+  _createClass(NumericStringRepresentation2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       var BACKSLASH = String.fromCharCode(VM_DELIMITER);
@@ -106784,16 +106784,16 @@ var NumericStringRepresentation = /* @__PURE__ */ function(_AsciiStringRepresent
   return NumericStringRepresentation2;
 }(AsciiStringRepresentation);
 var DecimalString = /* @__PURE__ */ function(_NumericStringReprese) {
-  _inherits$a(DecimalString2, _NumericStringReprese);
+  _inherits(DecimalString2, _NumericStringReprese);
   function DecimalString2() {
     var _this7;
-    _classCallCheck$a(this, DecimalString2);
+    _classCallCheck(this, DecimalString2);
     _this7 = _callSuper(this, DecimalString2, ["DS"]);
     _this7.maxLength = 16;
     _this7.padByte = PADDING_SPACE;
     return _this7;
   }
-  _createClass$8(DecimalString2, [{
+  _createClass(DecimalString2, [{
     key: "applyFormatting",
     value: function applyFormatting(value) {
       var formatNumber = function formatNumber2(numberStr) {
@@ -106840,17 +106840,17 @@ var DecimalString = /* @__PURE__ */ function(_NumericStringReprese) {
   return DecimalString2;
 }(NumericStringRepresentation);
 var DateTime = /* @__PURE__ */ function(_AsciiStringRepresent6) {
-  _inherits$a(DateTime2, _AsciiStringRepresent6);
+  _inherits(DateTime2, _AsciiStringRepresent6);
   function DateTime2() {
     var _this9;
-    _classCallCheck$a(this, DateTime2);
+    _classCallCheck(this, DateTime2);
     _this9 = _callSuper(this, DateTime2, ["DT"]);
     _this9.maxLength = 26;
     _this9.rangeMatchingMaxLength = 54;
     _this9.padByte = PADDING_SPACE;
     return _this9;
   }
-  _createClass$8(DateTime2, [{
+  _createClass(DateTime2, [{
     key: "checkLength",
     value: function checkLength(value) {
       if (typeof value === "string" || value instanceof String) {
@@ -106863,10 +106863,10 @@ var DateTime = /* @__PURE__ */ function(_AsciiStringRepresent6) {
   return DateTime2;
 }(AsciiStringRepresentation);
 var FloatingPointSingle = /* @__PURE__ */ function(_ValueRepresentation5) {
-  _inherits$a(FloatingPointSingle2, _ValueRepresentation5);
+  _inherits(FloatingPointSingle2, _ValueRepresentation5);
   function FloatingPointSingle2() {
     var _this10;
-    _classCallCheck$a(this, FloatingPointSingle2);
+    _classCallCheck(this, FloatingPointSingle2);
     _this10 = _callSuper(this, FloatingPointSingle2, ["FL"]);
     _this10.maxLength = 4;
     _this10.padByte = PADDING_NULL;
@@ -106874,7 +106874,7 @@ var FloatingPointSingle = /* @__PURE__ */ function(_ValueRepresentation5) {
     _this10.defaultValue = 0;
     return _this10;
   }
-  _createClass$8(FloatingPointSingle2, [{
+  _createClass(FloatingPointSingle2, [{
     key: "readBytes",
     value: function readBytes(stream) {
       return stream.readFloat();
@@ -106893,10 +106893,10 @@ var FloatingPointSingle = /* @__PURE__ */ function(_ValueRepresentation5) {
   return FloatingPointSingle2;
 }(ValueRepresentation);
 var FloatingPointDouble = /* @__PURE__ */ function(_ValueRepresentation6) {
-  _inherits$a(FloatingPointDouble2, _ValueRepresentation6);
+  _inherits(FloatingPointDouble2, _ValueRepresentation6);
   function FloatingPointDouble2() {
     var _this11;
-    _classCallCheck$a(this, FloatingPointDouble2);
+    _classCallCheck(this, FloatingPointDouble2);
     _this11 = _callSuper(this, FloatingPointDouble2, ["FD"]);
     _this11.maxLength = 8;
     _this11.padByte = PADDING_NULL;
@@ -106904,7 +106904,7 @@ var FloatingPointDouble = /* @__PURE__ */ function(_ValueRepresentation6) {
     _this11.defaultValue = 0;
     return _this11;
   }
-  _createClass$8(FloatingPointDouble2, [{
+  _createClass(FloatingPointDouble2, [{
     key: "readBytes",
     value: function readBytes(stream) {
       return stream.readDouble();
@@ -106923,16 +106923,16 @@ var FloatingPointDouble = /* @__PURE__ */ function(_ValueRepresentation6) {
   return FloatingPointDouble2;
 }(ValueRepresentation);
 var IntegerString = /* @__PURE__ */ function(_NumericStringReprese2) {
-  _inherits$a(IntegerString2, _NumericStringReprese2);
+  _inherits(IntegerString2, _NumericStringReprese2);
   function IntegerString2() {
     var _this12;
-    _classCallCheck$a(this, IntegerString2);
+    _classCallCheck(this, IntegerString2);
     _this12 = _callSuper(this, IntegerString2, ["IS"]);
     _this12.maxLength = 12;
     _this12.padByte = PADDING_SPACE;
     return _this12;
   }
-  _createClass$8(IntegerString2, [{
+  _createClass(IntegerString2, [{
     key: "applyFormatting",
     value: function applyFormatting(value) {
       var formatNumber = function formatNumber2(numberStr) {
@@ -106963,16 +106963,16 @@ var IntegerString = /* @__PURE__ */ function(_NumericStringReprese2) {
   return IntegerString2;
 }(NumericStringRepresentation);
 var LongString = /* @__PURE__ */ function(_EncodedStringReprese) {
-  _inherits$a(LongString2, _EncodedStringReprese);
+  _inherits(LongString2, _EncodedStringReprese);
   function LongString2() {
     var _this14;
-    _classCallCheck$a(this, LongString2);
+    _classCallCheck(this, LongString2);
     _this14 = _callSuper(this, LongString2, ["LO"]);
     _this14.maxCharLength = 64;
     _this14.padByte = PADDING_SPACE;
     return _this14;
   }
-  _createClass$8(LongString2, [{
+  _createClass(LongString2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       return stream.readEncodedString(length2);
@@ -106986,16 +106986,16 @@ var LongString = /* @__PURE__ */ function(_EncodedStringReprese) {
   return LongString2;
 }(EncodedStringRepresentation);
 var LongText = /* @__PURE__ */ function(_EncodedStringReprese2) {
-  _inherits$a(LongText2, _EncodedStringReprese2);
+  _inherits(LongText2, _EncodedStringReprese2);
   function LongText2() {
     var _this15;
-    _classCallCheck$a(this, LongText2);
+    _classCallCheck(this, LongText2);
     _this15 = _callSuper(this, LongText2, ["LT"]);
     _this15.maxCharLength = 10240;
     _this15.padByte = PADDING_SPACE;
     return _this15;
   }
-  _createClass$8(LongText2, [{
+  _createClass(LongText2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       return stream.readEncodedString(length2);
@@ -107009,16 +107009,16 @@ var LongText = /* @__PURE__ */ function(_EncodedStringReprese2) {
   return LongText2;
 }(EncodedStringRepresentation);
 var PersonName = /* @__PURE__ */ function(_EncodedStringReprese3) {
-  _inherits$a(PersonName2, _EncodedStringReprese3);
+  _inherits(PersonName2, _EncodedStringReprese3);
   function PersonName2() {
     var _this16;
-    _classCallCheck$a(this, PersonName2);
+    _classCallCheck(this, PersonName2);
     _this16 = _callSuper(this, PersonName2, ["PN"]);
     _this16.maxLength = null;
     _this16.padByte = PADDING_SPACE;
     return _this16;
   }
-  _createClass$8(PersonName2, [{
+  _createClass(PersonName2, [{
     key: "addValueAccessors",
     value: (
       // Adds toJSON and toString accessors to normalize PersonName output; ie toJSON
@@ -107029,7 +107029,7 @@ var PersonName = /* @__PURE__ */ function(_EncodedStringReprese3) {
           value = new String(value);
         }
         if (value != void 0) {
-          if (_typeof$2(value) === "object") {
+          if (_typeof$1(value) === "object") {
             return dicomJson.pnAddValueAccessors(value);
           } else {
             throw new Error("Cannot add accessors to non-string primitives");
@@ -107110,16 +107110,16 @@ var PersonName = /* @__PURE__ */ function(_EncodedStringReprese3) {
   return PersonName2;
 }(EncodedStringRepresentation);
 var ShortString = /* @__PURE__ */ function(_EncodedStringReprese4) {
-  _inherits$a(ShortString2, _EncodedStringReprese4);
+  _inherits(ShortString2, _EncodedStringReprese4);
   function ShortString2() {
     var _this17;
-    _classCallCheck$a(this, ShortString2);
+    _classCallCheck(this, ShortString2);
     _this17 = _callSuper(this, ShortString2, ["SH"]);
     _this17.maxCharLength = 16;
     _this17.padByte = PADDING_SPACE;
     return _this17;
   }
-  _createClass$8(ShortString2, [{
+  _createClass(ShortString2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       return stream.readEncodedString(length2);
@@ -107133,10 +107133,10 @@ var ShortString = /* @__PURE__ */ function(_EncodedStringReprese4) {
   return ShortString2;
 }(EncodedStringRepresentation);
 var SignedLong = /* @__PURE__ */ function(_ValueRepresentation7) {
-  _inherits$a(SignedLong2, _ValueRepresentation7);
+  _inherits(SignedLong2, _ValueRepresentation7);
   function SignedLong2() {
     var _this18;
-    _classCallCheck$a(this, SignedLong2);
+    _classCallCheck(this, SignedLong2);
     _this18 = _callSuper(this, SignedLong2, ["SL"]);
     _this18.maxLength = 4;
     _this18.padByte = PADDING_NULL;
@@ -107144,7 +107144,7 @@ var SignedLong = /* @__PURE__ */ function(_ValueRepresentation7) {
     _this18.defaultValue = 0;
     return _this18;
   }
-  _createClass$8(SignedLong2, [{
+  _createClass(SignedLong2, [{
     key: "readBytes",
     value: function readBytes(stream) {
       return stream.readInt32();
@@ -107158,10 +107158,10 @@ var SignedLong = /* @__PURE__ */ function(_ValueRepresentation7) {
   return SignedLong2;
 }(ValueRepresentation);
 var SequenceOfItems = /* @__PURE__ */ function(_ValueRepresentation8) {
-  _inherits$a(SequenceOfItems2, _ValueRepresentation8);
+  _inherits(SequenceOfItems2, _ValueRepresentation8);
   function SequenceOfItems2() {
     var _this19;
-    _classCallCheck$a(this, SequenceOfItems2);
+    _classCallCheck(this, SequenceOfItems2);
     _this19 = _callSuper(this, SequenceOfItems2, ["SQ"]);
     _this19.maxLength = null;
     _this19.padByte = PADDING_NULL;
@@ -107169,7 +107169,7 @@ var SequenceOfItems = /* @__PURE__ */ function(_ValueRepresentation8) {
     _this19._storeRaw = false;
     return _this19;
   }
-  _createClass$8(SequenceOfItems2, [{
+  _createClass(SequenceOfItems2, [{
     key: "readBytes",
     value: function readBytes(stream, sqlength, syntax) {
       if (sqlength == 0) {
@@ -107268,10 +107268,10 @@ var SequenceOfItems = /* @__PURE__ */ function(_ValueRepresentation8) {
   return SequenceOfItems2;
 }(ValueRepresentation);
 var SignedShort = /* @__PURE__ */ function(_ValueRepresentation9) {
-  _inherits$a(SignedShort2, _ValueRepresentation9);
+  _inherits(SignedShort2, _ValueRepresentation9);
   function SignedShort2() {
     var _this20;
-    _classCallCheck$a(this, SignedShort2);
+    _classCallCheck(this, SignedShort2);
     _this20 = _callSuper(this, SignedShort2, ["SS"]);
     _this20.maxLength = 2;
     _this20.valueLength = 2;
@@ -107280,7 +107280,7 @@ var SignedShort = /* @__PURE__ */ function(_ValueRepresentation9) {
     _this20.defaultValue = 0;
     return _this20;
   }
-  _createClass$8(SignedShort2, [{
+  _createClass(SignedShort2, [{
     key: "readBytes",
     value: function readBytes(stream) {
       return stream.readInt16();
@@ -107294,16 +107294,16 @@ var SignedShort = /* @__PURE__ */ function(_ValueRepresentation9) {
   return SignedShort2;
 }(ValueRepresentation);
 var ShortText = /* @__PURE__ */ function(_EncodedStringReprese5) {
-  _inherits$a(ShortText2, _EncodedStringReprese5);
+  _inherits(ShortText2, _EncodedStringReprese5);
   function ShortText2() {
     var _this21;
-    _classCallCheck$a(this, ShortText2);
+    _classCallCheck(this, ShortText2);
     _this21 = _callSuper(this, ShortText2, ["ST"]);
     _this21.maxCharLength = 1024;
     _this21.padByte = PADDING_SPACE;
     return _this21;
   }
-  _createClass$8(ShortText2, [{
+  _createClass(ShortText2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       return stream.readEncodedString(length2);
@@ -107317,17 +107317,17 @@ var ShortText = /* @__PURE__ */ function(_EncodedStringReprese5) {
   return ShortText2;
 }(EncodedStringRepresentation);
 var TimeValue = /* @__PURE__ */ function(_AsciiStringRepresent7) {
-  _inherits$a(TimeValue2, _AsciiStringRepresent7);
+  _inherits(TimeValue2, _AsciiStringRepresent7);
   function TimeValue2() {
     var _this22;
-    _classCallCheck$a(this, TimeValue2);
+    _classCallCheck(this, TimeValue2);
     _this22 = _callSuper(this, TimeValue2, ["TM"]);
     _this22.maxLength = 16;
     _this22.rangeMatchingMaxLength = 28;
     _this22.padByte = PADDING_SPACE;
     return _this22;
   }
-  _createClass$8(TimeValue2, [{
+  _createClass(TimeValue2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       return stream.readAsciiString(length2);
@@ -107350,17 +107350,17 @@ var TimeValue = /* @__PURE__ */ function(_AsciiStringRepresent7) {
   return TimeValue2;
 }(AsciiStringRepresentation);
 var UnlimitedCharacters = /* @__PURE__ */ function(_EncodedStringReprese6) {
-  _inherits$a(UnlimitedCharacters2, _EncodedStringReprese6);
+  _inherits(UnlimitedCharacters2, _EncodedStringReprese6);
   function UnlimitedCharacters2() {
     var _this23;
-    _classCallCheck$a(this, UnlimitedCharacters2);
+    _classCallCheck(this, UnlimitedCharacters2);
     _this23 = _callSuper(this, UnlimitedCharacters2, ["UC"]);
     _this23.maxLength = null;
     _this23.multi = true;
     _this23.padByte = PADDING_SPACE;
     return _this23;
   }
-  _createClass$8(UnlimitedCharacters2, [{
+  _createClass(UnlimitedCharacters2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       return stream.readEncodedString(length2);
@@ -107374,16 +107374,16 @@ var UnlimitedCharacters = /* @__PURE__ */ function(_EncodedStringReprese6) {
   return UnlimitedCharacters2;
 }(EncodedStringRepresentation);
 var UnlimitedText = /* @__PURE__ */ function(_EncodedStringReprese7) {
-  _inherits$a(UnlimitedText2, _EncodedStringReprese7);
+  _inherits(UnlimitedText2, _EncodedStringReprese7);
   function UnlimitedText2() {
     var _this24;
-    _classCallCheck$a(this, UnlimitedText2);
+    _classCallCheck(this, UnlimitedText2);
     _this24 = _callSuper(this, UnlimitedText2, ["UT"]);
     _this24.maxLength = null;
     _this24.padByte = PADDING_SPACE;
     return _this24;
   }
-  _createClass$8(UnlimitedText2, [{
+  _createClass(UnlimitedText2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       return stream.readEncodedString(length2);
@@ -107397,10 +107397,10 @@ var UnlimitedText = /* @__PURE__ */ function(_EncodedStringReprese7) {
   return UnlimitedText2;
 }(EncodedStringRepresentation);
 var UnsignedShort = /* @__PURE__ */ function(_ValueRepresentation10) {
-  _inherits$a(UnsignedShort2, _ValueRepresentation10);
+  _inherits(UnsignedShort2, _ValueRepresentation10);
   function UnsignedShort2() {
     var _this25;
-    _classCallCheck$a(this, UnsignedShort2);
+    _classCallCheck(this, UnsignedShort2);
     _this25 = _callSuper(this, UnsignedShort2, ["US"]);
     _this25.maxLength = 2;
     _this25.padByte = PADDING_NULL;
@@ -107408,7 +107408,7 @@ var UnsignedShort = /* @__PURE__ */ function(_ValueRepresentation10) {
     _this25.defaultValue = 0;
     return _this25;
   }
-  _createClass$8(UnsignedShort2, [{
+  _createClass(UnsignedShort2, [{
     key: "readBytes",
     value: function readBytes(stream) {
       return stream.readUint16();
@@ -107422,10 +107422,10 @@ var UnsignedShort = /* @__PURE__ */ function(_ValueRepresentation10) {
   return UnsignedShort2;
 }(ValueRepresentation);
 var UnsignedLong = /* @__PURE__ */ function(_ValueRepresentation11) {
-  _inherits$a(UnsignedLong2, _ValueRepresentation11);
+  _inherits(UnsignedLong2, _ValueRepresentation11);
   function UnsignedLong2() {
     var _this26;
-    _classCallCheck$a(this, UnsignedLong2);
+    _classCallCheck(this, UnsignedLong2);
     _this26 = _callSuper(this, UnsignedLong2, ["UL"]);
     _this26.maxLength = 4;
     _this26.padByte = PADDING_NULL;
@@ -107433,7 +107433,7 @@ var UnsignedLong = /* @__PURE__ */ function(_ValueRepresentation11) {
     _this26.defaultValue = 0;
     return _this26;
   }
-  _createClass$8(UnsignedLong2, [{
+  _createClass(UnsignedLong2, [{
     key: "readBytes",
     value: function readBytes(stream) {
       return stream.readUint32();
@@ -107447,16 +107447,16 @@ var UnsignedLong = /* @__PURE__ */ function(_ValueRepresentation11) {
   return UnsignedLong2;
 }(ValueRepresentation);
 var UniqueIdentifier = /* @__PURE__ */ function(_AsciiStringRepresent8) {
-  _inherits$a(UniqueIdentifier2, _AsciiStringRepresent8);
+  _inherits(UniqueIdentifier2, _AsciiStringRepresent8);
   function UniqueIdentifier2() {
     var _this27;
-    _classCallCheck$a(this, UniqueIdentifier2);
+    _classCallCheck(this, UniqueIdentifier2);
     _this27 = _callSuper(this, UniqueIdentifier2, ["UI"]);
     _this27.maxLength = 64;
     _this27.padByte = PADDING_NULL;
     return _this27;
   }
-  _createClass$8(UniqueIdentifier2, [{
+  _createClass(UniqueIdentifier2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       var result = this.readPaddedAsciiString(stream, length2);
@@ -107482,16 +107482,16 @@ var UniqueIdentifier = /* @__PURE__ */ function(_AsciiStringRepresent8) {
   return UniqueIdentifier2;
 }(AsciiStringRepresentation);
 var UniversalResource = /* @__PURE__ */ function(_AsciiStringRepresent9) {
-  _inherits$a(UniversalResource2, _AsciiStringRepresent9);
+  _inherits(UniversalResource2, _AsciiStringRepresent9);
   function UniversalResource2() {
     var _this28;
-    _classCallCheck$a(this, UniversalResource2);
+    _classCallCheck(this, UniversalResource2);
     _this28 = _callSuper(this, UniversalResource2, ["UR"]);
     _this28.maxLength = null;
     _this28.padByte = PADDING_SPACE;
     return _this28;
   }
-  _createClass$8(UniversalResource2, [{
+  _createClass(UniversalResource2, [{
     key: "readBytes",
     value: function readBytes(stream, length2) {
       return stream.readAsciiString(length2);
@@ -107500,23 +107500,23 @@ var UniversalResource = /* @__PURE__ */ function(_AsciiStringRepresent9) {
   return UniversalResource2;
 }(AsciiStringRepresentation);
 var UnknownValue = /* @__PURE__ */ function(_BinaryRepresentation) {
-  _inherits$a(UnknownValue2, _BinaryRepresentation);
+  _inherits(UnknownValue2, _BinaryRepresentation);
   function UnknownValue2() {
     var _this29;
-    _classCallCheck$a(this, UnknownValue2);
+    _classCallCheck(this, UnknownValue2);
     _this29 = _callSuper(this, UnknownValue2, ["UN"]);
     _this29.maxLength = null;
     _this29.padByte = PADDING_NULL;
     _this29.noMultiple = true;
     return _this29;
   }
-  return _createClass$8(UnknownValue2);
+  return _createClass(UnknownValue2);
 }(BinaryRepresentation);
 var ParsedUnknownValue = /* @__PURE__ */ function(_BinaryRepresentation2) {
-  _inherits$a(ParsedUnknownValue2, _BinaryRepresentation2);
+  _inherits(ParsedUnknownValue2, _BinaryRepresentation2);
   function ParsedUnknownValue2(vr) {
     var _this30;
-    _classCallCheck$a(this, ParsedUnknownValue2);
+    _classCallCheck(this, ParsedUnknownValue2);
     _this30 = _callSuper(this, ParsedUnknownValue2, [vr]);
     _this30.maxLength = null;
     _this30.padByte = 0;
@@ -107527,7 +107527,7 @@ var ParsedUnknownValue = /* @__PURE__ */ function(_BinaryRepresentation2) {
     _this30._storeRaw = true;
     return _this30;
   }
-  _createClass$8(ParsedUnknownValue2, [{
+  _createClass(ParsedUnknownValue2, [{
     key: "read",
     value: function read(stream, length2, syntax, readOptions) {
       var arrayBuffer2 = this.readBytes(stream, length2, syntax)[0];
@@ -107554,56 +107554,56 @@ var ParsedUnknownValue = /* @__PURE__ */ function(_BinaryRepresentation2) {
   return ParsedUnknownValue2;
 }(BinaryRepresentation);
 var OtherWordString = /* @__PURE__ */ function(_BinaryRepresentation3) {
-  _inherits$a(OtherWordString2, _BinaryRepresentation3);
+  _inherits(OtherWordString2, _BinaryRepresentation3);
   function OtherWordString2() {
     var _this31;
-    _classCallCheck$a(this, OtherWordString2);
+    _classCallCheck(this, OtherWordString2);
     _this31 = _callSuper(this, OtherWordString2, ["OW"]);
     _this31.maxLength = null;
     _this31.padByte = PADDING_NULL;
     _this31.noMultiple = true;
     return _this31;
   }
-  return _createClass$8(OtherWordString2);
+  return _createClass(OtherWordString2);
 }(BinaryRepresentation);
 var OtherByteString = /* @__PURE__ */ function(_BinaryRepresentation4) {
-  _inherits$a(OtherByteString2, _BinaryRepresentation4);
+  _inherits(OtherByteString2, _BinaryRepresentation4);
   function OtherByteString2() {
     var _this32;
-    _classCallCheck$a(this, OtherByteString2);
+    _classCallCheck(this, OtherByteString2);
     _this32 = _callSuper(this, OtherByteString2, ["OB"]);
     _this32.maxLength = null;
     _this32.padByte = PADDING_NULL;
     _this32.noMultiple = true;
     return _this32;
   }
-  return _createClass$8(OtherByteString2);
+  return _createClass(OtherByteString2);
 }(BinaryRepresentation);
 var OtherDoubleString = /* @__PURE__ */ function(_BinaryRepresentation5) {
-  _inherits$a(OtherDoubleString2, _BinaryRepresentation5);
+  _inherits(OtherDoubleString2, _BinaryRepresentation5);
   function OtherDoubleString2() {
     var _this33;
-    _classCallCheck$a(this, OtherDoubleString2);
+    _classCallCheck(this, OtherDoubleString2);
     _this33 = _callSuper(this, OtherDoubleString2, ["OD"]);
     _this33.maxLength = null;
     _this33.padByte = PADDING_NULL;
     _this33.noMultiple = true;
     return _this33;
   }
-  return _createClass$8(OtherDoubleString2);
+  return _createClass(OtherDoubleString2);
 }(BinaryRepresentation);
 var OtherFloatString = /* @__PURE__ */ function(_BinaryRepresentation6) {
-  _inherits$a(OtherFloatString2, _BinaryRepresentation6);
+  _inherits(OtherFloatString2, _BinaryRepresentation6);
   function OtherFloatString2() {
     var _this34;
-    _classCallCheck$a(this, OtherFloatString2);
+    _classCallCheck(this, OtherFloatString2);
     _this34 = _callSuper(this, OtherFloatString2, ["OF"]);
     _this34.maxLength = null;
     _this34.padByte = PADDING_NULL;
     _this34.noMultiple = true;
     return _this34;
   }
-  return _createClass$8(OtherFloatString2);
+  return _createClass(OtherFloatString2);
 }(BinaryRepresentation);
 var VRinstances = {
   AE: new ApplicationEntity(),
@@ -107641,11 +107641,11 @@ var EXPLICIT_LITTLE_ENDIAN = "1.2.840.10008.1.2.1";
 var DicomMessage$2;
 var DicomDict = /* @__PURE__ */ function() {
   function DicomDict2(meta) {
-    _classCallCheck$a(this, DicomDict2);
+    _classCallCheck(this, DicomDict2);
     this.meta = meta;
     this.dict = {};
   }
-  _createClass$8(DicomDict2, [{
+  _createClass(DicomDict2, [{
     key: "upsertTag",
     value: function upsertTag(tag, vr, values2) {
       if (this.dict[tag]) {
@@ -107696,12 +107696,12 @@ function paddingLeft(paddingValue, string2) {
 var DicomMessage$1;
 var Tag = /* @__PURE__ */ function() {
   function Tag2(value) {
-    _classCallCheck$a(this, Tag2);
+    _classCallCheck(this, Tag2);
     this.value = value;
   }
-  _createClass$8(Tag2, [{
+  _createClass(Tag2, [{
     key: "toString",
-    value: function toString3() {
+    value: function toString2() {
       return "(" + paddingLeft("0000", this.group().toString(16).toUpperCase()) + "," + paddingLeft("0000", this.element().toString(16).toUpperCase()) + ")";
     }
   }, {
@@ -107812,7 +107812,7 @@ function deepEqual(obj1, obj2) {
   if (Object.is(obj1, obj2)) {
     return true;
   }
-  if (_typeof$2(obj1) !== "object" || _typeof$2(obj2) !== "object" || obj1 === null || obj2 === null) {
+  if (_typeof$1(obj1) !== "object" || _typeof$1(obj2) !== "object" || obj1 === null || obj2 === null) {
     return false;
   }
   var keys1 = Object.keys(obj1);
@@ -107868,9 +107868,9 @@ var encodingMapping = {
 var encapsulatedSyntaxes = ["1.2.840.10008.1.2.4.50", "1.2.840.10008.1.2.4.51", "1.2.840.10008.1.2.4.57", "1.2.840.10008.1.2.4.70", "1.2.840.10008.1.2.4.80", "1.2.840.10008.1.2.4.81", "1.2.840.10008.1.2.4.90", "1.2.840.10008.1.2.4.91", "1.2.840.10008.1.2.4.92", "1.2.840.10008.1.2.4.93", "1.2.840.10008.1.2.4.94", "1.2.840.10008.1.2.4.95", "1.2.840.10008.1.2.5", "1.2.840.10008.1.2.6.1", "1.2.840.10008.1.2.4.100", "1.2.840.10008.1.2.4.102", "1.2.840.10008.1.2.4.103", "1.2.840.10008.1.2.4.201", "1.2.840.10008.1.2.4.202", "1.2.840.10008.1.2.4.203"];
 var DicomMessage = /* @__PURE__ */ function() {
   function DicomMessage2() {
-    _classCallCheck$a(this, DicomMessage2);
+    _classCallCheck(this, DicomMessage2);
   }
-  _createClass$8(DicomMessage2, null, [{
+  _createClass(DicomMessage2, null, [{
     key: "read",
     value: function read(bufferStream, syntax, ignoreErrors) {
       var untilTag = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : null;
@@ -108143,7 +108143,7 @@ var DicomMessage = /* @__PURE__ */ function() {
 var DerivedDataset = /* @__PURE__ */ function() {
   function DerivedDataset2(datasets) {
     var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-    _classCallCheck$a(this, DerivedDataset2);
+    _classCallCheck(this, DerivedDataset2);
     this.options = JSON.parse(JSON.stringify(options));
     var o3 = this.options;
     o3.Manufacturer = options.Manufacturer || "Unspecified";
@@ -108173,7 +108173,7 @@ var DerivedDataset = /* @__PURE__ */ function() {
     };
     this.derive();
   }
-  _createClass$8(DerivedDataset2, [{
+  _createClass(DerivedDataset2, [{
     key: "assignToDataset",
     value: function assignToDataset(data2) {
       var _this = this;
@@ -108212,11 +108212,11 @@ var DerivedDataset = /* @__PURE__ */ function() {
   return DerivedDataset2;
 }();
 var DerivedPixels = /* @__PURE__ */ function(_DerivedDataset) {
-  _inherits$a(DerivedPixels2, _DerivedDataset);
+  _inherits(DerivedPixels2, _DerivedDataset);
   function DerivedPixels2(datasets) {
     var _this;
     var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-    _classCallCheck$a(this, DerivedPixels2);
+    _classCallCheck(this, DerivedPixels2);
     _this = _callSuper(this, DerivedPixels2, [datasets, options]);
     var o3 = _this.options;
     o3.ContentLabel = options.ContentLabel || "";
@@ -108224,7 +108224,7 @@ var DerivedPixels = /* @__PURE__ */ function(_DerivedDataset) {
     o3.ContentCreatorName = options.ContentCreatorName || "";
     return _this;
   }
-  _createClass$8(DerivedPixels2, [{
+  _createClass(DerivedPixels2, [{
     key: "derive",
     value: function derive() {
       _get(_getPrototypeOf(DerivedPixels2.prototype), "derive", this).call(this);
@@ -108247,13 +108247,13 @@ var DerivedPixels = /* @__PURE__ */ function(_DerivedDataset) {
   return DerivedPixels2;
 }(DerivedDataset);
 var DerivedImage = /* @__PURE__ */ function(_DerivedPixels) {
-  _inherits$a(DerivedImage2, _DerivedPixels);
+  _inherits(DerivedImage2, _DerivedPixels);
   function DerivedImage2(datasets) {
     var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-    _classCallCheck$a(this, DerivedImage2);
+    _classCallCheck(this, DerivedImage2);
     return _callSuper(this, DerivedImage2, [datasets, options]);
   }
-  _createClass$8(DerivedImage2, [{
+  _createClass(DerivedImage2, [{
     key: "derive",
     value: function derive() {
       _get(_getPrototypeOf(DerivedImage2.prototype), "derive", this).call(this);
@@ -108264,11 +108264,11 @@ var DerivedImage = /* @__PURE__ */ function(_DerivedPixels) {
 }(DerivedPixels);
 var Normalizer = /* @__PURE__ */ function() {
   function Normalizer2(datasets) {
-    _classCallCheck$a(this, Normalizer2);
+    _classCallCheck(this, Normalizer2);
     this.datasets = datasets;
     this.dataset = void 0;
   }
-  _createClass$8(Normalizer2, [{
+  _createClass(Normalizer2, [{
     key: "normalize",
     value: function normalize3() {
       return "No normalization defined";
@@ -108346,12 +108346,12 @@ var Normalizer = /* @__PURE__ */ function() {
   return Normalizer2;
 }();
 var ImageNormalizer = /* @__PURE__ */ function(_Normalizer) {
-  _inherits$a(ImageNormalizer2, _Normalizer);
+  _inherits(ImageNormalizer2, _Normalizer);
   function ImageNormalizer2() {
-    _classCallCheck$a(this, ImageNormalizer2);
+    _classCallCheck(this, ImageNormalizer2);
     return _callSuper(this, ImageNormalizer2, arguments);
   }
-  _createClass$8(ImageNormalizer2, [{
+  _createClass(ImageNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       this.convertToMultiframe();
@@ -108602,12 +108602,12 @@ var ImageNormalizer = /* @__PURE__ */ function(_Normalizer) {
   return ImageNormalizer2;
 }(Normalizer);
 var MRImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer) {
-  _inherits$a(MRImageNormalizer2, _ImageNormalizer);
+  _inherits(MRImageNormalizer2, _ImageNormalizer);
   function MRImageNormalizer2() {
-    _classCallCheck$a(this, MRImageNormalizer2);
+    _classCallCheck(this, MRImageNormalizer2);
     return _callSuper(this, MRImageNormalizer2, arguments);
   }
-  _createClass$8(MRImageNormalizer2, [{
+  _createClass(MRImageNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       _get(_getPrototypeOf(MRImageNormalizer2.prototype), "normalize", this).call(this);
@@ -108634,12 +108634,12 @@ var MRImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer) {
   return MRImageNormalizer2;
 }(ImageNormalizer);
 var EnhancedCTImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer2) {
-  _inherits$a(EnhancedCTImageNormalizer2, _ImageNormalizer2);
+  _inherits(EnhancedCTImageNormalizer2, _ImageNormalizer2);
   function EnhancedCTImageNormalizer2() {
-    _classCallCheck$a(this, EnhancedCTImageNormalizer2);
+    _classCallCheck(this, EnhancedCTImageNormalizer2);
     return _callSuper(this, EnhancedCTImageNormalizer2, arguments);
   }
-  _createClass$8(EnhancedCTImageNormalizer2, [{
+  _createClass(EnhancedCTImageNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       _get(_getPrototypeOf(EnhancedCTImageNormalizer2.prototype), "normalize", this).call(this);
@@ -108648,12 +108648,12 @@ var EnhancedCTImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer2) {
   return EnhancedCTImageNormalizer2;
 }(ImageNormalizer);
 var EnhancedMRImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer3) {
-  _inherits$a(EnhancedMRImageNormalizer2, _ImageNormalizer3);
+  _inherits(EnhancedMRImageNormalizer2, _ImageNormalizer3);
   function EnhancedMRImageNormalizer2() {
-    _classCallCheck$a(this, EnhancedMRImageNormalizer2);
+    _classCallCheck(this, EnhancedMRImageNormalizer2);
     return _callSuper(this, EnhancedMRImageNormalizer2, arguments);
   }
-  _createClass$8(EnhancedMRImageNormalizer2, [{
+  _createClass(EnhancedMRImageNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       _get(_getPrototypeOf(EnhancedMRImageNormalizer2.prototype), "normalize", this).call(this);
@@ -108662,12 +108662,12 @@ var EnhancedMRImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer3) {
   return EnhancedMRImageNormalizer2;
 }(ImageNormalizer);
 var EnhancedUSVolumeNormalizer = /* @__PURE__ */ function(_ImageNormalizer4) {
-  _inherits$a(EnhancedUSVolumeNormalizer2, _ImageNormalizer4);
+  _inherits(EnhancedUSVolumeNormalizer2, _ImageNormalizer4);
   function EnhancedUSVolumeNormalizer2() {
-    _classCallCheck$a(this, EnhancedUSVolumeNormalizer2);
+    _classCallCheck(this, EnhancedUSVolumeNormalizer2);
     return _callSuper(this, EnhancedUSVolumeNormalizer2, arguments);
   }
-  _createClass$8(EnhancedUSVolumeNormalizer2, [{
+  _createClass(EnhancedUSVolumeNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       _get(_getPrototypeOf(EnhancedUSVolumeNormalizer2.prototype), "normalize", this).call(this);
@@ -108676,12 +108676,12 @@ var EnhancedUSVolumeNormalizer = /* @__PURE__ */ function(_ImageNormalizer4) {
   return EnhancedUSVolumeNormalizer2;
 }(ImageNormalizer);
 var NMImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer5) {
-  _inherits$a(NMImageNormalizer2, _ImageNormalizer5);
+  _inherits(NMImageNormalizer2, _ImageNormalizer5);
   function NMImageNormalizer2() {
-    _classCallCheck$a(this, NMImageNormalizer2);
+    _classCallCheck(this, NMImageNormalizer2);
     return _callSuper(this, NMImageNormalizer2, arguments);
   }
-  _createClass$8(NMImageNormalizer2, [{
+  _createClass(NMImageNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       _get(_getPrototypeOf(NMImageNormalizer2.prototype), "normalize", this).call(this);
@@ -108692,12 +108692,12 @@ var NMImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer5) {
   return NMImageNormalizer2;
 }(ImageNormalizer);
 var CTImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer6) {
-  _inherits$a(CTImageNormalizer2, _ImageNormalizer6);
+  _inherits(CTImageNormalizer2, _ImageNormalizer6);
   function CTImageNormalizer2() {
-    _classCallCheck$a(this, CTImageNormalizer2);
+    _classCallCheck(this, CTImageNormalizer2);
     return _callSuper(this, CTImageNormalizer2, arguments);
   }
-  _createClass$8(CTImageNormalizer2, [{
+  _createClass(CTImageNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       _get(_getPrototypeOf(CTImageNormalizer2.prototype), "normalize", this).call(this);
@@ -108708,12 +108708,12 @@ var CTImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer6) {
   return CTImageNormalizer2;
 }(ImageNormalizer);
 var PETImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer7) {
-  _inherits$a(PETImageNormalizer2, _ImageNormalizer7);
+  _inherits(PETImageNormalizer2, _ImageNormalizer7);
   function PETImageNormalizer2() {
-    _classCallCheck$a(this, PETImageNormalizer2);
+    _classCallCheck(this, PETImageNormalizer2);
     return _callSuper(this, PETImageNormalizer2, arguments);
   }
-  _createClass$8(PETImageNormalizer2, [{
+  _createClass(PETImageNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       _get(_getPrototypeOf(PETImageNormalizer2.prototype), "normalize", this).call(this);
@@ -108724,12 +108724,12 @@ var PETImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer7) {
   return PETImageNormalizer2;
 }(ImageNormalizer);
 var SEGImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer8) {
-  _inherits$a(SEGImageNormalizer2, _ImageNormalizer8);
+  _inherits(SEGImageNormalizer2, _ImageNormalizer8);
   function SEGImageNormalizer2() {
-    _classCallCheck$a(this, SEGImageNormalizer2);
+    _classCallCheck(this, SEGImageNormalizer2);
     return _callSuper(this, SEGImageNormalizer2, arguments);
   }
-  _createClass$8(SEGImageNormalizer2, [{
+  _createClass(SEGImageNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       _get(_getPrototypeOf(SEGImageNormalizer2.prototype), "normalize", this).call(this);
@@ -108738,12 +108738,12 @@ var SEGImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer8) {
   return SEGImageNormalizer2;
 }(ImageNormalizer);
 var PMImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer9) {
-  _inherits$a(PMImageNormalizer2, _ImageNormalizer9);
+  _inherits(PMImageNormalizer2, _ImageNormalizer9);
   function PMImageNormalizer2() {
-    _classCallCheck$a(this, PMImageNormalizer2);
+    _classCallCheck(this, PMImageNormalizer2);
     return _callSuper(this, PMImageNormalizer2, arguments);
   }
-  _createClass$8(PMImageNormalizer2, [{
+  _createClass(PMImageNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       _get(_getPrototypeOf(PMImageNormalizer2.prototype), "normalize", this).call(this);
@@ -108756,12 +108756,12 @@ var PMImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer9) {
   return PMImageNormalizer2;
 }(ImageNormalizer);
 var DSRNormalizer = /* @__PURE__ */ function(_Normalizer2) {
-  _inherits$a(DSRNormalizer2, _Normalizer2);
+  _inherits(DSRNormalizer2, _Normalizer2);
   function DSRNormalizer2() {
-    _classCallCheck$a(this, DSRNormalizer2);
+    _classCallCheck(this, DSRNormalizer2);
     return _callSuper(this, DSRNormalizer2, arguments);
   }
-  _createClass$8(DSRNormalizer2, [{
+  _createClass(DSRNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       this.dataset = this.datasets[0];
@@ -108770,12 +108770,12 @@ var DSRNormalizer = /* @__PURE__ */ function(_Normalizer2) {
   return DSRNormalizer2;
 }(Normalizer);
 var OPImageNormalizer = /* @__PURE__ */ function(_Normalizer3) {
-  _inherits$a(OPImageNormalizer2, _Normalizer3);
+  _inherits(OPImageNormalizer2, _Normalizer3);
   function OPImageNormalizer2() {
-    _classCallCheck$a(this, OPImageNormalizer2);
+    _classCallCheck(this, OPImageNormalizer2);
     return _callSuper(this, OPImageNormalizer2, arguments);
   }
-  _createClass$8(OPImageNormalizer2, [{
+  _createClass(OPImageNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       this.dataset = this.datasets[0];
@@ -108784,12 +108784,12 @@ var OPImageNormalizer = /* @__PURE__ */ function(_Normalizer3) {
   return OPImageNormalizer2;
 }(Normalizer);
 var OCTImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer10) {
-  _inherits$a(OCTImageNormalizer2, _ImageNormalizer10);
+  _inherits(OCTImageNormalizer2, _ImageNormalizer10);
   function OCTImageNormalizer2() {
-    _classCallCheck$a(this, OCTImageNormalizer2);
+    _classCallCheck(this, OCTImageNormalizer2);
     return _callSuper(this, OCTImageNormalizer2, arguments);
   }
-  _createClass$8(OCTImageNormalizer2, [{
+  _createClass(OCTImageNormalizer2, [{
     key: "normalize",
     value: function normalize3() {
       _get(_getPrototypeOf(OCTImageNormalizer2.prototype), "normalize", this).call(this);
@@ -108798,13 +108798,13 @@ var OCTImageNormalizer = /* @__PURE__ */ function(_ImageNormalizer10) {
   return OCTImageNormalizer2;
 }(ImageNormalizer);
 var StructuredReport = /* @__PURE__ */ function(_DerivedDataset) {
-  _inherits$a(StructuredReport2, _DerivedDataset);
+  _inherits(StructuredReport2, _DerivedDataset);
   function StructuredReport2(datasets) {
     var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-    _classCallCheck$a(this, StructuredReport2);
+    _classCallCheck(this, StructuredReport2);
     return _callSuper(this, StructuredReport2, [datasets, options]);
   }
-  _createClass$8(StructuredReport2, [{
+  _createClass(StructuredReport2, [{
     key: "derive",
     value: function derive() {
       _get(_getPrototypeOf(StructuredReport2.prototype), "derive", this).call(this);
@@ -108820,7 +108820,7 @@ var StructuredReport = /* @__PURE__ */ function(_DerivedDataset) {
 }(DerivedDataset);
 var TID1500MeasurementReport = /* @__PURE__ */ function() {
   function TID1500MeasurementReport2(TIDIncludeGroups) {
-    _classCallCheck$a(this, TID1500MeasurementReport2);
+    _classCallCheck(this, TID1500MeasurementReport2);
     this.TIDIncludeGroups = TIDIncludeGroups;
     var ImageLibraryContentSequence = [];
     var CurrentRequestedProcedureEvidenceSequence = [];
@@ -108922,7 +108922,7 @@ var TID1500MeasurementReport = /* @__PURE__ */ function() {
       }]
     };
   }
-  _createClass$8(TID1500MeasurementReport2, [{
+  _createClass(TID1500MeasurementReport2, [{
     key: "validate",
     value: function validate2() {
     }
@@ -109003,10 +109003,10 @@ var TID1500MeasurementReport = /* @__PURE__ */ function() {
 }();
 var TID1501MeasurementGroup = /* @__PURE__ */ function() {
   function TID1501MeasurementGroup2(TID300Measurements) {
-    _classCallCheck$a(this, TID1501MeasurementGroup2);
+    _classCallCheck(this, TID1501MeasurementGroup2);
     this.TID300Measurements = TID300Measurements;
   }
-  _createClass$8(TID1501MeasurementGroup2, [{
+  _createClass(TID1501MeasurementGroup2, [{
     key: "contentItem",
     value: function contentItem() {
       var _this = this;
@@ -109085,9 +109085,9 @@ function getMeasurementGroup$2(toolType, toolData, ReferencedSOPSequence) {
 }
 var MeasurementReport$3 = /* @__PURE__ */ function() {
   function MeasurementReport() {
-    _classCallCheck$a(this, MeasurementReport);
+    _classCallCheck(this, MeasurementReport);
   }
-  _createClass$8(MeasurementReport, null, [{
+  _createClass(MeasurementReport, null, [{
     key: "getSetupMeasurementData",
     value: function getSetupMeasurementData(MeasurementGroup) {
       var ContentSequence = MeasurementGroup.ContentSequence;
@@ -109266,11 +109266,11 @@ MeasurementReport$3.CORNERSTONE_TOOL_CLASSES_BY_UTILITY_TYPE = {};
 MeasurementReport$3.CORNERSTONE_TOOL_CLASSES_BY_TOOL_TYPE = {};
 var TID300Measurement = /* @__PURE__ */ function() {
   function TID300Measurement2(props) {
-    _classCallCheck$a(this, TID300Measurement2);
+    _classCallCheck(this, TID300Measurement2);
     this.ReferencedSOPSequence = props.ReferencedSOPSequence;
     this.props = props;
   }
-  _createClass$8(TID300Measurement2, [{
+  _createClass(TID300Measurement2, [{
     key: "getMeasurement",
     value: function getMeasurement(contentSequenceEntries) {
       return [].concat(_toConsumableArray$1(this.getTrackingGroups()), _toConsumableArray$1(this.getFindingGroup()), _toConsumableArray$1(this.getFindingSiteGroups()), _toConsumableArray$1(contentSequenceEntries));
@@ -109414,12 +109414,12 @@ var unit2CodingValue = function unit2CodingValue2(units) {
 };
 unit2CodingValue.measurementMap = measurementMap;
 var Length$2 = /* @__PURE__ */ function(_TID300Measurement) {
-  _inherits$a(Length2, _TID300Measurement);
+  _inherits(Length2, _TID300Measurement);
   function Length2() {
-    _classCallCheck$a(this, Length2);
+    _classCallCheck(this, Length2);
     return _callSuper(this, Length2, arguments);
   }
-  _createClass$8(Length2, [{
+  _createClass(Length2, [{
     key: "contentItem",
     value: function contentItem() {
       var _this$props = this.props, point1 = _this$props.point1, point2 = _this$props.point2, _this$props$unit = _this$props.unit, unit = _this$props$unit === void 0 ? "mm" : _this$props$unit, _this$props$use3DSpat = _this$props.use3DSpatialCoordinates, use3DSpatialCoordinates = _this$props$use3DSpat === void 0 ? false : _this$props$use3DSpat, distance2 = _this$props.distance, ReferencedSOPSequence = _this$props.ReferencedSOPSequence, ReferencedFrameOfReferenceUID = _this$props.ReferencedFrameOfReferenceUID;
@@ -109460,9 +109460,9 @@ var CORNERSTONE_4_TAG = "cornerstoneTools@^4.0.0";
 var LENGTH$1 = "Length";
 var Length$1 = /* @__PURE__ */ function() {
   function Length2() {
-    _classCallCheck$a(this, Length2);
+    _classCallCheck(this, Length2);
   }
-  _createClass$8(Length2, null, [{
+  _createClass(Length2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup) {
       var _MeasurementReport$ge = MeasurementReport$3.getSetupMeasurementData(MeasurementGroup), defaultState = _MeasurementReport$ge.defaultState, NUMGroup = _MeasurementReport$ge.NUMGroup, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup;
@@ -109523,12 +109523,12 @@ Length$1.isValidCornerstoneTrackingIdentifier = function(TrackingIdentifier) {
 };
 MeasurementReport$3.registerTool(Length$1);
 var Polyline$1 = /* @__PURE__ */ function(_TID300Measurement) {
-  _inherits$a(Polyline2, _TID300Measurement);
+  _inherits(Polyline2, _TID300Measurement);
   function Polyline2() {
-    _classCallCheck$a(this, Polyline2);
+    _classCallCheck(this, Polyline2);
     return _callSuper(this, Polyline2, arguments);
   }
-  _createClass$8(Polyline2, [{
+  _createClass(Polyline2, [{
     key: "contentItem",
     value: function contentItem() {
       var _this$props = this.props, points = _this$props.points, area2 = _this$props.area, _this$props$areaUnit = _this$props.areaUnit, areaUnit = _this$props$areaUnit === void 0 ? "mm2" : _this$props$areaUnit, ReferencedSOPSequence = _this$props.ReferencedSOPSequence, _this$props$use3DSpat = _this$props.use3DSpatialCoordinates, use3DSpatialCoordinates = _this$props$use3DSpat === void 0 ? false : _this$props$use3DSpat, perimeter = _this$props.perimeter, _this$props$unit = _this$props.unit, unit = _this$props$unit === void 0 ? "mm" : _this$props$unit, ReferencedFrameOfReferenceUID = _this$props.ReferencedFrameOfReferenceUID;
@@ -109593,9 +109593,9 @@ var Polyline$1 = /* @__PURE__ */ function(_TID300Measurement) {
 }(TID300Measurement);
 var FreehandRoi = /* @__PURE__ */ function() {
   function FreehandRoi2() {
-    _classCallCheck$a(this, FreehandRoi2);
+    _classCallCheck(this, FreehandRoi2);
   }
-  _createClass$8(FreehandRoi2, null, [{
+  _createClass(FreehandRoi2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup) {
       var _MeasurementReport$ge = MeasurementReport$3.getSetupMeasurementData(MeasurementGroup), defaultState = _MeasurementReport$ge.defaultState, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup, NUMGroup = _MeasurementReport$ge.NUMGroup;
@@ -109661,12 +109661,12 @@ FreehandRoi.isValidCornerstoneTrackingIdentifier = function(TrackingIdentifier) 
 };
 MeasurementReport$3.registerTool(FreehandRoi);
 var Bidirectional$2 = /* @__PURE__ */ function(_TID300Measurement) {
-  _inherits$a(Bidirectional2, _TID300Measurement);
+  _inherits(Bidirectional2, _TID300Measurement);
   function Bidirectional2() {
-    _classCallCheck$a(this, Bidirectional2);
+    _classCallCheck(this, Bidirectional2);
     return _callSuper(this, Bidirectional2, arguments);
   }
-  _createClass$8(Bidirectional2, [{
+  _createClass(Bidirectional2, [{
     key: "contentItem",
     value: function contentItem() {
       var _this$props = this.props, longAxis = _this$props.longAxis, shortAxis = _this$props.shortAxis, longAxisLength = _this$props.longAxisLength, shortAxisLength = _this$props.shortAxisLength, unit = _this$props.unit, _this$props$use3DSpat = _this$props.use3DSpatialCoordinates, use3DSpatialCoordinates = _this$props$use3DSpat === void 0 ? false : _this$props$use3DSpat, ReferencedSOPSequence = _this$props.ReferencedSOPSequence, ReferencedFrameOfReferenceUID = _this$props.ReferencedFrameOfReferenceUID;
@@ -109738,9 +109738,9 @@ var FINDING$1 = "121071";
 var FINDING_SITE$1 = "G-C0E3";
 var Bidirectional$1 = /* @__PURE__ */ function() {
   function Bidirectional2() {
-    _classCallCheck$a(this, Bidirectional2);
+    _classCallCheck(this, Bidirectional2);
   }
-  _createClass$8(Bidirectional2, null, [{
+  _createClass(Bidirectional2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup) {
       var ContentSequence = MeasurementGroup.ContentSequence;
@@ -109877,12 +109877,12 @@ Bidirectional$1.isValidCornerstoneTrackingIdentifier = function(TrackingIdentifi
 };
 MeasurementReport$3.registerTool(Bidirectional$1);
 var Ellipse$1 = /* @__PURE__ */ function(_TID300Measurement) {
-  _inherits$a(Ellipse2, _TID300Measurement);
+  _inherits(Ellipse2, _TID300Measurement);
   function Ellipse2() {
-    _classCallCheck$a(this, Ellipse2);
+    _classCallCheck(this, Ellipse2);
     return _callSuper(this, Ellipse2, arguments);
   }
-  _createClass$8(Ellipse2, [{
+  _createClass(Ellipse2, [{
     key: "contentItem",
     value: function contentItem() {
       var _this$props = this.props, points = _this$props.points, _this$props$use3DSpat = _this$props.use3DSpatialCoordinates, use3DSpatialCoordinates = _this$props$use3DSpat === void 0 ? false : _this$props$use3DSpat, ReferencedSOPSequence = _this$props.ReferencedSOPSequence, area2 = _this$props.area, areaUnit = _this$props.areaUnit, ReferencedFrameOfReferenceUID = _this$props.ReferencedFrameOfReferenceUID;
@@ -109922,9 +109922,9 @@ var Ellipse$1 = /* @__PURE__ */ function(_TID300Measurement) {
 var ELLIPTICALROI$1 = "EllipticalRoi";
 var EllipticalRoi = /* @__PURE__ */ function() {
   function EllipticalRoi2() {
-    _classCallCheck$a(this, EllipticalRoi2);
+    _classCallCheck(this, EllipticalRoi2);
   }
-  _createClass$8(EllipticalRoi2, null, [{
+  _createClass(EllipticalRoi2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup) {
       var _MeasurementReport$ge = MeasurementReport$3.getSetupMeasurementData(MeasurementGroup), defaultState = _MeasurementReport$ge.defaultState, NUMGroup = _MeasurementReport$ge.NUMGroup, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup;
@@ -110065,12 +110065,12 @@ EllipticalRoi.isValidCornerstoneTrackingIdentifier = function(TrackingIdentifier
 };
 MeasurementReport$3.registerTool(EllipticalRoi);
 var Circle$1 = /* @__PURE__ */ function(_TID300Measurement) {
-  _inherits$a(Circle3, _TID300Measurement);
-  function Circle3() {
-    _classCallCheck$a(this, Circle3);
-    return _callSuper(this, Circle3, arguments);
+  _inherits(Circle2, _TID300Measurement);
+  function Circle2() {
+    _classCallCheck(this, Circle2);
+    return _callSuper(this, Circle2, arguments);
   }
-  _createClass$8(Circle3, [{
+  _createClass(Circle2, [{
     key: "contentItem",
     value: function contentItem() {
       var _this$props = this.props, points = _this$props.points, ReferencedSOPSequence = _this$props.ReferencedSOPSequence, _this$props$use3DSpat = _this$props.use3DSpatialCoordinates, use3DSpatialCoordinates = _this$props$use3DSpat === void 0 ? false : _this$props$use3DSpat, perimeter = _this$props.perimeter, area2 = _this$props.area, _this$props$areaUnit = _this$props.areaUnit, areaUnit = _this$props$areaUnit === void 0 ? "mm2" : _this$props$areaUnit, _this$props$unit = _this$props.unit, unit = _this$props$unit === void 0 ? "mm" : _this$props$unit, ReferencedFrameOfReferenceUID = _this$props.ReferencedFrameOfReferenceUID;
@@ -110131,14 +110131,14 @@ var Circle$1 = /* @__PURE__ */ function(_TID300Measurement) {
       }]);
     }
   }]);
-  return Circle3;
+  return Circle2;
 }(TID300Measurement);
 var CIRCLEROI = "CircleRoi";
 var CircleRoi = /* @__PURE__ */ function() {
   function CircleRoi2() {
-    _classCallCheck$a(this, CircleRoi2);
+    _classCallCheck(this, CircleRoi2);
   }
-  _createClass$8(CircleRoi2, null, [{
+  _createClass(CircleRoi2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup) {
       var _MeasurementReport$ge = MeasurementReport$3.getSetupMeasurementData(MeasurementGroup), defaultState = _MeasurementReport$ge.defaultState, NUMGroup = _MeasurementReport$ge.NUMGroup, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup;
@@ -110230,12 +110230,12 @@ CircleRoi.isValidCornerstoneTrackingIdentifier = function(TrackingIdentifier) {
 };
 MeasurementReport$3.registerTool(CircleRoi);
 var Point$1 = /* @__PURE__ */ function(_TID300Measurement) {
-  _inherits$a(Point2, _TID300Measurement);
+  _inherits(Point2, _TID300Measurement);
   function Point2() {
-    _classCallCheck$a(this, Point2);
+    _classCallCheck(this, Point2);
     return _callSuper(this, Point2, arguments);
   }
-  _createClass$8(Point2, [{
+  _createClass(Point2, [{
     key: "contentItem",
     value: function contentItem() {
       var _this$props = this.props, points = _this$props.points, ReferencedSOPSequence = _this$props.ReferencedSOPSequence, _this$props$use3DSpat = _this$props.use3DSpatialCoordinates, use3DSpatialCoordinates = _this$props$use3DSpat === void 0 ? false : _this$props$use3DSpat, ReferencedFrameOfReferenceUID = _this$props.ReferencedFrameOfReferenceUID;
@@ -110274,9 +110274,9 @@ var ARROW_ANNOTATE$1 = "ArrowAnnotate";
 var CORNERSTONEFREETEXT$1 = "CORNERSTONEFREETEXT";
 var ArrowAnnotate$1 = /* @__PURE__ */ function() {
   function ArrowAnnotate2() {
-    _classCallCheck$a(this, ArrowAnnotate2);
+    _classCallCheck(this, ArrowAnnotate2);
   }
-  _createClass$8(ArrowAnnotate2, null, [{
+  _createClass(ArrowAnnotate2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup) {
       var _MeasurementReport$ge = MeasurementReport$3.getSetupMeasurementData(MeasurementGroup), defaultState = _MeasurementReport$ge.defaultState, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup, findingGroup = _MeasurementReport$ge.findingGroup;
@@ -110353,25 +110353,25 @@ ArrowAnnotate$1.isValidCornerstoneTrackingIdentifier = function(TrackingIdentifi
 MeasurementReport$3.registerTool(ArrowAnnotate$1);
 var lodash_clonedeep = { exports: {} };
 lodash_clonedeep.exports;
-(function(module2, exports2) {
-  var LARGE_ARRAY_SIZE2 = 200;
-  var HASH_UNDEFINED2 = "__lodash_hash_undefined__";
-  var MAX_SAFE_INTEGER2 = 9007199254740991;
-  var argsTag2 = "[object Arguments]", arrayTag2 = "[object Array]", boolTag2 = "[object Boolean]", dateTag2 = "[object Date]", errorTag2 = "[object Error]", funcTag2 = "[object Function]", genTag2 = "[object GeneratorFunction]", mapTag2 = "[object Map]", numberTag2 = "[object Number]", objectTag2 = "[object Object]", promiseTag2 = "[object Promise]", regexpTag2 = "[object RegExp]", setTag2 = "[object Set]", stringTag2 = "[object String]", symbolTag2 = "[object Symbol]", weakMapTag2 = "[object WeakMap]";
-  var arrayBufferTag2 = "[object ArrayBuffer]", dataViewTag2 = "[object DataView]", float32Tag2 = "[object Float32Array]", float64Tag2 = "[object Float64Array]", int8Tag2 = "[object Int8Array]", int16Tag2 = "[object Int16Array]", int32Tag2 = "[object Int32Array]", uint8Tag2 = "[object Uint8Array]", uint8ClampedTag2 = "[object Uint8ClampedArray]", uint16Tag2 = "[object Uint16Array]", uint32Tag2 = "[object Uint32Array]";
-  var reRegExpChar2 = /[\\^$.*+?()[\]{}|]/g;
-  var reFlags2 = /\w*$/;
-  var reIsHostCtor2 = /^\[object .+?Constructor\]$/;
-  var reIsUint2 = /^(?:0|[1-9]\d*)$/;
-  var cloneableTags2 = {};
-  cloneableTags2[argsTag2] = cloneableTags2[arrayTag2] = cloneableTags2[arrayBufferTag2] = cloneableTags2[dataViewTag2] = cloneableTags2[boolTag2] = cloneableTags2[dateTag2] = cloneableTags2[float32Tag2] = cloneableTags2[float64Tag2] = cloneableTags2[int8Tag2] = cloneableTags2[int16Tag2] = cloneableTags2[int32Tag2] = cloneableTags2[mapTag2] = cloneableTags2[numberTag2] = cloneableTags2[objectTag2] = cloneableTags2[regexpTag2] = cloneableTags2[setTag2] = cloneableTags2[stringTag2] = cloneableTags2[symbolTag2] = cloneableTags2[uint8Tag2] = cloneableTags2[uint8ClampedTag2] = cloneableTags2[uint16Tag2] = cloneableTags2[uint32Tag2] = true;
-  cloneableTags2[errorTag2] = cloneableTags2[funcTag2] = cloneableTags2[weakMapTag2] = false;
-  var freeGlobal2 = typeof commonjsGlobal == "object" && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
-  var freeSelf2 = typeof self == "object" && self && self.Object === Object && self;
-  var root2 = freeGlobal2 || freeSelf2 || Function("return this")();
-  var freeExports2 = exports2 && !exports2.nodeType && exports2;
-  var freeModule2 = freeExports2 && true && module2 && !module2.nodeType && module2;
-  var moduleExports2 = freeModule2 && freeModule2.exports === freeExports2;
+(function(module, exports) {
+  var LARGE_ARRAY_SIZE = 200;
+  var HASH_UNDEFINED = "__lodash_hash_undefined__";
+  var MAX_SAFE_INTEGER = 9007199254740991;
+  var argsTag = "[object Arguments]", arrayTag = "[object Array]", boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag = "[object Map]", numberTag = "[object Number]", objectTag = "[object Object]", promiseTag = "[object Promise]", regexpTag = "[object RegExp]", setTag = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]", weakMapTag = "[object WeakMap]";
+  var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
+  var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+  var reFlags = /\w*$/;
+  var reIsHostCtor = /^\[object .+?Constructor\]$/;
+  var reIsUint = /^(?:0|[1-9]\d*)$/;
+  var cloneableTags = {};
+  cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
+  cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
+  var freeGlobal = typeof commonjsGlobal == "object" && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
+  var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+  var root2 = freeGlobal || freeSelf || Function("return this")();
+  var freeExports = exports && !exports.nodeType && exports;
+  var freeModule = freeExports && true && module && !module.nodeType && module;
+  var moduleExports = freeModule && freeModule.exports === freeExports;
   function addMapEntry(map3, pair) {
     map3.set(pair[0], pair[1]);
     return map3;
@@ -110380,7 +110380,7 @@ lodash_clonedeep.exports;
     set5.add(value);
     return set5;
   }
-  function arrayEach2(array, iteratee) {
+  function arrayEach(array, iteratee) {
     var index2 = -1, length2 = array ? array.length : 0;
     while (++index2 < length2) {
       if (iteratee(array[index2], index2, array) === false) {
@@ -110389,7 +110389,7 @@ lodash_clonedeep.exports;
     }
     return array;
   }
-  function arrayPush2(array, values2) {
+  function arrayPush(array, values2) {
     var index2 = -1, length2 = values2.length, offset = array.length;
     while (++index2 < length2) {
       array[offset + index2] = values2[index2];
@@ -110403,7 +110403,7 @@ lodash_clonedeep.exports;
     }
     return accumulator;
   }
-  function baseTimes2(n3, iteratee) {
+  function baseTimes(n3, iteratee) {
     var index2 = -1, result = Array(n3);
     while (++index2 < n3) {
       result[index2] = iteratee(index2);
@@ -110423,43 +110423,43 @@ lodash_clonedeep.exports;
     }
     return result;
   }
-  function mapToArray2(map3) {
+  function mapToArray(map3) {
     var index2 = -1, result = Array(map3.size);
     map3.forEach(function(value, key) {
       result[++index2] = [key, value];
     });
     return result;
   }
-  function overArg2(func, transform2) {
+  function overArg(func, transform) {
     return function(arg) {
-      return func(transform2(arg));
+      return func(transform(arg));
     };
   }
-  function setToArray2(set5) {
+  function setToArray(set5) {
     var index2 = -1, result = Array(set5.size);
     set5.forEach(function(value) {
       result[++index2] = value;
     });
     return result;
   }
-  var arrayProto2 = Array.prototype, funcProto2 = Function.prototype, objectProto2 = Object.prototype;
-  var coreJsData2 = root2["__core-js_shared__"];
-  var maskSrcKey2 = function() {
-    var uid2 = /[^.]+$/.exec(coreJsData2 && coreJsData2.keys && coreJsData2.keys.IE_PROTO || "");
+  var arrayProto = Array.prototype, funcProto = Function.prototype, objectProto = Object.prototype;
+  var coreJsData = root2["__core-js_shared__"];
+  var maskSrcKey = function() {
+    var uid2 = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
     return uid2 ? "Symbol(src)_1." + uid2 : "";
   }();
-  var funcToString2 = funcProto2.toString;
-  var hasOwnProperty2 = objectProto2.hasOwnProperty;
-  var objectToString2 = objectProto2.toString;
-  var reIsNative2 = RegExp(
-    "^" + funcToString2.call(hasOwnProperty2).replace(reRegExpChar2, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
+  var funcToString = funcProto.toString;
+  var hasOwnProperty2 = objectProto.hasOwnProperty;
+  var objectToString = objectProto.toString;
+  var reIsNative = RegExp(
+    "^" + funcToString.call(hasOwnProperty2).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
   );
-  var Buffer2 = moduleExports2 ? root2.Buffer : void 0, Symbol2 = root2.Symbol, Uint8Array2 = root2.Uint8Array, getPrototype2 = overArg2(Object.getPrototypeOf, Object), objectCreate2 = Object.create, propertyIsEnumerable2 = objectProto2.propertyIsEnumerable, splice2 = arrayProto2.splice;
-  var nativeGetSymbols2 = Object.getOwnPropertySymbols, nativeIsBuffer2 = Buffer2 ? Buffer2.isBuffer : void 0, nativeKeys2 = overArg2(Object.keys, Object);
-  var DataView2 = getNative2(root2, "DataView"), Map2 = getNative2(root2, "Map"), Promise2 = getNative2(root2, "Promise"), Set2 = getNative2(root2, "Set"), WeakMap2 = getNative2(root2, "WeakMap"), nativeCreate2 = getNative2(Object, "create");
-  var dataViewCtorString2 = toSource2(DataView2), mapCtorString2 = toSource2(Map2), promiseCtorString2 = toSource2(Promise2), setCtorString2 = toSource2(Set2), weakMapCtorString2 = toSource2(WeakMap2);
-  var symbolProto2 = Symbol2 ? Symbol2.prototype : void 0, symbolValueOf2 = symbolProto2 ? symbolProto2.valueOf : void 0;
-  function Hash2(entries) {
+  var Buffer2 = moduleExports ? root2.Buffer : void 0, Symbol2 = root2.Symbol, Uint8Array2 = root2.Uint8Array, getPrototype = overArg(Object.getPrototypeOf, Object), objectCreate = Object.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice2 = arrayProto.splice;
+  var nativeGetSymbols = Object.getOwnPropertySymbols, nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0, nativeKeys = overArg(Object.keys, Object);
+  var DataView2 = getNative(root2, "DataView"), Map2 = getNative(root2, "Map"), Promise2 = getNative(root2, "Promise"), Set2 = getNative(root2, "Set"), WeakMap2 = getNative(root2, "WeakMap"), nativeCreate = getNative(Object, "create");
+  var dataViewCtorString = toSource(DataView2), mapCtorString = toSource(Map2), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set2), weakMapCtorString = toSource(WeakMap2);
+  var symbolProto = Symbol2 ? Symbol2.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
+  function Hash(entries) {
     var index2 = -1, length2 = entries ? entries.length : 0;
     this.clear();
     while (++index2 < length2) {
@@ -110467,35 +110467,35 @@ lodash_clonedeep.exports;
       this.set(entry[0], entry[1]);
     }
   }
-  function hashClear2() {
-    this.__data__ = nativeCreate2 ? nativeCreate2(null) : {};
+  function hashClear() {
+    this.__data__ = nativeCreate ? nativeCreate(null) : {};
   }
-  function hashDelete2(key) {
+  function hashDelete(key) {
     return this.has(key) && delete this.__data__[key];
   }
-  function hashGet2(key) {
+  function hashGet(key) {
     var data2 = this.__data__;
-    if (nativeCreate2) {
+    if (nativeCreate) {
       var result = data2[key];
-      return result === HASH_UNDEFINED2 ? void 0 : result;
+      return result === HASH_UNDEFINED ? void 0 : result;
     }
     return hasOwnProperty2.call(data2, key) ? data2[key] : void 0;
   }
-  function hashHas2(key) {
+  function hashHas(key) {
     var data2 = this.__data__;
-    return nativeCreate2 ? data2[key] !== void 0 : hasOwnProperty2.call(data2, key);
+    return nativeCreate ? data2[key] !== void 0 : hasOwnProperty2.call(data2, key);
   }
-  function hashSet2(key, value) {
+  function hashSet(key, value) {
     var data2 = this.__data__;
-    data2[key] = nativeCreate2 && value === void 0 ? HASH_UNDEFINED2 : value;
+    data2[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED : value;
     return this;
   }
-  Hash2.prototype.clear = hashClear2;
-  Hash2.prototype["delete"] = hashDelete2;
-  Hash2.prototype.get = hashGet2;
-  Hash2.prototype.has = hashHas2;
-  Hash2.prototype.set = hashSet2;
-  function ListCache2(entries) {
+  Hash.prototype.clear = hashClear;
+  Hash.prototype["delete"] = hashDelete;
+  Hash.prototype.get = hashGet;
+  Hash.prototype.has = hashHas;
+  Hash.prototype.set = hashSet;
+  function ListCache(entries) {
     var index2 = -1, length2 = entries ? entries.length : 0;
     this.clear();
     while (++index2 < length2) {
@@ -110503,11 +110503,11 @@ lodash_clonedeep.exports;
       this.set(entry[0], entry[1]);
     }
   }
-  function listCacheClear2() {
+  function listCacheClear() {
     this.__data__ = [];
   }
-  function listCacheDelete2(key) {
-    var data2 = this.__data__, index2 = assocIndexOf2(data2, key);
+  function listCacheDelete(key) {
+    var data2 = this.__data__, index2 = assocIndexOf(data2, key);
     if (index2 < 0) {
       return false;
     }
@@ -110519,15 +110519,15 @@ lodash_clonedeep.exports;
     }
     return true;
   }
-  function listCacheGet2(key) {
-    var data2 = this.__data__, index2 = assocIndexOf2(data2, key);
+  function listCacheGet(key) {
+    var data2 = this.__data__, index2 = assocIndexOf(data2, key);
     return index2 < 0 ? void 0 : data2[index2][1];
   }
-  function listCacheHas2(key) {
-    return assocIndexOf2(this.__data__, key) > -1;
+  function listCacheHas(key) {
+    return assocIndexOf(this.__data__, key) > -1;
   }
-  function listCacheSet2(key, value) {
-    var data2 = this.__data__, index2 = assocIndexOf2(data2, key);
+  function listCacheSet(key, value) {
+    var data2 = this.__data__, index2 = assocIndexOf(data2, key);
     if (index2 < 0) {
       data2.push([key, value]);
     } else {
@@ -110535,12 +110535,12 @@ lodash_clonedeep.exports;
     }
     return this;
   }
-  ListCache2.prototype.clear = listCacheClear2;
-  ListCache2.prototype["delete"] = listCacheDelete2;
-  ListCache2.prototype.get = listCacheGet2;
-  ListCache2.prototype.has = listCacheHas2;
-  ListCache2.prototype.set = listCacheSet2;
-  function MapCache2(entries) {
+  ListCache.prototype.clear = listCacheClear;
+  ListCache.prototype["delete"] = listCacheDelete;
+  ListCache.prototype.get = listCacheGet;
+  ListCache.prototype.has = listCacheHas;
+  ListCache.prototype.set = listCacheSet;
+  function MapCache(entries) {
     var index2 = -1, length2 = entries ? entries.length : 0;
     this.clear();
     while (++index2 < length2) {
@@ -110548,66 +110548,66 @@ lodash_clonedeep.exports;
       this.set(entry[0], entry[1]);
     }
   }
-  function mapCacheClear2() {
+  function mapCacheClear() {
     this.__data__ = {
-      "hash": new Hash2(),
-      "map": new (Map2 || ListCache2)(),
-      "string": new Hash2()
+      "hash": new Hash(),
+      "map": new (Map2 || ListCache)(),
+      "string": new Hash()
     };
   }
-  function mapCacheDelete2(key) {
-    return getMapData2(this, key)["delete"](key);
+  function mapCacheDelete(key) {
+    return getMapData(this, key)["delete"](key);
   }
-  function mapCacheGet2(key) {
-    return getMapData2(this, key).get(key);
+  function mapCacheGet(key) {
+    return getMapData(this, key).get(key);
   }
-  function mapCacheHas2(key) {
-    return getMapData2(this, key).has(key);
+  function mapCacheHas(key) {
+    return getMapData(this, key).has(key);
   }
-  function mapCacheSet2(key, value) {
-    getMapData2(this, key).set(key, value);
+  function mapCacheSet(key, value) {
+    getMapData(this, key).set(key, value);
     return this;
   }
-  MapCache2.prototype.clear = mapCacheClear2;
-  MapCache2.prototype["delete"] = mapCacheDelete2;
-  MapCache2.prototype.get = mapCacheGet2;
-  MapCache2.prototype.has = mapCacheHas2;
-  MapCache2.prototype.set = mapCacheSet2;
-  function Stack2(entries) {
-    this.__data__ = new ListCache2(entries);
+  MapCache.prototype.clear = mapCacheClear;
+  MapCache.prototype["delete"] = mapCacheDelete;
+  MapCache.prototype.get = mapCacheGet;
+  MapCache.prototype.has = mapCacheHas;
+  MapCache.prototype.set = mapCacheSet;
+  function Stack(entries) {
+    this.__data__ = new ListCache(entries);
   }
-  function stackClear2() {
-    this.__data__ = new ListCache2();
+  function stackClear() {
+    this.__data__ = new ListCache();
   }
-  function stackDelete2(key) {
+  function stackDelete(key) {
     return this.__data__["delete"](key);
   }
-  function stackGet2(key) {
+  function stackGet(key) {
     return this.__data__.get(key);
   }
-  function stackHas2(key) {
+  function stackHas(key) {
     return this.__data__.has(key);
   }
-  function stackSet2(key, value) {
+  function stackSet(key, value) {
     var cache2 = this.__data__;
-    if (cache2 instanceof ListCache2) {
+    if (cache2 instanceof ListCache) {
       var pairs = cache2.__data__;
-      if (!Map2 || pairs.length < LARGE_ARRAY_SIZE2 - 1) {
+      if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
         pairs.push([key, value]);
         return this;
       }
-      cache2 = this.__data__ = new MapCache2(pairs);
+      cache2 = this.__data__ = new MapCache(pairs);
     }
     cache2.set(key, value);
     return this;
   }
-  Stack2.prototype.clear = stackClear2;
-  Stack2.prototype["delete"] = stackDelete2;
-  Stack2.prototype.get = stackGet2;
-  Stack2.prototype.has = stackHas2;
-  Stack2.prototype.set = stackSet2;
-  function arrayLikeKeys2(value, inherited) {
-    var result = isArray3(value) || isArguments2(value) ? baseTimes2(value.length, String) : [];
+  Stack.prototype.clear = stackClear;
+  Stack.prototype["delete"] = stackDelete;
+  Stack.prototype.get = stackGet;
+  Stack.prototype.has = stackHas;
+  Stack.prototype.set = stackSet;
+  function arrayLikeKeys(value, inherited) {
+    var result = isArray3(value) || isArguments(value) ? baseTimes(value.length, String) : [];
     var length2 = result.length, skipIndexes = !!length2;
     for (var key in value) {
       if (hasOwnProperty2.call(value, key) && !(skipIndexes && (key == "length" || isIndex2(key, length2)))) {
@@ -110616,25 +110616,25 @@ lodash_clonedeep.exports;
     }
     return result;
   }
-  function assignValue2(object, key, value) {
+  function assignValue(object, key, value) {
     var objValue = object[key];
-    if (!(hasOwnProperty2.call(object, key) && eq2(objValue, value)) || value === void 0 && !(key in object)) {
+    if (!(hasOwnProperty2.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
       object[key] = value;
     }
   }
-  function assocIndexOf2(array, key) {
+  function assocIndexOf(array, key) {
     var length2 = array.length;
     while (length2--) {
-      if (eq2(array[length2][0], key)) {
+      if (eq(array[length2][0], key)) {
         return length2;
       }
     }
     return -1;
   }
-  function baseAssign2(object, source2) {
-    return object && copyObject2(source2, keys2(source2), object);
+  function baseAssign(object, source2) {
+    return object && copyObject(source2, keys2(source2), object);
   }
-  function baseClone2(value, isDeep, isFull, customizer, key, object, stack) {
+  function baseClone(value, isDeep, isFull, customizer, key, object, stack) {
     var result;
     if (customizer) {
       result = object ? customizer(value, key, object, stack) : customizer(value);
@@ -110647,68 +110647,68 @@ lodash_clonedeep.exports;
     }
     var isArr = isArray3(value);
     if (isArr) {
-      result = initCloneArray2(value);
+      result = initCloneArray(value);
       if (!isDeep) {
-        return copyArray2(value, result);
+        return copyArray(value, result);
       }
     } else {
-      var tag = getTag2(value), isFunc = tag == funcTag2 || tag == genTag2;
+      var tag = getTag(value), isFunc = tag == funcTag || tag == genTag;
       if (isBuffer2(value)) {
-        return cloneBuffer2(value, isDeep);
+        return cloneBuffer(value, isDeep);
       }
-      if (tag == objectTag2 || tag == argsTag2 || isFunc && !object) {
+      if (tag == objectTag || tag == argsTag || isFunc && !object) {
         if (isHostObject(value)) {
           return object ? value : {};
         }
-        result = initCloneObject2(isFunc ? {} : value);
+        result = initCloneObject(isFunc ? {} : value);
         if (!isDeep) {
-          return copySymbols2(value, baseAssign2(result, value));
+          return copySymbols(value, baseAssign(result, value));
         }
       } else {
-        if (!cloneableTags2[tag]) {
+        if (!cloneableTags[tag]) {
           return object ? value : {};
         }
-        result = initCloneByTag2(value, tag, baseClone2, isDeep);
+        result = initCloneByTag(value, tag, baseClone, isDeep);
       }
     }
-    stack || (stack = new Stack2());
+    stack || (stack = new Stack());
     var stacked = stack.get(value);
     if (stacked) {
       return stacked;
     }
     stack.set(value, result);
     if (!isArr) {
-      var props = isFull ? getAllKeys2(value) : keys2(value);
+      var props = isFull ? getAllKeys(value) : keys2(value);
     }
-    arrayEach2(props || value, function(subValue, key2) {
+    arrayEach(props || value, function(subValue, key2) {
       if (props) {
         key2 = subValue;
         subValue = value[key2];
       }
-      assignValue2(result, key2, baseClone2(subValue, isDeep, isFull, customizer, key2, value, stack));
+      assignValue(result, key2, baseClone(subValue, isDeep, isFull, customizer, key2, value, stack));
     });
     return result;
   }
-  function baseCreate2(proto2) {
-    return isObject2(proto2) ? objectCreate2(proto2) : {};
+  function baseCreate(proto2) {
+    return isObject2(proto2) ? objectCreate(proto2) : {};
   }
-  function baseGetAllKeys2(object, keysFunc, symbolsFunc) {
+  function baseGetAllKeys(object, keysFunc, symbolsFunc) {
     var result = keysFunc(object);
-    return isArray3(object) ? result : arrayPush2(result, symbolsFunc(object));
+    return isArray3(object) ? result : arrayPush(result, symbolsFunc(object));
   }
-  function baseGetTag2(value) {
-    return objectToString2.call(value);
+  function baseGetTag(value) {
+    return objectToString.call(value);
   }
-  function baseIsNative2(value) {
-    if (!isObject2(value) || isMasked2(value)) {
+  function baseIsNative(value) {
+    if (!isObject2(value) || isMasked(value)) {
       return false;
     }
-    var pattern = isFunction2(value) || isHostObject(value) ? reIsNative2 : reIsHostCtor2;
-    return pattern.test(toSource2(value));
+    var pattern = isFunction2(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
+    return pattern.test(toSource(value));
   }
-  function baseKeys2(object) {
-    if (!isPrototype2(object)) {
-      return nativeKeys2(object);
+  function baseKeys(object) {
+    if (!isPrototype(object)) {
+      return nativeKeys(object);
     }
     var result = [];
     for (var key in Object(object)) {
@@ -110718,7 +110718,7 @@ lodash_clonedeep.exports;
     }
     return result;
   }
-  function cloneBuffer2(buffer2, isDeep) {
+  function cloneBuffer(buffer2, isDeep) {
     if (isDeep) {
       return buffer2.slice();
     }
@@ -110726,36 +110726,36 @@ lodash_clonedeep.exports;
     buffer2.copy(result);
     return result;
   }
-  function cloneArrayBuffer2(arrayBuffer2) {
+  function cloneArrayBuffer(arrayBuffer2) {
     var result = new arrayBuffer2.constructor(arrayBuffer2.byteLength);
     new Uint8Array2(result).set(new Uint8Array2(arrayBuffer2));
     return result;
   }
-  function cloneDataView2(dataView, isDeep) {
-    var buffer2 = isDeep ? cloneArrayBuffer2(dataView.buffer) : dataView.buffer;
+  function cloneDataView(dataView, isDeep) {
+    var buffer2 = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
     return new dataView.constructor(buffer2, dataView.byteOffset, dataView.byteLength);
   }
   function cloneMap(map3, isDeep, cloneFunc) {
-    var array = isDeep ? cloneFunc(mapToArray2(map3), true) : mapToArray2(map3);
+    var array = isDeep ? cloneFunc(mapToArray(map3), true) : mapToArray(map3);
     return arrayReduce(array, addMapEntry, new map3.constructor());
   }
-  function cloneRegExp2(regexp) {
-    var result = new regexp.constructor(regexp.source, reFlags2.exec(regexp));
+  function cloneRegExp(regexp) {
+    var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
     result.lastIndex = regexp.lastIndex;
     return result;
   }
   function cloneSet(set5, isDeep, cloneFunc) {
-    var array = isDeep ? cloneFunc(setToArray2(set5), true) : setToArray2(set5);
+    var array = isDeep ? cloneFunc(setToArray(set5), true) : setToArray(set5);
     return arrayReduce(array, addSetEntry, new set5.constructor());
   }
-  function cloneSymbol2(symbol) {
-    return symbolValueOf2 ? Object(symbolValueOf2.call(symbol)) : {};
+  function cloneSymbol(symbol) {
+    return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
   }
-  function cloneTypedArray2(typedArray, isDeep) {
-    var buffer2 = isDeep ? cloneArrayBuffer2(typedArray.buffer) : typedArray.buffer;
+  function cloneTypedArray(typedArray, isDeep) {
+    var buffer2 = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
     return new typedArray.constructor(buffer2, typedArray.byteOffset, typedArray.length);
   }
-  function copyArray2(source2, array) {
+  function copyArray(source2, array) {
     var index2 = -1, length2 = source2.length;
     array || (array = Array(length2));
     while (++index2 < length2) {
@@ -110763,53 +110763,53 @@ lodash_clonedeep.exports;
     }
     return array;
   }
-  function copyObject2(source2, props, object, customizer) {
+  function copyObject(source2, props, object, customizer) {
     object || (object = {});
     var index2 = -1, length2 = props.length;
     while (++index2 < length2) {
       var key = props[index2];
       var newValue = void 0;
-      assignValue2(object, key, newValue === void 0 ? source2[key] : newValue);
+      assignValue(object, key, newValue === void 0 ? source2[key] : newValue);
     }
     return object;
   }
-  function copySymbols2(source2, object) {
-    return copyObject2(source2, getSymbols2(source2), object);
+  function copySymbols(source2, object) {
+    return copyObject(source2, getSymbols(source2), object);
   }
-  function getAllKeys2(object) {
-    return baseGetAllKeys2(object, keys2, getSymbols2);
+  function getAllKeys(object) {
+    return baseGetAllKeys(object, keys2, getSymbols);
   }
-  function getMapData2(map3, key) {
+  function getMapData(map3, key) {
     var data2 = map3.__data__;
-    return isKeyable2(key) ? data2[typeof key == "string" ? "string" : "hash"] : data2.map;
+    return isKeyable(key) ? data2[typeof key == "string" ? "string" : "hash"] : data2.map;
   }
-  function getNative2(object, key) {
+  function getNative(object, key) {
     var value = getValue2(object, key);
-    return baseIsNative2(value) ? value : void 0;
+    return baseIsNative(value) ? value : void 0;
   }
-  var getSymbols2 = nativeGetSymbols2 ? overArg2(nativeGetSymbols2, Object) : stubArray2;
-  var getTag2 = baseGetTag2;
-  if (DataView2 && getTag2(new DataView2(new ArrayBuffer(1))) != dataViewTag2 || Map2 && getTag2(new Map2()) != mapTag2 || Promise2 && getTag2(Promise2.resolve()) != promiseTag2 || Set2 && getTag2(new Set2()) != setTag2 || WeakMap2 && getTag2(new WeakMap2()) != weakMapTag2) {
-    getTag2 = function(value) {
-      var result = objectToString2.call(value), Ctor = result == objectTag2 ? value.constructor : void 0, ctorString = Ctor ? toSource2(Ctor) : void 0;
+  var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
+  var getTag = baseGetTag;
+  if (DataView2 && getTag(new DataView2(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
+    getTag = function(value) {
+      var result = objectToString.call(value), Ctor = result == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
       if (ctorString) {
         switch (ctorString) {
-          case dataViewCtorString2:
-            return dataViewTag2;
-          case mapCtorString2:
-            return mapTag2;
-          case promiseCtorString2:
-            return promiseTag2;
-          case setCtorString2:
-            return setTag2;
-          case weakMapCtorString2:
-            return weakMapTag2;
+          case dataViewCtorString:
+            return dataViewTag;
+          case mapCtorString:
+            return mapTag;
+          case promiseCtorString:
+            return promiseTag;
+          case setCtorString:
+            return setTag;
+          case weakMapCtorString:
+            return weakMapTag;
         }
       }
       return result;
     };
   }
-  function initCloneArray2(array) {
+  function initCloneArray(array) {
     var length2 = array.length, result = array.constructor(length2);
     if (length2 && typeof array[0] == "string" && hasOwnProperty2.call(array, "index")) {
       result.index = array.index;
@@ -110817,61 +110817,61 @@ lodash_clonedeep.exports;
     }
     return result;
   }
-  function initCloneObject2(object) {
-    return typeof object.constructor == "function" && !isPrototype2(object) ? baseCreate2(getPrototype2(object)) : {};
+  function initCloneObject(object) {
+    return typeof object.constructor == "function" && !isPrototype(object) ? baseCreate(getPrototype(object)) : {};
   }
-  function initCloneByTag2(object, tag, cloneFunc, isDeep) {
+  function initCloneByTag(object, tag, cloneFunc, isDeep) {
     var Ctor = object.constructor;
     switch (tag) {
-      case arrayBufferTag2:
-        return cloneArrayBuffer2(object);
-      case boolTag2:
-      case dateTag2:
+      case arrayBufferTag:
+        return cloneArrayBuffer(object);
+      case boolTag:
+      case dateTag:
         return new Ctor(+object);
-      case dataViewTag2:
-        return cloneDataView2(object, isDeep);
-      case float32Tag2:
-      case float64Tag2:
-      case int8Tag2:
-      case int16Tag2:
-      case int32Tag2:
-      case uint8Tag2:
-      case uint8ClampedTag2:
-      case uint16Tag2:
-      case uint32Tag2:
-        return cloneTypedArray2(object, isDeep);
-      case mapTag2:
+      case dataViewTag:
+        return cloneDataView(object, isDeep);
+      case float32Tag:
+      case float64Tag:
+      case int8Tag:
+      case int16Tag:
+      case int32Tag:
+      case uint8Tag:
+      case uint8ClampedTag:
+      case uint16Tag:
+      case uint32Tag:
+        return cloneTypedArray(object, isDeep);
+      case mapTag:
         return cloneMap(object, isDeep, cloneFunc);
-      case numberTag2:
-      case stringTag2:
+      case numberTag:
+      case stringTag:
         return new Ctor(object);
-      case regexpTag2:
-        return cloneRegExp2(object);
-      case setTag2:
+      case regexpTag:
+        return cloneRegExp(object);
+      case setTag:
         return cloneSet(object, isDeep, cloneFunc);
-      case symbolTag2:
-        return cloneSymbol2(object);
+      case symbolTag:
+        return cloneSymbol(object);
     }
   }
   function isIndex2(value, length2) {
-    length2 = length2 == null ? MAX_SAFE_INTEGER2 : length2;
-    return !!length2 && (typeof value == "number" || reIsUint2.test(value)) && (value > -1 && value % 1 == 0 && value < length2);
+    length2 = length2 == null ? MAX_SAFE_INTEGER : length2;
+    return !!length2 && (typeof value == "number" || reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length2);
   }
-  function isKeyable2(value) {
+  function isKeyable(value) {
     var type = typeof value;
     return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
   }
-  function isMasked2(func) {
-    return !!maskSrcKey2 && maskSrcKey2 in func;
+  function isMasked(func) {
+    return !!maskSrcKey && maskSrcKey in func;
   }
-  function isPrototype2(value) {
-    var Ctor = value && value.constructor, proto2 = typeof Ctor == "function" && Ctor.prototype || objectProto2;
+  function isPrototype(value) {
+    var Ctor = value && value.constructor, proto2 = typeof Ctor == "function" && Ctor.prototype || objectProto;
     return value === proto2;
   }
-  function toSource2(func) {
+  function toSource(func) {
     if (func != null) {
       try {
-        return funcToString2.call(func);
+        return funcToString.call(func);
       } catch (e3) {
       }
       try {
@@ -110881,56 +110881,56 @@ lodash_clonedeep.exports;
     }
     return "";
   }
-  function cloneDeep2(value) {
-    return baseClone2(value, true, true);
+  function cloneDeep(value) {
+    return baseClone(value, true, true);
   }
-  function eq2(value, other) {
+  function eq(value, other) {
     return value === other || value !== value && other !== other;
   }
-  function isArguments2(value) {
-    return isArrayLikeObject2(value) && hasOwnProperty2.call(value, "callee") && (!propertyIsEnumerable2.call(value, "callee") || objectToString2.call(value) == argsTag2);
+  function isArguments(value) {
+    return isArrayLikeObject(value) && hasOwnProperty2.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString.call(value) == argsTag);
   }
   var isArray3 = Array.isArray;
-  function isArrayLike2(value) {
-    return value != null && isLength2(value.length) && !isFunction2(value);
+  function isArrayLike(value) {
+    return value != null && isLength(value.length) && !isFunction2(value);
   }
-  function isArrayLikeObject2(value) {
-    return isObjectLike2(value) && isArrayLike2(value);
+  function isArrayLikeObject(value) {
+    return isObjectLike(value) && isArrayLike(value);
   }
-  var isBuffer2 = nativeIsBuffer2 || stubFalse2;
+  var isBuffer2 = nativeIsBuffer || stubFalse;
   function isFunction2(value) {
-    var tag = isObject2(value) ? objectToString2.call(value) : "";
-    return tag == funcTag2 || tag == genTag2;
+    var tag = isObject2(value) ? objectToString.call(value) : "";
+    return tag == funcTag || tag == genTag;
   }
-  function isLength2(value) {
-    return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER2;
+  function isLength(value) {
+    return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
   }
   function isObject2(value) {
     var type = typeof value;
     return !!value && (type == "object" || type == "function");
   }
-  function isObjectLike2(value) {
+  function isObjectLike(value) {
     return !!value && typeof value == "object";
   }
   function keys2(object) {
-    return isArrayLike2(object) ? arrayLikeKeys2(object) : baseKeys2(object);
+    return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
   }
-  function stubArray2() {
+  function stubArray() {
     return [];
   }
-  function stubFalse2() {
+  function stubFalse() {
     return false;
   }
-  module2.exports = cloneDeep2;
+  module.exports = cloneDeep;
 })(lodash_clonedeep, lodash_clonedeep.exports);
 lodash_clonedeep.exports;
 var CobbAngle$1 = /* @__PURE__ */ function(_TID300Measurement) {
-  _inherits$a(CobbAngle2, _TID300Measurement);
+  _inherits(CobbAngle2, _TID300Measurement);
   function CobbAngle2() {
-    _classCallCheck$a(this, CobbAngle2);
+    _classCallCheck(this, CobbAngle2);
     return _callSuper(this, CobbAngle2, arguments);
   }
-  _createClass$8(CobbAngle2, [{
+  _createClass(CobbAngle2, [{
     key: "contentItem",
     value: function contentItem() {
       var _this$props = this.props, point1 = _this$props.point1, point2 = _this$props.point2, point3 = _this$props.point3, point4 = _this$props.point4, rAngle = _this$props.rAngle, use3DSpatialCoordinates = _this$props.use3DSpatialCoordinates, ReferencedSOPSequence = _this$props.ReferencedSOPSequence, ReferencedFrameOfReferenceUID = _this$props.ReferencedFrameOfReferenceUID;
@@ -110975,9 +110975,9 @@ var CobbAngle$1 = /* @__PURE__ */ function(_TID300Measurement) {
 var COBB_ANGLE = "CobbAngle";
 var CobbAngle = /* @__PURE__ */ function() {
   function CobbAngle2() {
-    _classCallCheck$a(this, CobbAngle2);
+    _classCallCheck(this, CobbAngle2);
   }
-  _createClass$8(CobbAngle2, null, [{
+  _createClass(CobbAngle2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup) {
       var _MeasurementReport$ge = MeasurementReport$3.getSetupMeasurementData(MeasurementGroup), defaultState = _MeasurementReport$ge.defaultState, NUMGroup = _MeasurementReport$ge.NUMGroup, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup;
@@ -111056,9 +111056,9 @@ MeasurementReport$3.registerTool(CobbAngle);
 var ANGLE = "Angle";
 var Angle = /* @__PURE__ */ function() {
   function Angle2() {
-    _classCallCheck$a(this, Angle2);
+    _classCallCheck(this, Angle2);
   }
-  _createClass$8(Angle2, null, [{
+  _createClass(Angle2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup) {
       var _MeasurementReport$ge = MeasurementReport$3.getSetupMeasurementData(MeasurementGroup), defaultState = _MeasurementReport$ge.defaultState, NUMGroup = _MeasurementReport$ge.NUMGroup, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup;
@@ -111129,9 +111129,9 @@ Angle.isValidCornerstoneTrackingIdentifier = function(TrackingIdentifier) {
 MeasurementReport$3.registerTool(Angle);
 var RectangleRoi = /* @__PURE__ */ function() {
   function RectangleRoi2() {
-    _classCallCheck$a(this, RectangleRoi2);
+    _classCallCheck(this, RectangleRoi2);
   }
-  _createClass$8(RectangleRoi2, null, [{
+  _createClass(RectangleRoi2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup) {
       var _MeasurementReport$ge = MeasurementReport$3.getSetupMeasurementData(MeasurementGroup), defaultState = _MeasurementReport$ge.defaultState, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup, NUMGroup = _MeasurementReport$ge.NUMGroup;
@@ -111252,9 +111252,9 @@ function getMeasurementGroup$1(toolType, toolData, ReferencedSOPSequence, worldT
 }
 var MeasurementReport$2 = /* @__PURE__ */ function() {
   function MeasurementReport() {
-    _classCallCheck$a(this, MeasurementReport);
+    _classCallCheck(this, MeasurementReport);
   }
-  _createClass$8(MeasurementReport, null, [{
+  _createClass(MeasurementReport, null, [{
     key: "getCornerstoneLabelFromDefaultState",
     value: function getCornerstoneLabelFromDefaultState(defaultState) {
       var _defaultState$finding = defaultState.findingSites, findingSites = _defaultState$finding === void 0 ? [] : _defaultState$finding, finding = defaultState.finding;
@@ -111476,9 +111476,9 @@ var LENGTH$3 = "Length";
 var trackingIdentifierTextValue$5 = "".concat(CORNERSTONE_3D_TAG, ":").concat(LENGTH$3);
 var Length = /* @__PURE__ */ function() {
   function Length2() {
-    _classCallCheck$a(this, Length2);
+    _classCallCheck(this, Length2);
   }
-  _createClass$8(Length2, null, [{
+  _createClass(Length2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup, sopInstanceUIDToImageIdMap, imageToWorldCoords, metadata) {
       var _MeasurementReport$ge = MeasurementReport$2.getSetupMeasurementData(MeasurementGroup, sopInstanceUIDToImageIdMap, metadata, Length2.toolType), defaultState = _MeasurementReport$ge.defaultState, NUMGroup = _MeasurementReport$ge.NUMGroup, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup, ReferencedFrameNumber = _MeasurementReport$ge.ReferencedFrameNumber;
@@ -111498,7 +111498,7 @@ var Length = /* @__PURE__ */ function() {
             hasMoved: false
           }
         },
-        cachedStats: _defineProperty$5({}, "imageId:".concat(referencedImageId), {
+        cachedStats: _defineProperty$3({}, "imageId:".concat(referencedImageId), {
           length: NUMGroup ? NUMGroup.MeasuredValueSequence.NumericValue : 0
         }),
         frameNumber: ReferencedFrameNumber
@@ -111557,9 +111557,9 @@ var SHORT_AXIS = "Short Axis";
 var trackingIdentifierTextValue$4 = "".concat(CORNERSTONE_3D_TAG, ":").concat(BIDIRECTIONAL);
 var Bidirectional = /* @__PURE__ */ function() {
   function Bidirectional2() {
-    _classCallCheck$a(this, Bidirectional2);
+    _classCallCheck(this, Bidirectional2);
   }
-  _createClass$8(Bidirectional2, null, [{
+  _createClass(Bidirectional2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup, sopInstanceUIDToImageIdMap, imageToWorldCoords, metadata) {
       var _MeasurementReport$ge = MeasurementReport$2.getSetupMeasurementData(MeasurementGroup, sopInstanceUIDToImageIdMap, metadata, Bidirectional2.toolType), defaultState = _MeasurementReport$ge.defaultState, ReferencedFrameNumber = _MeasurementReport$ge.ReferencedFrameNumber;
@@ -111594,7 +111594,7 @@ var Bidirectional = /* @__PURE__ */ function() {
             hasMoved: false
           }
         },
-        cachedStats: _defineProperty$5({}, "imageId:".concat(referencedImageId), {
+        cachedStats: _defineProperty$3({}, "imageId:".concat(referencedImageId), {
           length: longAxisNUMGroup.MeasuredValueSequence.NumericValue,
           width: shortAxisNUMGroup.MeasuredValueSequence.NumericValue
         }),
@@ -111989,7 +111989,7 @@ var dist$1 = distance;
 var sqrDist = squaredDistance;
 var len = length;
 var sqrLen = squaredLength;
-var forEach$1 = function() {
+var forEach2 = function() {
   var vec = create$3();
   return function(a2, stride, offset, count2, fn, arg) {
     var i5, l3;
@@ -112034,7 +112034,7 @@ var vec3 = /* @__PURE__ */ Object.freeze({
   equals,
   exactEquals,
   floor,
-  forEach: forEach$1,
+  forEach: forEach2,
   fromValues,
   hermite,
   inverse,
@@ -112072,9 +112072,9 @@ var EPSILON = 1e-4;
 var trackingIdentifierTextValue$3 = "".concat(CORNERSTONE_3D_TAG, ":").concat(ELLIPTICALROI);
 var EllipticalROI = /* @__PURE__ */ function() {
   function EllipticalROI2() {
-    _classCallCheck$a(this, EllipticalROI2);
+    _classCallCheck(this, EllipticalROI2);
   }
-  _createClass$8(EllipticalROI2, null, [{
+  _createClass(EllipticalROI2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup, sopInstanceUIDToImageIdMap, imageToWorldCoords, metadata) {
       var _MeasurementReport$ge = MeasurementReport$2.getSetupMeasurementData(MeasurementGroup, sopInstanceUIDToImageIdMap, metadata, EllipticalROI2.toolType), defaultState = _MeasurementReport$ge.defaultState, NUMGroup = _MeasurementReport$ge.NUMGroup, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup, ReferencedFrameNumber = _MeasurementReport$ge.ReferencedFrameNumber;
@@ -112122,7 +112122,7 @@ var EllipticalROI = /* @__PURE__ */ function() {
             hasMoved: false
           }
         },
-        cachedStats: _defineProperty$5({}, "imageId:".concat(referencedImageId), {
+        cachedStats: _defineProperty$3({}, "imageId:".concat(referencedImageId), {
           area: NUMGroup ? NUMGroup.MeasuredValueSequence.NumericValue : 0
         }),
         frameNumber: ReferencedFrameNumber
@@ -112211,9 +112211,9 @@ var trackingIdentifierTextValue$2 = "".concat(CORNERSTONE_3D_TAG, ":").concat(AR
 var codeValues = CodingScheme.codeValues, CodingSchemeDesignator = CodingScheme.CodingSchemeDesignator;
 var ArrowAnnotate = /* @__PURE__ */ function() {
   function ArrowAnnotate2() {
-    _classCallCheck$a(this, ArrowAnnotate2);
+    _classCallCheck(this, ArrowAnnotate2);
   }
-  _createClass$8(ArrowAnnotate2, null, [{
+  _createClass(ArrowAnnotate2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup, sopInstanceUIDToImageIdMap, imageToWorldCoords, metadata) {
       var _MeasurementReport$ge = MeasurementReport$2.getSetupMeasurementData(MeasurementGroup, sopInstanceUIDToImageIdMap, metadata, ArrowAnnotate2.toolType), defaultState = _MeasurementReport$ge.defaultState, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup, ReferencedFrameNumber = _MeasurementReport$ge.ReferencedFrameNumber;
@@ -112308,9 +112308,9 @@ var PROBE = "Probe";
 var trackingIdentifierTextValue$1 = "".concat(CORNERSTONE_3D_TAG, ":").concat(PROBE);
 var Probe = /* @__PURE__ */ function() {
   function Probe2() {
-    _classCallCheck$a(this, Probe2);
+    _classCallCheck(this, Probe2);
   }
-  _createClass$8(Probe2, null, [{
+  _createClass(Probe2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup, sopInstanceUIDToImageIdMap, imageToWorldCoords, metadata) {
       var _MeasurementReport$ge = MeasurementReport$2.getSetupMeasurementData(MeasurementGroup, sopInstanceUIDToImageIdMap, metadata, Probe2.toolType), defaultState = _MeasurementReport$ge.defaultState, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup, ReferencedFrameNumber = _MeasurementReport$ge.ReferencedFrameNumber;
@@ -112381,9 +112381,9 @@ var trackingIdentifierTextValue = "".concat(CORNERSTONE_3D_TAG, ":").concat(PLAN
 var closedContourThreshold = 1e-5;
 var PlanarFreehandROI = /* @__PURE__ */ function() {
   function PlanarFreehandROI2() {
-    _classCallCheck$a(this, PlanarFreehandROI2);
+    _classCallCheck(this, PlanarFreehandROI2);
   }
-  _createClass$8(PlanarFreehandROI2, null, [{
+  _createClass(PlanarFreehandROI2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(MeasurementGroup, sopInstanceUIDToImageIdMap, imageToWorldCoords, metadata) {
       var _MeasurementReport$ge = MeasurementReport$2.getSetupMeasurementData(MeasurementGroup, sopInstanceUIDToImageIdMap, metadata, PlanarFreehandROI2.toolType), defaultState = _MeasurementReport$ge.defaultState, SCOORDGroup = _MeasurementReport$ge.SCOORDGroup, ReferencedFrameNumber = _MeasurementReport$ge.ReferencedFrameNumber;
@@ -112477,9 +112477,9 @@ function getMeasurementGroup(graphicType, measurements2) {
 }
 var MeasurementReport$1 = /* @__PURE__ */ function() {
   function MeasurementReport() {
-    _classCallCheck$a(this, MeasurementReport);
+    _classCallCheck(this, MeasurementReport);
   }
-  _createClass$8(MeasurementReport, null, [{
+  _createClass(MeasurementReport, null, [{
     key: "generateReport",
     value: function generateReport(rois, metadataProvider, options) {
       var measurementsByGraphicType = {};
@@ -112597,9 +112597,9 @@ MeasurementReport$1.MICROSCOPY_TOOL_CLASSES_BY_UTILITY_TYPE = {};
 MeasurementReport$1.MICROSCOPY_TOOL_CLASSES_BY_TOOL_TYPE = {};
 var Polyline = /* @__PURE__ */ function() {
   function Polyline2() {
-    _classCallCheck$a(this, Polyline2);
+    _classCallCheck(this, Polyline2);
   }
-  _createClass$8(Polyline2, null, [{
+  _createClass(Polyline2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(measurementContent) {
       var measurement = measurementContent.map(function(item) {
@@ -112641,12 +112641,12 @@ Polyline.utilityToolType = "Polyline";
 Polyline.TID300Representation = Polyline$1;
 MeasurementReport$1.registerTool(Polyline);
 var Polygon$1 = /* @__PURE__ */ function(_TID300Measurement) {
-  _inherits$a(Polygon2, _TID300Measurement);
+  _inherits(Polygon2, _TID300Measurement);
   function Polygon2() {
-    _classCallCheck$a(this, Polygon2);
+    _classCallCheck(this, Polygon2);
     return _callSuper(this, Polygon2, arguments);
   }
-  _createClass$8(Polygon2, [{
+  _createClass(Polygon2, [{
     key: "contentItem",
     value: function contentItem() {
       var _this$props = this.props, points = _this$props.points, perimeter = _this$props.perimeter, _this$props$unit = _this$props.unit, unit = _this$props$unit === void 0 ? "mm" : _this$props$unit, area2 = _this$props.area, areaUnit = _this$props.areaUnit, ReferencedSOPSequence = _this$props.ReferencedSOPSequence, _this$props$use3DSpat = _this$props.use3DSpatialCoordinates, use3DSpatialCoordinates = _this$props$use3DSpat === void 0 ? false : _this$props$use3DSpat, ReferencedFrameOfReferenceUID = _this$props.ReferencedFrameOfReferenceUID;
@@ -112709,9 +112709,9 @@ var Polygon$1 = /* @__PURE__ */ function(_TID300Measurement) {
 }(TID300Measurement);
 var Polygon = /* @__PURE__ */ function() {
   function Polygon2() {
-    _classCallCheck$a(this, Polygon2);
+    _classCallCheck(this, Polygon2);
   }
-  _createClass$8(Polygon2, null, [{
+  _createClass(Polygon2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(measurementContent) {
       var measurement = measurementContent.map(function(item) {
@@ -112754,9 +112754,9 @@ Polygon.TID300Representation = Polygon$1;
 MeasurementReport$1.registerTool(Polygon);
 var Point = /* @__PURE__ */ function() {
   function Point2() {
-    _classCallCheck$a(this, Point2);
+    _classCallCheck(this, Point2);
   }
-  _createClass$8(Point2, null, [{
+  _createClass(Point2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(measurementContent) {
       var measurement = measurementContent.map(function(item) {
@@ -112791,11 +112791,11 @@ Point.toolType = "Point";
 Point.utilityToolType = "Point";
 Point.TID300Representation = Point$1;
 MeasurementReport$1.registerTool(Point);
-var Circle$2 = /* @__PURE__ */ function() {
-  function Circle3() {
-    _classCallCheck$a(this, Circle3);
+var Circle = /* @__PURE__ */ function() {
+  function Circle2() {
+    _classCallCheck(this, Circle2);
   }
-  _createClass$8(Circle3, null, [{
+  _createClass(Circle2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(measurementContent) {
       var measurement = measurementContent.map(function(item) {
@@ -112829,18 +112829,18 @@ var Circle$2 = /* @__PURE__ */ function() {
       };
     }
   }]);
-  return Circle3;
+  return Circle2;
 }();
-Circle$2.graphicType = "CIRCLE";
-Circle$2.toolType = "Circle";
-Circle$2.utilityToolType = "Circle";
-Circle$2.TID300Representation = Circle$1;
-MeasurementReport$1.registerTool(Circle$2);
+Circle.graphicType = "CIRCLE";
+Circle.toolType = "Circle";
+Circle.utilityToolType = "Circle";
+Circle.TID300Representation = Circle$1;
+MeasurementReport$1.registerTool(Circle);
 var Ellipse = /* @__PURE__ */ function() {
   function Ellipse2() {
-    _classCallCheck$a(this, Ellipse2);
+    _classCallCheck(this, Ellipse2);
   }
-  _createClass$8(Ellipse2, null, [{
+  _createClass(Ellipse2, null, [{
     key: "getMeasurementData",
     value: function getMeasurementData(measurementContent) {
       var measurement = measurementContent.map(function(item) {
@@ -116039,22 +116039,22 @@ async function getDecoder$1(fileDirectory) {
   const Decoder = await importFn();
   return new Decoder(fileDirectory);
 }
-addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-UCmGwOIE.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(5, () => __vitePreload(() => import("./lzw-KQeBp7N2.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([void 0, 1], () => __vitePreload(() => import("./raw-4jDOJyTe.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(5, () => __vitePreload(() => import("./lzw-C5hWglpi.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder$1(7, () => __vitePreload(() => import("./jpeg-Cj3tuUfe.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-BC-74AUc.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
-addDecoder$1(32773, () => __vitePreload(() => import("./packbits-oPpM4lgm.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(7, () => __vitePreload(() => import("./jpeg-Cas1lEu8.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1([8, 32946], () => __vitePreload(() => import("./deflate-B7wQWfUr.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(32773, () => __vitePreload(() => import("./packbits-Bz84FHA5.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder$1(
   34887,
-  () => __vitePreload(() => import("./lerc-nu-_2OuY.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-CF0BlnIt.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
 );
-addDecoder$1(50001, () => __vitePreload(() => import("./webimage-YNsRNmat.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
+addDecoder$1(50001, () => __vitePreload(() => import("./webimage-C9VfqPZy.js"), true ? [] : void 0, import.meta.url).then((m2) => m2.default));
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
   return new (Object.getPrototypeOf(array)).constructor(width * height * samplesPerPixel);
 }
@@ -116795,15 +116795,15 @@ class GeoTIFFImage {
         throw new Error("Unsupported photometric interpretation.");
     }
     if (!interleave) {
-      const red2 = new Uint8Array(data2.length / 3);
-      const green2 = new Uint8Array(data2.length / 3);
-      const blue2 = new Uint8Array(data2.length / 3);
+      const red = new Uint8Array(data2.length / 3);
+      const green = new Uint8Array(data2.length / 3);
+      const blue = new Uint8Array(data2.length / 3);
       for (let i5 = 0, j2 = 0; i5 < data2.length; i5 += 3, ++j2) {
-        red2[j2] = data2[i5];
-        green2[j2] = data2[i5 + 1];
-        blue2[j2] = data2[i5 + 2];
+        red[j2] = data2[i5];
+        green[j2] = data2[i5 + 1];
+        blue[j2] = data2[i5 + 2];
       }
-      data2 = [red2, green2, blue2];
+      data2 = [red, green, blue];
     }
     data2.width = raster.width;
     data2.height = raster.height;
@@ -117568,7 +117568,7 @@ class CustomAggregateError extends Error {
   }
 }
 const AggregateError = CustomAggregateError;
-let Block$1 = class Block {
+class Block {
   /**
    *
    * @param {number} offset
@@ -117586,7 +117586,7 @@ let Block$1 = class Block {
   get top() {
     return this.offset + this.length;
   }
-};
+}
 class BlockGroup {
   /**
    *
@@ -117707,7 +117707,7 @@ class BlockedSource extends BaseSource {
               const o3 = blockOffset - response.offset;
               const t3 = Math.min(o3 + this.blockSize, response.data.byteLength);
               const data2 = response.data.slice(o3, t3);
-              const block10 = new Block$1(
+              const block10 = new Block(
                 blockOffset,
                 data2.byteLength,
                 data2,
@@ -119610,12 +119610,12 @@ class ZodType {
   and(incoming) {
     return ZodIntersection.create(this, incoming, this._def);
   }
-  transform(transform2) {
+  transform(transform) {
     return new ZodEffects({
       ...processCreateParams(this._def),
       schema: this,
       typeName: ZodFirstPartyTypeKind.ZodEffects,
-      effect: { type: "transform", transform: transform2 }
+      effect: { type: "transform", transform }
     });
   }
   default(def) {
@@ -122450,7 +122450,7 @@ function addCodec(id2, importFn) {
 }
 typeof process !== "undefined" && process.versions && process.versions.node;
 var eventemitter3 = { exports: {} };
-(function(module2) {
+(function(module) {
   var has2 = Object.prototype.hasOwnProperty, prefix2 = "~";
   function Events() {
   }
@@ -122482,15 +122482,15 @@ var eventemitter3 = { exports: {} };
     this._eventsCount = 0;
   }
   EventEmitter.prototype.eventNames = function eventNames() {
-    var names2 = [], events, name2;
-    if (this._eventsCount === 0) return names2;
+    var names = [], events, name2;
+    if (this._eventsCount === 0) return names;
     for (name2 in events = this._events) {
-      if (has2.call(events, name2)) names2.push(prefix2 ? name2.slice(1) : name2);
+      if (has2.call(events, name2)) names.push(prefix2 ? name2.slice(1) : name2);
     }
     if (Object.getOwnPropertySymbols) {
-      return names2.concat(Object.getOwnPropertySymbols(events));
+      return names.concat(Object.getOwnPropertySymbols(events));
     }
-    return names2;
+    return names;
   };
   EventEmitter.prototype.listeners = function listeners2(event) {
     var evt = prefix2 ? prefix2 + event : event, handlers2 = this._events[evt];
@@ -122603,7 +122603,7 @@ var eventemitter3 = { exports: {} };
   EventEmitter.prefixed = prefix2;
   EventEmitter.EventEmitter = EventEmitter;
   {
-    module2.exports = EventEmitter;
+    module.exports = EventEmitter;
   }
 })(eventemitter3);
 class TimeoutError extends Error {
@@ -124575,7 +124575,7 @@ function ZStream() {
   this.adler = 0;
 }
 var zstream = ZStream;
-const toString$5 = Object.prototype.toString;
+const toString$2 = Object.prototype.toString;
 const {
   Z_NO_FLUSH: Z_NO_FLUSH$1,
   Z_SYNC_FLUSH,
@@ -124626,7 +124626,7 @@ function Deflate(options) {
     let dict;
     if (typeof opt.dictionary === "string") {
       dict = strings.string2buf(opt.dictionary);
-    } else if (toString$5.call(opt.dictionary) === "[object ArrayBuffer]") {
+    } else if (toString$2.call(opt.dictionary) === "[object ArrayBuffer]") {
       dict = new Uint8Array(opt.dictionary);
     } else {
       dict = opt.dictionary;
@@ -124649,7 +124649,7 @@ Deflate.prototype.push = function(data2, flush_mode) {
   else _flush_mode = flush_mode === true ? Z_FINISH$1 : Z_NO_FLUSH$1;
   if (typeof data2 === "string") {
     strm.input = strings.string2buf(data2);
-  } else if (toString$5.call(data2) === "[object ArrayBuffer]") {
+  } else if (toString$2.call(data2) === "[object ArrayBuffer]") {
     strm.input = new Uint8Array(data2);
   } else {
     strm.input = data2;
@@ -127668,20 +127668,20 @@ const Blosc = (_a = class {
     if (!emscriptenModule) {
       emscriptenModule = init();
     }
-    const module2 = await emscriptenModule;
-    const view = module2.compress(data2, this.cname, this.clevel, this.shuffle, this.blocksize);
+    const module = await emscriptenModule;
+    const view = module.compress(data2, this.cname, this.clevel, this.shuffle, this.blocksize);
     const result = new Uint8Array(view);
-    module2.free_result();
+    module.free_result();
     return result;
   }
   async decode(data2, out) {
     if (!emscriptenModule) {
       emscriptenModule = init();
     }
-    const module2 = await emscriptenModule;
-    const view = module2.decompress(data2);
+    const module = await emscriptenModule;
+    const view = module.decompress(data2);
     const result = new Uint8Array(view);
-    module2.free_result();
+    module.free_result();
     if (out !== void 0) {
       out.set(result);
       return out;
@@ -127812,7 +127812,7 @@ function assert(condition, message2) {
 const VIV_PROXY_KEY = "__viv";
 const OFFSETS_PROXY_KEY = `${VIV_PROXY_KEY}-offsets`;
 function createOffsetsProxy(tiff, offsets) {
-  const get5 = (target, key) => {
+  const get4 = (target, key) => {
     if (key === "getImage") {
       return (index2) => {
         if (!(index2 in target.ifdRequests) && index2 in offsets) {
@@ -127827,7 +127827,7 @@ function createOffsetsProxy(tiff, offsets) {
     }
     return Reflect.get(target, key);
   };
-  return new Proxy(tiff, { get: get5 });
+  return new Proxy(tiff, { get: get4 });
 }
 function extractPhysicalSizesfromPixels(d2) {
   if (!d2["PhysicalSizeX"] || !d2["PhysicalSizeY"] || !d2["PhysicalSizeXUnit"] || !d2["PhysicalSizeYUnit"]) {
@@ -132203,7 +132203,7 @@ var classnames = { exports: {} };
 	Licensed under the MIT License (MIT), see
 	http://jedwatson.github.io/classnames
 */
-(function(module2) {
+(function(module) {
   (function() {
     var hasOwn2 = {}.hasOwnProperty;
     function classNames2() {
@@ -132246,9 +132246,9 @@ var classnames = { exports: {} };
       }
       return value + newClass;
     }
-    if (module2.exports) {
+    if (module.exports) {
       classNames2.default = classNames2;
-      module2.exports = classNames2;
+      module.exports = classNames2;
     } else {
       window.classNames = classNames2;
     }
@@ -132373,7 +132373,7 @@ const FormCheckInput = /* @__PURE__ */ reactExports.forwardRef(({
   bsPrefix,
   className,
   type = "checkbox",
-  isValid: isValid3 = false,
+  isValid: isValid2 = false,
   isInvalid = false,
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   as: Component2 = "input",
@@ -132388,7 +132388,7 @@ const FormCheckInput = /* @__PURE__ */ reactExports.forwardRef(({
     ref,
     type,
     id: id2 || controlId,
-    className: classNames(className, bsPrefix, isValid3 && "is-valid", isInvalid && "is-invalid")
+    className: classNames(className, bsPrefix, isValid2 && "is-valid", isInvalid && "is-invalid")
   });
 });
 FormCheckInput.displayName = "FormCheckInput";
@@ -132420,7 +132420,7 @@ const FormCheck = /* @__PURE__ */ reactExports.forwardRef(({
   inline: inline2 = false,
   reverse = false,
   disabled: disabled2 = false,
-  isValid: isValid3 = false,
+  isValid: isValid2 = false,
   isInvalid = false,
   feedbackTooltip = false,
   feedback,
@@ -132448,7 +132448,7 @@ const FormCheck = /* @__PURE__ */ reactExports.forwardRef(({
     ...props,
     type: type === "switch" ? "checkbox" : type,
     ref,
-    isValid: isValid3,
+    isValid: isValid2,
     isInvalid,
     disabled: disabled2,
     as
@@ -132483,7 +132483,7 @@ const FormControl = /* @__PURE__ */ reactExports.forwardRef(({
   htmlSize,
   id: id2,
   className,
-  isValid: isValid3 = false,
+  isValid: isValid2 = false,
   isInvalid = false,
   plaintext,
   readOnly,
@@ -132502,7 +132502,7 @@ const FormControl = /* @__PURE__ */ reactExports.forwardRef(({
     ref,
     readOnly,
     id: id2 || controlId,
-    className: classNames(className, plaintext ? `${bsPrefix}-plaintext` : bsPrefix, size && `${bsPrefix}-${size}`, type === "color" && `${bsPrefix}-color`, isValid3 && "is-valid", isInvalid && "is-invalid")
+    className: classNames(className, plaintext ? `${bsPrefix}-plaintext` : bsPrefix, size && `${bsPrefix}-${size}`, type === "color" && `${bsPrefix}-color`, isValid2 && "is-valid", isInvalid && "is-invalid")
   });
 });
 FormControl.displayName = "FormControl";
@@ -132657,7 +132657,7 @@ const FormSelect = /* @__PURE__ */ reactExports.forwardRef(({
   size,
   htmlSize,
   className,
-  isValid: isValid3 = false,
+  isValid: isValid2 = false,
   isInvalid = false,
   id: id2,
   ...props
@@ -132670,7 +132670,7 @@ const FormSelect = /* @__PURE__ */ reactExports.forwardRef(({
     ...props,
     size: htmlSize,
     ref,
-    className: classNames(className, bsPrefix, size && `${bsPrefix}-${size}`, isValid3 && `is-valid`, isInvalid && `is-invalid`),
+    className: classNames(className, bsPrefix, size && `${bsPrefix}-${size}`, isValid2 && `is-valid`, isInvalid && `is-invalid`),
     id: id2 || controlId
   });
 });
@@ -132863,7 +132863,7 @@ const Button$1 = /* @__PURE__ */ reactExports.forwardRef(({
   bsPrefix,
   variant = "primary",
   size,
-  active: active3 = false,
+  active = false,
   disabled: disabled2 = false,
   className,
   ...props
@@ -132882,7 +132882,7 @@ const Button$1 = /* @__PURE__ */ reactExports.forwardRef(({
     ...props,
     ref,
     disabled: disabled2,
-    className: classNames(className, prefix2, active3 && "active", variant && `${prefix2}-${variant}`, size && `${prefix2}-${size}`, props.href && disabled2 && "disabled")
+    className: classNames(className, prefix2, active && "active", variant && `${prefix2}-${variant}`, size && `${prefix2}-${size}`, props.href && disabled2 && "disabled")
   });
 });
 Button$1.displayName = "Button";
@@ -133266,11 +133266,11 @@ const readStories = (config2) => {
 };
 const readChannels = (group) => {
   const colors = group.Colors || [];
-  const names2 = group.Channels || [];
-  const named = names2.slice(0, colors.length);
+  const names = group.Channels || [];
+  const named = names.slice(0, colors.length);
   return [...named.keys()].map((k4) => {
     return {
-      name: names2[k4],
+      name: names[k4],
       color: colors[k4]
     };
   });
@@ -133292,7 +133292,7 @@ const readConfig = (config2) => {
     groups: readGroups(config2)
   };
 };
-const debounce$1 = (fn, wait2) => {
+const debounce = (fn, wait2) => {
   let timeout;
   return (...args) => {
     const later = function() {
@@ -133312,7 +133312,7 @@ const getSize = ({ innerWidth, innerHeight: innerHeight2 } = window) => {
 const useWindowSize = () => {
   const [windowSize, setWindowSize] = reactExports.useState(getSize);
   reactExports.useEffect(() => {
-    const handle = debounce$1(() => {
+    const handle = debounce(() => {
       setWindowSize(getSize());
     }, 250);
     window.addEventListener("resize", handle);
@@ -133342,8 +133342,8 @@ const createStoreImpl = (createState2) => {
   return api2;
 };
 const createStore = (createState2) => createState2 ? createStoreImpl(createState2) : createStoreImpl;
-const identity$4 = (arg) => arg;
-function useStore(api2, selector = identity$4) {
+const identity = (arg) => arg;
+function useStore(api2, selector = identity) {
   const slice2 = React.useSyncExternalStore(
     api2.subscribe,
     React.useCallback(() => selector(api2.getState()), [api2, selector]),
@@ -133406,7 +133406,7 @@ const findCallerName = (stack) => {
   const callerLine = ((_a3 = traceLines[apiSetStateLineIndex + 1]) == null ? void 0 : _a3.trim()) || "";
   return (_b2 = /.+ (.+) .+/.exec(callerLine)) == null ? void 0 : _b2[1];
 };
-const devtoolsImpl = (fn, devtoolsOptions = {}) => (set5, get5, api2) => {
+const devtoolsImpl = (fn, devtoolsOptions = {}) => (set5, get4, api2) => {
   const { enabled, anonymousActionType, store, ...options } = devtoolsOptions;
   let extensionConnector;
   try {
@@ -133414,7 +133414,7 @@ const devtoolsImpl = (fn, devtoolsOptions = {}) => (set5, get5, api2) => {
   } catch (e3) {
   }
   if (!extensionConnector) {
-    return fn(set5, get5, api2);
+    return fn(set5, get4, api2);
   }
   const { connection, ...connectionInformation } = extractConnectionInformation(store, extensionConnector, options);
   let isRecording = true;
@@ -133425,7 +133425,7 @@ const devtoolsImpl = (fn, devtoolsOptions = {}) => (set5, get5, api2) => {
       type: anonymousActionType || findCallerName(new Error().stack) || "anonymous"
     } : typeof nameOrAction === "string" ? { type: nameOrAction } : nameOrAction;
     if (store === void 0) {
-      connection == null ? void 0 : connection.send(action, get5());
+      connection == null ? void 0 : connection.send(action, get4());
       return r4;
     }
     connection == null ? void 0 : connection.send(
@@ -133454,7 +133454,7 @@ const devtoolsImpl = (fn, devtoolsOptions = {}) => (set5, get5, api2) => {
     set5(...a2);
     isRecording = originalIsRecording;
   };
-  const initialState = fn(api2.setState, get5, api2);
+  const initialState = fn(api2.setState, get4, api2);
   if (connectionInformation.type === "untracked") {
     connection == null ? void 0 : connection.init(initialState);
   } else {
@@ -133658,12 +133658,17 @@ const overlayInitialState = {
   // New: empty stories array
   activeStoryIndex: null,
   // New: no active story initially
+  activeChannelGroupId: null,
+  // No channel group initially
   waypoints: [],
   // New: empty waypoints array
   activeWaypointId: null,
   // New: no active waypoint initially
   imageWidth: 0,
   imageHeight: 0,
+  channelVisibilities: {},
+  groupChannelLists: {},
+  groupNames: {},
   targetWaypointPan: null,
   // Target pan from waypoint selection (Minerva 1.5 format)
   targetWaypointZoom: null
@@ -133671,7 +133676,7 @@ const overlayInitialState = {
 };
 const useOverlayStore = create$2()(
   devtools(
-    (set5, get5) => ({
+    (set5, get4) => ({
       ...overlayInitialState,
       setActiveTool: (tool) => {
         set5({ activeTool: tool });
@@ -133703,24 +133708,24 @@ const useOverlayStore = create$2()(
       },
       handleLayerCreate: (layer) => {
         if (layer === null) {
-          get5().removeOverlayLayer("drawing-layer");
+          get4().removeOverlayLayer("drawing-layer");
           return;
         }
-        get5().addOverlayLayer(layer);
+        get4().addOverlayLayer(layer);
       },
       handleToolChange: (tool) => {
         set5({ activeTool: tool });
-        get5().resetDrawingState();
-        get5().resetDragState();
-        get5().removeOverlayLayer("drawing-layer");
+        get4().resetDrawingState();
+        get4().resetDragState();
+        get4().removeOverlayLayer("drawing-layer");
       },
       handleOverlayInteraction: (type, coordinate) => {
         const interaction = { type, coordinate };
         set5({ currentInteraction: interaction });
-        const { activeTool, drawingState, dragState } = get5();
+        const { activeTool, drawingState, dragState } = get4();
         const [x2, y3] = coordinate;
         if (activeTool === "move") {
-          const { hoverState } = get5();
+          const { hoverState } = get4();
           switch (type) {
             case "hover":
               break;
@@ -133728,7 +133733,7 @@ const useOverlayStore = create$2()(
               break;
             case "dragStart":
               if (hoverState.hoveredAnnotationId) {
-                const annotation = get5().annotations.find((a2) => a2.id === hoverState.hoveredAnnotationId);
+                const annotation = get4().annotations.find((a2) => a2.id === hoverState.hoveredAnnotationId);
                 if (annotation) {
                   let offset = [0, 0];
                   if (annotation.type === "text" || annotation.type === "point") {
@@ -133737,18 +133742,18 @@ const useOverlayStore = create$2()(
                     const firstPoint = annotation.polygon[0];
                     offset = [x2 - firstPoint[0], y3 - firstPoint[1]];
                   }
-                  get5().startDrag(hoverState.hoveredAnnotationId, offset);
+                  get4().startDrag(hoverState.hoveredAnnotationId, offset);
                 }
               }
               break;
             case "drag":
               if (dragState.isDragging) {
-                get5().updateDrag(coordinate);
+                get4().updateDrag(coordinate);
               }
               break;
             case "dragEnd":
               if (dragState.isDragging) {
-                get5().endDrag();
+                get4().endDrag();
               }
               break;
           }
@@ -133757,7 +133762,7 @@ const useOverlayStore = create$2()(
         switch (type) {
           case "click":
           case "dragStart":
-            get5().updateDrawingState({
+            get4().updateDrawingState({
               isDrawing: true,
               dragStart: [x2, y3],
               dragEnd: [x2, y3]
@@ -133765,27 +133770,27 @@ const useOverlayStore = create$2()(
             break;
           case "drag":
             if (drawingState.isDrawing) {
-              get5().updateDrawingState({
+              get4().updateDrawingState({
                 dragEnd: [x2, y3]
               });
             }
             break;
           case "dragEnd":
             if (drawingState.isDrawing) {
-              get5().updateDrawingState({
+              get4().updateDrawingState({
                 dragEnd: [x2, y3]
               });
               if (activeTool === "rectangle") {
                 setTimeout(() => {
-                  get5().finalizeRectangle();
+                  get4().finalizeRectangle();
                 }, 0);
               } else if (activeTool === "ellipse") {
                 setTimeout(() => {
-                  get5().finalizeEllipse();
+                  get4().finalizeEllipse();
                 }, 0);
               } else if (activeTool === "line") {
                 setTimeout(() => {
-                  get5().finalizeLine();
+                  get4().finalizeLine();
                 }, 0);
               }
             }
@@ -133819,7 +133824,7 @@ const useOverlayStore = create$2()(
         set5({ annotations: [] });
       },
       finalizeRectangle: () => {
-        const { drawingState } = get5();
+        const { drawingState } = get4();
         if (drawingState.isDrawing && drawingState.dragStart && drawingState.dragEnd) {
           const [startX, startY] = drawingState.dragStart;
           const [endX, endY] = drawingState.dragEnd;
@@ -133828,24 +133833,24 @@ const useOverlayStore = create$2()(
             type: "rectangle",
             polygon: rectangleToPolygon([startX, startY], [endX, endY]),
             style: {
-              fillColor: [get5().globalColor[0], get5().globalColor[1], get5().globalColor[2], 50],
+              fillColor: [get4().globalColor[0], get4().globalColor[1], get4().globalColor[2], 50],
               // Use global color with low opacity
-              lineColor: get5().globalColor,
+              lineColor: get4().globalColor,
               // Use global color for border
               lineWidth: 3
             },
             metadata: {
               createdAt: /* @__PURE__ */ new Date(),
-              label: `Rectangle ${get5().annotations.length + 1}`
+              label: `Rectangle ${get4().annotations.length + 1}`
             }
           };
-          get5().addAnnotation(annotation);
-          get5().resetDrawingState();
-          get5().removeOverlayLayer("drawing-layer");
+          get4().addAnnotation(annotation);
+          get4().resetDrawingState();
+          get4().removeOverlayLayer("drawing-layer");
         }
       },
       finalizeEllipse: () => {
-        const { drawingState } = get5();
+        const { drawingState } = get4();
         if (drawingState.isDrawing && drawingState.dragStart && drawingState.dragEnd) {
           const [startX, startY] = drawingState.dragStart;
           const [endX, endY] = drawingState.dragEnd;
@@ -133854,20 +133859,20 @@ const useOverlayStore = create$2()(
             type: "ellipse",
             polygon: ellipseToPolygon([startX, startY], [endX, endY]),
             style: {
-              fillColor: [get5().globalColor[0], get5().globalColor[1], get5().globalColor[2], 50],
+              fillColor: [get4().globalColor[0], get4().globalColor[1], get4().globalColor[2], 50],
               // Use global color with low opacity
-              lineColor: get5().globalColor,
+              lineColor: get4().globalColor,
               // Use global color for border
               lineWidth: 3
             },
             metadata: {
               createdAt: /* @__PURE__ */ new Date(),
-              label: `Ellipse ${get5().annotations.length + 1}`
+              label: `Ellipse ${get4().annotations.length + 1}`
             }
           };
-          get5().addAnnotation(annotation);
-          get5().resetDrawingState();
-          get5().removeOverlayLayer("drawing-layer");
+          get4().addAnnotation(annotation);
+          get4().resetDrawingState();
+          get4().removeOverlayLayer("drawing-layer");
         }
       },
       finalizeLasso: (points) => {
@@ -133877,19 +133882,19 @@ const useOverlayStore = create$2()(
             type: "polygon",
             polygon: points,
             style: {
-              fillColor: [get5().globalColor[0], get5().globalColor[1], get5().globalColor[2], 50],
+              fillColor: [get4().globalColor[0], get4().globalColor[1], get4().globalColor[2], 50],
               // Use global color with low opacity
-              lineColor: get5().globalColor,
+              lineColor: get4().globalColor,
               // Use global color for border
               lineWidth: 3
             },
             metadata: {
               createdAt: /* @__PURE__ */ new Date(),
-              label: `Polygon ${get5().annotations.length + 1}`
+              label: `Polygon ${get4().annotations.length + 1}`
             }
           };
-          get5().addAnnotation(annotation);
-          get5().removeOverlayLayer("drawing-layer");
+          get4().addAnnotation(annotation);
+          get4().removeOverlayLayer("drawing-layer");
         }
       },
       finalizePolyline: (points) => {
@@ -133899,21 +133904,21 @@ const useOverlayStore = create$2()(
             type: "polyline",
             polygon: points,
             style: {
-              lineColor: get5().globalColor,
+              lineColor: get4().globalColor,
               // Use global color for border
               lineWidth: 3
             },
             metadata: {
               createdAt: /* @__PURE__ */ new Date(),
-              label: `Polyline ${get5().annotations.length + 1}`
+              label: `Polyline ${get4().annotations.length + 1}`
             }
           };
-          get5().addAnnotation(annotation);
-          get5().removeOverlayLayer("drawing-layer");
+          get4().addAnnotation(annotation);
+          get4().removeOverlayLayer("drawing-layer");
         }
       },
       finalizeLine: () => {
-        const { drawingState } = get5();
+        const { drawingState } = get4();
         if (drawingState.isDrawing && drawingState.dragStart && drawingState.dragEnd) {
           const [startX, startY] = drawingState.dragStart;
           const [endX, endY] = drawingState.dragEnd;
@@ -133931,17 +133936,17 @@ const useOverlayStore = create$2()(
             style: {
               fillColor: [0, 0, 0, 0],
               // Transparent fill
-              lineColor: get5().globalColor,
+              lineColor: get4().globalColor,
               lineWidth: 3
             },
             metadata: {
               createdAt: /* @__PURE__ */ new Date(),
-              label: `Line ${get5().annotations.length + 1}`
+              label: `Line ${get4().annotations.length + 1}`
             }
           };
-          get5().addAnnotation(annotation);
-          get5().resetDrawingState();
-          get5().removeOverlayLayer("drawing-layer");
+          get4().addAnnotation(annotation);
+          get4().resetDrawingState();
+          get4().removeOverlayLayer("drawing-layer");
         }
       },
       createTextAnnotation: (position2, text2, fontSize = 14) => {
@@ -133955,7 +133960,7 @@ const useOverlayStore = create$2()(
           text: text2.trim(),
           style: {
             fontSize,
-            fontColor: get5().globalColor,
+            fontColor: get4().globalColor,
             // Use global color
             backgroundColor: [0, 0, 0, 100],
             // Semi-transparent black background
@@ -133963,10 +133968,10 @@ const useOverlayStore = create$2()(
           },
           metadata: {
             createdAt: /* @__PURE__ */ new Date(),
-            label: `Text ${get5().annotations.length + 1}`
+            label: `Text ${get4().annotations.length + 1}`
           }
         };
-        get5().addAnnotation(annotation);
+        get4().addAnnotation(annotation);
       },
       createPointAnnotation: (position2, radius = 5) => {
         const annotation = {
@@ -133974,7 +133979,7 @@ const useOverlayStore = create$2()(
           type: "point",
           position: position2,
           style: {
-            fillColor: get5().globalColor,
+            fillColor: get4().globalColor,
             // Use global color for fill
             strokeColor: [255, 255, 255, 255],
             // White stroke
@@ -133982,16 +133987,16 @@ const useOverlayStore = create$2()(
           },
           metadata: {
             createdAt: /* @__PURE__ */ new Date(),
-            label: `Point ${get5().annotations.length + 1}`
+            label: `Point ${get4().annotations.length + 1}`
           }
         };
-        get5().addAnnotation(annotation);
+        get4().addAnnotation(annotation);
       },
       updateTextAnnotation: (annotationId, newText, fontSize) => {
         if (!newText.trim()) {
           return;
         }
-        const annotations = get5().annotations;
+        const annotations = get4().annotations;
         const annotation = annotations.find((a2) => a2.id === annotationId);
         if (!annotation || annotation.type !== "text") {
           return;
@@ -134005,10 +134010,10 @@ const useOverlayStore = create$2()(
             fontSize
           };
         }
-        get5().updateAnnotation(annotationId, updates);
+        get4().updateAnnotation(annotationId, updates);
       },
       updateTextAnnotationColor: (annotationId, fontColor2) => {
-        const annotations = get5().annotations;
+        const annotations = get4().annotations;
         const annotation = annotations.find((a2) => a2.id === annotationId);
         if (!annotation || annotation.type !== "text") {
           return;
@@ -134019,22 +134024,22 @@ const useOverlayStore = create$2()(
             fontColor: fontColor2
           }
         };
-        get5().updateAnnotation(annotationId, updates);
+        get4().updateAnnotation(annotationId, updates);
       },
       updateShapeText: (annotationId, newText) => {
-        const annotations = get5().annotations;
+        const annotations = get4().annotations;
         const annotation = annotations.find((a2) => a2.id === annotationId);
         if (!annotation) {
           return;
         }
         if (annotation.type === "text") {
-          get5().updateTextAnnotation(annotationId, newText);
+          get4().updateTextAnnotation(annotationId, newText);
           return;
         }
         const updates = {
           text: newText.trim() || void 0
         };
-        get5().updateAnnotation(annotationId, updates);
+        get4().updateAnnotation(annotationId, updates);
       },
       setGlobalColor: (color2) => {
         set5({ globalColor: color2 });
@@ -134073,7 +134078,7 @@ const useOverlayStore = create$2()(
         });
       },
       updateDrag: (coordinate) => {
-        const { dragState, annotations } = get5();
+        const { dragState, annotations } = get4();
         if (dragState.isDragging && dragState.draggedAnnotationId && dragState.dragOffset) {
           const [x2, y3] = coordinate;
           const [offsetX, offsetY] = dragState.dragOffset;
@@ -134086,7 +134091,7 @@ const useOverlayStore = create$2()(
                 ...annotation,
                 position: [newX, newY]
               };
-              get5().updateAnnotation(dragState.draggedAnnotationId, updatedAnnotation);
+              get4().updateAnnotation(dragState.draggedAnnotationId, updatedAnnotation);
             } else {
               const deltaX = newX - annotation.polygon[0][0];
               const deltaY = newY - annotation.polygon[0][1];
@@ -134095,7 +134100,7 @@ const useOverlayStore = create$2()(
                 ...annotation,
                 polygon: updatedPolygon
               };
-              get5().updateAnnotation(dragState.draggedAnnotationId, updatedAnnotation);
+              get4().updateAnnotation(dragState.draggedAnnotationId, updatedAnnotation);
             }
           }
         }
@@ -134125,7 +134130,7 @@ const useOverlayStore = create$2()(
       },
       // Group actions
       createGroup: (name2) => {
-        const groupCount = get5().annotationGroups.length;
+        const groupCount = get4().annotationGroups.length;
         const newGroup = {
           id: `group-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
           name: name2 || `Group ${groupCount + 1}`,
@@ -134211,7 +134216,15 @@ const useOverlayStore = create$2()(
           };
         });
       },
-      // Waypoints actions
+      setGroupNames: (o3) => {
+        set5({ groupNames: o3 });
+      },
+      setGroupChannelLists: (o3) => {
+        set5({ groupChannelLists: o3 });
+      },
+      setChannelVisibilities: (vis) => {
+        set5({ channelVisibilities: vis });
+      },
       setWaypoints: (waypoints) => {
         set5({ waypoints, activeWaypointId: null });
       },
@@ -134242,7 +134255,7 @@ const useOverlayStore = create$2()(
       },
       // Import waypoint annotations actions
       importWaypointAnnotations: (arrows, overlays, clearExisting = false) => {
-        const { imageWidth, imageHeight } = get5();
+        const { imageWidth, imageHeight } = get4();
         if (imageWidth === 0 || imageHeight === 0) {
           return;
         }
@@ -134374,7 +134387,17 @@ const useOverlayStore = create$2()(
       //
       setActiveChannelGroup: (channelGroupId) => {
         console.log("Store: Setting active channel group ID:", channelGroupId);
-        set5({ activeChannelGroupId: channelGroupId });
+        set5(({ groupChannelLists, groupNames }) => {
+          const name2 = groupNames[channelGroupId] || "";
+          const channels2 = groupChannelLists[name2] || [];
+          const channelVisibilities = Object.fromEntries(
+            channels2.map((name22) => [name22, true])
+          );
+          return {
+            activeChannelGroupId: channelGroupId,
+            channelVisibilities
+          };
+        });
       },
       // Waypoint view state actions
       setTargetWaypointViewState: (pan, zoom) => {
@@ -134491,10 +134514,10 @@ const VivView = (props) => {
   const { loaderOmeTiff, dicomIndexList, groups, stories, hash, setHash, overlayLayers = [], activeTool, isDragging = false, hoveredAnnotationId = null, onOverlayInteraction } = props;
   const { v: v2, g: g2, s: s3, w: w2 } = hash;
   const {
-    activeChannelGroupId
+    activeChannelGroupId,
+    channelVisibilities
   } = useOverlayStore();
   const [viewportSize, setViewportSize] = reactExports.useState(windowSize);
-  const [channelSettings, setChannelSettings] = reactExports.useState({});
   const [canvas2, setCanvas] = reactExports.useState(null);
   const rootRef = reactExports.useRef(null);
   reactExports.useMemo(() => getWaypoint(stories, s3, w2), [stories, s3, w2]);
@@ -134517,7 +134540,7 @@ const VivView = (props) => {
     loaderOmeTiff,
     dicomIndexList
   ]);
-  const toSettings2 = (loader, modality, groups2, activeChannelGroupId2) => {
+  const toSettings2 = (loader, modality, groups2, activeChannelGroupId2, channelVisibilities2) => {
     if (loader === null || !groups2) {
       return props.viewerConfig.toSettings(
         activeChannelGroupId2,
@@ -134528,7 +134551,8 @@ const VivView = (props) => {
       activeChannelGroupId2,
       modality,
       loader,
-      groups2
+      groups2,
+      channelVisibilities2
     );
   };
   const mainSettingsOmeTiff = reactExports.useMemo(() => {
@@ -134537,12 +134561,14 @@ const VivView = (props) => {
       loaderOmeTiff,
       modality,
       groups,
-      activeChannelGroupId
+      activeChannelGroupId,
+      channelVisibilities
     );
   }, [
     loaderOmeTiff,
     groups,
-    activeChannelGroupId
+    activeChannelGroupId,
+    channelVisibilities
   ]);
   const mainSettingsDicomList = reactExports.useMemo(() => {
     return dicomIndexList.map((dicomIndex) => {
@@ -134551,13 +134577,15 @@ const VivView = (props) => {
         dicomIndex.loader,
         modality,
         groups,
-        activeChannelGroupId
+        activeChannelGroupId,
+        channelVisibilities
       );
     });
   }, [
     dicomIndexList,
     groups,
-    activeChannelGroupId
+    activeChannelGroupId,
+    channelVisibilities
   ]);
   const mainSettingsList = reactExports.useMemo(() => loaderOmeTiff !== null ? [mainSettingsOmeTiff] : mainSettingsDicomList, [
     mainSettingsOmeTiff,
@@ -134836,7 +134864,7 @@ const hexToRGB = (hex) => {
   return [r4, g2, b2];
 };
 const toSettings = (opts) => {
-  return (activeChannelGroupId, modality, loader, groups) => {
+  return (activeChannelGroupId, modality, loader, groups, channelVisibilities) => {
     const { ItemRegistry } = opts.config;
     const { GroupChannels, SourceChannels } = ItemRegistry;
     const channels2 = GroupChannels.filter(
@@ -134869,8 +134897,12 @@ const toSettings = (opts) => {
         const source_channel = SourceChannels.find(
           (source_channel2) => c2.Associations.SourceChannel.UUID === source_channel2.UUID
         );
+        const { Name } = (source_channel == null ? void 0 : source_channel.Properties) || {};
         const image_id = source_channel.Associations.SourceImage.UUID;
-        return image_id === modality;
+        if (!channelVisibilities) {
+          return image_id === modality;
+        }
+        return image_id === modality && (channelVisibilities || {})[Name];
       }
     );
     const n_channels = shape[c_idx] || 0;
@@ -135121,7 +135153,7 @@ const Exporter = (props) => {
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2024 Fonticons, Inc.
  */
-function _defineProperty$4(e3, r22, t22) {
+function _defineProperty$2(e3, r22, t22) {
   return (r22 = _toPropertyKey(r22)) in e3 ? Object.defineProperty(e3, r22, {
     value: t22,
     enumerable: true,
@@ -135143,7 +135175,7 @@ function _objectSpread2$1(e3) {
   for (var r22 = 1; r22 < arguments.length; r22++) {
     var t22 = null != arguments[r22] ? arguments[r22] : {};
     r22 % 2 ? ownKeys$2(Object(t22), true).forEach(function(r32) {
-      _defineProperty$4(e3, r32, t22[r32]);
+      _defineProperty$2(e3, r32, t22[r32]);
     }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e3, Object.getOwnPropertyDescriptors(t22)) : ownKeys$2(Object(t22)).forEach(function(r32) {
       Object.defineProperty(e3, r32, Object.getOwnPropertyDescriptor(t22, r32));
     });
@@ -135556,7 +135588,7 @@ if (DOCUMENT && typeof DOCUMENT.querySelector === "function") {
     }
   });
 }
-const _default$3 = {
+const _default = {
   styleDefault: "solid",
   familyDefault: s2,
   cssPrefix: DEFAULT_CSS_PREFIX,
@@ -135574,10 +135606,10 @@ const _default$3 = {
 if (initial.familyPrefix) {
   initial.cssPrefix = initial.familyPrefix;
 }
-const _config = _objectSpread2$1(_objectSpread2$1({}, _default$3), initial);
+const _config = _objectSpread2$1(_objectSpread2$1({}, _default), initial);
 if (!_config.autoReplaceSvg) _config.observeMutations = false;
 const config = {};
-Object.keys(_default$3).forEach((key) => {
+Object.keys(_default).forEach((key) => {
   Object.defineProperty(config, key, {
     enumerable: true,
     set: function(val) {
@@ -135671,21 +135703,21 @@ function joinStyles(styles2) {
     return acc + "".concat(styleName, ": ").concat(styles2[styleName].trim(), ";");
   }, "");
 }
-function transformIsMeaningful(transform2) {
-  return transform2.size !== meaninglessTransform.size || transform2.x !== meaninglessTransform.x || transform2.y !== meaninglessTransform.y || transform2.rotate !== meaninglessTransform.rotate || transform2.flipX || transform2.flipY;
+function transformIsMeaningful(transform) {
+  return transform.size !== meaninglessTransform.size || transform.x !== meaninglessTransform.x || transform.y !== meaninglessTransform.y || transform.rotate !== meaninglessTransform.rotate || transform.flipX || transform.flipY;
 }
 function transformForSvg(_ref) {
   let {
-    transform: transform2,
+    transform,
     containerWidth,
     iconWidth
   } = _ref;
   const outer = {
     transform: "translate(".concat(containerWidth / 2, " 256)")
   };
-  const innerTranslate = "translate(".concat(transform2.x * 32, ", ").concat(transform2.y * 32, ") ");
-  const innerScale = "scale(".concat(transform2.size / 16 * (transform2.flipX ? -1 : 1), ", ").concat(transform2.size / 16 * (transform2.flipY ? -1 : 1), ") ");
-  const innerRotate = "rotate(".concat(transform2.rotate, " 0 0)");
+  const innerTranslate = "translate(".concat(transform.x * 32, ", ").concat(transform.y * 32, ") ");
+  const innerScale = "scale(".concat(transform.size / 16 * (transform.flipX ? -1 : 1), ", ").concat(transform.size / 16 * (transform.flipY ? -1 : 1), ") ");
+  const innerRotate = "rotate(".concat(transform.rotate, " 0 0)");
   const inner = {
     transform: "".concat(innerTranslate, " ").concat(innerScale, " ").concat(innerRotate)
   };
@@ -135700,21 +135732,21 @@ function transformForSvg(_ref) {
 }
 function transformForCss(_ref2) {
   let {
-    transform: transform2,
+    transform,
     width = UNITS_IN_GRID,
     height = UNITS_IN_GRID,
     startCentered = false
   } = _ref2;
   let val = "";
   if (startCentered && IS_IE) {
-    val += "translate(".concat(transform2.x / d$2 - width / 2, "em, ").concat(transform2.y / d$2 - height / 2, "em) ");
+    val += "translate(".concat(transform.x / d$2 - width / 2, "em, ").concat(transform.y / d$2 - height / 2, "em) ");
   } else if (startCentered) {
-    val += "translate(calc(-50% + ".concat(transform2.x / d$2, "em), calc(-50% + ").concat(transform2.y / d$2, "em)) ");
+    val += "translate(calc(-50% + ".concat(transform.x / d$2, "em), calc(-50% + ").concat(transform.y / d$2, "em)) ");
   } else {
-    val += "translate(".concat(transform2.x / d$2, "em, ").concat(transform2.y / d$2, "em) ");
+    val += "translate(".concat(transform.x / d$2, "em, ").concat(transform.y / d$2, "em) ");
   }
-  val += "scale(".concat(transform2.size / d$2 * (transform2.flipX ? -1 : 1), ", ").concat(transform2.size / d$2 * (transform2.flipY ? -1 : 1), ") ");
-  val += "rotate(".concat(transform2.rotate, "deg) ");
+  val += "scale(".concat(transform.size / d$2 * (transform.flipX ? -1 : 1), ", ").concat(transform.size / d$2 * (transform.flipY ? -1 : 1), ") ");
+  val += "rotate(".concat(transform.rotate, "deg) ");
   return val;
 }
 var baseStyles = ':root, :host {\n  --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";\n  --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";\n  --fa-font-light: normal 300 1em/1 "Font Awesome 6 Pro";\n  --fa-font-thin: normal 100 1em/1 "Font Awesome 6 Pro";\n  --fa-font-duotone: normal 900 1em/1 "Font Awesome 6 Duotone";\n  --fa-font-duotone-regular: normal 400 1em/1 "Font Awesome 6 Duotone";\n  --fa-font-duotone-light: normal 300 1em/1 "Font Awesome 6 Duotone";\n  --fa-font-duotone-thin: normal 100 1em/1 "Font Awesome 6 Duotone";\n  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";\n  --fa-font-sharp-solid: normal 900 1em/1 "Font Awesome 6 Sharp";\n  --fa-font-sharp-regular: normal 400 1em/1 "Font Awesome 6 Sharp";\n  --fa-font-sharp-light: normal 300 1em/1 "Font Awesome 6 Sharp";\n  --fa-font-sharp-thin: normal 100 1em/1 "Font Awesome 6 Sharp";\n  --fa-font-sharp-duotone-solid: normal 900 1em/1 "Font Awesome 6 Sharp Duotone";\n  --fa-font-sharp-duotone-regular: normal 400 1em/1 "Font Awesome 6 Sharp Duotone";\n  --fa-font-sharp-duotone-light: normal 300 1em/1 "Font Awesome 6 Sharp Duotone";\n  --fa-font-sharp-duotone-thin: normal 100 1em/1 "Font Awesome 6 Sharp Duotone";\n}\n\nsvg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {\n  overflow: visible;\n  box-sizing: content-box;\n}\n\n.svg-inline--fa {\n  display: var(--fa-display, inline-block);\n  height: 1em;\n  overflow: visible;\n  vertical-align: -0.125em;\n}\n.svg-inline--fa.fa-2xs {\n  vertical-align: 0.1em;\n}\n.svg-inline--fa.fa-xs {\n  vertical-align: 0em;\n}\n.svg-inline--fa.fa-sm {\n  vertical-align: -0.0714285705em;\n}\n.svg-inline--fa.fa-lg {\n  vertical-align: -0.2em;\n}\n.svg-inline--fa.fa-xl {\n  vertical-align: -0.25em;\n}\n.svg-inline--fa.fa-2xl {\n  vertical-align: -0.3125em;\n}\n.svg-inline--fa.fa-pull-left {\n  margin-right: var(--fa-pull-margin, 0.3em);\n  width: auto;\n}\n.svg-inline--fa.fa-pull-right {\n  margin-left: var(--fa-pull-margin, 0.3em);\n  width: auto;\n}\n.svg-inline--fa.fa-li {\n  width: var(--fa-li-width, 2em);\n  top: 0.25em;\n}\n.svg-inline--fa.fa-fw {\n  width: var(--fa-fw-width, 1.25em);\n}\n\n.fa-layers svg.svg-inline--fa {\n  bottom: 0;\n  left: 0;\n  margin: auto;\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n\n.fa-layers-counter, .fa-layers-text {\n  display: inline-block;\n  position: absolute;\n  text-align: center;\n}\n\n.fa-layers {\n  display: inline-block;\n  height: 1em;\n  position: relative;\n  text-align: center;\n  vertical-align: -0.125em;\n  width: 1em;\n}\n.fa-layers svg.svg-inline--fa {\n  transform-origin: center center;\n}\n\n.fa-layers-text {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  transform-origin: center center;\n}\n\n.fa-layers-counter {\n  background-color: var(--fa-counter-background-color, #ff253a);\n  border-radius: var(--fa-counter-border-radius, 1em);\n  box-sizing: border-box;\n  color: var(--fa-inverse, #fff);\n  line-height: var(--fa-counter-line-height, 1);\n  max-width: var(--fa-counter-max-width, 5em);\n  min-width: var(--fa-counter-min-width, 1.5em);\n  overflow: hidden;\n  padding: var(--fa-counter-padding, 0.25em 0.5em);\n  right: var(--fa-right, 0);\n  text-overflow: ellipsis;\n  top: var(--fa-top, 0);\n  transform: scale(var(--fa-counter-scale, 0.25));\n  transform-origin: top right;\n}\n\n.fa-layers-bottom-right {\n  bottom: var(--fa-bottom, 0);\n  right: var(--fa-right, 0);\n  top: auto;\n  transform: scale(var(--fa-layers-scale, 0.25));\n  transform-origin: bottom right;\n}\n\n.fa-layers-bottom-left {\n  bottom: var(--fa-bottom, 0);\n  left: var(--fa-left, 0);\n  right: auto;\n  top: auto;\n  transform: scale(var(--fa-layers-scale, 0.25));\n  transform-origin: bottom left;\n}\n\n.fa-layers-top-right {\n  top: var(--fa-top, 0);\n  right: var(--fa-right, 0);\n  transform: scale(var(--fa-layers-scale, 0.25));\n  transform-origin: top right;\n}\n\n.fa-layers-top-left {\n  left: var(--fa-left, 0);\n  right: auto;\n  top: var(--fa-top, 0);\n  transform: scale(var(--fa-layers-scale, 0.25));\n  transform-origin: top left;\n}\n\n.fa-1x {\n  font-size: 1em;\n}\n\n.fa-2x {\n  font-size: 2em;\n}\n\n.fa-3x {\n  font-size: 3em;\n}\n\n.fa-4x {\n  font-size: 4em;\n}\n\n.fa-5x {\n  font-size: 5em;\n}\n\n.fa-6x {\n  font-size: 6em;\n}\n\n.fa-7x {\n  font-size: 7em;\n}\n\n.fa-8x {\n  font-size: 8em;\n}\n\n.fa-9x {\n  font-size: 9em;\n}\n\n.fa-10x {\n  font-size: 10em;\n}\n\n.fa-2xs {\n  font-size: 0.625em;\n  line-height: 0.1em;\n  vertical-align: 0.225em;\n}\n\n.fa-xs {\n  font-size: 0.75em;\n  line-height: 0.0833333337em;\n  vertical-align: 0.125em;\n}\n\n.fa-sm {\n  font-size: 0.875em;\n  line-height: 0.0714285718em;\n  vertical-align: 0.0535714295em;\n}\n\n.fa-lg {\n  font-size: 1.25em;\n  line-height: 0.05em;\n  vertical-align: -0.075em;\n}\n\n.fa-xl {\n  font-size: 1.5em;\n  line-height: 0.0416666682em;\n  vertical-align: -0.125em;\n}\n\n.fa-2xl {\n  font-size: 2em;\n  line-height: 0.03125em;\n  vertical-align: -0.1875em;\n}\n\n.fa-fw {\n  text-align: center;\n  width: 1.25em;\n}\n\n.fa-ul {\n  list-style-type: none;\n  margin-left: var(--fa-li-margin, 2.5em);\n  padding-left: 0;\n}\n.fa-ul > li {\n  position: relative;\n}\n\n.fa-li {\n  left: calc(-1 * var(--fa-li-width, 2em));\n  position: absolute;\n  text-align: center;\n  width: var(--fa-li-width, 2em);\n  line-height: inherit;\n}\n\n.fa-border {\n  border-color: var(--fa-border-color, #eee);\n  border-radius: var(--fa-border-radius, 0.1em);\n  border-style: var(--fa-border-style, solid);\n  border-width: var(--fa-border-width, 0.08em);\n  padding: var(--fa-border-padding, 0.2em 0.25em 0.15em);\n}\n\n.fa-pull-left {\n  float: left;\n  margin-right: var(--fa-pull-margin, 0.3em);\n}\n\n.fa-pull-right {\n  float: right;\n  margin-left: var(--fa-pull-margin, 0.3em);\n}\n\n.fa-beat {\n  animation-name: fa-beat;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, ease-in-out);\n}\n\n.fa-bounce {\n  animation-name: fa-bounce;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.28, 0.84, 0.42, 1));\n}\n\n.fa-fade {\n  animation-name: fa-fade;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));\n}\n\n.fa-beat-fade {\n  animation-name: fa-beat-fade;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));\n}\n\n.fa-flip {\n  animation-name: fa-flip;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, ease-in-out);\n}\n\n.fa-shake {\n  animation-name: fa-shake;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, linear);\n}\n\n.fa-spin {\n  animation-name: fa-spin;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 2s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, linear);\n}\n\n.fa-spin-reverse {\n  --fa-animation-direction: reverse;\n}\n\n.fa-pulse,\n.fa-spin-pulse {\n  animation-name: fa-spin;\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, steps(8));\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .fa-beat,\n.fa-bounce,\n.fa-fade,\n.fa-beat-fade,\n.fa-flip,\n.fa-pulse,\n.fa-shake,\n.fa-spin,\n.fa-spin-pulse {\n    animation-delay: -1ms;\n    animation-duration: 1ms;\n    animation-iteration-count: 1;\n    transition-delay: 0s;\n    transition-duration: 0s;\n  }\n}\n@keyframes fa-beat {\n  0%, 90% {\n    transform: scale(1);\n  }\n  45% {\n    transform: scale(var(--fa-beat-scale, 1.25));\n  }\n}\n@keyframes fa-bounce {\n  0% {\n    transform: scale(1, 1) translateY(0);\n  }\n  10% {\n    transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9)) translateY(0);\n  }\n  30% {\n    transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -0.5em));\n  }\n  50% {\n    transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95)) translateY(0);\n  }\n  57% {\n    transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -0.125em));\n  }\n  64% {\n    transform: scale(1, 1) translateY(0);\n  }\n  100% {\n    transform: scale(1, 1) translateY(0);\n  }\n}\n@keyframes fa-fade {\n  50% {\n    opacity: var(--fa-fade-opacity, 0.4);\n  }\n}\n@keyframes fa-beat-fade {\n  0%, 100% {\n    opacity: var(--fa-beat-fade-opacity, 0.4);\n    transform: scale(1);\n  }\n  50% {\n    opacity: 1;\n    transform: scale(var(--fa-beat-fade-scale, 1.125));\n  }\n}\n@keyframes fa-flip {\n  50% {\n    transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));\n  }\n}\n@keyframes fa-shake {\n  0% {\n    transform: rotate(-15deg);\n  }\n  4% {\n    transform: rotate(15deg);\n  }\n  8%, 24% {\n    transform: rotate(-18deg);\n  }\n  12%, 28% {\n    transform: rotate(18deg);\n  }\n  16% {\n    transform: rotate(-22deg);\n  }\n  20% {\n    transform: rotate(22deg);\n  }\n  32% {\n    transform: rotate(-12deg);\n  }\n  36% {\n    transform: rotate(12deg);\n  }\n  40%, 100% {\n    transform: rotate(0deg);\n  }\n}\n@keyframes fa-spin {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n.fa-rotate-90 {\n  transform: rotate(90deg);\n}\n\n.fa-rotate-180 {\n  transform: rotate(180deg);\n}\n\n.fa-rotate-270 {\n  transform: rotate(270deg);\n}\n\n.fa-flip-horizontal {\n  transform: scale(-1, 1);\n}\n\n.fa-flip-vertical {\n  transform: scale(1, -1);\n}\n\n.fa-flip-both,\n.fa-flip-horizontal.fa-flip-vertical {\n  transform: scale(-1, -1);\n}\n\n.fa-rotate-by {\n  transform: rotate(var(--fa-rotate-angle, 0));\n}\n\n.fa-stack {\n  display: inline-block;\n  vertical-align: middle;\n  height: 2em;\n  position: relative;\n  width: 2.5em;\n}\n\n.fa-stack-1x,\n.fa-stack-2x {\n  bottom: 0;\n  left: 0;\n  margin: auto;\n  position: absolute;\n  right: 0;\n  top: 0;\n  z-index: var(--fa-stack-z-index, auto);\n}\n\n.svg-inline--fa.fa-stack-1x {\n  height: 1em;\n  width: 1.25em;\n}\n.svg-inline--fa.fa-stack-2x {\n  height: 2em;\n  width: 2.5em;\n}\n\n.fa-inverse {\n  color: var(--fa-inverse, #fff);\n}\n\n.sr-only,\n.fa-sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border-width: 0;\n}\n\n.sr-only-focusable:not(:focus),\n.fa-sr-only-focusable:not(:focus) {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border-width: 0;\n}\n\n.svg-inline--fa .fa-primary {\n  fill: var(--fa-primary-color, currentColor);\n  opacity: var(--fa-primary-opacity, 1);\n}\n\n.svg-inline--fa .fa-secondary {\n  fill: var(--fa-secondary-color, currentColor);\n  opacity: var(--fa-secondary-opacity, 0.4);\n}\n\n.svg-inline--fa.fa-swap-opacity .fa-primary {\n  opacity: var(--fa-secondary-opacity, 0.4);\n}\n\n.svg-inline--fa.fa-swap-opacity .fa-secondary {\n  opacity: var(--fa-primary-opacity, 1);\n}\n\n.svg-inline--fa mask .fa-primary,\n.svg-inline--fa mask .fa-secondary {\n  fill: black;\n}';
@@ -136398,9 +136430,9 @@ function asIcon(_ref) {
     mask,
     attributes,
     styles: styles2,
-    transform: transform2
+    transform
   } = _ref;
-  if (transformIsMeaningful(transform2) && main2.found && !mask.found) {
+  if (transformIsMeaningful(transform) && main2.found && !mask.found) {
     const {
       width,
       height
@@ -136410,7 +136442,7 @@ function asIcon(_ref) {
       y: 0.5
     };
     attributes["style"] = joinStyles(_objectSpread2$1(_objectSpread2$1({}, styles2), {}, {
-      "transform-origin": "".concat(offset.x + transform2.x / 16, "em ").concat(offset.y + transform2.y / 16, "em")
+      "transform-origin": "".concat(offset.x + transform.x / 16, "em ").concat(offset.y + transform.y / 16, "em")
     }));
   }
   return [{
@@ -136450,7 +136482,7 @@ function makeInlineSvgAbstract(params) {
     },
     prefix: prefix2,
     iconName,
-    transform: transform2,
+    transform,
     symbol,
     title,
     maskId,
@@ -136497,7 +136529,7 @@ function makeInlineSvgAbstract(params) {
     main: main2,
     mask,
     maskId,
-    transform: transform2,
+    transform,
     symbol,
     styles: _objectSpread2$1(_objectSpread2$1({}, uploadedIconWidthStyle), extra.styles)
   });
@@ -136524,7 +136556,7 @@ function makeLayersTextAbstract(params) {
     content: content2,
     width,
     height,
-    transform: transform2,
+    transform,
     title,
     extra,
     watchable = false
@@ -136538,9 +136570,9 @@ function makeLayersTextAbstract(params) {
     attributes[DATA_FA_I2SVG] = "";
   }
   const styles2 = _objectSpread2$1({}, extra.styles);
-  if (transformIsMeaningful(transform2)) {
+  if (transformIsMeaningful(transform)) {
     styles2["transform"] = transformForCss({
-      transform: transform2,
+      transform,
       startCentered: true,
       width,
       height
@@ -137083,10 +137115,10 @@ function resolveIcons(next3) {
     }));
   };
 }
-const render$1 = function(iconDefinition) {
+const render = function(iconDefinition) {
   let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
   const {
-    transform: transform2 = meaninglessTransform,
+    transform = meaninglessTransform,
     symbol = false,
     mask = null,
     maskId = null,
@@ -137129,7 +137161,7 @@ const render$1 = function(iconDefinition) {
       },
       prefix: prefix2,
       iconName,
-      transform: _objectSpread2$1(_objectSpread2$1({}, meaninglessTransform), transform2),
+      transform: _objectSpread2$1(_objectSpread2$1({}, meaninglessTransform), transform),
       symbol,
       title,
       maskId,
@@ -137145,7 +137177,7 @@ const render$1 = function(iconDefinition) {
 var ReplaceElements = {
   mixout() {
     return {
-      icon: resolveIcons(render$1)
+      icon: resolveIcons(render)
     };
   },
   hooks() {
@@ -137172,7 +137204,7 @@ var ReplaceElements = {
         title,
         titleId,
         prefix: prefix2,
-        transform: transform2,
+        transform,
         symbol,
         mask,
         maskId,
@@ -137193,7 +137225,7 @@ var ReplaceElements = {
             },
             prefix: prefix2,
             iconName,
-            transform: transform2,
+            transform,
             symbol,
             maskId,
             title,
@@ -137209,7 +137241,7 @@ var ReplaceElements = {
         children,
         attributes,
         main: main2,
-        transform: transform2,
+        transform,
         styles: styles2
       } = _ref2;
       const styleString = joinStyles(styles2);
@@ -137217,10 +137249,10 @@ var ReplaceElements = {
         attributes["style"] = styleString;
       }
       let nextChild;
-      if (transformIsMeaningful(transform2)) {
+      if (transformIsMeaningful(transform)) {
         nextChild = callProvided("generateAbstractTransformGrouping", {
           main: main2,
-          transform: transform2,
+          transform,
           containerWidth: main2.width,
           iconWidth: main2.width
         });
@@ -137305,7 +137337,7 @@ var LayersText = {
       text(content2) {
         let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         const {
-          transform: transform2 = meaninglessTransform,
+          transform = meaninglessTransform,
           title = null,
           classes = [],
           attributes = {},
@@ -137321,7 +137353,7 @@ var LayersText = {
           });
           return makeLayersTextAbstract({
             content: content2,
-            transform: _objectSpread2$1(_objectSpread2$1({}, meaninglessTransform), transform2),
+            transform: _objectSpread2$1(_objectSpread2$1({}, meaninglessTransform), transform),
             title,
             extra: {
               attributes,
@@ -137337,7 +137369,7 @@ var LayersText = {
     providers$$1.generateLayersText = function(node2, nodeMeta) {
       const {
         title,
-        transform: transform2,
+        transform,
         extra
       } = nodeMeta;
       let width = null;
@@ -137355,7 +137387,7 @@ var LayersText = {
         content: node2.innerHTML,
         width,
         height,
-        transform: transform2,
+        transform,
         title,
         extra,
         watchable: true
@@ -137547,7 +137579,7 @@ var MutationObserver$1 = {
   }
 };
 const parseTransformString = (transformString) => {
-  let transform2 = {
+  let transform = {
     size: 16,
     x: 0,
     y: 0,
@@ -137595,7 +137627,7 @@ const parseTransformString = (transformString) => {
         break;
     }
     return acc;
-  }, transform2);
+  }, transform);
 };
 var PowerTransforms = {
   mixout() {
@@ -137622,16 +137654,16 @@ var PowerTransforms = {
     providers2.generateAbstractTransformGrouping = function(_ref) {
       let {
         main: main2,
-        transform: transform2,
+        transform,
         containerWidth,
         iconWidth
       } = _ref;
       const outer = {
         transform: "translate(".concat(containerWidth / 2, " 256)")
       };
-      const innerTranslate = "translate(".concat(transform2.x * 32, ", ").concat(transform2.y * 32, ") ");
-      const innerScale = "scale(".concat(transform2.size / 16 * (transform2.flipX ? -1 : 1), ", ").concat(transform2.size / 16 * (transform2.flipY ? -1 : 1), ") ");
-      const innerRotate = "rotate(".concat(transform2.rotate, " 0 0)");
+      const innerTranslate = "translate(".concat(transform.x * 32, ", ").concat(transform.y * 32, ") ");
+      const innerScale = "scale(".concat(transform.size / 16 * (transform.flipX ? -1 : 1), ", ").concat(transform.size / 16 * (transform.flipY ? -1 : 1), ") ");
+      const innerRotate = "rotate(".concat(transform.rotate, " 0 0)");
       const inner = {
         transform: "".concat(innerTranslate, " ").concat(innerScale, " ").concat(innerRotate)
       };
@@ -137702,7 +137734,7 @@ var Masks = {
         main: main2,
         mask,
         maskId: explicitMaskId,
-        transform: transform2
+        transform
       } = _ref;
       const {
         width: mainWidth,
@@ -137713,7 +137745,7 @@ var Masks = {
         icon: maskPath
       } = mask;
       const trans = transformForSvg({
-        transform: transform2,
+        transform,
         containerWidth: maskWidth,
         iconWidth: mainWidth
       });
@@ -137903,22 +137935,22 @@ function _objectSpread2(target) {
   for (var i5 = 1; i5 < arguments.length; i5++) {
     var source2 = null != arguments[i5] ? arguments[i5] : {};
     i5 % 2 ? ownKeys$1(Object(source2), true).forEach(function(key) {
-      _defineProperty$3(target, key, source2[key]);
+      _defineProperty$1(target, key, source2[key]);
     }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source2)) : ownKeys$1(Object(source2)).forEach(function(key) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source2, key));
     });
   }
   return target;
 }
-function _typeof$1(obj) {
+function _typeof(obj) {
   "@babel/helpers - typeof";
-  return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj2) {
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj2) {
     return typeof obj2;
   } : function(obj2) {
     return obj2 && "function" == typeof Symbol && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-  }, _typeof$1(obj);
+  }, _typeof(obj);
 }
-function _defineProperty$3(obj, key, value) {
+function _defineProperty$1(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value,
@@ -137943,7 +137975,7 @@ function _objectWithoutPropertiesLoose$2(source2, excluded) {
   }
   return target;
 }
-function _objectWithoutProperties$3(source2, excluded) {
+function _objectWithoutProperties$1(source2, excluded) {
   if (source2 == null) return {};
   var target = _objectWithoutPropertiesLoose$2(source2, excluded);
   var key, i5;
@@ -137985,7 +138017,7 @@ function _nonIterableSpread() {
 }
 function classList(props) {
   var _classes;
-  var beat = props.beat, fade = props.fade, beatFade = props.beatFade, bounce = props.bounce, shake = props.shake, flash = props.flash, spin2 = props.spin, spinPulse = props.spinPulse, spinReverse = props.spinReverse, pulse = props.pulse, fixedWidth = props.fixedWidth, inverse2 = props.inverse, border = props.border, listItem2 = props.listItem, flip2 = props.flip, size = props.size, rotation = props.rotation, pull = props.pull;
+  var beat = props.beat, fade = props.fade, beatFade = props.beatFade, bounce = props.bounce, shake = props.shake, flash = props.flash, spin = props.spin, spinPulse = props.spinPulse, spinReverse = props.spinReverse, pulse = props.pulse, fixedWidth = props.fixedWidth, inverse2 = props.inverse, border = props.border, listItem2 = props.listItem, flip = props.flip, size = props.size, rotation = props.rotation, pull = props.pull;
   var classes = (_classes = {
     "fa-beat": beat,
     "fa-fade": fade,
@@ -137993,7 +138025,7 @@ function classList(props) {
     "fa-bounce": bounce,
     "fa-shake": shake,
     "fa-flash": flash,
-    "fa-spin": spin2,
+    "fa-spin": spin,
     "fa-spin-reverse": spinReverse,
     "fa-spin-pulse": spinPulse,
     "fa-pulse": pulse,
@@ -138001,10 +138033,10 @@ function classList(props) {
     "fa-inverse": inverse2,
     "fa-border": border,
     "fa-li": listItem2,
-    "fa-flip": flip2 === true,
-    "fa-flip-horizontal": flip2 === "horizontal" || flip2 === "both",
-    "fa-flip-vertical": flip2 === "vertical" || flip2 === "both"
-  }, _defineProperty$3(_classes, "fa-".concat(size), typeof size !== "undefined" && size !== null), _defineProperty$3(_classes, "fa-rotate-".concat(rotation), typeof rotation !== "undefined" && rotation !== null && rotation !== 0), _defineProperty$3(_classes, "fa-pull-".concat(pull), typeof pull !== "undefined" && pull !== null), _defineProperty$3(_classes, "fa-swap-opacity", props.swapOpacity), _classes);
+    "fa-flip": flip === true,
+    "fa-flip-horizontal": flip === "horizontal" || flip === "both",
+    "fa-flip-vertical": flip === "vertical" || flip === "both"
+  }, _defineProperty$1(_classes, "fa-".concat(size), typeof size !== "undefined" && size !== null), _defineProperty$1(_classes, "fa-rotate-".concat(rotation), typeof rotation !== "undefined" && rotation !== null && rotation !== 0), _defineProperty$1(_classes, "fa-pull-".concat(pull), typeof pull !== "undefined" && pull !== null), _defineProperty$1(_classes, "fa-swap-opacity", props.swapOpacity), _classes);
   return Object.keys(classes).map(function(key) {
     return classes[key] ? key : null;
   }).filter(function(key) {
@@ -138070,7 +138102,7 @@ function convert$1(createElement2, element2) {
   }, {
     attrs: {}
   });
-  var _extraProps$style = extraProps.style, existingStyle = _extraProps$style === void 0 ? {} : _extraProps$style, remaining = _objectWithoutProperties$3(extraProps, _excluded$2);
+  var _extraProps$style = extraProps.style, existingStyle = _extraProps$style === void 0 ? {} : _extraProps$style, remaining = _objectWithoutProperties$1(extraProps, _excluded$2);
   mixins.attrs["style"] = _objectSpread2(_objectSpread2({}, mixins.attrs["style"]), existingStyle);
   return createElement2.apply(void 0, [element2.tag, _objectSpread2(_objectSpread2({}, mixins.attrs), remaining)].concat(_toConsumableArray(children)));
 }
@@ -138086,7 +138118,7 @@ function log() {
   }
 }
 function normalizeIconArgs(icon2) {
-  if (icon2 && _typeof$1(icon2) === "object" && icon2.prefix && icon2.iconName && icon2.icon) {
+  if (icon2 && _typeof(icon2) === "object" && icon2.prefix && icon2.iconName && icon2.icon) {
     return icon2;
   }
   if (parse$1$1.icon) {
@@ -138095,7 +138127,7 @@ function normalizeIconArgs(icon2) {
   if (icon2 === null) {
     return null;
   }
-  if (icon2 && _typeof$1(icon2) === "object" && icon2.prefix && icon2.iconName) {
+  if (icon2 && _typeof(icon2) === "object" && icon2.prefix && icon2.iconName) {
     return icon2;
   }
   if (Array.isArray(icon2) && icon2.length === 2) {
@@ -138112,7 +138144,7 @@ function normalizeIconArgs(icon2) {
   }
 }
 function objectWithKey(key, value) {
-  return Array.isArray(value) && value.length > 0 || !Array.isArray(value) && value ? _defineProperty$3({}, key, value) : {};
+  return Array.isArray(value) && value.length > 0 || !Array.isArray(value) && value ? _defineProperty$1({}, key, value) : {};
 }
 var defaultProps$1 = {
   border: false,
@@ -138147,9 +138179,9 @@ var FontAwesomeIcon = /* @__PURE__ */ React.forwardRef(function(props, ref) {
   var iconArgs = allProps.icon, maskArgs = allProps.mask, symbol = allProps.symbol, className = allProps.className, title = allProps.title, titleId = allProps.titleId, maskId = allProps.maskId;
   var iconLookup = normalizeIconArgs(iconArgs);
   var classes = objectWithKey("classes", [].concat(_toConsumableArray(classList(allProps)), _toConsumableArray((className || "").split(" "))));
-  var transform2 = objectWithKey("transform", typeof allProps.transform === "string" ? parse$1$1.transform(allProps.transform) : allProps.transform);
+  var transform = objectWithKey("transform", typeof allProps.transform === "string" ? parse$1$1.transform(allProps.transform) : allProps.transform);
   var mask = objectWithKey("mask", normalizeIconArgs(maskArgs));
-  var renderedIcon = icon(iconLookup, _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, classes), transform2), mask), {}, {
+  var renderedIcon = icon(iconLookup, _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, classes), transform), mask), {}, {
     symbol,
     title,
     titleId,
@@ -138312,14 +138344,14 @@ const Editor = (props) => {
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsx(Plain, { ...plainProps });
 };
-function _extends$f() {
-  return _extends$f = Object.assign ? Object.assign.bind() : function(n3) {
+function _extends() {
+  return _extends = Object.assign ? Object.assign.bind() : function(n3) {
     for (var e3 = 1; e3 < arguments.length; e3++) {
       var t3 = arguments[e3];
       for (var r4 in t3) ({}).hasOwnProperty.call(t3, r4) && (n3[r4] = t3[r4]);
     }
     return n3;
-  }, _extends$f.apply(null, arguments);
+  }, _extends.apply(null, arguments);
 }
 function _objectWithoutPropertiesLoose$1(r4, e3) {
   if (null == r4) return {};
@@ -138557,7 +138589,7 @@ var TextareaAutosize = function TextareaAutosize2(_ref, userRef) {
     });
     useWindowResizeListener(resizeTextarea);
     useFontsLoadedListener(resizeTextarea);
-    return /* @__PURE__ */ reactExports.createElement("textarea", _extends$f({}, props, {
+    return /* @__PURE__ */ reactExports.createElement("textarea", _extends({}, props, {
       onChange: handleChange,
       ref
     }));
@@ -138600,8789 +138632,6 @@ const Status = (props) => {
   const content2 = editable ? /* @__PURE__ */ jsxRuntimeExports.jsx(Mono, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(index$2, { ...inputProps }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx(El, { children: text2 });
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: content2 });
 };
-var lib = {};
-var flattenNames$1 = {};
-var freeGlobal$2 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
-var _freeGlobal = freeGlobal$2;
-var freeGlobal$1 = _freeGlobal;
-var freeSelf$1 = typeof self == "object" && self && self.Object === Object && self;
-var root$c = freeGlobal$1 || freeSelf$1 || Function("return this")();
-var _root = root$c;
-var root$b = _root;
-var Symbol$7 = root$b.Symbol;
-var _Symbol = Symbol$7;
-var Symbol$6 = _Symbol;
-var objectProto$u = Object.prototype;
-var hasOwnProperty$p = objectProto$u.hasOwnProperty;
-var nativeObjectToString$3 = objectProto$u.toString;
-var symToStringTag$3 = Symbol$6 ? Symbol$6.toStringTag : void 0;
-function getRawTag$2(value) {
-  var isOwn = hasOwnProperty$p.call(value, symToStringTag$3), tag = value[symToStringTag$3];
-  try {
-    value[symToStringTag$3] = void 0;
-    var unmasked = true;
-  } catch (e3) {
-  }
-  var result = nativeObjectToString$3.call(value);
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag$3] = tag;
-    } else {
-      delete value[symToStringTag$3];
-    }
-  }
-  return result;
-}
-var _getRawTag = getRawTag$2;
-var objectProto$t = Object.prototype;
-var nativeObjectToString$2 = objectProto$t.toString;
-function objectToString$2(value) {
-  return nativeObjectToString$2.call(value);
-}
-var _objectToString = objectToString$2;
-var Symbol$5 = _Symbol, getRawTag$1 = _getRawTag, objectToString$1 = _objectToString;
-var nullTag$1 = "[object Null]", undefinedTag$1 = "[object Undefined]";
-var symToStringTag$2 = Symbol$5 ? Symbol$5.toStringTag : void 0;
-function baseGetTag$8(value) {
-  if (value == null) {
-    return value === void 0 ? undefinedTag$1 : nullTag$1;
-  }
-  return symToStringTag$2 && symToStringTag$2 in Object(value) ? getRawTag$1(value) : objectToString$1(value);
-}
-var _baseGetTag = baseGetTag$8;
-var isArray$d = Array.isArray;
-var isArray_1 = isArray$d;
-function isObjectLike$a(value) {
-  return value != null && typeof value == "object";
-}
-var isObjectLike_1 = isObjectLike$a;
-var baseGetTag$7 = _baseGetTag, isArray$c = isArray_1, isObjectLike$9 = isObjectLike_1;
-var stringTag$6 = "[object String]";
-function isString(value) {
-  return typeof value == "string" || !isArray$c(value) && isObjectLike$9(value) && baseGetTag$7(value) == stringTag$6;
-}
-var isString_1 = isString;
-function createBaseFor$2(fromRight) {
-  return function(object, iteratee, keysFunc) {
-    var index2 = -1, iterable = Object(object), props = keysFunc(object), length2 = props.length;
-    while (length2--) {
-      var key = props[fromRight ? length2 : ++index2];
-      if (iteratee(iterable[key], key, iterable) === false) {
-        break;
-      }
-    }
-    return object;
-  };
-}
-var _createBaseFor = createBaseFor$2;
-var createBaseFor$1 = _createBaseFor;
-var baseFor$2 = createBaseFor$1();
-var _baseFor = baseFor$2;
-function baseTimes$2(n3, iteratee) {
-  var index2 = -1, result = Array(n3);
-  while (++index2 < n3) {
-    result[index2] = iteratee(index2);
-  }
-  return result;
-}
-var _baseTimes = baseTimes$2;
-var baseGetTag$6 = _baseGetTag, isObjectLike$8 = isObjectLike_1;
-var argsTag$6 = "[object Arguments]";
-function baseIsArguments$2(value) {
-  return isObjectLike$8(value) && baseGetTag$6(value) == argsTag$6;
-}
-var _baseIsArguments = baseIsArguments$2;
-var baseIsArguments$1 = _baseIsArguments, isObjectLike$7 = isObjectLike_1;
-var objectProto$s = Object.prototype;
-var hasOwnProperty$o = objectProto$s.hasOwnProperty;
-var propertyIsEnumerable$3 = objectProto$s.propertyIsEnumerable;
-var isArguments$3 = baseIsArguments$1(/* @__PURE__ */ function() {
-  return arguments;
-}()) ? baseIsArguments$1 : function(value) {
-  return isObjectLike$7(value) && hasOwnProperty$o.call(value, "callee") && !propertyIsEnumerable$3.call(value, "callee");
-};
-var isArguments_1 = isArguments$3;
-var isBuffer$4 = { exports: {} };
-function stubFalse$1() {
-  return false;
-}
-var stubFalse_1 = stubFalse$1;
-isBuffer$4.exports;
-(function(module2, exports2) {
-  var root2 = _root, stubFalse2 = stubFalse_1;
-  var freeExports2 = exports2 && !exports2.nodeType && exports2;
-  var freeModule2 = freeExports2 && true && module2 && !module2.nodeType && module2;
-  var moduleExports2 = freeModule2 && freeModule2.exports === freeExports2;
-  var Buffer2 = moduleExports2 ? root2.Buffer : void 0;
-  var nativeIsBuffer2 = Buffer2 ? Buffer2.isBuffer : void 0;
-  var isBuffer2 = nativeIsBuffer2 || stubFalse2;
-  module2.exports = isBuffer2;
-})(isBuffer$4, isBuffer$4.exports);
-var isBufferExports = isBuffer$4.exports;
-var MAX_SAFE_INTEGER$3 = 9007199254740991;
-var reIsUint$1 = /^(?:0|[1-9]\d*)$/;
-function isIndex$3(value, length2) {
-  var type = typeof value;
-  length2 = length2 == null ? MAX_SAFE_INTEGER$3 : length2;
-  return !!length2 && (type == "number" || type != "symbol" && reIsUint$1.test(value)) && (value > -1 && value % 1 == 0 && value < length2);
-}
-var _isIndex = isIndex$3;
-var MAX_SAFE_INTEGER$2 = 9007199254740991;
-function isLength$4(value) {
-  return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER$2;
-}
-var isLength_1 = isLength$4;
-var baseGetTag$5 = _baseGetTag, isLength$3 = isLength_1, isObjectLike$6 = isObjectLike_1;
-var argsTag$5 = "[object Arguments]", arrayTag$4 = "[object Array]", boolTag$5 = "[object Boolean]", dateTag$5 = "[object Date]", errorTag$4 = "[object Error]", funcTag$4 = "[object Function]", mapTag$8 = "[object Map]", numberTag$5 = "[object Number]", objectTag$8 = "[object Object]", regexpTag$5 = "[object RegExp]", setTag$8 = "[object Set]", stringTag$5 = "[object String]", weakMapTag$4 = "[object WeakMap]";
-var arrayBufferTag$5 = "[object ArrayBuffer]", dataViewTag$7 = "[object DataView]", float32Tag$3 = "[object Float32Array]", float64Tag$3 = "[object Float64Array]", int8Tag$3 = "[object Int8Array]", int16Tag$3 = "[object Int16Array]", int32Tag$3 = "[object Int32Array]", uint8Tag$3 = "[object Uint8Array]", uint8ClampedTag$3 = "[object Uint8ClampedArray]", uint16Tag$3 = "[object Uint16Array]", uint32Tag$3 = "[object Uint32Array]";
-var typedArrayTags$1 = {};
-typedArrayTags$1[float32Tag$3] = typedArrayTags$1[float64Tag$3] = typedArrayTags$1[int8Tag$3] = typedArrayTags$1[int16Tag$3] = typedArrayTags$1[int32Tag$3] = typedArrayTags$1[uint8Tag$3] = typedArrayTags$1[uint8ClampedTag$3] = typedArrayTags$1[uint16Tag$3] = typedArrayTags$1[uint32Tag$3] = true;
-typedArrayTags$1[argsTag$5] = typedArrayTags$1[arrayTag$4] = typedArrayTags$1[arrayBufferTag$5] = typedArrayTags$1[boolTag$5] = typedArrayTags$1[dataViewTag$7] = typedArrayTags$1[dateTag$5] = typedArrayTags$1[errorTag$4] = typedArrayTags$1[funcTag$4] = typedArrayTags$1[mapTag$8] = typedArrayTags$1[numberTag$5] = typedArrayTags$1[objectTag$8] = typedArrayTags$1[regexpTag$5] = typedArrayTags$1[setTag$8] = typedArrayTags$1[stringTag$5] = typedArrayTags$1[weakMapTag$4] = false;
-function baseIsTypedArray$2(value) {
-  return isObjectLike$6(value) && isLength$3(value.length) && !!typedArrayTags$1[baseGetTag$5(value)];
-}
-var _baseIsTypedArray = baseIsTypedArray$2;
-function baseUnary$4(func) {
-  return function(value) {
-    return func(value);
-  };
-}
-var _baseUnary = baseUnary$4;
-var _nodeUtil = { exports: {} };
-_nodeUtil.exports;
-(function(module2, exports2) {
-  var freeGlobal2 = _freeGlobal;
-  var freeExports2 = exports2 && !exports2.nodeType && exports2;
-  var freeModule2 = freeExports2 && true && module2 && !module2.nodeType && module2;
-  var moduleExports2 = freeModule2 && freeModule2.exports === freeExports2;
-  var freeProcess2 = moduleExports2 && freeGlobal2.process;
-  var nodeUtil2 = function() {
-    try {
-      var types2 = freeModule2 && freeModule2.require && freeModule2.require("util").types;
-      if (types2) {
-        return types2;
-      }
-      return freeProcess2 && freeProcess2.binding && freeProcess2.binding("util");
-    } catch (e3) {
-    }
-  }();
-  module2.exports = nodeUtil2;
-})(_nodeUtil, _nodeUtil.exports);
-var _nodeUtilExports = _nodeUtil.exports;
-var baseIsTypedArray$1 = _baseIsTypedArray, baseUnary$3 = _baseUnary, nodeUtil$3 = _nodeUtilExports;
-var nodeIsTypedArray$1 = nodeUtil$3 && nodeUtil$3.isTypedArray;
-var isTypedArray$3 = nodeIsTypedArray$1 ? baseUnary$3(nodeIsTypedArray$1) : baseIsTypedArray$1;
-var isTypedArray_1 = isTypedArray$3;
-var baseTimes$1 = _baseTimes, isArguments$2 = isArguments_1, isArray$b = isArray_1, isBuffer$3 = isBufferExports, isIndex$2 = _isIndex, isTypedArray$2 = isTypedArray_1;
-var objectProto$r = Object.prototype;
-var hasOwnProperty$n = objectProto$r.hasOwnProperty;
-function arrayLikeKeys$3(value, inherited) {
-  var isArr = isArray$b(value), isArg = !isArr && isArguments$2(value), isBuff = !isArr && !isArg && isBuffer$3(value), isType = !isArr && !isArg && !isBuff && isTypedArray$2(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes$1(value.length, String) : [], length2 = result.length;
-  for (var key in value) {
-    if ((inherited || hasOwnProperty$n.call(value, key)) && !(skipIndexes && // Safari 9 has enumerable `arguments.length` in strict mode.
-    (key == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
-    isBuff && (key == "offset" || key == "parent") || // PhantomJS 2 has enumerable non-index properties on typed arrays.
-    isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || // Skip index properties.
-    isIndex$2(key, length2)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-var _arrayLikeKeys = arrayLikeKeys$3;
-var objectProto$q = Object.prototype;
-function isPrototype$4(value) {
-  var Ctor = value && value.constructor, proto2 = typeof Ctor == "function" && Ctor.prototype || objectProto$q;
-  return value === proto2;
-}
-var _isPrototype = isPrototype$4;
-function overArg$3(func, transform2) {
-  return function(arg) {
-    return func(transform2(arg));
-  };
-}
-var _overArg = overArg$3;
-var overArg$2 = _overArg;
-var nativeKeys$2 = overArg$2(Object.keys, Object);
-var _nativeKeys = nativeKeys$2;
-var isPrototype$3 = _isPrototype, nativeKeys$1 = _nativeKeys;
-var objectProto$p = Object.prototype;
-var hasOwnProperty$m = objectProto$p.hasOwnProperty;
-function baseKeys$2(object) {
-  if (!isPrototype$3(object)) {
-    return nativeKeys$1(object);
-  }
-  var result = [];
-  for (var key in Object(object)) {
-    if (hasOwnProperty$m.call(object, key) && key != "constructor") {
-      result.push(key);
-    }
-  }
-  return result;
-}
-var _baseKeys = baseKeys$2;
-function isObject$7(value) {
-  var type = typeof value;
-  return value != null && (type == "object" || type == "function");
-}
-var isObject_1 = isObject$7;
-var baseGetTag$4 = _baseGetTag, isObject$6 = isObject_1;
-var asyncTag$1 = "[object AsyncFunction]", funcTag$3 = "[object Function]", genTag$2 = "[object GeneratorFunction]", proxyTag$1 = "[object Proxy]";
-function isFunction$3(value) {
-  if (!isObject$6(value)) {
-    return false;
-  }
-  var tag = baseGetTag$4(value);
-  return tag == funcTag$3 || tag == genTag$2 || tag == asyncTag$1 || tag == proxyTag$1;
-}
-var isFunction_1 = isFunction$3;
-var isFunction$2 = isFunction_1, isLength$2 = isLength_1;
-function isArrayLike$5(value) {
-  return value != null && isLength$2(value.length) && !isFunction$2(value);
-}
-var isArrayLike_1 = isArrayLike$5;
-var arrayLikeKeys$2 = _arrayLikeKeys, baseKeys$1 = _baseKeys, isArrayLike$4 = isArrayLike_1;
-function keys$7(object) {
-  return isArrayLike$4(object) ? arrayLikeKeys$2(object) : baseKeys$1(object);
-}
-var keys_1 = keys$7;
-var baseFor$1 = _baseFor, keys$6 = keys_1;
-function baseForOwn$3(object, iteratee) {
-  return object && baseFor$1(object, iteratee, keys$6);
-}
-var _baseForOwn = baseForOwn$3;
-function identity$3(value) {
-  return value;
-}
-var identity_1 = identity$3;
-var identity$2 = identity_1;
-function castFunction$2(value) {
-  return typeof value == "function" ? value : identity$2;
-}
-var _castFunction = castFunction$2;
-var baseForOwn$2 = _baseForOwn, castFunction$1 = _castFunction;
-function forOwn(object, iteratee) {
-  return object && baseForOwn$2(object, castFunction$1(iteratee));
-}
-var forOwn_1 = forOwn;
-var overArg$1 = _overArg;
-var getPrototype$4 = overArg$1(Object.getPrototypeOf, Object);
-var _getPrototype = getPrototype$4;
-var baseGetTag$3 = _baseGetTag, getPrototype$3 = _getPrototype, isObjectLike$5 = isObjectLike_1;
-var objectTag$7 = "[object Object]";
-var funcProto$5 = Function.prototype, objectProto$o = Object.prototype;
-var funcToString$5 = funcProto$5.toString;
-var hasOwnProperty$l = objectProto$o.hasOwnProperty;
-var objectCtorString$1 = funcToString$5.call(Object);
-function isPlainObject$3(value) {
-  if (!isObjectLike$5(value) || baseGetTag$3(value) != objectTag$7) {
-    return false;
-  }
-  var proto2 = getPrototype$3(value);
-  if (proto2 === null) {
-    return true;
-  }
-  var Ctor = hasOwnProperty$l.call(proto2, "constructor") && proto2.constructor;
-  return typeof Ctor == "function" && Ctor instanceof Ctor && funcToString$5.call(Ctor) == objectCtorString$1;
-}
-var isPlainObject_1 = isPlainObject$3;
-function arrayMap$3(array, iteratee) {
-  var index2 = -1, length2 = array == null ? 0 : array.length, result = Array(length2);
-  while (++index2 < length2) {
-    result[index2] = iteratee(array[index2], index2, array);
-  }
-  return result;
-}
-var _arrayMap = arrayMap$3;
-function listCacheClear$2() {
-  this.__data__ = [];
-  this.size = 0;
-}
-var _listCacheClear = listCacheClear$2;
-function eq$4(value, other) {
-  return value === other || value !== value && other !== other;
-}
-var eq_1 = eq$4;
-var eq$3 = eq_1;
-function assocIndexOf$5(array, key) {
-  var length2 = array.length;
-  while (length2--) {
-    if (eq$3(array[length2][0], key)) {
-      return length2;
-    }
-  }
-  return -1;
-}
-var _assocIndexOf = assocIndexOf$5;
-var assocIndexOf$4 = _assocIndexOf;
-var arrayProto$1 = Array.prototype;
-var splice$2 = arrayProto$1.splice;
-function listCacheDelete$2(key) {
-  var data2 = this.__data__, index2 = assocIndexOf$4(data2, key);
-  if (index2 < 0) {
-    return false;
-  }
-  var lastIndex = data2.length - 1;
-  if (index2 == lastIndex) {
-    data2.pop();
-  } else {
-    splice$2.call(data2, index2, 1);
-  }
-  --this.size;
-  return true;
-}
-var _listCacheDelete = listCacheDelete$2;
-var assocIndexOf$3 = _assocIndexOf;
-function listCacheGet$2(key) {
-  var data2 = this.__data__, index2 = assocIndexOf$3(data2, key);
-  return index2 < 0 ? void 0 : data2[index2][1];
-}
-var _listCacheGet = listCacheGet$2;
-var assocIndexOf$2 = _assocIndexOf;
-function listCacheHas$2(key) {
-  return assocIndexOf$2(this.__data__, key) > -1;
-}
-var _listCacheHas = listCacheHas$2;
-var assocIndexOf$1 = _assocIndexOf;
-function listCacheSet$2(key, value) {
-  var data2 = this.__data__, index2 = assocIndexOf$1(data2, key);
-  if (index2 < 0) {
-    ++this.size;
-    data2.push([key, value]);
-  } else {
-    data2[index2][1] = value;
-  }
-  return this;
-}
-var _listCacheSet = listCacheSet$2;
-var listCacheClear$1 = _listCacheClear, listCacheDelete$1 = _listCacheDelete, listCacheGet$1 = _listCacheGet, listCacheHas$1 = _listCacheHas, listCacheSet$1 = _listCacheSet;
-function ListCache$5(entries) {
-  var index2 = -1, length2 = entries == null ? 0 : entries.length;
-  this.clear();
-  while (++index2 < length2) {
-    var entry = entries[index2];
-    this.set(entry[0], entry[1]);
-  }
-}
-ListCache$5.prototype.clear = listCacheClear$1;
-ListCache$5.prototype["delete"] = listCacheDelete$1;
-ListCache$5.prototype.get = listCacheGet$1;
-ListCache$5.prototype.has = listCacheHas$1;
-ListCache$5.prototype.set = listCacheSet$1;
-var _ListCache = ListCache$5;
-var ListCache$4 = _ListCache;
-function stackClear$2() {
-  this.__data__ = new ListCache$4();
-  this.size = 0;
-}
-var _stackClear = stackClear$2;
-function stackDelete$2(key) {
-  var data2 = this.__data__, result = data2["delete"](key);
-  this.size = data2.size;
-  return result;
-}
-var _stackDelete = stackDelete$2;
-function stackGet$2(key) {
-  return this.__data__.get(key);
-}
-var _stackGet = stackGet$2;
-function stackHas$2(key) {
-  return this.__data__.has(key);
-}
-var _stackHas = stackHas$2;
-var root$a = _root;
-var coreJsData$2 = root$a["__core-js_shared__"];
-var _coreJsData = coreJsData$2;
-var coreJsData$1 = _coreJsData;
-var maskSrcKey$1 = function() {
-  var uid2 = /[^.]+$/.exec(coreJsData$1 && coreJsData$1.keys && coreJsData$1.keys.IE_PROTO || "");
-  return uid2 ? "Symbol(src)_1." + uid2 : "";
-}();
-function isMasked$2(func) {
-  return !!maskSrcKey$1 && maskSrcKey$1 in func;
-}
-var _isMasked = isMasked$2;
-var funcProto$4 = Function.prototype;
-var funcToString$4 = funcProto$4.toString;
-function toSource$3(func) {
-  if (func != null) {
-    try {
-      return funcToString$4.call(func);
-    } catch (e3) {
-    }
-    try {
-      return func + "";
-    } catch (e3) {
-    }
-  }
-  return "";
-}
-var _toSource = toSource$3;
-var isFunction$1 = isFunction_1, isMasked$1 = _isMasked, isObject$5 = isObject_1, toSource$2 = _toSource;
-var reRegExpChar$1 = /[\\^$.*+?()[\]{}|]/g;
-var reIsHostCtor$1 = /^\[object .+?Constructor\]$/;
-var funcProto$3 = Function.prototype, objectProto$n = Object.prototype;
-var funcToString$3 = funcProto$3.toString;
-var hasOwnProperty$k = objectProto$n.hasOwnProperty;
-var reIsNative$1 = RegExp(
-  "^" + funcToString$3.call(hasOwnProperty$k).replace(reRegExpChar$1, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
-);
-function baseIsNative$2(value) {
-  if (!isObject$5(value) || isMasked$1(value)) {
-    return false;
-  }
-  var pattern = isFunction$1(value) ? reIsNative$1 : reIsHostCtor$1;
-  return pattern.test(toSource$2(value));
-}
-var _baseIsNative = baseIsNative$2;
-function getValue$2(object, key) {
-  return object == null ? void 0 : object[key];
-}
-var _getValue = getValue$2;
-var baseIsNative$1 = _baseIsNative, getValue$1 = _getValue;
-function getNative$8(object, key) {
-  var value = getValue$1(object, key);
-  return baseIsNative$1(value) ? value : void 0;
-}
-var _getNative = getNative$8;
-var getNative$7 = _getNative, root$9 = _root;
-var Map$5 = getNative$7(root$9, "Map");
-var _Map = Map$5;
-var getNative$6 = _getNative;
-var nativeCreate$5 = getNative$6(Object, "create");
-var _nativeCreate = nativeCreate$5;
-var nativeCreate$4 = _nativeCreate;
-function hashClear$2() {
-  this.__data__ = nativeCreate$4 ? nativeCreate$4(null) : {};
-  this.size = 0;
-}
-var _hashClear = hashClear$2;
-function hashDelete$2(key) {
-  var result = this.has(key) && delete this.__data__[key];
-  this.size -= result ? 1 : 0;
-  return result;
-}
-var _hashDelete = hashDelete$2;
-var nativeCreate$3 = _nativeCreate;
-var HASH_UNDEFINED$5 = "__lodash_hash_undefined__";
-var objectProto$m = Object.prototype;
-var hasOwnProperty$j = objectProto$m.hasOwnProperty;
-function hashGet$2(key) {
-  var data2 = this.__data__;
-  if (nativeCreate$3) {
-    var result = data2[key];
-    return result === HASH_UNDEFINED$5 ? void 0 : result;
-  }
-  return hasOwnProperty$j.call(data2, key) ? data2[key] : void 0;
-}
-var _hashGet = hashGet$2;
-var nativeCreate$2 = _nativeCreate;
-var objectProto$l = Object.prototype;
-var hasOwnProperty$i = objectProto$l.hasOwnProperty;
-function hashHas$2(key) {
-  var data2 = this.__data__;
-  return nativeCreate$2 ? data2[key] !== void 0 : hasOwnProperty$i.call(data2, key);
-}
-var _hashHas = hashHas$2;
-var nativeCreate$1 = _nativeCreate;
-var HASH_UNDEFINED$4 = "__lodash_hash_undefined__";
-function hashSet$2(key, value) {
-  var data2 = this.__data__;
-  this.size += this.has(key) ? 0 : 1;
-  data2[key] = nativeCreate$1 && value === void 0 ? HASH_UNDEFINED$4 : value;
-  return this;
-}
-var _hashSet = hashSet$2;
-var hashClear$1 = _hashClear, hashDelete$1 = _hashDelete, hashGet$1 = _hashGet, hashHas$1 = _hashHas, hashSet$1 = _hashSet;
-function Hash$2(entries) {
-  var index2 = -1, length2 = entries == null ? 0 : entries.length;
-  this.clear();
-  while (++index2 < length2) {
-    var entry = entries[index2];
-    this.set(entry[0], entry[1]);
-  }
-}
-Hash$2.prototype.clear = hashClear$1;
-Hash$2.prototype["delete"] = hashDelete$1;
-Hash$2.prototype.get = hashGet$1;
-Hash$2.prototype.has = hashHas$1;
-Hash$2.prototype.set = hashSet$1;
-var _Hash = Hash$2;
-var Hash$1 = _Hash, ListCache$3 = _ListCache, Map$4 = _Map;
-function mapCacheClear$2() {
-  this.size = 0;
-  this.__data__ = {
-    "hash": new Hash$1(),
-    "map": new (Map$4 || ListCache$3)(),
-    "string": new Hash$1()
-  };
-}
-var _mapCacheClear = mapCacheClear$2;
-function isKeyable$2(value) {
-  var type = typeof value;
-  return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
-}
-var _isKeyable = isKeyable$2;
-var isKeyable$1 = _isKeyable;
-function getMapData$5(map3, key) {
-  var data2 = map3.__data__;
-  return isKeyable$1(key) ? data2[typeof key == "string" ? "string" : "hash"] : data2.map;
-}
-var _getMapData = getMapData$5;
-var getMapData$4 = _getMapData;
-function mapCacheDelete$2(key) {
-  var result = getMapData$4(this, key)["delete"](key);
-  this.size -= result ? 1 : 0;
-  return result;
-}
-var _mapCacheDelete = mapCacheDelete$2;
-var getMapData$3 = _getMapData;
-function mapCacheGet$2(key) {
-  return getMapData$3(this, key).get(key);
-}
-var _mapCacheGet = mapCacheGet$2;
-var getMapData$2 = _getMapData;
-function mapCacheHas$2(key) {
-  return getMapData$2(this, key).has(key);
-}
-var _mapCacheHas = mapCacheHas$2;
-var getMapData$1 = _getMapData;
-function mapCacheSet$2(key, value) {
-  var data2 = getMapData$1(this, key), size = data2.size;
-  data2.set(key, value);
-  this.size += data2.size == size ? 0 : 1;
-  return this;
-}
-var _mapCacheSet = mapCacheSet$2;
-var mapCacheClear$1 = _mapCacheClear, mapCacheDelete$1 = _mapCacheDelete, mapCacheGet$1 = _mapCacheGet, mapCacheHas$1 = _mapCacheHas, mapCacheSet$1 = _mapCacheSet;
-function MapCache$4(entries) {
-  var index2 = -1, length2 = entries == null ? 0 : entries.length;
-  this.clear();
-  while (++index2 < length2) {
-    var entry = entries[index2];
-    this.set(entry[0], entry[1]);
-  }
-}
-MapCache$4.prototype.clear = mapCacheClear$1;
-MapCache$4.prototype["delete"] = mapCacheDelete$1;
-MapCache$4.prototype.get = mapCacheGet$1;
-MapCache$4.prototype.has = mapCacheHas$1;
-MapCache$4.prototype.set = mapCacheSet$1;
-var _MapCache = MapCache$4;
-var ListCache$2 = _ListCache, Map$3 = _Map, MapCache$3 = _MapCache;
-var LARGE_ARRAY_SIZE$1 = 200;
-function stackSet$2(key, value) {
-  var data2 = this.__data__;
-  if (data2 instanceof ListCache$2) {
-    var pairs = data2.__data__;
-    if (!Map$3 || pairs.length < LARGE_ARRAY_SIZE$1 - 1) {
-      pairs.push([key, value]);
-      this.size = ++data2.size;
-      return this;
-    }
-    data2 = this.__data__ = new MapCache$3(pairs);
-  }
-  data2.set(key, value);
-  this.size = data2.size;
-  return this;
-}
-var _stackSet = stackSet$2;
-var ListCache$1 = _ListCache, stackClear$1 = _stackClear, stackDelete$1 = _stackDelete, stackGet$1 = _stackGet, stackHas$1 = _stackHas, stackSet$1 = _stackSet;
-function Stack$4(entries) {
-  var data2 = this.__data__ = new ListCache$1(entries);
-  this.size = data2.size;
-}
-Stack$4.prototype.clear = stackClear$1;
-Stack$4.prototype["delete"] = stackDelete$1;
-Stack$4.prototype.get = stackGet$1;
-Stack$4.prototype.has = stackHas$1;
-Stack$4.prototype.set = stackSet$1;
-var _Stack = Stack$4;
-var HASH_UNDEFINED$3 = "__lodash_hash_undefined__";
-function setCacheAdd$2(value) {
-  this.__data__.set(value, HASH_UNDEFINED$3);
-  return this;
-}
-var _setCacheAdd = setCacheAdd$2;
-function setCacheHas$2(value) {
-  return this.__data__.has(value);
-}
-var _setCacheHas = setCacheHas$2;
-var MapCache$2 = _MapCache, setCacheAdd$1 = _setCacheAdd, setCacheHas$1 = _setCacheHas;
-function SetCache$2(values2) {
-  var index2 = -1, length2 = values2 == null ? 0 : values2.length;
-  this.__data__ = new MapCache$2();
-  while (++index2 < length2) {
-    this.add(values2[index2]);
-  }
-}
-SetCache$2.prototype.add = SetCache$2.prototype.push = setCacheAdd$1;
-SetCache$2.prototype.has = setCacheHas$1;
-var _SetCache = SetCache$2;
-function arraySome$2(array, predicate) {
-  var index2 = -1, length2 = array == null ? 0 : array.length;
-  while (++index2 < length2) {
-    if (predicate(array[index2], index2, array)) {
-      return true;
-    }
-  }
-  return false;
-}
-var _arraySome = arraySome$2;
-function cacheHas$2(cache2, key) {
-  return cache2.has(key);
-}
-var _cacheHas = cacheHas$2;
-var SetCache$1 = _SetCache, arraySome$1 = _arraySome, cacheHas$1 = _cacheHas;
-var COMPARE_PARTIAL_FLAG$b = 1, COMPARE_UNORDERED_FLAG$7 = 2;
-function equalArrays$3(array, other, bitmask, customizer, equalFunc, stack) {
-  var isPartial = bitmask & COMPARE_PARTIAL_FLAG$b, arrLength = array.length, othLength = other.length;
-  if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
-    return false;
-  }
-  var arrStacked = stack.get(array);
-  var othStacked = stack.get(other);
-  if (arrStacked && othStacked) {
-    return arrStacked == other && othStacked == array;
-  }
-  var index2 = -1, result = true, seen2 = bitmask & COMPARE_UNORDERED_FLAG$7 ? new SetCache$1() : void 0;
-  stack.set(array, other);
-  stack.set(other, array);
-  while (++index2 < arrLength) {
-    var arrValue = array[index2], othValue = other[index2];
-    if (customizer) {
-      var compared = isPartial ? customizer(othValue, arrValue, index2, other, array, stack) : customizer(arrValue, othValue, index2, array, other, stack);
-    }
-    if (compared !== void 0) {
-      if (compared) {
-        continue;
-      }
-      result = false;
-      break;
-    }
-    if (seen2) {
-      if (!arraySome$1(other, function(othValue2, othIndex) {
-        if (!cacheHas$1(seen2, othIndex) && (arrValue === othValue2 || equalFunc(arrValue, othValue2, bitmask, customizer, stack))) {
-          return seen2.push(othIndex);
-        }
-      })) {
-        result = false;
-        break;
-      }
-    } else if (!(arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
-      result = false;
-      break;
-    }
-  }
-  stack["delete"](array);
-  stack["delete"](other);
-  return result;
-}
-var _equalArrays = equalArrays$3;
-var root$8 = _root;
-var Uint8Array$4 = root$8.Uint8Array;
-var _Uint8Array = Uint8Array$4;
-function mapToArray$2(map3) {
-  var index2 = -1, result = Array(map3.size);
-  map3.forEach(function(value, key) {
-    result[++index2] = [key, value];
-  });
-  return result;
-}
-var _mapToArray = mapToArray$2;
-function setToArray$2(set5) {
-  var index2 = -1, result = Array(set5.size);
-  set5.forEach(function(value) {
-    result[++index2] = value;
-  });
-  return result;
-}
-var _setToArray = setToArray$2;
-var Symbol$4 = _Symbol, Uint8Array$3 = _Uint8Array, eq$2 = eq_1, equalArrays$2 = _equalArrays, mapToArray$1 = _mapToArray, setToArray$1 = _setToArray;
-var COMPARE_PARTIAL_FLAG$a = 1, COMPARE_UNORDERED_FLAG$6 = 2;
-var boolTag$4 = "[object Boolean]", dateTag$4 = "[object Date]", errorTag$3 = "[object Error]", mapTag$7 = "[object Map]", numberTag$4 = "[object Number]", regexpTag$4 = "[object RegExp]", setTag$7 = "[object Set]", stringTag$4 = "[object String]", symbolTag$5 = "[object Symbol]";
-var arrayBufferTag$4 = "[object ArrayBuffer]", dataViewTag$6 = "[object DataView]";
-var symbolProto$4 = Symbol$4 ? Symbol$4.prototype : void 0, symbolValueOf$2 = symbolProto$4 ? symbolProto$4.valueOf : void 0;
-function equalByTag$2(object, other, tag, bitmask, customizer, equalFunc, stack) {
-  switch (tag) {
-    case dataViewTag$6:
-      if (object.byteLength != other.byteLength || object.byteOffset != other.byteOffset) {
-        return false;
-      }
-      object = object.buffer;
-      other = other.buffer;
-    case arrayBufferTag$4:
-      if (object.byteLength != other.byteLength || !equalFunc(new Uint8Array$3(object), new Uint8Array$3(other))) {
-        return false;
-      }
-      return true;
-    case boolTag$4:
-    case dateTag$4:
-    case numberTag$4:
-      return eq$2(+object, +other);
-    case errorTag$3:
-      return object.name == other.name && object.message == other.message;
-    case regexpTag$4:
-    case stringTag$4:
-      return object == other + "";
-    case mapTag$7:
-      var convert2 = mapToArray$1;
-    case setTag$7:
-      var isPartial = bitmask & COMPARE_PARTIAL_FLAG$a;
-      convert2 || (convert2 = setToArray$1);
-      if (object.size != other.size && !isPartial) {
-        return false;
-      }
-      var stacked = stack.get(object);
-      if (stacked) {
-        return stacked == other;
-      }
-      bitmask |= COMPARE_UNORDERED_FLAG$6;
-      stack.set(object, other);
-      var result = equalArrays$2(convert2(object), convert2(other), bitmask, customizer, equalFunc, stack);
-      stack["delete"](object);
-      return result;
-    case symbolTag$5:
-      if (symbolValueOf$2) {
-        return symbolValueOf$2.call(object) == symbolValueOf$2.call(other);
-      }
-  }
-  return false;
-}
-var _equalByTag = equalByTag$2;
-function arrayPush$3(array, values2) {
-  var index2 = -1, length2 = values2.length, offset = array.length;
-  while (++index2 < length2) {
-    array[offset + index2] = values2[index2];
-  }
-  return array;
-}
-var _arrayPush = arrayPush$3;
-var arrayPush$2 = _arrayPush, isArray$a = isArray_1;
-function baseGetAllKeys$3(object, keysFunc, symbolsFunc) {
-  var result = keysFunc(object);
-  return isArray$a(object) ? result : arrayPush$2(result, symbolsFunc(object));
-}
-var _baseGetAllKeys = baseGetAllKeys$3;
-function arrayFilter$2(array, predicate) {
-  var index2 = -1, length2 = array == null ? 0 : array.length, resIndex = 0, result = [];
-  while (++index2 < length2) {
-    var value = array[index2];
-    if (predicate(value, index2, array)) {
-      result[resIndex++] = value;
-    }
-  }
-  return result;
-}
-var _arrayFilter = arrayFilter$2;
-function stubArray$3() {
-  return [];
-}
-var stubArray_1 = stubArray$3;
-var arrayFilter$1 = _arrayFilter, stubArray$2 = stubArray_1;
-var objectProto$k = Object.prototype;
-var propertyIsEnumerable$2 = objectProto$k.propertyIsEnumerable;
-var nativeGetSymbols$2 = Object.getOwnPropertySymbols;
-var getSymbols$4 = !nativeGetSymbols$2 ? stubArray$2 : function(object) {
-  if (object == null) {
-    return [];
-  }
-  object = Object(object);
-  return arrayFilter$1(nativeGetSymbols$2(object), function(symbol) {
-    return propertyIsEnumerable$2.call(object, symbol);
-  });
-};
-var _getSymbols = getSymbols$4;
-var baseGetAllKeys$2 = _baseGetAllKeys, getSymbols$3 = _getSymbols, keys$5 = keys_1;
-function getAllKeys$3(object) {
-  return baseGetAllKeys$2(object, keys$5, getSymbols$3);
-}
-var _getAllKeys = getAllKeys$3;
-var getAllKeys$2 = _getAllKeys;
-var COMPARE_PARTIAL_FLAG$9 = 1;
-var objectProto$j = Object.prototype;
-var hasOwnProperty$h = objectProto$j.hasOwnProperty;
-function equalObjects$2(object, other, bitmask, customizer, equalFunc, stack) {
-  var isPartial = bitmask & COMPARE_PARTIAL_FLAG$9, objProps = getAllKeys$2(object), objLength = objProps.length, othProps = getAllKeys$2(other), othLength = othProps.length;
-  if (objLength != othLength && !isPartial) {
-    return false;
-  }
-  var index2 = objLength;
-  while (index2--) {
-    var key = objProps[index2];
-    if (!(isPartial ? key in other : hasOwnProperty$h.call(other, key))) {
-      return false;
-    }
-  }
-  var objStacked = stack.get(object);
-  var othStacked = stack.get(other);
-  if (objStacked && othStacked) {
-    return objStacked == other && othStacked == object;
-  }
-  var result = true;
-  stack.set(object, other);
-  stack.set(other, object);
-  var skipCtor = isPartial;
-  while (++index2 < objLength) {
-    key = objProps[index2];
-    var objValue = object[key], othValue = other[key];
-    if (customizer) {
-      var compared = isPartial ? customizer(othValue, objValue, key, other, object, stack) : customizer(objValue, othValue, key, object, other, stack);
-    }
-    if (!(compared === void 0 ? objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack) : compared)) {
-      result = false;
-      break;
-    }
-    skipCtor || (skipCtor = key == "constructor");
-  }
-  if (result && !skipCtor) {
-    var objCtor = object.constructor, othCtor = other.constructor;
-    if (objCtor != othCtor && ("constructor" in object && "constructor" in other) && !(typeof objCtor == "function" && objCtor instanceof objCtor && typeof othCtor == "function" && othCtor instanceof othCtor)) {
-      result = false;
-    }
-  }
-  stack["delete"](object);
-  stack["delete"](other);
-  return result;
-}
-var _equalObjects = equalObjects$2;
-var getNative$5 = _getNative, root$7 = _root;
-var DataView$3 = getNative$5(root$7, "DataView");
-var _DataView = DataView$3;
-var getNative$4 = _getNative, root$6 = _root;
-var Promise$3 = getNative$4(root$6, "Promise");
-var _Promise = Promise$3;
-var getNative$3 = _getNative, root$5 = _root;
-var Set$3 = getNative$3(root$5, "Set");
-var _Set = Set$3;
-var getNative$2 = _getNative, root$4 = _root;
-var WeakMap$3 = getNative$2(root$4, "WeakMap");
-var _WeakMap = WeakMap$3;
-var DataView$2 = _DataView, Map$2 = _Map, Promise$2 = _Promise, Set$2 = _Set, WeakMap$2 = _WeakMap, baseGetTag$2 = _baseGetTag, toSource$1 = _toSource;
-var mapTag$6 = "[object Map]", objectTag$6 = "[object Object]", promiseTag$1 = "[object Promise]", setTag$6 = "[object Set]", weakMapTag$3 = "[object WeakMap]";
-var dataViewTag$5 = "[object DataView]";
-var dataViewCtorString$1 = toSource$1(DataView$2), mapCtorString$1 = toSource$1(Map$2), promiseCtorString$1 = toSource$1(Promise$2), setCtorString$1 = toSource$1(Set$2), weakMapCtorString$1 = toSource$1(WeakMap$2);
-var getTag$5 = baseGetTag$2;
-if (DataView$2 && getTag$5(new DataView$2(new ArrayBuffer(1))) != dataViewTag$5 || Map$2 && getTag$5(new Map$2()) != mapTag$6 || Promise$2 && getTag$5(Promise$2.resolve()) != promiseTag$1 || Set$2 && getTag$5(new Set$2()) != setTag$6 || WeakMap$2 && getTag$5(new WeakMap$2()) != weakMapTag$3) {
-  getTag$5 = function(value) {
-    var result = baseGetTag$2(value), Ctor = result == objectTag$6 ? value.constructor : void 0, ctorString = Ctor ? toSource$1(Ctor) : "";
-    if (ctorString) {
-      switch (ctorString) {
-        case dataViewCtorString$1:
-          return dataViewTag$5;
-        case mapCtorString$1:
-          return mapTag$6;
-        case promiseCtorString$1:
-          return promiseTag$1;
-        case setCtorString$1:
-          return setTag$6;
-        case weakMapCtorString$1:
-          return weakMapTag$3;
-      }
-    }
-    return result;
-  };
-}
-var _getTag = getTag$5;
-var Stack$3 = _Stack, equalArrays$1 = _equalArrays, equalByTag$1 = _equalByTag, equalObjects$1 = _equalObjects, getTag$4 = _getTag, isArray$9 = isArray_1, isBuffer$2 = isBufferExports, isTypedArray$1 = isTypedArray_1;
-var COMPARE_PARTIAL_FLAG$8 = 1;
-var argsTag$4 = "[object Arguments]", arrayTag$3 = "[object Array]", objectTag$5 = "[object Object]";
-var objectProto$i = Object.prototype;
-var hasOwnProperty$g = objectProto$i.hasOwnProperty;
-function baseIsEqualDeep$2(object, other, bitmask, customizer, equalFunc, stack) {
-  var objIsArr = isArray$9(object), othIsArr = isArray$9(other), objTag = objIsArr ? arrayTag$3 : getTag$4(object), othTag = othIsArr ? arrayTag$3 : getTag$4(other);
-  objTag = objTag == argsTag$4 ? objectTag$5 : objTag;
-  othTag = othTag == argsTag$4 ? objectTag$5 : othTag;
-  var objIsObj = objTag == objectTag$5, othIsObj = othTag == objectTag$5, isSameTag = objTag == othTag;
-  if (isSameTag && isBuffer$2(object)) {
-    if (!isBuffer$2(other)) {
-      return false;
-    }
-    objIsArr = true;
-    objIsObj = false;
-  }
-  if (isSameTag && !objIsObj) {
-    stack || (stack = new Stack$3());
-    return objIsArr || isTypedArray$1(object) ? equalArrays$1(object, other, bitmask, customizer, equalFunc, stack) : equalByTag$1(object, other, objTag, bitmask, customizer, equalFunc, stack);
-  }
-  if (!(bitmask & COMPARE_PARTIAL_FLAG$8)) {
-    var objIsWrapped = objIsObj && hasOwnProperty$g.call(object, "__wrapped__"), othIsWrapped = othIsObj && hasOwnProperty$g.call(other, "__wrapped__");
-    if (objIsWrapped || othIsWrapped) {
-      var objUnwrapped = objIsWrapped ? object.value() : object, othUnwrapped = othIsWrapped ? other.value() : other;
-      stack || (stack = new Stack$3());
-      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
-    }
-  }
-  if (!isSameTag) {
-    return false;
-  }
-  stack || (stack = new Stack$3());
-  return equalObjects$1(object, other, bitmask, customizer, equalFunc, stack);
-}
-var _baseIsEqualDeep = baseIsEqualDeep$2;
-var baseIsEqualDeep$1 = _baseIsEqualDeep, isObjectLike$4 = isObjectLike_1;
-function baseIsEqual$3(value, other, bitmask, customizer, stack) {
-  if (value === other) {
-    return true;
-  }
-  if (value == null || other == null || !isObjectLike$4(value) && !isObjectLike$4(other)) {
-    return value !== value && other !== other;
-  }
-  return baseIsEqualDeep$1(value, other, bitmask, customizer, baseIsEqual$3, stack);
-}
-var _baseIsEqual = baseIsEqual$3;
-var Stack$2 = _Stack, baseIsEqual$2 = _baseIsEqual;
-var COMPARE_PARTIAL_FLAG$7 = 1, COMPARE_UNORDERED_FLAG$5 = 2;
-function baseIsMatch$2(object, source2, matchData, customizer) {
-  var index2 = matchData.length, length2 = index2, noCustomizer = !customizer;
-  if (object == null) {
-    return !length2;
-  }
-  object = Object(object);
-  while (index2--) {
-    var data2 = matchData[index2];
-    if (noCustomizer && data2[2] ? data2[1] !== object[data2[0]] : !(data2[0] in object)) {
-      return false;
-    }
-  }
-  while (++index2 < length2) {
-    data2 = matchData[index2];
-    var key = data2[0], objValue = object[key], srcValue = data2[1];
-    if (noCustomizer && data2[2]) {
-      if (objValue === void 0 && !(key in object)) {
-        return false;
-      }
-    } else {
-      var stack = new Stack$2();
-      if (customizer) {
-        var result = customizer(objValue, srcValue, key, object, source2, stack);
-      }
-      if (!(result === void 0 ? baseIsEqual$2(srcValue, objValue, COMPARE_PARTIAL_FLAG$7 | COMPARE_UNORDERED_FLAG$5, customizer, stack) : result)) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-var _baseIsMatch = baseIsMatch$2;
-var isObject$4 = isObject_1;
-function isStrictComparable$3(value) {
-  return value === value && !isObject$4(value);
-}
-var _isStrictComparable = isStrictComparable$3;
-var isStrictComparable$2 = _isStrictComparable, keys$4 = keys_1;
-function getMatchData$2(object) {
-  var result = keys$4(object), length2 = result.length;
-  while (length2--) {
-    var key = result[length2], value = object[key];
-    result[length2] = [key, value, isStrictComparable$2(value)];
-  }
-  return result;
-}
-var _getMatchData = getMatchData$2;
-function matchesStrictComparable$3(key, srcValue) {
-  return function(object) {
-    if (object == null) {
-      return false;
-    }
-    return object[key] === srcValue && (srcValue !== void 0 || key in Object(object));
-  };
-}
-var _matchesStrictComparable = matchesStrictComparable$3;
-var baseIsMatch$1 = _baseIsMatch, getMatchData$1 = _getMatchData, matchesStrictComparable$2 = _matchesStrictComparable;
-function baseMatches$2(source2) {
-  var matchData = getMatchData$1(source2);
-  if (matchData.length == 1 && matchData[0][2]) {
-    return matchesStrictComparable$2(matchData[0][0], matchData[0][1]);
-  }
-  return function(object) {
-    return object === source2 || baseIsMatch$1(object, source2, matchData);
-  };
-}
-var _baseMatches = baseMatches$2;
-var baseGetTag$1 = _baseGetTag, isObjectLike$3 = isObjectLike_1;
-var symbolTag$4 = "[object Symbol]";
-function isSymbol$4(value) {
-  return typeof value == "symbol" || isObjectLike$3(value) && baseGetTag$1(value) == symbolTag$4;
-}
-var isSymbol_1 = isSymbol$4;
-var isArray$8 = isArray_1, isSymbol$3 = isSymbol_1;
-var reIsDeepProp$1 = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/, reIsPlainProp$1 = /^\w*$/;
-function isKey$4(value, object) {
-  if (isArray$8(value)) {
-    return false;
-  }
-  var type = typeof value;
-  if (type == "number" || type == "symbol" || type == "boolean" || value == null || isSymbol$3(value)) {
-    return true;
-  }
-  return reIsPlainProp$1.test(value) || !reIsDeepProp$1.test(value) || object != null && value in Object(object);
-}
-var _isKey = isKey$4;
-var MapCache$1 = _MapCache;
-var FUNC_ERROR_TEXT$3 = "Expected a function";
-function memoize$2(func, resolver2) {
-  if (typeof func != "function" || resolver2 != null && typeof resolver2 != "function") {
-    throw new TypeError(FUNC_ERROR_TEXT$3);
-  }
-  var memoized = function() {
-    var args = arguments, key = resolver2 ? resolver2.apply(this, args) : args[0], cache2 = memoized.cache;
-    if (cache2.has(key)) {
-      return cache2.get(key);
-    }
-    var result = func.apply(this, args);
-    memoized.cache = cache2.set(key, result) || cache2;
-    return result;
-  };
-  memoized.cache = new (memoize$2.Cache || MapCache$1)();
-  return memoized;
-}
-memoize$2.Cache = MapCache$1;
-var memoize_1 = memoize$2;
-var memoize$1 = memoize_1;
-var MAX_MEMOIZE_SIZE$1 = 500;
-function memoizeCapped$2(func) {
-  var result = memoize$1(func, function(key) {
-    if (cache2.size === MAX_MEMOIZE_SIZE$1) {
-      cache2.clear();
-    }
-    return key;
-  });
-  var cache2 = result.cache;
-  return result;
-}
-var _memoizeCapped = memoizeCapped$2;
-var memoizeCapped$1 = _memoizeCapped;
-var rePropName$1 = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
-var reEscapeChar$1 = /\\(\\)?/g;
-var stringToPath$2 = memoizeCapped$1(function(string2) {
-  var result = [];
-  if (string2.charCodeAt(0) === 46) {
-    result.push("");
-  }
-  string2.replace(rePropName$1, function(match2, number2, quote, subString) {
-    result.push(quote ? subString.replace(reEscapeChar$1, "$1") : number2 || match2);
-  });
-  return result;
-});
-var _stringToPath = stringToPath$2;
-var Symbol$3 = _Symbol, arrayMap$2 = _arrayMap, isArray$7 = isArray_1, isSymbol$2 = isSymbol_1;
-var symbolProto$3 = Symbol$3 ? Symbol$3.prototype : void 0, symbolToString$1 = symbolProto$3 ? symbolProto$3.toString : void 0;
-function baseToString$2(value) {
-  if (typeof value == "string") {
-    return value;
-  }
-  if (isArray$7(value)) {
-    return arrayMap$2(value, baseToString$2) + "";
-  }
-  if (isSymbol$2(value)) {
-    return symbolToString$1 ? symbolToString$1.call(value) : "";
-  }
-  var result = value + "";
-  return result == "0" && 1 / value == -Infinity ? "-0" : result;
-}
-var _baseToString = baseToString$2;
-var baseToString$1 = _baseToString;
-function toString$4(value) {
-  return value == null ? "" : baseToString$1(value);
-}
-var toString_1 = toString$4;
-var isArray$6 = isArray_1, isKey$3 = _isKey, stringToPath$1 = _stringToPath, toString$3 = toString_1;
-function castPath$3(value, object) {
-  if (isArray$6(value)) {
-    return value;
-  }
-  return isKey$3(value, object) ? [value] : stringToPath$1(toString$3(value));
-}
-var _castPath = castPath$3;
-var isSymbol$1 = isSymbol_1;
-function toKey$5(value) {
-  if (typeof value == "string" || isSymbol$1(value)) {
-    return value;
-  }
-  var result = value + "";
-  return result == "0" && 1 / value == -Infinity ? "-0" : result;
-}
-var _toKey = toKey$5;
-var castPath$2 = _castPath, toKey$4 = _toKey;
-function baseGet$3(object, path) {
-  path = castPath$2(path, object);
-  var index2 = 0, length2 = path.length;
-  while (object != null && index2 < length2) {
-    object = object[toKey$4(path[index2++])];
-  }
-  return index2 && index2 == length2 ? object : void 0;
-}
-var _baseGet = baseGet$3;
-var baseGet$2 = _baseGet;
-function get$3(object, path, defaultValue) {
-  var result = object == null ? void 0 : baseGet$2(object, path);
-  return result === void 0 ? defaultValue : result;
-}
-var get_1 = get$3;
-function baseHasIn$2(object, key) {
-  return object != null && key in Object(object);
-}
-var _baseHasIn = baseHasIn$2;
-var castPath$1 = _castPath, isArguments$1 = isArguments_1, isArray$5 = isArray_1, isIndex$1 = _isIndex, isLength$1 = isLength_1, toKey$3 = _toKey;
-function hasPath$2(object, path, hasFunc) {
-  path = castPath$1(path, object);
-  var index2 = -1, length2 = path.length, result = false;
-  while (++index2 < length2) {
-    var key = toKey$3(path[index2]);
-    if (!(result = object != null && hasFunc(object, key))) {
-      break;
-    }
-    object = object[key];
-  }
-  if (result || ++index2 != length2) {
-    return result;
-  }
-  length2 = object == null ? 0 : object.length;
-  return !!length2 && isLength$1(length2) && isIndex$1(key, length2) && (isArray$5(object) || isArguments$1(object));
-}
-var _hasPath = hasPath$2;
-var baseHasIn$1 = _baseHasIn, hasPath$1 = _hasPath;
-function hasIn$2(object, path) {
-  return object != null && hasPath$1(object, path, baseHasIn$1);
-}
-var hasIn_1 = hasIn$2;
-var baseIsEqual$1 = _baseIsEqual, get$2 = get_1, hasIn$1 = hasIn_1, isKey$2 = _isKey, isStrictComparable$1 = _isStrictComparable, matchesStrictComparable$1 = _matchesStrictComparable, toKey$2 = _toKey;
-var COMPARE_PARTIAL_FLAG$6 = 1, COMPARE_UNORDERED_FLAG$4 = 2;
-function baseMatchesProperty$2(path, srcValue) {
-  if (isKey$2(path) && isStrictComparable$1(srcValue)) {
-    return matchesStrictComparable$1(toKey$2(path), srcValue);
-  }
-  return function(object) {
-    var objValue = get$2(object, path);
-    return objValue === void 0 && objValue === srcValue ? hasIn$1(object, path) : baseIsEqual$1(srcValue, objValue, COMPARE_PARTIAL_FLAG$6 | COMPARE_UNORDERED_FLAG$4);
-  };
-}
-var _baseMatchesProperty = baseMatchesProperty$2;
-function baseProperty$2(key) {
-  return function(object) {
-    return object == null ? void 0 : object[key];
-  };
-}
-var _baseProperty = baseProperty$2;
-var baseGet$1 = _baseGet;
-function basePropertyDeep$2(path) {
-  return function(object) {
-    return baseGet$1(object, path);
-  };
-}
-var _basePropertyDeep = basePropertyDeep$2;
-var baseProperty$1 = _baseProperty, basePropertyDeep$1 = _basePropertyDeep, isKey$1 = _isKey, toKey$1 = _toKey;
-function property$2(path) {
-  return isKey$1(path) ? baseProperty$1(toKey$1(path)) : basePropertyDeep$1(path);
-}
-var property_1 = property$2;
-var baseMatches$1 = _baseMatches, baseMatchesProperty$1 = _baseMatchesProperty, identity$1 = identity_1, isArray$4 = isArray_1, property$1 = property_1;
-function baseIteratee$2(value) {
-  if (typeof value == "function") {
-    return value;
-  }
-  if (value == null) {
-    return identity$1;
-  }
-  if (typeof value == "object") {
-    return isArray$4(value) ? baseMatchesProperty$1(value[0], value[1]) : baseMatches$1(value);
-  }
-  return property$1(value);
-}
-var _baseIteratee = baseIteratee$2;
-var isArrayLike$3 = isArrayLike_1;
-function createBaseEach$2(eachFunc, fromRight) {
-  return function(collection2, iteratee) {
-    if (collection2 == null) {
-      return collection2;
-    }
-    if (!isArrayLike$3(collection2)) {
-      return eachFunc(collection2, iteratee);
-    }
-    var length2 = collection2.length, index2 = fromRight ? length2 : -1, iterable = Object(collection2);
-    while (fromRight ? index2-- : ++index2 < length2) {
-      if (iteratee(iterable[index2], index2, iterable) === false) {
-        break;
-      }
-    }
-    return collection2;
-  };
-}
-var _createBaseEach = createBaseEach$2;
-var baseForOwn$1 = _baseForOwn, createBaseEach$1 = _createBaseEach;
-var baseEach$2 = createBaseEach$1(baseForOwn$1);
-var _baseEach = baseEach$2;
-var baseEach$1 = _baseEach, isArrayLike$2 = isArrayLike_1;
-function baseMap$2(collection2, iteratee) {
-  var index2 = -1, result = isArrayLike$2(collection2) ? Array(collection2.length) : [];
-  baseEach$1(collection2, function(value, key, collection3) {
-    result[++index2] = iteratee(value, key, collection3);
-  });
-  return result;
-}
-var _baseMap = baseMap$2;
-var arrayMap$1 = _arrayMap, baseIteratee$1 = _baseIteratee, baseMap$1 = _baseMap, isArray$3 = isArray_1;
-function map$1(collection2, iteratee) {
-  var func = isArray$3(collection2) ? arrayMap$1 : baseMap$1;
-  return func(collection2, baseIteratee$1(iteratee));
-}
-var map_1 = map$1;
-Object.defineProperty(flattenNames$1, "__esModule", {
-  value: true
-});
-flattenNames$1.flattenNames = void 0;
-var _isString2 = isString_1;
-var _isString3 = _interopRequireDefault$8(_isString2);
-var _forOwn2$2 = forOwn_1;
-var _forOwn3$2 = _interopRequireDefault$8(_forOwn2$2);
-var _isPlainObject2 = isPlainObject_1;
-var _isPlainObject3 = _interopRequireDefault$8(_isPlainObject2);
-var _map2 = map_1;
-var _map3 = _interopRequireDefault$8(_map2);
-function _interopRequireDefault$8(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-var flattenNames = flattenNames$1.flattenNames = function flattenNames2() {
-  var things = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : [];
-  var names2 = [];
-  (0, _map3.default)(things, function(thing) {
-    if (Array.isArray(thing)) {
-      flattenNames2(thing).map(function(name2) {
-        return names2.push(name2);
-      });
-    } else if ((0, _isPlainObject3.default)(thing)) {
-      (0, _forOwn3$2.default)(thing, function(value, key) {
-        value === true && names2.push(key);
-        names2.push(key + "-" + value);
-      });
-    } else if ((0, _isString3.default)(thing)) {
-      names2.push(thing);
-    }
-  });
-  return names2;
-};
-flattenNames$1.default = flattenNames;
-var mergeClasses$1 = {};
-function arrayEach$2(array, iteratee) {
-  var index2 = -1, length2 = array == null ? 0 : array.length;
-  while (++index2 < length2) {
-    if (iteratee(array[index2], index2, array) === false) {
-      break;
-    }
-  }
-  return array;
-}
-var _arrayEach = arrayEach$2;
-var getNative$1 = _getNative;
-var defineProperty$3 = function() {
-  try {
-    var func = getNative$1(Object, "defineProperty");
-    func({}, "", {});
-    return func;
-  } catch (e3) {
-  }
-}();
-var _defineProperty$2 = defineProperty$3;
-var defineProperty$2 = _defineProperty$2;
-function baseAssignValue$3(object, key, value) {
-  if (key == "__proto__" && defineProperty$2) {
-    defineProperty$2(object, key, {
-      "configurable": true,
-      "enumerable": true,
-      "value": value,
-      "writable": true
-    });
-  } else {
-    object[key] = value;
-  }
-}
-var _baseAssignValue = baseAssignValue$3;
-var baseAssignValue$2 = _baseAssignValue, eq$1 = eq_1;
-var objectProto$h = Object.prototype;
-var hasOwnProperty$f = objectProto$h.hasOwnProperty;
-function assignValue$3(object, key, value) {
-  var objValue = object[key];
-  if (!(hasOwnProperty$f.call(object, key) && eq$1(objValue, value)) || value === void 0 && !(key in object)) {
-    baseAssignValue$2(object, key, value);
-  }
-}
-var _assignValue = assignValue$3;
-var assignValue$2 = _assignValue, baseAssignValue$1 = _baseAssignValue;
-function copyObject$5(source2, props, object, customizer) {
-  var isNew = !object;
-  object || (object = {});
-  var index2 = -1, length2 = props.length;
-  while (++index2 < length2) {
-    var key = props[index2];
-    var newValue = customizer ? customizer(object[key], source2[key], key, object, source2) : void 0;
-    if (newValue === void 0) {
-      newValue = source2[key];
-    }
-    if (isNew) {
-      baseAssignValue$1(object, key, newValue);
-    } else {
-      assignValue$2(object, key, newValue);
-    }
-  }
-  return object;
-}
-var _copyObject = copyObject$5;
-var copyObject$4 = _copyObject, keys$3 = keys_1;
-function baseAssign$1(object, source2) {
-  return object && copyObject$4(source2, keys$3(source2), object);
-}
-var _baseAssign = baseAssign$1;
-function nativeKeysIn$2(object) {
-  var result = [];
-  if (object != null) {
-    for (var key in Object(object)) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-var _nativeKeysIn = nativeKeysIn$2;
-var isObject$3 = isObject_1, isPrototype$2 = _isPrototype, nativeKeysIn$1 = _nativeKeysIn;
-var objectProto$g = Object.prototype;
-var hasOwnProperty$e = objectProto$g.hasOwnProperty;
-function baseKeysIn$2(object) {
-  if (!isObject$3(object)) {
-    return nativeKeysIn$1(object);
-  }
-  var isProto = isPrototype$2(object), result = [];
-  for (var key in object) {
-    if (!(key == "constructor" && (isProto || !hasOwnProperty$e.call(object, key)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-var _baseKeysIn = baseKeysIn$2;
-var arrayLikeKeys$1 = _arrayLikeKeys, baseKeysIn$1 = _baseKeysIn, isArrayLike$1 = isArrayLike_1;
-function keysIn$4(object) {
-  return isArrayLike$1(object) ? arrayLikeKeys$1(object, true) : baseKeysIn$1(object);
-}
-var keysIn_1 = keysIn$4;
-var copyObject$3 = _copyObject, keysIn$3 = keysIn_1;
-function baseAssignIn$1(object, source2) {
-  return object && copyObject$3(source2, keysIn$3(source2), object);
-}
-var _baseAssignIn = baseAssignIn$1;
-var _cloneBuffer = { exports: {} };
-_cloneBuffer.exports;
-(function(module2, exports2) {
-  var root2 = _root;
-  var freeExports2 = exports2 && !exports2.nodeType && exports2;
-  var freeModule2 = freeExports2 && true && module2 && !module2.nodeType && module2;
-  var moduleExports2 = freeModule2 && freeModule2.exports === freeExports2;
-  var Buffer2 = moduleExports2 ? root2.Buffer : void 0, allocUnsafe = Buffer2 ? Buffer2.allocUnsafe : void 0;
-  function cloneBuffer2(buffer2, isDeep) {
-    if (isDeep) {
-      return buffer2.slice();
-    }
-    var length2 = buffer2.length, result = allocUnsafe ? allocUnsafe(length2) : new buffer2.constructor(length2);
-    buffer2.copy(result);
-    return result;
-  }
-  module2.exports = cloneBuffer2;
-})(_cloneBuffer, _cloneBuffer.exports);
-var _cloneBufferExports = _cloneBuffer.exports;
-function copyArray$2(source2, array) {
-  var index2 = -1, length2 = source2.length;
-  array || (array = Array(length2));
-  while (++index2 < length2) {
-    array[index2] = source2[index2];
-  }
-  return array;
-}
-var _copyArray = copyArray$2;
-var copyObject$2 = _copyObject, getSymbols$2 = _getSymbols;
-function copySymbols$1(source2, object) {
-  return copyObject$2(source2, getSymbols$2(source2), object);
-}
-var _copySymbols = copySymbols$1;
-var arrayPush$1 = _arrayPush, getPrototype$2 = _getPrototype, getSymbols$1 = _getSymbols, stubArray$1 = stubArray_1;
-var nativeGetSymbols$1 = Object.getOwnPropertySymbols;
-var getSymbolsIn$2 = !nativeGetSymbols$1 ? stubArray$1 : function(object) {
-  var result = [];
-  while (object) {
-    arrayPush$1(result, getSymbols$1(object));
-    object = getPrototype$2(object);
-  }
-  return result;
-};
-var _getSymbolsIn = getSymbolsIn$2;
-var copyObject$1 = _copyObject, getSymbolsIn$1 = _getSymbolsIn;
-function copySymbolsIn$1(source2, object) {
-  return copyObject$1(source2, getSymbolsIn$1(source2), object);
-}
-var _copySymbolsIn = copySymbolsIn$1;
-var baseGetAllKeys$1 = _baseGetAllKeys, getSymbolsIn = _getSymbolsIn, keysIn$2 = keysIn_1;
-function getAllKeysIn$1(object) {
-  return baseGetAllKeys$1(object, keysIn$2, getSymbolsIn);
-}
-var _getAllKeysIn = getAllKeysIn$1;
-var objectProto$f = Object.prototype;
-var hasOwnProperty$d = objectProto$f.hasOwnProperty;
-function initCloneArray$1(array) {
-  var length2 = array.length, result = new array.constructor(length2);
-  if (length2 && typeof array[0] == "string" && hasOwnProperty$d.call(array, "index")) {
-    result.index = array.index;
-    result.input = array.input;
-  }
-  return result;
-}
-var _initCloneArray = initCloneArray$1;
-var Uint8Array$2 = _Uint8Array;
-function cloneArrayBuffer$4(arrayBuffer2) {
-  var result = new arrayBuffer2.constructor(arrayBuffer2.byteLength);
-  new Uint8Array$2(result).set(new Uint8Array$2(arrayBuffer2));
-  return result;
-}
-var _cloneArrayBuffer = cloneArrayBuffer$4;
-var cloneArrayBuffer$3 = _cloneArrayBuffer;
-function cloneDataView$1(dataView, isDeep) {
-  var buffer2 = isDeep ? cloneArrayBuffer$3(dataView.buffer) : dataView.buffer;
-  return new dataView.constructor(buffer2, dataView.byteOffset, dataView.byteLength);
-}
-var _cloneDataView = cloneDataView$1;
-var reFlags = /\w*$/;
-function cloneRegExp$1(regexp) {
-  var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
-  result.lastIndex = regexp.lastIndex;
-  return result;
-}
-var _cloneRegExp = cloneRegExp$1;
-var Symbol$2 = _Symbol;
-var symbolProto$2 = Symbol$2 ? Symbol$2.prototype : void 0, symbolValueOf$1 = symbolProto$2 ? symbolProto$2.valueOf : void 0;
-function cloneSymbol$1(symbol) {
-  return symbolValueOf$1 ? Object(symbolValueOf$1.call(symbol)) : {};
-}
-var _cloneSymbol = cloneSymbol$1;
-var cloneArrayBuffer$2 = _cloneArrayBuffer;
-function cloneTypedArray$2(typedArray, isDeep) {
-  var buffer2 = isDeep ? cloneArrayBuffer$2(typedArray.buffer) : typedArray.buffer;
-  return new typedArray.constructor(buffer2, typedArray.byteOffset, typedArray.length);
-}
-var _cloneTypedArray = cloneTypedArray$2;
-var cloneArrayBuffer$1 = _cloneArrayBuffer, cloneDataView = _cloneDataView, cloneRegExp = _cloneRegExp, cloneSymbol = _cloneSymbol, cloneTypedArray$1 = _cloneTypedArray;
-var boolTag$3 = "[object Boolean]", dateTag$3 = "[object Date]", mapTag$5 = "[object Map]", numberTag$3 = "[object Number]", regexpTag$3 = "[object RegExp]", setTag$5 = "[object Set]", stringTag$3 = "[object String]", symbolTag$3 = "[object Symbol]";
-var arrayBufferTag$3 = "[object ArrayBuffer]", dataViewTag$4 = "[object DataView]", float32Tag$2 = "[object Float32Array]", float64Tag$2 = "[object Float64Array]", int8Tag$2 = "[object Int8Array]", int16Tag$2 = "[object Int16Array]", int32Tag$2 = "[object Int32Array]", uint8Tag$2 = "[object Uint8Array]", uint8ClampedTag$2 = "[object Uint8ClampedArray]", uint16Tag$2 = "[object Uint16Array]", uint32Tag$2 = "[object Uint32Array]";
-function initCloneByTag$1(object, tag, isDeep) {
-  var Ctor = object.constructor;
-  switch (tag) {
-    case arrayBufferTag$3:
-      return cloneArrayBuffer$1(object);
-    case boolTag$3:
-    case dateTag$3:
-      return new Ctor(+object);
-    case dataViewTag$4:
-      return cloneDataView(object, isDeep);
-    case float32Tag$2:
-    case float64Tag$2:
-    case int8Tag$2:
-    case int16Tag$2:
-    case int32Tag$2:
-    case uint8Tag$2:
-    case uint8ClampedTag$2:
-    case uint16Tag$2:
-    case uint32Tag$2:
-      return cloneTypedArray$1(object, isDeep);
-    case mapTag$5:
-      return new Ctor();
-    case numberTag$3:
-    case stringTag$3:
-      return new Ctor(object);
-    case regexpTag$3:
-      return cloneRegExp(object);
-    case setTag$5:
-      return new Ctor();
-    case symbolTag$3:
-      return cloneSymbol(object);
-  }
-}
-var _initCloneByTag = initCloneByTag$1;
-var isObject$2 = isObject_1;
-var objectCreate$1 = Object.create;
-var baseCreate$2 = /* @__PURE__ */ function() {
-  function object() {
-  }
-  return function(proto2) {
-    if (!isObject$2(proto2)) {
-      return {};
-    }
-    if (objectCreate$1) {
-      return objectCreate$1(proto2);
-    }
-    object.prototype = proto2;
-    var result = new object();
-    object.prototype = void 0;
-    return result;
-  };
-}();
-var _baseCreate = baseCreate$2;
-var baseCreate$1 = _baseCreate, getPrototype$1 = _getPrototype, isPrototype$1 = _isPrototype;
-function initCloneObject$2(object) {
-  return typeof object.constructor == "function" && !isPrototype$1(object) ? baseCreate$1(getPrototype$1(object)) : {};
-}
-var _initCloneObject = initCloneObject$2;
-var getTag$3 = _getTag, isObjectLike$2 = isObjectLike_1;
-var mapTag$4 = "[object Map]";
-function baseIsMap$1(value) {
-  return isObjectLike$2(value) && getTag$3(value) == mapTag$4;
-}
-var _baseIsMap = baseIsMap$1;
-var baseIsMap = _baseIsMap, baseUnary$2 = _baseUnary, nodeUtil$2 = _nodeUtilExports;
-var nodeIsMap = nodeUtil$2 && nodeUtil$2.isMap;
-var isMap$1 = nodeIsMap ? baseUnary$2(nodeIsMap) : baseIsMap;
-var isMap_1 = isMap$1;
-var getTag$2 = _getTag, isObjectLike$1 = isObjectLike_1;
-var setTag$4 = "[object Set]";
-function baseIsSet$1(value) {
-  return isObjectLike$1(value) && getTag$2(value) == setTag$4;
-}
-var _baseIsSet = baseIsSet$1;
-var baseIsSet = _baseIsSet, baseUnary$1 = _baseUnary, nodeUtil$1 = _nodeUtilExports;
-var nodeIsSet = nodeUtil$1 && nodeUtil$1.isSet;
-var isSet$1 = nodeIsSet ? baseUnary$1(nodeIsSet) : baseIsSet;
-var isSet_1 = isSet$1;
-var Stack$1 = _Stack, arrayEach$1 = _arrayEach, assignValue$1 = _assignValue, baseAssign = _baseAssign, baseAssignIn = _baseAssignIn, cloneBuffer$1 = _cloneBufferExports, copyArray$1 = _copyArray, copySymbols = _copySymbols, copySymbolsIn = _copySymbolsIn, getAllKeys$1 = _getAllKeys, getAllKeysIn = _getAllKeysIn, getTag$1 = _getTag, initCloneArray = _initCloneArray, initCloneByTag = _initCloneByTag, initCloneObject$1 = _initCloneObject, isArray$2 = isArray_1, isBuffer$1 = isBufferExports, isMap = isMap_1, isObject$1 = isObject_1, isSet = isSet_1, keys$2 = keys_1, keysIn$1 = keysIn_1;
-var CLONE_DEEP_FLAG$1 = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG$1 = 4;
-var argsTag$3 = "[object Arguments]", arrayTag$2 = "[object Array]", boolTag$2 = "[object Boolean]", dateTag$2 = "[object Date]", errorTag$2 = "[object Error]", funcTag$2 = "[object Function]", genTag$1 = "[object GeneratorFunction]", mapTag$3 = "[object Map]", numberTag$2 = "[object Number]", objectTag$4 = "[object Object]", regexpTag$2 = "[object RegExp]", setTag$3 = "[object Set]", stringTag$2 = "[object String]", symbolTag$2 = "[object Symbol]", weakMapTag$2 = "[object WeakMap]";
-var arrayBufferTag$2 = "[object ArrayBuffer]", dataViewTag$3 = "[object DataView]", float32Tag$1 = "[object Float32Array]", float64Tag$1 = "[object Float64Array]", int8Tag$1 = "[object Int8Array]", int16Tag$1 = "[object Int16Array]", int32Tag$1 = "[object Int32Array]", uint8Tag$1 = "[object Uint8Array]", uint8ClampedTag$1 = "[object Uint8ClampedArray]", uint16Tag$1 = "[object Uint16Array]", uint32Tag$1 = "[object Uint32Array]";
-var cloneableTags = {};
-cloneableTags[argsTag$3] = cloneableTags[arrayTag$2] = cloneableTags[arrayBufferTag$2] = cloneableTags[dataViewTag$3] = cloneableTags[boolTag$2] = cloneableTags[dateTag$2] = cloneableTags[float32Tag$1] = cloneableTags[float64Tag$1] = cloneableTags[int8Tag$1] = cloneableTags[int16Tag$1] = cloneableTags[int32Tag$1] = cloneableTags[mapTag$3] = cloneableTags[numberTag$2] = cloneableTags[objectTag$4] = cloneableTags[regexpTag$2] = cloneableTags[setTag$3] = cloneableTags[stringTag$2] = cloneableTags[symbolTag$2] = cloneableTags[uint8Tag$1] = cloneableTags[uint8ClampedTag$1] = cloneableTags[uint16Tag$1] = cloneableTags[uint32Tag$1] = true;
-cloneableTags[errorTag$2] = cloneableTags[funcTag$2] = cloneableTags[weakMapTag$2] = false;
-function baseClone$1(value, bitmask, customizer, key, object, stack) {
-  var result, isDeep = bitmask & CLONE_DEEP_FLAG$1, isFlat = bitmask & CLONE_FLAT_FLAG, isFull = bitmask & CLONE_SYMBOLS_FLAG$1;
-  if (customizer) {
-    result = object ? customizer(value, key, object, stack) : customizer(value);
-  }
-  if (result !== void 0) {
-    return result;
-  }
-  if (!isObject$1(value)) {
-    return value;
-  }
-  var isArr = isArray$2(value);
-  if (isArr) {
-    result = initCloneArray(value);
-    if (!isDeep) {
-      return copyArray$1(value, result);
-    }
-  } else {
-    var tag = getTag$1(value), isFunc = tag == funcTag$2 || tag == genTag$1;
-    if (isBuffer$1(value)) {
-      return cloneBuffer$1(value, isDeep);
-    }
-    if (tag == objectTag$4 || tag == argsTag$3 || isFunc && !object) {
-      result = isFlat || isFunc ? {} : initCloneObject$1(value);
-      if (!isDeep) {
-        return isFlat ? copySymbolsIn(value, baseAssignIn(result, value)) : copySymbols(value, baseAssign(result, value));
-      }
-    } else {
-      if (!cloneableTags[tag]) {
-        return object ? value : {};
-      }
-      result = initCloneByTag(value, tag, isDeep);
-    }
-  }
-  stack || (stack = new Stack$1());
-  var stacked = stack.get(value);
-  if (stacked) {
-    return stacked;
-  }
-  stack.set(value, result);
-  if (isSet(value)) {
-    value.forEach(function(subValue) {
-      result.add(baseClone$1(subValue, bitmask, customizer, subValue, value, stack));
-    });
-  } else if (isMap(value)) {
-    value.forEach(function(subValue, key2) {
-      result.set(key2, baseClone$1(subValue, bitmask, customizer, key2, value, stack));
-    });
-  }
-  var keysFunc = isFull ? isFlat ? getAllKeysIn : getAllKeys$1 : isFlat ? keysIn$1 : keys$2;
-  var props = isArr ? void 0 : keysFunc(value);
-  arrayEach$1(props || value, function(subValue, key2) {
-    if (props) {
-      key2 = subValue;
-      subValue = value[key2];
-    }
-    assignValue$1(result, key2, baseClone$1(subValue, bitmask, customizer, key2, value, stack));
-  });
-  return result;
-}
-var _baseClone = baseClone$1;
-var baseClone = _baseClone;
-var CLONE_DEEP_FLAG = 1, CLONE_SYMBOLS_FLAG = 4;
-function cloneDeep(value) {
-  return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG);
-}
-var cloneDeep_1 = cloneDeep;
-Object.defineProperty(mergeClasses$1, "__esModule", {
-  value: true
-});
-mergeClasses$1.mergeClasses = void 0;
-var _forOwn2$1 = forOwn_1;
-var _forOwn3$1 = _interopRequireDefault$7(_forOwn2$1);
-var _cloneDeep2 = cloneDeep_1;
-var _cloneDeep3 = _interopRequireDefault$7(_cloneDeep2);
-var _extends$e = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-function _interopRequireDefault$7(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-var mergeClasses = mergeClasses$1.mergeClasses = function mergeClasses2(classes) {
-  var activeNames = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : [];
-  var styles2 = classes.default && (0, _cloneDeep3.default)(classes.default) || {};
-  activeNames.map(function(name2) {
-    var toMerge = classes[name2];
-    if (toMerge) {
-      (0, _forOwn3$1.default)(toMerge, function(value, key) {
-        if (!styles2[key]) {
-          styles2[key] = {};
-        }
-        styles2[key] = _extends$e({}, styles2[key], toMerge[key]);
-      });
-    }
-    return name2;
-  });
-  return styles2;
-};
-mergeClasses$1.default = mergeClasses;
-var autoprefix$1 = {};
-Object.defineProperty(autoprefix$1, "__esModule", {
-  value: true
-});
-autoprefix$1.autoprefix = void 0;
-var _forOwn2 = forOwn_1;
-var _forOwn3 = _interopRequireDefault$6(_forOwn2);
-var _extends$d = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-function _interopRequireDefault$6(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-var transforms = {
-  borderRadius: function borderRadius(value) {
-    return {
-      msBorderRadius: value,
-      MozBorderRadius: value,
-      OBorderRadius: value,
-      WebkitBorderRadius: value,
-      borderRadius: value
-    };
-  },
-  boxShadow: function boxShadow(value) {
-    return {
-      msBoxShadow: value,
-      MozBoxShadow: value,
-      OBoxShadow: value,
-      WebkitBoxShadow: value,
-      boxShadow: value
-    };
-  },
-  userSelect: function userSelect(value) {
-    return {
-      WebkitTouchCallout: value,
-      KhtmlUserSelect: value,
-      MozUserSelect: value,
-      msUserSelect: value,
-      WebkitUserSelect: value,
-      userSelect: value
-    };
-  },
-  flex: function flex(value) {
-    return {
-      WebkitBoxFlex: value,
-      MozBoxFlex: value,
-      WebkitFlex: value,
-      msFlex: value,
-      flex: value
-    };
-  },
-  flexBasis: function flexBasis(value) {
-    return {
-      WebkitFlexBasis: value,
-      flexBasis: value
-    };
-  },
-  justifyContent: function justifyContent(value) {
-    return {
-      WebkitJustifyContent: value,
-      justifyContent: value
-    };
-  },
-  transition: function transition(value) {
-    return {
-      msTransition: value,
-      MozTransition: value,
-      OTransition: value,
-      WebkitTransition: value,
-      transition: value
-    };
-  },
-  transform: function transform(value) {
-    return {
-      msTransform: value,
-      MozTransform: value,
-      OTransform: value,
-      WebkitTransform: value,
-      transform: value
-    };
-  },
-  absolute: function absolute(value) {
-    var direction = value && value.split(" ");
-    return {
-      position: "absolute",
-      top: direction && direction[0],
-      right: direction && direction[1],
-      bottom: direction && direction[2],
-      left: direction && direction[3]
-    };
-  },
-  extend: function extend(name2, otherElementStyles) {
-    var otherStyle = otherElementStyles[name2];
-    if (otherStyle) {
-      return otherStyle;
-    }
-    return {
-      "extend": name2
-    };
-  }
-};
-var autoprefix = autoprefix$1.autoprefix = function autoprefix2(elements) {
-  var prefixed2 = {};
-  (0, _forOwn3.default)(elements, function(styles2, element2) {
-    var expanded = {};
-    (0, _forOwn3.default)(styles2, function(value, key) {
-      var transform2 = transforms[key];
-      if (transform2) {
-        expanded = _extends$d({}, expanded, transform2(value));
-      } else {
-        expanded[key] = value;
-      }
-    });
-    prefixed2[element2] = expanded;
-  });
-  return prefixed2;
-};
-autoprefix$1.default = autoprefix;
-var hover$1 = {};
-Object.defineProperty(hover$1, "__esModule", {
-  value: true
-});
-hover$1.hover = void 0;
-var _extends$c = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var _react$4 = reactExports;
-var _react2$3 = _interopRequireDefault$5(_react$4);
-function _interopRequireDefault$5(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-function _classCallCheck$9(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _possibleConstructorReturn$9(self2, call) {
-  if (!self2) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return call && (typeof call === "object" || typeof call === "function") ? call : self2;
-}
-function _inherits$9(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-var hover = hover$1.hover = function hover2(Component2) {
-  var Span = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "span";
-  return function(_React$Component) {
-    _inherits$9(Hover, _React$Component);
-    function Hover() {
-      var _ref;
-      var _temp, _this, _ret;
-      _classCallCheck$9(this, Hover);
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-      return _ret = (_temp = (_this = _possibleConstructorReturn$9(this, (_ref = Hover.__proto__ || Object.getPrototypeOf(Hover)).call.apply(_ref, [this].concat(args))), _this), _this.state = { hover: false }, _this.handleMouseOver = function() {
-        return _this.setState({ hover: true });
-      }, _this.handleMouseOut = function() {
-        return _this.setState({ hover: false });
-      }, _this.render = function() {
-        return _react2$3.default.createElement(
-          Span,
-          { onMouseOver: _this.handleMouseOver, onMouseOut: _this.handleMouseOut },
-          _react2$3.default.createElement(Component2, _extends$c({}, _this.props, _this.state))
-        );
-      }, _temp), _possibleConstructorReturn$9(_this, _ret);
-    }
-    return Hover;
-  }(_react2$3.default.Component);
-};
-hover$1.default = hover;
-var active$1 = {};
-Object.defineProperty(active$1, "__esModule", {
-  value: true
-});
-active$1.active = void 0;
-var _extends$b = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var _react$3 = reactExports;
-var _react2$2 = _interopRequireDefault$4(_react$3);
-function _interopRequireDefault$4(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-function _classCallCheck$8(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _possibleConstructorReturn$8(self2, call) {
-  if (!self2) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return call && (typeof call === "object" || typeof call === "function") ? call : self2;
-}
-function _inherits$8(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-var active = active$1.active = function active2(Component2) {
-  var Span = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "span";
-  return function(_React$Component) {
-    _inherits$8(Active, _React$Component);
-    function Active() {
-      var _ref;
-      var _temp, _this, _ret;
-      _classCallCheck$8(this, Active);
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-      return _ret = (_temp = (_this = _possibleConstructorReturn$8(this, (_ref = Active.__proto__ || Object.getPrototypeOf(Active)).call.apply(_ref, [this].concat(args))), _this), _this.state = { active: false }, _this.handleMouseDown = function() {
-        return _this.setState({ active: true });
-      }, _this.handleMouseUp = function() {
-        return _this.setState({ active: false });
-      }, _this.render = function() {
-        return _react2$2.default.createElement(
-          Span,
-          { onMouseDown: _this.handleMouseDown, onMouseUp: _this.handleMouseUp },
-          _react2$2.default.createElement(Component2, _extends$b({}, _this.props, _this.state))
-        );
-      }, _temp), _possibleConstructorReturn$8(_this, _ret);
-    }
-    return Active;
-  }(_react2$2.default.Component);
-};
-active$1.default = active;
-var loop = {};
-Object.defineProperty(loop, "__esModule", {
-  value: true
-});
-var loopable = function loopable2(i5, length2) {
-  var props = {};
-  var setProp = function setProp2(name2) {
-    var value = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : true;
-    props[name2] = value;
-  };
-  i5 === 0 && setProp("first-child");
-  i5 === length2 - 1 && setProp("last-child");
-  (i5 === 0 || i5 % 2 === 0) && setProp("even");
-  Math.abs(i5 % 2) === 1 && setProp("odd");
-  setProp("nth-child", i5);
-  return props;
-};
-loop.default = loopable;
-Object.defineProperty(lib, "__esModule", {
-  value: true
-});
-lib.ReactCSS = lib.loop = lib.handleActive = handleHover = lib.handleHover = lib.hover = void 0;
-var _flattenNames = flattenNames$1;
-var _flattenNames2 = _interopRequireDefault$3(_flattenNames);
-var _mergeClasses = mergeClasses$1;
-var _mergeClasses2 = _interopRequireDefault$3(_mergeClasses);
-var _autoprefix = autoprefix$1;
-var _autoprefix2 = _interopRequireDefault$3(_autoprefix);
-var _hover2 = hover$1;
-var _hover3 = _interopRequireDefault$3(_hover2);
-var _active = active$1;
-var _active2 = _interopRequireDefault$3(_active);
-var _loop2 = loop;
-var _loop3 = _interopRequireDefault$3(_loop2);
-function _interopRequireDefault$3(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-lib.hover = _hover3.default;
-var handleHover = lib.handleHover = _hover3.default;
-lib.handleActive = _active2.default;
-lib.loop = _loop3.default;
-var ReactCSS = lib.ReactCSS = function ReactCSS2(classes) {
-  for (var _len = arguments.length, activations = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    activations[_key - 1] = arguments[_key];
-  }
-  var activeNames = (0, _flattenNames2.default)(activations);
-  var merged = (0, _mergeClasses2.default)(classes, activeNames);
-  return (0, _autoprefix2.default)(merged);
-};
-var _default$2 = lib.default = ReactCSS;
-var calculateChange$2 = function calculateChange(e3, hsl, direction, initialA, container) {
-  var containerWidth = container.clientWidth;
-  var containerHeight = container.clientHeight;
-  var x2 = typeof e3.pageX === "number" ? e3.pageX : e3.touches[0].pageX;
-  var y3 = typeof e3.pageY === "number" ? e3.pageY : e3.touches[0].pageY;
-  var left = x2 - (container.getBoundingClientRect().left + window.pageXOffset);
-  var top = y3 - (container.getBoundingClientRect().top + window.pageYOffset);
-  if (direction === "vertical") {
-    var a2 = void 0;
-    if (top < 0) {
-      a2 = 0;
-    } else if (top > containerHeight) {
-      a2 = 1;
-    } else {
-      a2 = Math.round(top * 100 / containerHeight) / 100;
-    }
-    if (hsl.a !== a2) {
-      return {
-        h: hsl.h,
-        s: hsl.s,
-        l: hsl.l,
-        a: a2,
-        source: "rgb"
-      };
-    }
-  } else {
-    var _a3 = void 0;
-    if (left < 0) {
-      _a3 = 0;
-    } else if (left > containerWidth) {
-      _a3 = 1;
-    } else {
-      _a3 = Math.round(left * 100 / containerWidth) / 100;
-    }
-    if (initialA !== _a3) {
-      return {
-        h: hsl.h,
-        s: hsl.s,
-        l: hsl.l,
-        a: _a3,
-        source: "rgb"
-      };
-    }
-  }
-  return null;
-};
-var checkboardCache = {};
-var render = function render2(c1, c2, size, serverCanvas) {
-  if (typeof document === "undefined" && !serverCanvas) {
-    return null;
-  }
-  var canvas2 = serverCanvas ? new serverCanvas() : document.createElement("canvas");
-  canvas2.width = size * 2;
-  canvas2.height = size * 2;
-  var ctx2 = canvas2.getContext("2d");
-  if (!ctx2) {
-    return null;
-  }
-  ctx2.fillStyle = c1;
-  ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
-  ctx2.fillStyle = c2;
-  ctx2.fillRect(0, 0, size, size);
-  ctx2.translate(size, size);
-  ctx2.fillRect(0, 0, size, size);
-  return canvas2.toDataURL();
-};
-var get$1 = function get3(c1, c2, size, serverCanvas) {
-  var key = c1 + "-" + c2 + "-" + size + (serverCanvas ? "-server" : "");
-  if (checkboardCache[key]) {
-    return checkboardCache[key];
-  }
-  var checkboard = render(c1, c2, size, serverCanvas);
-  checkboardCache[key] = checkboard;
-  return checkboard;
-};
-var _extends$a = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var Checkboard = function Checkboard2(_ref) {
-  var white = _ref.white, grey = _ref.grey, size = _ref.size, renderers = _ref.renderers, borderRadius2 = _ref.borderRadius, boxShadow2 = _ref.boxShadow, children = _ref.children;
-  var styles2 = _default$2({
-    "default": {
-      grid: {
-        borderRadius: borderRadius2,
-        boxShadow: boxShadow2,
-        absolute: "0px 0px 0px 0px",
-        background: "url(" + get$1(white, grey, size, renderers.canvas) + ") center left"
-      }
-    }
-  });
-  return reactExports.isValidElement(children) ? React.cloneElement(children, _extends$a({}, children.props, { style: _extends$a({}, children.props.style, styles2.grid) })) : React.createElement("div", { style: styles2.grid });
-};
-Checkboard.defaultProps = {
-  size: 8,
-  white: "transparent",
-  grey: "rgba(0,0,0,.08)",
-  renderers: {}
-};
-var _extends$9 = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var _createClass$7 = /* @__PURE__ */ function() {
-  function defineProperties(target, props) {
-    for (var i5 = 0; i5 < props.length; i5++) {
-      var descriptor = props[i5];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-  return function(Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-function _classCallCheck$7(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _possibleConstructorReturn$7(self2, call) {
-  if (!self2) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return call && (typeof call === "object" || typeof call === "function") ? call : self2;
-}
-function _inherits$7(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-var Alpha = function(_ref) {
-  _inherits$7(Alpha2, _ref);
-  function Alpha2() {
-    var _ref2;
-    var _temp, _this, _ret;
-    _classCallCheck$7(this, Alpha2);
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-    return _ret = (_temp = (_this = _possibleConstructorReturn$7(this, (_ref2 = Alpha2.__proto__ || Object.getPrototypeOf(Alpha2)).call.apply(_ref2, [this].concat(args))), _this), _this.handleChange = function(e3) {
-      var change = calculateChange$2(e3, _this.props.hsl, _this.props.direction, _this.props.a, _this.container);
-      change && typeof _this.props.onChange === "function" && _this.props.onChange(change, e3);
-    }, _this.handleMouseDown = function(e3) {
-      _this.handleChange(e3);
-      window.addEventListener("mousemove", _this.handleChange);
-      window.addEventListener("mouseup", _this.handleMouseUp);
-    }, _this.handleMouseUp = function() {
-      _this.unbindEventListeners();
-    }, _this.unbindEventListeners = function() {
-      window.removeEventListener("mousemove", _this.handleChange);
-      window.removeEventListener("mouseup", _this.handleMouseUp);
-    }, _temp), _possibleConstructorReturn$7(_this, _ret);
-  }
-  _createClass$7(Alpha2, [{
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.unbindEventListeners();
-    }
-  }, {
-    key: "render",
-    value: function render3() {
-      var _this2 = this;
-      var rgb = this.props.rgb;
-      var styles2 = _default$2({
-        "default": {
-          alpha: {
-            absolute: "0px 0px 0px 0px",
-            borderRadius: this.props.radius
-          },
-          checkboard: {
-            absolute: "0px 0px 0px 0px",
-            overflow: "hidden",
-            borderRadius: this.props.radius
-          },
-          gradient: {
-            absolute: "0px 0px 0px 0px",
-            background: "linear-gradient(to right, rgba(" + rgb.r + "," + rgb.g + "," + rgb.b + ", 0) 0%,\n           rgba(" + rgb.r + "," + rgb.g + "," + rgb.b + ", 1) 100%)",
-            boxShadow: this.props.shadow,
-            borderRadius: this.props.radius
-          },
-          container: {
-            position: "relative",
-            height: "100%",
-            margin: "0 3px"
-          },
-          pointer: {
-            position: "absolute",
-            left: rgb.a * 100 + "%"
-          },
-          slider: {
-            width: "4px",
-            borderRadius: "1px",
-            height: "8px",
-            boxShadow: "0 0 2px rgba(0, 0, 0, .6)",
-            background: "#fff",
-            marginTop: "1px",
-            transform: "translateX(-2px)"
-          }
-        },
-        "vertical": {
-          gradient: {
-            background: "linear-gradient(to bottom, rgba(" + rgb.r + "," + rgb.g + "," + rgb.b + ", 0) 0%,\n           rgba(" + rgb.r + "," + rgb.g + "," + rgb.b + ", 1) 100%)"
-          },
-          pointer: {
-            left: 0,
-            top: rgb.a * 100 + "%"
-          }
-        },
-        "overwrite": _extends$9({}, this.props.style)
-      }, {
-        vertical: this.props.direction === "vertical",
-        overwrite: true
-      });
-      return React.createElement(
-        "div",
-        { style: styles2.alpha },
-        React.createElement(
-          "div",
-          { style: styles2.checkboard },
-          React.createElement(Checkboard, { renderers: this.props.renderers })
-        ),
-        React.createElement("div", { style: styles2.gradient }),
-        React.createElement(
-          "div",
-          {
-            style: styles2.container,
-            ref: function ref(container) {
-              return _this2.container = container;
-            },
-            onMouseDown: this.handleMouseDown,
-            onTouchMove: this.handleChange,
-            onTouchStart: this.handleChange
-          },
-          React.createElement(
-            "div",
-            { style: styles2.pointer },
-            this.props.pointer ? React.createElement(this.props.pointer, this.props) : React.createElement("div", { style: styles2.slider })
-          )
-        )
-      );
-    }
-  }]);
-  return Alpha2;
-}(reactExports.PureComponent || reactExports.Component);
-var _createClass$6 = /* @__PURE__ */ function() {
-  function defineProperties(target, props) {
-    for (var i5 = 0; i5 < props.length; i5++) {
-      var descriptor = props[i5];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-  return function(Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-function _defineProperty$1(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function _classCallCheck$6(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _possibleConstructorReturn$6(self2, call) {
-  if (!self2) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return call && (typeof call === "object" || typeof call === "function") ? call : self2;
-}
-function _inherits$6(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-var DEFAULT_ARROW_OFFSET = 1;
-var UP_KEY_CODE = 38;
-var DOWN_KEY_CODE = 40;
-var VALID_KEY_CODES = [UP_KEY_CODE, DOWN_KEY_CODE];
-var isValidKeyCode = function isValidKeyCode2(keyCode) {
-  return VALID_KEY_CODES.indexOf(keyCode) > -1;
-};
-var getNumberValue = function getNumberValue2(value) {
-  return Number(String(value).replace(/%/g, ""));
-};
-var idCounter = 1;
-var EditableInput = function(_ref) {
-  _inherits$6(EditableInput2, _ref);
-  function EditableInput2(props) {
-    _classCallCheck$6(this, EditableInput2);
-    var _this = _possibleConstructorReturn$6(this, (EditableInput2.__proto__ || Object.getPrototypeOf(EditableInput2)).call(this));
-    _this.handleBlur = function() {
-      if (_this.state.blurValue) {
-        _this.setState({ value: _this.state.blurValue, blurValue: null });
-      }
-    };
-    _this.handleChange = function(e3) {
-      _this.setUpdatedValue(e3.target.value, e3);
-    };
-    _this.handleKeyDown = function(e3) {
-      var value = getNumberValue(e3.target.value);
-      if (!isNaN(value) && isValidKeyCode(e3.keyCode)) {
-        var offset = _this.getArrowOffset();
-        var updatedValue = e3.keyCode === UP_KEY_CODE ? value + offset : value - offset;
-        _this.setUpdatedValue(updatedValue, e3);
-      }
-    };
-    _this.handleDrag = function(e3) {
-      if (_this.props.dragLabel) {
-        var newValue = Math.round(_this.props.value + e3.movementX);
-        if (newValue >= 0 && newValue <= _this.props.dragMax) {
-          _this.props.onChange && _this.props.onChange(_this.getValueObjectWithLabel(newValue), e3);
-        }
-      }
-    };
-    _this.handleMouseDown = function(e3) {
-      if (_this.props.dragLabel) {
-        e3.preventDefault();
-        _this.handleDrag(e3);
-        window.addEventListener("mousemove", _this.handleDrag);
-        window.addEventListener("mouseup", _this.handleMouseUp);
-      }
-    };
-    _this.handleMouseUp = function() {
-      _this.unbindEventListeners();
-    };
-    _this.unbindEventListeners = function() {
-      window.removeEventListener("mousemove", _this.handleDrag);
-      window.removeEventListener("mouseup", _this.handleMouseUp);
-    };
-    _this.state = {
-      value: String(props.value).toUpperCase(),
-      blurValue: String(props.value).toUpperCase()
-    };
-    _this.inputId = "rc-editable-input-" + idCounter++;
-    return _this;
-  }
-  _createClass$6(EditableInput2, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps, prevState) {
-      if (this.props.value !== this.state.value && (prevProps.value !== this.props.value || prevState.value !== this.state.value)) {
-        if (this.input === document.activeElement) {
-          this.setState({ blurValue: String(this.props.value).toUpperCase() });
-        } else {
-          this.setState({ value: String(this.props.value).toUpperCase(), blurValue: !this.state.blurValue && String(this.props.value).toUpperCase() });
-        }
-      }
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.unbindEventListeners();
-    }
-  }, {
-    key: "getValueObjectWithLabel",
-    value: function getValueObjectWithLabel(value) {
-      return _defineProperty$1({}, this.props.label, value);
-    }
-  }, {
-    key: "getArrowOffset",
-    value: function getArrowOffset() {
-      return this.props.arrowOffset || DEFAULT_ARROW_OFFSET;
-    }
-  }, {
-    key: "setUpdatedValue",
-    value: function setUpdatedValue(value, e3) {
-      var onChangeValue = this.props.label ? this.getValueObjectWithLabel(value) : value;
-      this.props.onChange && this.props.onChange(onChangeValue, e3);
-      this.setState({ value });
-    }
-  }, {
-    key: "render",
-    value: function render3() {
-      var _this2 = this;
-      var styles2 = _default$2({
-        "default": {
-          wrap: {
-            position: "relative"
-          }
-        },
-        "user-override": {
-          wrap: this.props.style && this.props.style.wrap ? this.props.style.wrap : {},
-          input: this.props.style && this.props.style.input ? this.props.style.input : {},
-          label: this.props.style && this.props.style.label ? this.props.style.label : {}
-        },
-        "dragLabel-true": {
-          label: {
-            cursor: "ew-resize"
-          }
-        }
-      }, {
-        "user-override": true
-      }, this.props);
-      return React.createElement(
-        "div",
-        { style: styles2.wrap },
-        React.createElement("input", {
-          id: this.inputId,
-          style: styles2.input,
-          ref: function ref(input) {
-            return _this2.input = input;
-          },
-          value: this.state.value,
-          onKeyDown: this.handleKeyDown,
-          onChange: this.handleChange,
-          onBlur: this.handleBlur,
-          placeholder: this.props.placeholder,
-          spellCheck: "false"
-        }),
-        this.props.label && !this.props.hideLabel ? React.createElement(
-          "label",
-          {
-            htmlFor: this.inputId,
-            style: styles2.label,
-            onMouseDown: this.handleMouseDown
-          },
-          this.props.label
-        ) : null
-      );
-    }
-  }]);
-  return EditableInput2;
-}(reactExports.PureComponent || reactExports.Component);
-var calculateChange$1 = function calculateChange2(e3, direction, hsl, container) {
-  var containerWidth = container.clientWidth;
-  var containerHeight = container.clientHeight;
-  var x2 = typeof e3.pageX === "number" ? e3.pageX : e3.touches[0].pageX;
-  var y3 = typeof e3.pageY === "number" ? e3.pageY : e3.touches[0].pageY;
-  var left = x2 - (container.getBoundingClientRect().left + window.pageXOffset);
-  var top = y3 - (container.getBoundingClientRect().top + window.pageYOffset);
-  if (direction === "vertical") {
-    var h2 = void 0;
-    if (top < 0) {
-      h2 = 359;
-    } else if (top > containerHeight) {
-      h2 = 0;
-    } else {
-      var percent = -(top * 100 / containerHeight) + 100;
-      h2 = 360 * percent / 100;
-    }
-    if (hsl.h !== h2) {
-      return {
-        h: h2,
-        s: hsl.s,
-        l: hsl.l,
-        a: hsl.a,
-        source: "hsl"
-      };
-    }
-  } else {
-    var _h2 = void 0;
-    if (left < 0) {
-      _h2 = 0;
-    } else if (left > containerWidth) {
-      _h2 = 359;
-    } else {
-      var _percent = left * 100 / containerWidth;
-      _h2 = 360 * _percent / 100;
-    }
-    if (hsl.h !== _h2) {
-      return {
-        h: _h2,
-        s: hsl.s,
-        l: hsl.l,
-        a: hsl.a,
-        source: "hsl"
-      };
-    }
-  }
-  return null;
-};
-var _createClass$5 = /* @__PURE__ */ function() {
-  function defineProperties(target, props) {
-    for (var i5 = 0; i5 < props.length; i5++) {
-      var descriptor = props[i5];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-  return function(Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-function _classCallCheck$5(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _possibleConstructorReturn$5(self2, call) {
-  if (!self2) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return call && (typeof call === "object" || typeof call === "function") ? call : self2;
-}
-function _inherits$5(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-var Hue = function(_ref) {
-  _inherits$5(Hue2, _ref);
-  function Hue2() {
-    var _ref2;
-    var _temp, _this, _ret;
-    _classCallCheck$5(this, Hue2);
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-    return _ret = (_temp = (_this = _possibleConstructorReturn$5(this, (_ref2 = Hue2.__proto__ || Object.getPrototypeOf(Hue2)).call.apply(_ref2, [this].concat(args))), _this), _this.handleChange = function(e3) {
-      var change = calculateChange$1(e3, _this.props.direction, _this.props.hsl, _this.container);
-      change && typeof _this.props.onChange === "function" && _this.props.onChange(change, e3);
-    }, _this.handleMouseDown = function(e3) {
-      _this.handleChange(e3);
-      window.addEventListener("mousemove", _this.handleChange);
-      window.addEventListener("mouseup", _this.handleMouseUp);
-    }, _this.handleMouseUp = function() {
-      _this.unbindEventListeners();
-    }, _temp), _possibleConstructorReturn$5(_this, _ret);
-  }
-  _createClass$5(Hue2, [{
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.unbindEventListeners();
-    }
-  }, {
-    key: "unbindEventListeners",
-    value: function unbindEventListeners() {
-      window.removeEventListener("mousemove", this.handleChange);
-      window.removeEventListener("mouseup", this.handleMouseUp);
-    }
-  }, {
-    key: "render",
-    value: function render3() {
-      var _this2 = this;
-      var _props$direction = this.props.direction, direction = _props$direction === void 0 ? "horizontal" : _props$direction;
-      var styles2 = _default$2({
-        "default": {
-          hue: {
-            absolute: "0px 0px 0px 0px",
-            borderRadius: this.props.radius,
-            boxShadow: this.props.shadow
-          },
-          container: {
-            padding: "0 2px",
-            position: "relative",
-            height: "100%",
-            borderRadius: this.props.radius
-          },
-          pointer: {
-            position: "absolute",
-            left: this.props.hsl.h * 100 / 360 + "%"
-          },
-          slider: {
-            marginTop: "1px",
-            width: "4px",
-            borderRadius: "1px",
-            height: "8px",
-            boxShadow: "0 0 2px rgba(0, 0, 0, .6)",
-            background: "#fff",
-            transform: "translateX(-2px)"
-          }
-        },
-        "vertical": {
-          pointer: {
-            left: "0px",
-            top: -(this.props.hsl.h * 100 / 360) + 100 + "%"
-          }
-        }
-      }, { vertical: direction === "vertical" });
-      return React.createElement(
-        "div",
-        { style: styles2.hue },
-        React.createElement(
-          "div",
-          {
-            className: "hue-" + direction,
-            style: styles2.container,
-            ref: function ref(container) {
-              return _this2.container = container;
-            },
-            onMouseDown: this.handleMouseDown,
-            onTouchMove: this.handleChange,
-            onTouchStart: this.handleChange
-          },
-          React.createElement(
-            "style",
-            null,
-            "\n            .hue-horizontal {\n              background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0\n                33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);\n              background: -webkit-linear-gradient(to right, #f00 0%, #ff0\n                17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);\n            }\n\n            .hue-vertical {\n              background: linear-gradient(to top, #f00 0%, #ff0 17%, #0f0 33%,\n                #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);\n              background: -webkit-linear-gradient(to top, #f00 0%, #ff0 17%,\n                #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);\n            }\n          "
-          ),
-          React.createElement(
-            "div",
-            { style: styles2.pointer },
-            this.props.pointer ? React.createElement(this.props.pointer, this.props) : React.createElement("div", { style: styles2.slider })
-          )
-        )
-      );
-    }
-  }]);
-  return Hue2;
-}(reactExports.PureComponent || reactExports.Component);
-function listCacheClear() {
-  this.__data__ = [];
-  this.size = 0;
-}
-function eq(value, other) {
-  return value === other || value !== value && other !== other;
-}
-function assocIndexOf(array, key) {
-  var length2 = array.length;
-  while (length2--) {
-    if (eq(array[length2][0], key)) {
-      return length2;
-    }
-  }
-  return -1;
-}
-var arrayProto = Array.prototype;
-var splice$1 = arrayProto.splice;
-function listCacheDelete(key) {
-  var data2 = this.__data__, index2 = assocIndexOf(data2, key);
-  if (index2 < 0) {
-    return false;
-  }
-  var lastIndex = data2.length - 1;
-  if (index2 == lastIndex) {
-    data2.pop();
-  } else {
-    splice$1.call(data2, index2, 1);
-  }
-  --this.size;
-  return true;
-}
-function listCacheGet(key) {
-  var data2 = this.__data__, index2 = assocIndexOf(data2, key);
-  return index2 < 0 ? void 0 : data2[index2][1];
-}
-function listCacheHas(key) {
-  return assocIndexOf(this.__data__, key) > -1;
-}
-function listCacheSet(key, value) {
-  var data2 = this.__data__, index2 = assocIndexOf(data2, key);
-  if (index2 < 0) {
-    ++this.size;
-    data2.push([key, value]);
-  } else {
-    data2[index2][1] = value;
-  }
-  return this;
-}
-function ListCache(entries) {
-  var index2 = -1, length2 = entries == null ? 0 : entries.length;
-  this.clear();
-  while (++index2 < length2) {
-    var entry = entries[index2];
-    this.set(entry[0], entry[1]);
-  }
-}
-ListCache.prototype.clear = listCacheClear;
-ListCache.prototype["delete"] = listCacheDelete;
-ListCache.prototype.get = listCacheGet;
-ListCache.prototype.has = listCacheHas;
-ListCache.prototype.set = listCacheSet;
-function stackClear() {
-  this.__data__ = new ListCache();
-  this.size = 0;
-}
-function stackDelete(key) {
-  var data2 = this.__data__, result = data2["delete"](key);
-  this.size = data2.size;
-  return result;
-}
-function stackGet(key) {
-  return this.__data__.get(key);
-}
-function stackHas(key) {
-  return this.__data__.has(key);
-}
-var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
-var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-var root$3 = freeGlobal || freeSelf || Function("return this")();
-var Symbol$1 = root$3.Symbol;
-var objectProto$e = Object.prototype;
-var hasOwnProperty$c = objectProto$e.hasOwnProperty;
-var nativeObjectToString$1 = objectProto$e.toString;
-var symToStringTag$1 = Symbol$1 ? Symbol$1.toStringTag : void 0;
-function getRawTag(value) {
-  var isOwn = hasOwnProperty$c.call(value, symToStringTag$1), tag = value[symToStringTag$1];
-  try {
-    value[symToStringTag$1] = void 0;
-    var unmasked = true;
-  } catch (e3) {
-  }
-  var result = nativeObjectToString$1.call(value);
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag$1] = tag;
-    } else {
-      delete value[symToStringTag$1];
-    }
-  }
-  return result;
-}
-var objectProto$d = Object.prototype;
-var nativeObjectToString = objectProto$d.toString;
-function objectToString(value) {
-  return nativeObjectToString.call(value);
-}
-var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
-var symToStringTag = Symbol$1 ? Symbol$1.toStringTag : void 0;
-function baseGetTag(value) {
-  if (value == null) {
-    return value === void 0 ? undefinedTag : nullTag;
-  }
-  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
-}
-function isObject(value) {
-  var type = typeof value;
-  return value != null && (type == "object" || type == "function");
-}
-var asyncTag = "[object AsyncFunction]", funcTag$1 = "[object Function]", genTag = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
-function isFunction(value) {
-  if (!isObject(value)) {
-    return false;
-  }
-  var tag = baseGetTag(value);
-  return tag == funcTag$1 || tag == genTag || tag == asyncTag || tag == proxyTag;
-}
-var coreJsData = root$3["__core-js_shared__"];
-var maskSrcKey = function() {
-  var uid2 = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
-  return uid2 ? "Symbol(src)_1." + uid2 : "";
-}();
-function isMasked(func) {
-  return !!maskSrcKey && maskSrcKey in func;
-}
-var funcProto$2 = Function.prototype;
-var funcToString$2 = funcProto$2.toString;
-function toSource(func) {
-  if (func != null) {
-    try {
-      return funcToString$2.call(func);
-    } catch (e3) {
-    }
-    try {
-      return func + "";
-    } catch (e3) {
-    }
-  }
-  return "";
-}
-var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-var funcProto$1 = Function.prototype, objectProto$c = Object.prototype;
-var funcToString$1 = funcProto$1.toString;
-var hasOwnProperty$b = objectProto$c.hasOwnProperty;
-var reIsNative = RegExp(
-  "^" + funcToString$1.call(hasOwnProperty$b).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
-);
-function baseIsNative(value) {
-  if (!isObject(value) || isMasked(value)) {
-    return false;
-  }
-  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
-  return pattern.test(toSource(value));
-}
-function getValue(object, key) {
-  return object == null ? void 0 : object[key];
-}
-function getNative(object, key) {
-  var value = getValue(object, key);
-  return baseIsNative(value) ? value : void 0;
-}
-var Map$1 = getNative(root$3, "Map");
-var nativeCreate = getNative(Object, "create");
-function hashClear() {
-  this.__data__ = nativeCreate ? nativeCreate(null) : {};
-  this.size = 0;
-}
-function hashDelete(key) {
-  var result = this.has(key) && delete this.__data__[key];
-  this.size -= result ? 1 : 0;
-  return result;
-}
-var HASH_UNDEFINED$2 = "__lodash_hash_undefined__";
-var objectProto$b = Object.prototype;
-var hasOwnProperty$a = objectProto$b.hasOwnProperty;
-function hashGet(key) {
-  var data2 = this.__data__;
-  if (nativeCreate) {
-    var result = data2[key];
-    return result === HASH_UNDEFINED$2 ? void 0 : result;
-  }
-  return hasOwnProperty$a.call(data2, key) ? data2[key] : void 0;
-}
-var objectProto$a = Object.prototype;
-var hasOwnProperty$9 = objectProto$a.hasOwnProperty;
-function hashHas(key) {
-  var data2 = this.__data__;
-  return nativeCreate ? data2[key] !== void 0 : hasOwnProperty$9.call(data2, key);
-}
-var HASH_UNDEFINED$1 = "__lodash_hash_undefined__";
-function hashSet(key, value) {
-  var data2 = this.__data__;
-  this.size += this.has(key) ? 0 : 1;
-  data2[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED$1 : value;
-  return this;
-}
-function Hash(entries) {
-  var index2 = -1, length2 = entries == null ? 0 : entries.length;
-  this.clear();
-  while (++index2 < length2) {
-    var entry = entries[index2];
-    this.set(entry[0], entry[1]);
-  }
-}
-Hash.prototype.clear = hashClear;
-Hash.prototype["delete"] = hashDelete;
-Hash.prototype.get = hashGet;
-Hash.prototype.has = hashHas;
-Hash.prototype.set = hashSet;
-function mapCacheClear() {
-  this.size = 0;
-  this.__data__ = {
-    "hash": new Hash(),
-    "map": new (Map$1 || ListCache)(),
-    "string": new Hash()
-  };
-}
-function isKeyable(value) {
-  var type = typeof value;
-  return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
-}
-function getMapData(map3, key) {
-  var data2 = map3.__data__;
-  return isKeyable(key) ? data2[typeof key == "string" ? "string" : "hash"] : data2.map;
-}
-function mapCacheDelete(key) {
-  var result = getMapData(this, key)["delete"](key);
-  this.size -= result ? 1 : 0;
-  return result;
-}
-function mapCacheGet(key) {
-  return getMapData(this, key).get(key);
-}
-function mapCacheHas(key) {
-  return getMapData(this, key).has(key);
-}
-function mapCacheSet(key, value) {
-  var data2 = getMapData(this, key), size = data2.size;
-  data2.set(key, value);
-  this.size += data2.size == size ? 0 : 1;
-  return this;
-}
-function MapCache(entries) {
-  var index2 = -1, length2 = entries == null ? 0 : entries.length;
-  this.clear();
-  while (++index2 < length2) {
-    var entry = entries[index2];
-    this.set(entry[0], entry[1]);
-  }
-}
-MapCache.prototype.clear = mapCacheClear;
-MapCache.prototype["delete"] = mapCacheDelete;
-MapCache.prototype.get = mapCacheGet;
-MapCache.prototype.has = mapCacheHas;
-MapCache.prototype.set = mapCacheSet;
-var LARGE_ARRAY_SIZE = 200;
-function stackSet(key, value) {
-  var data2 = this.__data__;
-  if (data2 instanceof ListCache) {
-    var pairs = data2.__data__;
-    if (!Map$1 || pairs.length < LARGE_ARRAY_SIZE - 1) {
-      pairs.push([key, value]);
-      this.size = ++data2.size;
-      return this;
-    }
-    data2 = this.__data__ = new MapCache(pairs);
-  }
-  data2.set(key, value);
-  this.size = data2.size;
-  return this;
-}
-function Stack(entries) {
-  var data2 = this.__data__ = new ListCache(entries);
-  this.size = data2.size;
-}
-Stack.prototype.clear = stackClear;
-Stack.prototype["delete"] = stackDelete;
-Stack.prototype.get = stackGet;
-Stack.prototype.has = stackHas;
-Stack.prototype.set = stackSet;
-var defineProperty$1 = function() {
-  try {
-    var func = getNative(Object, "defineProperty");
-    func({}, "", {});
-    return func;
-  } catch (e3) {
-  }
-}();
-function baseAssignValue(object, key, value) {
-  if (key == "__proto__" && defineProperty$1) {
-    defineProperty$1(object, key, {
-      "configurable": true,
-      "enumerable": true,
-      "value": value,
-      "writable": true
-    });
-  } else {
-    object[key] = value;
-  }
-}
-function assignMergeValue(object, key, value) {
-  if (value !== void 0 && !eq(object[key], value) || value === void 0 && !(key in object)) {
-    baseAssignValue(object, key, value);
-  }
-}
-function createBaseFor(fromRight) {
-  return function(object, iteratee, keysFunc) {
-    var index2 = -1, iterable = Object(object), props = keysFunc(object), length2 = props.length;
-    while (length2--) {
-      var key = props[++index2];
-      if (iteratee(iterable[key], key, iterable) === false) {
-        break;
-      }
-    }
-    return object;
-  };
-}
-var baseFor = createBaseFor();
-var freeExports$2 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$2 = freeExports$2 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$2 = freeModule$2 && freeModule$2.exports === freeExports$2;
-var Buffer$2 = moduleExports$2 ? root$3.Buffer : void 0;
-Buffer$2 ? Buffer$2.allocUnsafe : void 0;
-function cloneBuffer(buffer2, isDeep) {
-  {
-    return buffer2.slice();
-  }
-}
-var Uint8Array$1 = root$3.Uint8Array;
-function cloneArrayBuffer(arrayBuffer2) {
-  var result = new arrayBuffer2.constructor(arrayBuffer2.byteLength);
-  new Uint8Array$1(result).set(new Uint8Array$1(arrayBuffer2));
-  return result;
-}
-function cloneTypedArray(typedArray, isDeep) {
-  var buffer2 = cloneArrayBuffer(typedArray.buffer);
-  return new typedArray.constructor(buffer2, typedArray.byteOffset, typedArray.length);
-}
-function copyArray(source2, array) {
-  var index2 = -1, length2 = source2.length;
-  array || (array = Array(length2));
-  while (++index2 < length2) {
-    array[index2] = source2[index2];
-  }
-  return array;
-}
-var objectCreate = Object.create;
-var baseCreate = /* @__PURE__ */ function() {
-  function object() {
-  }
-  return function(proto2) {
-    if (!isObject(proto2)) {
-      return {};
-    }
-    if (objectCreate) {
-      return objectCreate(proto2);
-    }
-    object.prototype = proto2;
-    var result = new object();
-    object.prototype = void 0;
-    return result;
-  };
-}();
-function overArg(func, transform2) {
-  return function(arg) {
-    return func(transform2(arg));
-  };
-}
-var getPrototype = overArg(Object.getPrototypeOf, Object);
-var objectProto$9 = Object.prototype;
-function isPrototype(value) {
-  var Ctor = value && value.constructor, proto2 = typeof Ctor == "function" && Ctor.prototype || objectProto$9;
-  return value === proto2;
-}
-function initCloneObject(object) {
-  return typeof object.constructor == "function" && !isPrototype(object) ? baseCreate(getPrototype(object)) : {};
-}
-function isObjectLike(value) {
-  return value != null && typeof value == "object";
-}
-var argsTag$2 = "[object Arguments]";
-function baseIsArguments(value) {
-  return isObjectLike(value) && baseGetTag(value) == argsTag$2;
-}
-var objectProto$8 = Object.prototype;
-var hasOwnProperty$8 = objectProto$8.hasOwnProperty;
-var propertyIsEnumerable$1 = objectProto$8.propertyIsEnumerable;
-var isArguments = baseIsArguments(/* @__PURE__ */ function() {
-  return arguments;
-}()) ? baseIsArguments : function(value) {
-  return isObjectLike(value) && hasOwnProperty$8.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
-};
-var isArray$1 = Array.isArray;
-var MAX_SAFE_INTEGER$1 = 9007199254740991;
-function isLength(value) {
-  return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER$1;
-}
-function isArrayLike(value) {
-  return value != null && isLength(value.length) && !isFunction(value);
-}
-function isArrayLikeObject(value) {
-  return isObjectLike(value) && isArrayLike(value);
-}
-function stubFalse() {
-  return false;
-}
-var freeExports$1 = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule$1 = freeExports$1 && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports$1 = freeModule$1 && freeModule$1.exports === freeExports$1;
-var Buffer$1 = moduleExports$1 ? root$3.Buffer : void 0;
-var nativeIsBuffer = Buffer$1 ? Buffer$1.isBuffer : void 0;
-var isBuffer = nativeIsBuffer || stubFalse;
-var objectTag$3 = "[object Object]";
-var funcProto = Function.prototype, objectProto$7 = Object.prototype;
-var funcToString = funcProto.toString;
-var hasOwnProperty$7 = objectProto$7.hasOwnProperty;
-var objectCtorString = funcToString.call(Object);
-function isPlainObject$2(value) {
-  if (!isObjectLike(value) || baseGetTag(value) != objectTag$3) {
-    return false;
-  }
-  var proto2 = getPrototype(value);
-  if (proto2 === null) {
-    return true;
-  }
-  var Ctor = hasOwnProperty$7.call(proto2, "constructor") && proto2.constructor;
-  return typeof Ctor == "function" && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
-}
-var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", boolTag$1 = "[object Boolean]", dateTag$1 = "[object Date]", errorTag$1 = "[object Error]", funcTag = "[object Function]", mapTag$2 = "[object Map]", numberTag$1 = "[object Number]", objectTag$2 = "[object Object]", regexpTag$1 = "[object RegExp]", setTag$2 = "[object Set]", stringTag$1 = "[object String]", weakMapTag$1 = "[object WeakMap]";
-var arrayBufferTag$1 = "[object ArrayBuffer]", dataViewTag$2 = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
-var typedArrayTags = {};
-typedArrayTags[float32Tag] = typedArrayTags[float64Tag] = typedArrayTags[int8Tag] = typedArrayTags[int16Tag] = typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] = typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] = typedArrayTags[uint32Tag] = true;
-typedArrayTags[argsTag$1] = typedArrayTags[arrayTag$1] = typedArrayTags[arrayBufferTag$1] = typedArrayTags[boolTag$1] = typedArrayTags[dataViewTag$2] = typedArrayTags[dateTag$1] = typedArrayTags[errorTag$1] = typedArrayTags[funcTag] = typedArrayTags[mapTag$2] = typedArrayTags[numberTag$1] = typedArrayTags[objectTag$2] = typedArrayTags[regexpTag$1] = typedArrayTags[setTag$2] = typedArrayTags[stringTag$1] = typedArrayTags[weakMapTag$1] = false;
-function baseIsTypedArray(value) {
-  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
-}
-function baseUnary(func) {
-  return function(value) {
-    return func(value);
-  };
-}
-var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
-var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
-var moduleExports = freeModule && freeModule.exports === freeExports;
-var freeProcess = moduleExports && freeGlobal.process;
-var nodeUtil = function() {
-  try {
-    var types2 = freeModule && freeModule.require && freeModule.require("util").types;
-    if (types2) {
-      return types2;
-    }
-    return freeProcess && freeProcess.binding && freeProcess.binding("util");
-  } catch (e3) {
-  }
-}();
-var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
-var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
-function safeGet(object, key) {
-  if (key === "constructor" && typeof object[key] === "function") {
-    return;
-  }
-  if (key == "__proto__") {
-    return;
-  }
-  return object[key];
-}
-var objectProto$6 = Object.prototype;
-var hasOwnProperty$6 = objectProto$6.hasOwnProperty;
-function assignValue(object, key, value) {
-  var objValue = object[key];
-  if (!(hasOwnProperty$6.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
-    baseAssignValue(object, key, value);
-  }
-}
-function copyObject(source2, props, object, customizer) {
-  var isNew = !object;
-  object || (object = {});
-  var index2 = -1, length2 = props.length;
-  while (++index2 < length2) {
-    var key = props[index2];
-    var newValue = void 0;
-    if (newValue === void 0) {
-      newValue = source2[key];
-    }
-    if (isNew) {
-      baseAssignValue(object, key, newValue);
-    } else {
-      assignValue(object, key, newValue);
-    }
-  }
-  return object;
-}
-function baseTimes(n3, iteratee) {
-  var index2 = -1, result = Array(n3);
-  while (++index2 < n3) {
-    result[index2] = iteratee(index2);
-  }
-  return result;
-}
-var MAX_SAFE_INTEGER = 9007199254740991;
-var reIsUint = /^(?:0|[1-9]\d*)$/;
-function isIndex(value, length2) {
-  var type = typeof value;
-  length2 = length2 == null ? MAX_SAFE_INTEGER : length2;
-  return !!length2 && (type == "number" || type != "symbol" && reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length2);
-}
-var objectProto$5 = Object.prototype;
-var hasOwnProperty$5 = objectProto$5.hasOwnProperty;
-function arrayLikeKeys(value, inherited) {
-  var isArr = isArray$1(value), isArg = !isArr && isArguments(value), isBuff = !isArr && !isArg && isBuffer(value), isType = !isArr && !isArg && !isBuff && isTypedArray(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length2 = result.length;
-  for (var key in value) {
-    if ((inherited || hasOwnProperty$5.call(value, key)) && !(skipIndexes && // Safari 9 has enumerable `arguments.length` in strict mode.
-    (key == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
-    isBuff && (key == "offset" || key == "parent") || // PhantomJS 2 has enumerable non-index properties on typed arrays.
-    isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || // Skip index properties.
-    isIndex(key, length2)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-function nativeKeysIn(object) {
-  var result = [];
-  if (object != null) {
-    for (var key in Object(object)) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-var objectProto$4 = Object.prototype;
-var hasOwnProperty$4 = objectProto$4.hasOwnProperty;
-function baseKeysIn(object) {
-  if (!isObject(object)) {
-    return nativeKeysIn(object);
-  }
-  var isProto = isPrototype(object), result = [];
-  for (var key in object) {
-    if (!(key == "constructor" && (isProto || !hasOwnProperty$4.call(object, key)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-function keysIn(object) {
-  return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
-}
-function toPlainObject(value) {
-  return copyObject(value, keysIn(value));
-}
-function baseMergeDeep(object, source2, key, srcIndex, mergeFunc, customizer, stack) {
-  var objValue = safeGet(object, key), srcValue = safeGet(source2, key), stacked = stack.get(srcValue);
-  if (stacked) {
-    assignMergeValue(object, key, stacked);
-    return;
-  }
-  var newValue = customizer ? customizer(objValue, srcValue, key + "", object, source2, stack) : void 0;
-  var isCommon = newValue === void 0;
-  if (isCommon) {
-    var isArr = isArray$1(srcValue), isBuff = !isArr && isBuffer(srcValue), isTyped = !isArr && !isBuff && isTypedArray(srcValue);
-    newValue = srcValue;
-    if (isArr || isBuff || isTyped) {
-      if (isArray$1(objValue)) {
-        newValue = objValue;
-      } else if (isArrayLikeObject(objValue)) {
-        newValue = copyArray(objValue);
-      } else if (isBuff) {
-        isCommon = false;
-        newValue = cloneBuffer(srcValue);
-      } else if (isTyped) {
-        isCommon = false;
-        newValue = cloneTypedArray(srcValue);
-      } else {
-        newValue = [];
-      }
-    } else if (isPlainObject$2(srcValue) || isArguments(srcValue)) {
-      newValue = objValue;
-      if (isArguments(objValue)) {
-        newValue = toPlainObject(objValue);
-      } else if (!isObject(objValue) || isFunction(objValue)) {
-        newValue = initCloneObject(srcValue);
-      }
-    } else {
-      isCommon = false;
-    }
-  }
-  if (isCommon) {
-    stack.set(srcValue, newValue);
-    mergeFunc(newValue, srcValue, srcIndex, customizer, stack);
-    stack["delete"](srcValue);
-  }
-  assignMergeValue(object, key, newValue);
-}
-function baseMerge(object, source2, srcIndex, customizer, stack) {
-  if (object === source2) {
-    return;
-  }
-  baseFor(source2, function(srcValue, key) {
-    stack || (stack = new Stack());
-    if (isObject(srcValue)) {
-      baseMergeDeep(object, source2, key, srcIndex, baseMerge, customizer, stack);
-    } else {
-      var newValue = customizer ? customizer(safeGet(object, key), srcValue, key + "", object, source2, stack) : void 0;
-      if (newValue === void 0) {
-        newValue = srcValue;
-      }
-      assignMergeValue(object, key, newValue);
-    }
-  }, keysIn);
-}
-function identity(value) {
-  return value;
-}
-function apply(func, thisArg, args) {
-  switch (args.length) {
-    case 0:
-      return func.call(thisArg);
-    case 1:
-      return func.call(thisArg, args[0]);
-    case 2:
-      return func.call(thisArg, args[0], args[1]);
-    case 3:
-      return func.call(thisArg, args[0], args[1], args[2]);
-  }
-  return func.apply(thisArg, args);
-}
-var nativeMax$1 = Math.max;
-function overRest(func, start, transform2) {
-  start = nativeMax$1(start === void 0 ? func.length - 1 : start, 0);
-  return function() {
-    var args = arguments, index2 = -1, length2 = nativeMax$1(args.length - start, 0), array = Array(length2);
-    while (++index2 < length2) {
-      array[index2] = args[start + index2];
-    }
-    index2 = -1;
-    var otherArgs = Array(start + 1);
-    while (++index2 < start) {
-      otherArgs[index2] = args[index2];
-    }
-    otherArgs[start] = transform2(array);
-    return apply(func, this, otherArgs);
-  };
-}
-function constant(value) {
-  return function() {
-    return value;
-  };
-}
-var baseSetToString = !defineProperty$1 ? identity : function(func, string2) {
-  return defineProperty$1(func, "toString", {
-    "configurable": true,
-    "enumerable": false,
-    "value": constant(string2),
-    "writable": true
-  });
-};
-var HOT_COUNT = 800, HOT_SPAN = 16;
-var nativeNow = Date.now;
-function shortOut(func) {
-  var count2 = 0, lastCalled = 0;
-  return function() {
-    var stamp = nativeNow(), remaining = HOT_SPAN - (stamp - lastCalled);
-    lastCalled = stamp;
-    if (remaining > 0) {
-      if (++count2 >= HOT_COUNT) {
-        return arguments[0];
-      }
-    } else {
-      count2 = 0;
-    }
-    return func.apply(void 0, arguments);
-  };
-}
-var setToString = shortOut(baseSetToString);
-function baseRest(func, start) {
-  return setToString(overRest(func, start, identity), func + "");
-}
-function isIterateeCall(value, index2, object) {
-  if (!isObject(object)) {
-    return false;
-  }
-  var type = typeof index2;
-  if (type == "number" ? isArrayLike(object) && isIndex(index2, object.length) : type == "string" && index2 in object) {
-    return eq(object[index2], value);
-  }
-  return false;
-}
-function createAssigner(assigner) {
-  return baseRest(function(object, sources) {
-    var index2 = -1, length2 = sources.length, customizer = length2 > 1 ? sources[length2 - 1] : void 0, guard = length2 > 2 ? sources[2] : void 0;
-    customizer = assigner.length > 3 && typeof customizer == "function" ? (length2--, customizer) : void 0;
-    if (guard && isIterateeCall(sources[0], sources[1], guard)) {
-      customizer = length2 < 3 ? void 0 : customizer;
-      length2 = 1;
-    }
-    object = Object(object);
-    while (++index2 < length2) {
-      var source2 = sources[index2];
-      if (source2) {
-        assigner(object, source2, index2, customizer);
-      }
-    }
-    return object;
-  });
-}
-var merge$1 = createAssigner(function(object, source2, srcIndex) {
-  baseMerge(object, source2, srcIndex);
-});
-var Raised = function Raised2(_ref) {
-  var zDepth = _ref.zDepth, radius = _ref.radius, background = _ref.background, children = _ref.children, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles;
-  var styles2 = _default$2(merge$1({
-    "default": {
-      wrap: {
-        position: "relative",
-        display: "inline-block"
-      },
-      content: {
-        position: "relative"
-      },
-      bg: {
-        absolute: "0px 0px 0px 0px",
-        boxShadow: "0 " + zDepth + "px " + zDepth * 4 + "px rgba(0,0,0,.24)",
-        borderRadius: radius,
-        background
-      }
-    },
-    "zDepth-0": {
-      bg: {
-        boxShadow: "none"
-      }
-    },
-    "zDepth-1": {
-      bg: {
-        boxShadow: "0 2px 10px rgba(0,0,0,.12), 0 2px 5px rgba(0,0,0,.16)"
-      }
-    },
-    "zDepth-2": {
-      bg: {
-        boxShadow: "0 6px 20px rgba(0,0,0,.19), 0 8px 17px rgba(0,0,0,.2)"
-      }
-    },
-    "zDepth-3": {
-      bg: {
-        boxShadow: "0 17px 50px rgba(0,0,0,.19), 0 12px 15px rgba(0,0,0,.24)"
-      }
-    },
-    "zDepth-4": {
-      bg: {
-        boxShadow: "0 25px 55px rgba(0,0,0,.21), 0 16px 28px rgba(0,0,0,.22)"
-      }
-    },
-    "zDepth-5": {
-      bg: {
-        boxShadow: "0 40px 77px rgba(0,0,0,.22), 0 27px 24px rgba(0,0,0,.2)"
-      }
-    },
-    "square": {
-      bg: {
-        borderRadius: "0"
-      }
-    },
-    "circle": {
-      bg: {
-        borderRadius: "50%"
-      }
-    }
-  }, passedStyles), { "zDepth-1": zDepth === 1 });
-  return React.createElement(
-    "div",
-    { style: styles2.wrap },
-    React.createElement("div", { style: styles2.bg }),
-    React.createElement(
-      "div",
-      { style: styles2.content },
-      children
-    )
-  );
-};
-Raised.propTypes = {
-  background: PropTypes.string,
-  zDepth: PropTypes.oneOf([0, 1, 2, 3, 4, 5]),
-  radius: PropTypes.number,
-  styles: PropTypes.object
-};
-Raised.defaultProps = {
-  background: "#fff",
-  zDepth: 1,
-  radius: 2,
-  styles: {}
-};
-var now = function() {
-  return root$3.Date.now();
-};
-var reWhitespace = /\s/;
-function trimmedEndIndex(string2) {
-  var index2 = string2.length;
-  while (index2-- && reWhitespace.test(string2.charAt(index2))) {
-  }
-  return index2;
-}
-var reTrimStart = /^\s+/;
-function baseTrim(string2) {
-  return string2 ? string2.slice(0, trimmedEndIndex(string2) + 1).replace(reTrimStart, "") : string2;
-}
-var symbolTag$1 = "[object Symbol]";
-function isSymbol(value) {
-  return typeof value == "symbol" || isObjectLike(value) && baseGetTag(value) == symbolTag$1;
-}
-var NAN = 0 / 0;
-var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
-var reIsBinary = /^0b[01]+$/i;
-var reIsOctal = /^0o[0-7]+$/i;
-var freeParseInt = parseInt;
-function toNumber(value) {
-  if (typeof value == "number") {
-    return value;
-  }
-  if (isSymbol(value)) {
-    return NAN;
-  }
-  if (isObject(value)) {
-    var other = typeof value.valueOf == "function" ? value.valueOf() : value;
-    value = isObject(other) ? other + "" : other;
-  }
-  if (typeof value != "string") {
-    return value === 0 ? value : +value;
-  }
-  value = baseTrim(value);
-  var isBinary = reIsBinary.test(value);
-  return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
-}
-var FUNC_ERROR_TEXT$2 = "Expected a function";
-var nativeMax = Math.max, nativeMin = Math.min;
-function debounce(func, wait2, options) {
-  var lastArgs, lastThis, maxWait, result, timerId, lastCallTime, lastInvokeTime = 0, leading = false, maxing = false, trailing = true;
-  if (typeof func != "function") {
-    throw new TypeError(FUNC_ERROR_TEXT$2);
-  }
-  wait2 = toNumber(wait2) || 0;
-  if (isObject(options)) {
-    leading = !!options.leading;
-    maxing = "maxWait" in options;
-    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait2) : maxWait;
-    trailing = "trailing" in options ? !!options.trailing : trailing;
-  }
-  function invokeFunc(time) {
-    var args = lastArgs, thisArg = lastThis;
-    lastArgs = lastThis = void 0;
-    lastInvokeTime = time;
-    result = func.apply(thisArg, args);
-    return result;
-  }
-  function leadingEdge(time) {
-    lastInvokeTime = time;
-    timerId = setTimeout(timerExpired, wait2);
-    return leading ? invokeFunc(time) : result;
-  }
-  function remainingWait(time) {
-    var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime, timeWaiting = wait2 - timeSinceLastCall;
-    return maxing ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
-  }
-  function shouldInvoke(time) {
-    var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime;
-    return lastCallTime === void 0 || timeSinceLastCall >= wait2 || timeSinceLastCall < 0 || maxing && timeSinceLastInvoke >= maxWait;
-  }
-  function timerExpired() {
-    var time = now();
-    if (shouldInvoke(time)) {
-      return trailingEdge(time);
-    }
-    timerId = setTimeout(timerExpired, remainingWait(time));
-  }
-  function trailingEdge(time) {
-    timerId = void 0;
-    if (trailing && lastArgs) {
-      return invokeFunc(time);
-    }
-    lastArgs = lastThis = void 0;
-    return result;
-  }
-  function cancel() {
-    if (timerId !== void 0) {
-      clearTimeout(timerId);
-    }
-    lastInvokeTime = 0;
-    lastArgs = lastCallTime = lastThis = timerId = void 0;
-  }
-  function flush() {
-    return timerId === void 0 ? result : trailingEdge(now());
-  }
-  function debounced() {
-    var time = now(), isInvoking = shouldInvoke(time);
-    lastArgs = arguments;
-    lastThis = this;
-    lastCallTime = time;
-    if (isInvoking) {
-      if (timerId === void 0) {
-        return leadingEdge(lastCallTime);
-      }
-      if (maxing) {
-        clearTimeout(timerId);
-        timerId = setTimeout(timerExpired, wait2);
-        return invokeFunc(lastCallTime);
-      }
-    }
-    if (timerId === void 0) {
-      timerId = setTimeout(timerExpired, wait2);
-    }
-    return result;
-  }
-  debounced.cancel = cancel;
-  debounced.flush = flush;
-  return debounced;
-}
-var FUNC_ERROR_TEXT$1 = "Expected a function";
-function throttle(func, wait2, options) {
-  var leading = true, trailing = true;
-  if (typeof func != "function") {
-    throw new TypeError(FUNC_ERROR_TEXT$1);
-  }
-  if (isObject(options)) {
-    leading = "leading" in options ? !!options.leading : leading;
-    trailing = "trailing" in options ? !!options.trailing : trailing;
-  }
-  return debounce(func, wait2, {
-    "leading": leading,
-    "maxWait": wait2,
-    "trailing": trailing
-  });
-}
-var calculateChange3 = function calculateChange4(e3, hsl, container) {
-  var _container$getBoundin = container.getBoundingClientRect(), containerWidth = _container$getBoundin.width, containerHeight = _container$getBoundin.height;
-  var x2 = typeof e3.pageX === "number" ? e3.pageX : e3.touches[0].pageX;
-  var y3 = typeof e3.pageY === "number" ? e3.pageY : e3.touches[0].pageY;
-  var left = x2 - (container.getBoundingClientRect().left + window.pageXOffset);
-  var top = y3 - (container.getBoundingClientRect().top + window.pageYOffset);
-  if (left < 0) {
-    left = 0;
-  } else if (left > containerWidth) {
-    left = containerWidth;
-  }
-  if (top < 0) {
-    top = 0;
-  } else if (top > containerHeight) {
-    top = containerHeight;
-  }
-  var saturation = left / containerWidth;
-  var bright = 1 - top / containerHeight;
-  return {
-    h: hsl.h,
-    s: saturation,
-    v: bright,
-    a: hsl.a,
-    source: "hsv"
-  };
-};
-var _createClass$4 = /* @__PURE__ */ function() {
-  function defineProperties(target, props) {
-    for (var i5 = 0; i5 < props.length; i5++) {
-      var descriptor = props[i5];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-  return function(Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-function _classCallCheck$4(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _possibleConstructorReturn$4(self2, call) {
-  if (!self2) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return call && (typeof call === "object" || typeof call === "function") ? call : self2;
-}
-function _inherits$4(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-var Saturation = function(_ref) {
-  _inherits$4(Saturation2, _ref);
-  function Saturation2(props) {
-    _classCallCheck$4(this, Saturation2);
-    var _this = _possibleConstructorReturn$4(this, (Saturation2.__proto__ || Object.getPrototypeOf(Saturation2)).call(this, props));
-    _this.handleChange = function(e3) {
-      typeof _this.props.onChange === "function" && _this.throttle(_this.props.onChange, calculateChange3(e3, _this.props.hsl, _this.container), e3);
-    };
-    _this.handleMouseDown = function(e3) {
-      _this.handleChange(e3);
-      var renderWindow = _this.getContainerRenderWindow();
-      renderWindow.addEventListener("mousemove", _this.handleChange);
-      renderWindow.addEventListener("mouseup", _this.handleMouseUp);
-    };
-    _this.handleMouseUp = function() {
-      _this.unbindEventListeners();
-    };
-    _this.throttle = throttle(function(fn, data2, e3) {
-      fn(data2, e3);
-    }, 50);
-    return _this;
-  }
-  _createClass$4(Saturation2, [{
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.throttle.cancel();
-      this.unbindEventListeners();
-    }
-  }, {
-    key: "getContainerRenderWindow",
-    value: function getContainerRenderWindow() {
-      var container = this.container;
-      var renderWindow = window;
-      while (!renderWindow.document.contains(container) && renderWindow.parent !== renderWindow) {
-        renderWindow = renderWindow.parent;
-      }
-      return renderWindow;
-    }
-  }, {
-    key: "unbindEventListeners",
-    value: function unbindEventListeners() {
-      var renderWindow = this.getContainerRenderWindow();
-      renderWindow.removeEventListener("mousemove", this.handleChange);
-      renderWindow.removeEventListener("mouseup", this.handleMouseUp);
-    }
-  }, {
-    key: "render",
-    value: function render3() {
-      var _this2 = this;
-      var _ref2 = this.props.style || {}, color2 = _ref2.color, white = _ref2.white, black = _ref2.black, pointer = _ref2.pointer, circle = _ref2.circle;
-      var styles2 = _default$2({
-        "default": {
-          color: {
-            absolute: "0px 0px 0px 0px",
-            background: "hsl(" + this.props.hsl.h + ",100%, 50%)",
-            borderRadius: this.props.radius
-          },
-          white: {
-            absolute: "0px 0px 0px 0px",
-            borderRadius: this.props.radius
-          },
-          black: {
-            absolute: "0px 0px 0px 0px",
-            boxShadow: this.props.shadow,
-            borderRadius: this.props.radius
-          },
-          pointer: {
-            position: "absolute",
-            top: -(this.props.hsv.v * 100) + 100 + "%",
-            left: this.props.hsv.s * 100 + "%",
-            cursor: "default"
-          },
-          circle: {
-            width: "4px",
-            height: "4px",
-            boxShadow: "0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0,0,0,.3),\n            0 0 1px 2px rgba(0,0,0,.4)",
-            borderRadius: "50%",
-            cursor: "hand",
-            transform: "translate(-2px, -2px)"
-          }
-        },
-        "custom": {
-          color: color2,
-          white,
-          black,
-          pointer,
-          circle
-        }
-      }, { "custom": !!this.props.style });
-      return React.createElement(
-        "div",
-        {
-          style: styles2.color,
-          ref: function ref(container) {
-            return _this2.container = container;
-          },
-          onMouseDown: this.handleMouseDown,
-          onTouchMove: this.handleChange,
-          onTouchStart: this.handleChange
-        },
-        React.createElement(
-          "style",
-          null,
-          "\n          .saturation-white {\n            background: -webkit-linear-gradient(to right, #fff, rgba(255,255,255,0));\n            background: linear-gradient(to right, #fff, rgba(255,255,255,0));\n          }\n          .saturation-black {\n            background: -webkit-linear-gradient(to top, #000, rgba(0,0,0,0));\n            background: linear-gradient(to top, #000, rgba(0,0,0,0));\n          }\n        "
-        ),
-        React.createElement(
-          "div",
-          { style: styles2.white, className: "saturation-white" },
-          React.createElement("div", { style: styles2.black, className: "saturation-black" }),
-          React.createElement(
-            "div",
-            { style: styles2.pointer },
-            this.props.pointer ? React.createElement(this.props.pointer, this.props) : React.createElement("div", { style: styles2.circle })
-          )
-        )
-      );
-    }
-  }]);
-  return Saturation2;
-}(reactExports.PureComponent || reactExports.Component);
-function arrayEach(array, iteratee) {
-  var index2 = -1, length2 = array == null ? 0 : array.length;
-  while (++index2 < length2) {
-    if (iteratee(array[index2], index2, array) === false) {
-      break;
-    }
-  }
-  return array;
-}
-var nativeKeys = overArg(Object.keys, Object);
-var objectProto$3 = Object.prototype;
-var hasOwnProperty$3 = objectProto$3.hasOwnProperty;
-function baseKeys(object) {
-  if (!isPrototype(object)) {
-    return nativeKeys(object);
-  }
-  var result = [];
-  for (var key in Object(object)) {
-    if (hasOwnProperty$3.call(object, key) && key != "constructor") {
-      result.push(key);
-    }
-  }
-  return result;
-}
-function keys$1(object) {
-  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
-}
-function baseForOwn(object, iteratee) {
-  return object && baseFor(object, iteratee, keys$1);
-}
-function createBaseEach(eachFunc, fromRight) {
-  return function(collection2, iteratee) {
-    if (collection2 == null) {
-      return collection2;
-    }
-    if (!isArrayLike(collection2)) {
-      return eachFunc(collection2, iteratee);
-    }
-    var length2 = collection2.length, index2 = -1, iterable = Object(collection2);
-    while (++index2 < length2) {
-      if (iteratee(iterable[index2], index2, iterable) === false) {
-        break;
-      }
-    }
-    return collection2;
-  };
-}
-var baseEach = createBaseEach(baseForOwn);
-function castFunction(value) {
-  return typeof value == "function" ? value : identity;
-}
-function forEach2(collection2, iteratee) {
-  var func = isArray$1(collection2) ? arrayEach : baseEach;
-  return func(collection2, castFunction(iteratee));
-}
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj2) {
-    return typeof obj2;
-  } : function(obj2) {
-    return obj2 && "function" == typeof Symbol && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-  }, _typeof(obj);
-}
-var trimLeft = /^\s+/;
-var trimRight = /\s+$/;
-function tinycolor(color2, opts) {
-  color2 = color2 ? color2 : "";
-  opts = opts || {};
-  if (color2 instanceof tinycolor) {
-    return color2;
-  }
-  if (!(this instanceof tinycolor)) {
-    return new tinycolor(color2, opts);
-  }
-  var rgb = inputToRGB(color2);
-  this._originalInput = color2, this._r = rgb.r, this._g = rgb.g, this._b = rgb.b, this._a = rgb.a, this._roundA = Math.round(100 * this._a) / 100, this._format = opts.format || rgb.format;
-  this._gradientType = opts.gradientType;
-  if (this._r < 1) this._r = Math.round(this._r);
-  if (this._g < 1) this._g = Math.round(this._g);
-  if (this._b < 1) this._b = Math.round(this._b);
-  this._ok = rgb.ok;
-}
-tinycolor.prototype = {
-  isDark: function isDark() {
-    return this.getBrightness() < 128;
-  },
-  isLight: function isLight() {
-    return !this.isDark();
-  },
-  isValid: function isValid2() {
-    return this._ok;
-  },
-  getOriginalInput: function getOriginalInput() {
-    return this._originalInput;
-  },
-  getFormat: function getFormat() {
-    return this._format;
-  },
-  getAlpha: function getAlpha() {
-    return this._a;
-  },
-  getBrightness: function getBrightness() {
-    var rgb = this.toRgb();
-    return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1e3;
-  },
-  getLuminance: function getLuminance() {
-    var rgb = this.toRgb();
-    var RsRGB, GsRGB, BsRGB, R4, G3, B3;
-    RsRGB = rgb.r / 255;
-    GsRGB = rgb.g / 255;
-    BsRGB = rgb.b / 255;
-    if (RsRGB <= 0.03928) R4 = RsRGB / 12.92;
-    else R4 = Math.pow((RsRGB + 0.055) / 1.055, 2.4);
-    if (GsRGB <= 0.03928) G3 = GsRGB / 12.92;
-    else G3 = Math.pow((GsRGB + 0.055) / 1.055, 2.4);
-    if (BsRGB <= 0.03928) B3 = BsRGB / 12.92;
-    else B3 = Math.pow((BsRGB + 0.055) / 1.055, 2.4);
-    return 0.2126 * R4 + 0.7152 * G3 + 0.0722 * B3;
-  },
-  setAlpha: function setAlpha(value) {
-    this._a = boundAlpha(value);
-    this._roundA = Math.round(100 * this._a) / 100;
-    return this;
-  },
-  toHsv: function toHsv() {
-    var hsv2 = rgbToHsv(this._r, this._g, this._b);
-    return {
-      h: hsv2.h * 360,
-      s: hsv2.s,
-      v: hsv2.v,
-      a: this._a
-    };
-  },
-  toHsvString: function toHsvString() {
-    var hsv2 = rgbToHsv(this._r, this._g, this._b);
-    var h2 = Math.round(hsv2.h * 360), s3 = Math.round(hsv2.s * 100), v2 = Math.round(hsv2.v * 100);
-    return this._a == 1 ? "hsv(" + h2 + ", " + s3 + "%, " + v2 + "%)" : "hsva(" + h2 + ", " + s3 + "%, " + v2 + "%, " + this._roundA + ")";
-  },
-  toHsl: function toHsl() {
-    var hsl = rgbToHsl(this._r, this._g, this._b);
-    return {
-      h: hsl.h * 360,
-      s: hsl.s,
-      l: hsl.l,
-      a: this._a
-    };
-  },
-  toHslString: function toHslString() {
-    var hsl = rgbToHsl(this._r, this._g, this._b);
-    var h2 = Math.round(hsl.h * 360), s3 = Math.round(hsl.s * 100), l3 = Math.round(hsl.l * 100);
-    return this._a == 1 ? "hsl(" + h2 + ", " + s3 + "%, " + l3 + "%)" : "hsla(" + h2 + ", " + s3 + "%, " + l3 + "%, " + this._roundA + ")";
-  },
-  toHex: function toHex2(allow3Char) {
-    return rgbToHex(this._r, this._g, this._b, allow3Char);
-  },
-  toHexString: function toHexString(allow3Char) {
-    return "#" + this.toHex(allow3Char);
-  },
-  toHex8: function toHex8(allow4Char) {
-    return rgbaToHex(this._r, this._g, this._b, this._a, allow4Char);
-  },
-  toHex8String: function toHex8String(allow4Char) {
-    return "#" + this.toHex8(allow4Char);
-  },
-  toRgb: function toRgb() {
-    return {
-      r: Math.round(this._r),
-      g: Math.round(this._g),
-      b: Math.round(this._b),
-      a: this._a
-    };
-  },
-  toRgbString: function toRgbString() {
-    return this._a == 1 ? "rgb(" + Math.round(this._r) + ", " + Math.round(this._g) + ", " + Math.round(this._b) + ")" : "rgba(" + Math.round(this._r) + ", " + Math.round(this._g) + ", " + Math.round(this._b) + ", " + this._roundA + ")";
-  },
-  toPercentageRgb: function toPercentageRgb() {
-    return {
-      r: Math.round(bound01(this._r, 255) * 100) + "%",
-      g: Math.round(bound01(this._g, 255) * 100) + "%",
-      b: Math.round(bound01(this._b, 255) * 100) + "%",
-      a: this._a
-    };
-  },
-  toPercentageRgbString: function toPercentageRgbString() {
-    return this._a == 1 ? "rgb(" + Math.round(bound01(this._r, 255) * 100) + "%, " + Math.round(bound01(this._g, 255) * 100) + "%, " + Math.round(bound01(this._b, 255) * 100) + "%)" : "rgba(" + Math.round(bound01(this._r, 255) * 100) + "%, " + Math.round(bound01(this._g, 255) * 100) + "%, " + Math.round(bound01(this._b, 255) * 100) + "%, " + this._roundA + ")";
-  },
-  toName: function toName() {
-    if (this._a === 0) {
-      return "transparent";
-    }
-    if (this._a < 1) {
-      return false;
-    }
-    return hexNames[rgbToHex(this._r, this._g, this._b, true)] || false;
-  },
-  toFilter: function toFilter(secondColor) {
-    var hex8String = "#" + rgbaToArgbHex(this._r, this._g, this._b, this._a);
-    var secondHex8String = hex8String;
-    var gradientType = this._gradientType ? "GradientType = 1, " : "";
-    if (secondColor) {
-      var s3 = tinycolor(secondColor);
-      secondHex8String = "#" + rgbaToArgbHex(s3._r, s3._g, s3._b, s3._a);
-    }
-    return "progid:DXImageTransform.Microsoft.gradient(" + gradientType + "startColorstr=" + hex8String + ",endColorstr=" + secondHex8String + ")";
-  },
-  toString: function toString(format2) {
-    var formatSet = !!format2;
-    format2 = format2 || this._format;
-    var formattedString = false;
-    var hasAlpha = this._a < 1 && this._a >= 0;
-    var needsAlphaFormat = !formatSet && hasAlpha && (format2 === "hex" || format2 === "hex6" || format2 === "hex3" || format2 === "hex4" || format2 === "hex8" || format2 === "name");
-    if (needsAlphaFormat) {
-      if (format2 === "name" && this._a === 0) {
-        return this.toName();
-      }
-      return this.toRgbString();
-    }
-    if (format2 === "rgb") {
-      formattedString = this.toRgbString();
-    }
-    if (format2 === "prgb") {
-      formattedString = this.toPercentageRgbString();
-    }
-    if (format2 === "hex" || format2 === "hex6") {
-      formattedString = this.toHexString();
-    }
-    if (format2 === "hex3") {
-      formattedString = this.toHexString(true);
-    }
-    if (format2 === "hex4") {
-      formattedString = this.toHex8String(true);
-    }
-    if (format2 === "hex8") {
-      formattedString = this.toHex8String();
-    }
-    if (format2 === "name") {
-      formattedString = this.toName();
-    }
-    if (format2 === "hsl") {
-      formattedString = this.toHslString();
-    }
-    if (format2 === "hsv") {
-      formattedString = this.toHsvString();
-    }
-    return formattedString || this.toHexString();
-  },
-  clone: function clone2() {
-    return tinycolor(this.toString());
-  },
-  _applyModification: function _applyModification(fn, args) {
-    var color2 = fn.apply(null, [this].concat([].slice.call(args)));
-    this._r = color2._r;
-    this._g = color2._g;
-    this._b = color2._b;
-    this.setAlpha(color2._a);
-    return this;
-  },
-  lighten: function lighten() {
-    return this._applyModification(_lighten, arguments);
-  },
-  brighten: function brighten() {
-    return this._applyModification(_brighten, arguments);
-  },
-  darken: function darken() {
-    return this._applyModification(_darken, arguments);
-  },
-  desaturate: function desaturate() {
-    return this._applyModification(_desaturate, arguments);
-  },
-  saturate: function saturate() {
-    return this._applyModification(_saturate, arguments);
-  },
-  greyscale: function greyscale() {
-    return this._applyModification(_greyscale, arguments);
-  },
-  spin: function spin() {
-    return this._applyModification(_spin, arguments);
-  },
-  _applyCombination: function _applyCombination(fn, args) {
-    return fn.apply(null, [this].concat([].slice.call(args)));
-  },
-  analogous: function analogous() {
-    return this._applyCombination(_analogous, arguments);
-  },
-  complement: function complement() {
-    return this._applyCombination(_complement, arguments);
-  },
-  monochromatic: function monochromatic() {
-    return this._applyCombination(_monochromatic, arguments);
-  },
-  splitcomplement: function splitcomplement() {
-    return this._applyCombination(_splitcomplement, arguments);
-  },
-  // Disabled until https://github.com/bgrins/TinyColor/issues/254
-  // polyad: function (number) {
-  //   return this._applyCombination(polyad, [number]);
-  // },
-  triad: function triad() {
-    return this._applyCombination(polyad, [3]);
-  },
-  tetrad: function tetrad() {
-    return this._applyCombination(polyad, [4]);
-  }
-};
-tinycolor.fromRatio = function(color2, opts) {
-  if (_typeof(color2) == "object") {
-    var newColor = {};
-    for (var i5 in color2) {
-      if (color2.hasOwnProperty(i5)) {
-        if (i5 === "a") {
-          newColor[i5] = color2[i5];
-        } else {
-          newColor[i5] = convertToPercentage(color2[i5]);
-        }
-      }
-    }
-    color2 = newColor;
-  }
-  return tinycolor(color2, opts);
-};
-function inputToRGB(color2) {
-  var rgb = {
-    r: 0,
-    g: 0,
-    b: 0
-  };
-  var a2 = 1;
-  var s3 = null;
-  var v2 = null;
-  var l3 = null;
-  var ok2 = false;
-  var format2 = false;
-  if (typeof color2 == "string") {
-    color2 = stringInputToObject(color2);
-  }
-  if (_typeof(color2) == "object") {
-    if (isValidCSSUnit(color2.r) && isValidCSSUnit(color2.g) && isValidCSSUnit(color2.b)) {
-      rgb = rgbToRgb(color2.r, color2.g, color2.b);
-      ok2 = true;
-      format2 = String(color2.r).substr(-1) === "%" ? "prgb" : "rgb";
-    } else if (isValidCSSUnit(color2.h) && isValidCSSUnit(color2.s) && isValidCSSUnit(color2.v)) {
-      s3 = convertToPercentage(color2.s);
-      v2 = convertToPercentage(color2.v);
-      rgb = hsvToRgb(color2.h, s3, v2);
-      ok2 = true;
-      format2 = "hsv";
-    } else if (isValidCSSUnit(color2.h) && isValidCSSUnit(color2.s) && isValidCSSUnit(color2.l)) {
-      s3 = convertToPercentage(color2.s);
-      l3 = convertToPercentage(color2.l);
-      rgb = hslToRgb(color2.h, s3, l3);
-      ok2 = true;
-      format2 = "hsl";
-    }
-    if (color2.hasOwnProperty("a")) {
-      a2 = color2.a;
-    }
-  }
-  a2 = boundAlpha(a2);
-  return {
-    ok: ok2,
-    format: color2.format || format2,
-    r: Math.min(255, Math.max(rgb.r, 0)),
-    g: Math.min(255, Math.max(rgb.g, 0)),
-    b: Math.min(255, Math.max(rgb.b, 0)),
-    a: a2
-  };
-}
-function rgbToRgb(r4, g2, b2) {
-  return {
-    r: bound01(r4, 255) * 255,
-    g: bound01(g2, 255) * 255,
-    b: bound01(b2, 255) * 255
-  };
-}
-function rgbToHsl(r4, g2, b2) {
-  r4 = bound01(r4, 255);
-  g2 = bound01(g2, 255);
-  b2 = bound01(b2, 255);
-  var max2 = Math.max(r4, g2, b2), min2 = Math.min(r4, g2, b2);
-  var h2, s3, l3 = (max2 + min2) / 2;
-  if (max2 == min2) {
-    h2 = s3 = 0;
-  } else {
-    var d2 = max2 - min2;
-    s3 = l3 > 0.5 ? d2 / (2 - max2 - min2) : d2 / (max2 + min2);
-    switch (max2) {
-      case r4:
-        h2 = (g2 - b2) / d2 + (g2 < b2 ? 6 : 0);
-        break;
-      case g2:
-        h2 = (b2 - r4) / d2 + 2;
-        break;
-      case b2:
-        h2 = (r4 - g2) / d2 + 4;
-        break;
-    }
-    h2 /= 6;
-  }
-  return {
-    h: h2,
-    s: s3,
-    l: l3
-  };
-}
-function hslToRgb(h2, s3, l3) {
-  var r4, g2, b2;
-  h2 = bound01(h2, 360);
-  s3 = bound01(s3, 100);
-  l3 = bound01(l3, 100);
-  function hue2rgb(p5, q3, t3) {
-    if (t3 < 0) t3 += 1;
-    if (t3 > 1) t3 -= 1;
-    if (t3 < 1 / 6) return p5 + (q3 - p5) * 6 * t3;
-    if (t3 < 1 / 2) return q3;
-    if (t3 < 2 / 3) return p5 + (q3 - p5) * (2 / 3 - t3) * 6;
-    return p5;
-  }
-  if (s3 === 0) {
-    r4 = g2 = b2 = l3;
-  } else {
-    var q2 = l3 < 0.5 ? l3 * (1 + s3) : l3 + s3 - l3 * s3;
-    var p4 = 2 * l3 - q2;
-    r4 = hue2rgb(p4, q2, h2 + 1 / 3);
-    g2 = hue2rgb(p4, q2, h2);
-    b2 = hue2rgb(p4, q2, h2 - 1 / 3);
-  }
-  return {
-    r: r4 * 255,
-    g: g2 * 255,
-    b: b2 * 255
-  };
-}
-function rgbToHsv(r4, g2, b2) {
-  r4 = bound01(r4, 255);
-  g2 = bound01(g2, 255);
-  b2 = bound01(b2, 255);
-  var max2 = Math.max(r4, g2, b2), min2 = Math.min(r4, g2, b2);
-  var h2, s3, v2 = max2;
-  var d2 = max2 - min2;
-  s3 = max2 === 0 ? 0 : d2 / max2;
-  if (max2 == min2) {
-    h2 = 0;
-  } else {
-    switch (max2) {
-      case r4:
-        h2 = (g2 - b2) / d2 + (g2 < b2 ? 6 : 0);
-        break;
-      case g2:
-        h2 = (b2 - r4) / d2 + 2;
-        break;
-      case b2:
-        h2 = (r4 - g2) / d2 + 4;
-        break;
-    }
-    h2 /= 6;
-  }
-  return {
-    h: h2,
-    s: s3,
-    v: v2
-  };
-}
-function hsvToRgb(h2, s3, v2) {
-  h2 = bound01(h2, 360) * 6;
-  s3 = bound01(s3, 100);
-  v2 = bound01(v2, 100);
-  var i5 = Math.floor(h2), f3 = h2 - i5, p4 = v2 * (1 - s3), q2 = v2 * (1 - f3 * s3), t3 = v2 * (1 - (1 - f3) * s3), mod2 = i5 % 6, r4 = [v2, q2, p4, p4, t3, v2][mod2], g2 = [t3, v2, v2, q2, p4, p4][mod2], b2 = [p4, p4, t3, v2, v2, q2][mod2];
-  return {
-    r: r4 * 255,
-    g: g2 * 255,
-    b: b2 * 255
-  };
-}
-function rgbToHex(r4, g2, b2, allow3Char) {
-  var hex = [pad2(Math.round(r4).toString(16)), pad2(Math.round(g2).toString(16)), pad2(Math.round(b2).toString(16))];
-  if (allow3Char && hex[0].charAt(0) == hex[0].charAt(1) && hex[1].charAt(0) == hex[1].charAt(1) && hex[2].charAt(0) == hex[2].charAt(1)) {
-    return hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0);
-  }
-  return hex.join("");
-}
-function rgbaToHex(r4, g2, b2, a2, allow4Char) {
-  var hex = [pad2(Math.round(r4).toString(16)), pad2(Math.round(g2).toString(16)), pad2(Math.round(b2).toString(16)), pad2(convertDecimalToHex(a2))];
-  if (allow4Char && hex[0].charAt(0) == hex[0].charAt(1) && hex[1].charAt(0) == hex[1].charAt(1) && hex[2].charAt(0) == hex[2].charAt(1) && hex[3].charAt(0) == hex[3].charAt(1)) {
-    return hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0) + hex[3].charAt(0);
-  }
-  return hex.join("");
-}
-function rgbaToArgbHex(r4, g2, b2, a2) {
-  var hex = [pad2(convertDecimalToHex(a2)), pad2(Math.round(r4).toString(16)), pad2(Math.round(g2).toString(16)), pad2(Math.round(b2).toString(16))];
-  return hex.join("");
-}
-tinycolor.equals = function(color1, color2) {
-  if (!color1 || !color2) return false;
-  return tinycolor(color1).toRgbString() == tinycolor(color2).toRgbString();
-};
-tinycolor.random = function() {
-  return tinycolor.fromRatio({
-    r: Math.random(),
-    g: Math.random(),
-    b: Math.random()
-  });
-};
-function _desaturate(color2, amount) {
-  amount = amount === 0 ? 0 : amount || 10;
-  var hsl = tinycolor(color2).toHsl();
-  hsl.s -= amount / 100;
-  hsl.s = clamp01(hsl.s);
-  return tinycolor(hsl);
-}
-function _saturate(color2, amount) {
-  amount = amount === 0 ? 0 : amount || 10;
-  var hsl = tinycolor(color2).toHsl();
-  hsl.s += amount / 100;
-  hsl.s = clamp01(hsl.s);
-  return tinycolor(hsl);
-}
-function _greyscale(color2) {
-  return tinycolor(color2).desaturate(100);
-}
-function _lighten(color2, amount) {
-  amount = amount === 0 ? 0 : amount || 10;
-  var hsl = tinycolor(color2).toHsl();
-  hsl.l += amount / 100;
-  hsl.l = clamp01(hsl.l);
-  return tinycolor(hsl);
-}
-function _brighten(color2, amount) {
-  amount = amount === 0 ? 0 : amount || 10;
-  var rgb = tinycolor(color2).toRgb();
-  rgb.r = Math.max(0, Math.min(255, rgb.r - Math.round(255 * -(amount / 100))));
-  rgb.g = Math.max(0, Math.min(255, rgb.g - Math.round(255 * -(amount / 100))));
-  rgb.b = Math.max(0, Math.min(255, rgb.b - Math.round(255 * -(amount / 100))));
-  return tinycolor(rgb);
-}
-function _darken(color2, amount) {
-  amount = amount === 0 ? 0 : amount || 10;
-  var hsl = tinycolor(color2).toHsl();
-  hsl.l -= amount / 100;
-  hsl.l = clamp01(hsl.l);
-  return tinycolor(hsl);
-}
-function _spin(color2, amount) {
-  var hsl = tinycolor(color2).toHsl();
-  var hue = (hsl.h + amount) % 360;
-  hsl.h = hue < 0 ? 360 + hue : hue;
-  return tinycolor(hsl);
-}
-function _complement(color2) {
-  var hsl = tinycolor(color2).toHsl();
-  hsl.h = (hsl.h + 180) % 360;
-  return tinycolor(hsl);
-}
-function polyad(color2, number2) {
-  if (isNaN(number2) || number2 <= 0) {
-    throw new Error("Argument to polyad must be a positive number");
-  }
-  var hsl = tinycolor(color2).toHsl();
-  var result = [tinycolor(color2)];
-  var step = 360 / number2;
-  for (var i5 = 1; i5 < number2; i5++) {
-    result.push(tinycolor({
-      h: (hsl.h + i5 * step) % 360,
-      s: hsl.s,
-      l: hsl.l
-    }));
-  }
-  return result;
-}
-function _splitcomplement(color2) {
-  var hsl = tinycolor(color2).toHsl();
-  var h2 = hsl.h;
-  return [tinycolor(color2), tinycolor({
-    h: (h2 + 72) % 360,
-    s: hsl.s,
-    l: hsl.l
-  }), tinycolor({
-    h: (h2 + 216) % 360,
-    s: hsl.s,
-    l: hsl.l
-  })];
-}
-function _analogous(color2, results, slices) {
-  results = results || 6;
-  slices = slices || 30;
-  var hsl = tinycolor(color2).toHsl();
-  var part = 360 / slices;
-  var ret = [tinycolor(color2)];
-  for (hsl.h = (hsl.h - (part * results >> 1) + 720) % 360; --results; ) {
-    hsl.h = (hsl.h + part) % 360;
-    ret.push(tinycolor(hsl));
-  }
-  return ret;
-}
-function _monochromatic(color2, results) {
-  results = results || 6;
-  var hsv2 = tinycolor(color2).toHsv();
-  var h2 = hsv2.h, s3 = hsv2.s, v2 = hsv2.v;
-  var ret = [];
-  var modification = 1 / results;
-  while (results--) {
-    ret.push(tinycolor({
-      h: h2,
-      s: s3,
-      v: v2
-    }));
-    v2 = (v2 + modification) % 1;
-  }
-  return ret;
-}
-tinycolor.mix = function(color1, color2, amount) {
-  amount = amount === 0 ? 0 : amount || 50;
-  var rgb1 = tinycolor(color1).toRgb();
-  var rgb2 = tinycolor(color2).toRgb();
-  var p4 = amount / 100;
-  var rgba = {
-    r: (rgb2.r - rgb1.r) * p4 + rgb1.r,
-    g: (rgb2.g - rgb1.g) * p4 + rgb1.g,
-    b: (rgb2.b - rgb1.b) * p4 + rgb1.b,
-    a: (rgb2.a - rgb1.a) * p4 + rgb1.a
-  };
-  return tinycolor(rgba);
-};
-tinycolor.readability = function(color1, color2) {
-  var c1 = tinycolor(color1);
-  var c2 = tinycolor(color2);
-  return (Math.max(c1.getLuminance(), c2.getLuminance()) + 0.05) / (Math.min(c1.getLuminance(), c2.getLuminance()) + 0.05);
-};
-tinycolor.isReadable = function(color1, color2, wcag2) {
-  var readability = tinycolor.readability(color1, color2);
-  var wcag2Parms, out;
-  out = false;
-  wcag2Parms = validateWCAG2Parms(wcag2);
-  switch (wcag2Parms.level + wcag2Parms.size) {
-    case "AAsmall":
-    case "AAAlarge":
-      out = readability >= 4.5;
-      break;
-    case "AAlarge":
-      out = readability >= 3;
-      break;
-    case "AAAsmall":
-      out = readability >= 7;
-      break;
-  }
-  return out;
-};
-tinycolor.mostReadable = function(baseColor, colorList, args) {
-  var bestColor = null;
-  var bestScore = 0;
-  var readability;
-  var includeFallbackColors, level, size;
-  args = args || {};
-  includeFallbackColors = args.includeFallbackColors;
-  level = args.level;
-  size = args.size;
-  for (var i5 = 0; i5 < colorList.length; i5++) {
-    readability = tinycolor.readability(baseColor, colorList[i5]);
-    if (readability > bestScore) {
-      bestScore = readability;
-      bestColor = tinycolor(colorList[i5]);
-    }
-  }
-  if (tinycolor.isReadable(baseColor, bestColor, {
-    level,
-    size
-  }) || !includeFallbackColors) {
-    return bestColor;
-  } else {
-    args.includeFallbackColors = false;
-    return tinycolor.mostReadable(baseColor, ["#fff", "#000"], args);
-  }
-};
-var names = tinycolor.names = {
-  aliceblue: "f0f8ff",
-  antiquewhite: "faebd7",
-  aqua: "0ff",
-  aquamarine: "7fffd4",
-  azure: "f0ffff",
-  beige: "f5f5dc",
-  bisque: "ffe4c4",
-  black: "000",
-  blanchedalmond: "ffebcd",
-  blue: "00f",
-  blueviolet: "8a2be2",
-  brown: "a52a2a",
-  burlywood: "deb887",
-  burntsienna: "ea7e5d",
-  cadetblue: "5f9ea0",
-  chartreuse: "7fff00",
-  chocolate: "d2691e",
-  coral: "ff7f50",
-  cornflowerblue: "6495ed",
-  cornsilk: "fff8dc",
-  crimson: "dc143c",
-  cyan: "0ff",
-  darkblue: "00008b",
-  darkcyan: "008b8b",
-  darkgoldenrod: "b8860b",
-  darkgray: "a9a9a9",
-  darkgreen: "006400",
-  darkgrey: "a9a9a9",
-  darkkhaki: "bdb76b",
-  darkmagenta: "8b008b",
-  darkolivegreen: "556b2f",
-  darkorange: "ff8c00",
-  darkorchid: "9932cc",
-  darkred: "8b0000",
-  darksalmon: "e9967a",
-  darkseagreen: "8fbc8f",
-  darkslateblue: "483d8b",
-  darkslategray: "2f4f4f",
-  darkslategrey: "2f4f4f",
-  darkturquoise: "00ced1",
-  darkviolet: "9400d3",
-  deeppink: "ff1493",
-  deepskyblue: "00bfff",
-  dimgray: "696969",
-  dimgrey: "696969",
-  dodgerblue: "1e90ff",
-  firebrick: "b22222",
-  floralwhite: "fffaf0",
-  forestgreen: "228b22",
-  fuchsia: "f0f",
-  gainsboro: "dcdcdc",
-  ghostwhite: "f8f8ff",
-  gold: "ffd700",
-  goldenrod: "daa520",
-  gray: "808080",
-  green: "008000",
-  greenyellow: "adff2f",
-  grey: "808080",
-  honeydew: "f0fff0",
-  hotpink: "ff69b4",
-  indianred: "cd5c5c",
-  indigo: "4b0082",
-  ivory: "fffff0",
-  khaki: "f0e68c",
-  lavender: "e6e6fa",
-  lavenderblush: "fff0f5",
-  lawngreen: "7cfc00",
-  lemonchiffon: "fffacd",
-  lightblue: "add8e6",
-  lightcoral: "f08080",
-  lightcyan: "e0ffff",
-  lightgoldenrodyellow: "fafad2",
-  lightgray: "d3d3d3",
-  lightgreen: "90ee90",
-  lightgrey: "d3d3d3",
-  lightpink: "ffb6c1",
-  lightsalmon: "ffa07a",
-  lightseagreen: "20b2aa",
-  lightskyblue: "87cefa",
-  lightslategray: "789",
-  lightslategrey: "789",
-  lightsteelblue: "b0c4de",
-  lightyellow: "ffffe0",
-  lime: "0f0",
-  limegreen: "32cd32",
-  linen: "faf0e6",
-  magenta: "f0f",
-  maroon: "800000",
-  mediumaquamarine: "66cdaa",
-  mediumblue: "0000cd",
-  mediumorchid: "ba55d3",
-  mediumpurple: "9370db",
-  mediumseagreen: "3cb371",
-  mediumslateblue: "7b68ee",
-  mediumspringgreen: "00fa9a",
-  mediumturquoise: "48d1cc",
-  mediumvioletred: "c71585",
-  midnightblue: "191970",
-  mintcream: "f5fffa",
-  mistyrose: "ffe4e1",
-  moccasin: "ffe4b5",
-  navajowhite: "ffdead",
-  navy: "000080",
-  oldlace: "fdf5e6",
-  olive: "808000",
-  olivedrab: "6b8e23",
-  orange: "ffa500",
-  orangered: "ff4500",
-  orchid: "da70d6",
-  palegoldenrod: "eee8aa",
-  palegreen: "98fb98",
-  paleturquoise: "afeeee",
-  palevioletred: "db7093",
-  papayawhip: "ffefd5",
-  peachpuff: "ffdab9",
-  peru: "cd853f",
-  pink: "ffc0cb",
-  plum: "dda0dd",
-  powderblue: "b0e0e6",
-  purple: "800080",
-  rebeccapurple: "663399",
-  red: "f00",
-  rosybrown: "bc8f8f",
-  royalblue: "4169e1",
-  saddlebrown: "8b4513",
-  salmon: "fa8072",
-  sandybrown: "f4a460",
-  seagreen: "2e8b57",
-  seashell: "fff5ee",
-  sienna: "a0522d",
-  silver: "c0c0c0",
-  skyblue: "87ceeb",
-  slateblue: "6a5acd",
-  slategray: "708090",
-  slategrey: "708090",
-  snow: "fffafa",
-  springgreen: "00ff7f",
-  steelblue: "4682b4",
-  tan: "d2b48c",
-  teal: "008080",
-  thistle: "d8bfd8",
-  tomato: "ff6347",
-  turquoise: "40e0d0",
-  violet: "ee82ee",
-  wheat: "f5deb3",
-  white: "fff",
-  whitesmoke: "f5f5f5",
-  yellow: "ff0",
-  yellowgreen: "9acd32"
-};
-var hexNames = tinycolor.hexNames = flip(names);
-function flip(o3) {
-  var flipped = {};
-  for (var i5 in o3) {
-    if (o3.hasOwnProperty(i5)) {
-      flipped[o3[i5]] = i5;
-    }
-  }
-  return flipped;
-}
-function boundAlpha(a2) {
-  a2 = parseFloat(a2);
-  if (isNaN(a2) || a2 < 0 || a2 > 1) {
-    a2 = 1;
-  }
-  return a2;
-}
-function bound01(n3, max2) {
-  if (isOnePointZero(n3)) n3 = "100%";
-  var processPercent = isPercentage(n3);
-  n3 = Math.min(max2, Math.max(0, parseFloat(n3)));
-  if (processPercent) {
-    n3 = parseInt(n3 * max2, 10) / 100;
-  }
-  if (Math.abs(n3 - max2) < 1e-6) {
-    return 1;
-  }
-  return n3 % max2 / parseFloat(max2);
-}
-function clamp01(val) {
-  return Math.min(1, Math.max(0, val));
-}
-function parseIntFromHex(val) {
-  return parseInt(val, 16);
-}
-function isOnePointZero(n3) {
-  return typeof n3 == "string" && n3.indexOf(".") != -1 && parseFloat(n3) === 1;
-}
-function isPercentage(n3) {
-  return typeof n3 === "string" && n3.indexOf("%") != -1;
-}
-function pad2(c2) {
-  return c2.length == 1 ? "0" + c2 : "" + c2;
-}
-function convertToPercentage(n3) {
-  if (n3 <= 1) {
-    n3 = n3 * 100 + "%";
-  }
-  return n3;
-}
-function convertDecimalToHex(d2) {
-  return Math.round(parseFloat(d2) * 255).toString(16);
-}
-function convertHexToDecimal(h2) {
-  return parseIntFromHex(h2) / 255;
-}
-var matchers = function() {
-  var CSS_INTEGER = "[-\\+]?\\d+%?";
-  var CSS_NUMBER = "[-\\+]?\\d*\\.\\d+%?";
-  var CSS_UNIT = "(?:" + CSS_NUMBER + ")|(?:" + CSS_INTEGER + ")";
-  var PERMISSIVE_MATCH3 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
-  var PERMISSIVE_MATCH4 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
-  return {
-    CSS_UNIT: new RegExp(CSS_UNIT),
-    rgb: new RegExp("rgb" + PERMISSIVE_MATCH3),
-    rgba: new RegExp("rgba" + PERMISSIVE_MATCH4),
-    hsl: new RegExp("hsl" + PERMISSIVE_MATCH3),
-    hsla: new RegExp("hsla" + PERMISSIVE_MATCH4),
-    hsv: new RegExp("hsv" + PERMISSIVE_MATCH3),
-    hsva: new RegExp("hsva" + PERMISSIVE_MATCH4),
-    hex3: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
-    hex6: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
-    hex4: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
-    hex8: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
-  };
-}();
-function isValidCSSUnit(color2) {
-  return !!matchers.CSS_UNIT.exec(color2);
-}
-function stringInputToObject(color2) {
-  color2 = color2.replace(trimLeft, "").replace(trimRight, "").toLowerCase();
-  var named = false;
-  if (names[color2]) {
-    color2 = names[color2];
-    named = true;
-  } else if (color2 == "transparent") {
-    return {
-      r: 0,
-      g: 0,
-      b: 0,
-      a: 0,
-      format: "name"
-    };
-  }
-  var match2;
-  if (match2 = matchers.rgb.exec(color2)) {
-    return {
-      r: match2[1],
-      g: match2[2],
-      b: match2[3]
-    };
-  }
-  if (match2 = matchers.rgba.exec(color2)) {
-    return {
-      r: match2[1],
-      g: match2[2],
-      b: match2[3],
-      a: match2[4]
-    };
-  }
-  if (match2 = matchers.hsl.exec(color2)) {
-    return {
-      h: match2[1],
-      s: match2[2],
-      l: match2[3]
-    };
-  }
-  if (match2 = matchers.hsla.exec(color2)) {
-    return {
-      h: match2[1],
-      s: match2[2],
-      l: match2[3],
-      a: match2[4]
-    };
-  }
-  if (match2 = matchers.hsv.exec(color2)) {
-    return {
-      h: match2[1],
-      s: match2[2],
-      v: match2[3]
-    };
-  }
-  if (match2 = matchers.hsva.exec(color2)) {
-    return {
-      h: match2[1],
-      s: match2[2],
-      v: match2[3],
-      a: match2[4]
-    };
-  }
-  if (match2 = matchers.hex8.exec(color2)) {
-    return {
-      r: parseIntFromHex(match2[1]),
-      g: parseIntFromHex(match2[2]),
-      b: parseIntFromHex(match2[3]),
-      a: convertHexToDecimal(match2[4]),
-      format: named ? "name" : "hex8"
-    };
-  }
-  if (match2 = matchers.hex6.exec(color2)) {
-    return {
-      r: parseIntFromHex(match2[1]),
-      g: parseIntFromHex(match2[2]),
-      b: parseIntFromHex(match2[3]),
-      format: named ? "name" : "hex"
-    };
-  }
-  if (match2 = matchers.hex4.exec(color2)) {
-    return {
-      r: parseIntFromHex(match2[1] + "" + match2[1]),
-      g: parseIntFromHex(match2[2] + "" + match2[2]),
-      b: parseIntFromHex(match2[3] + "" + match2[3]),
-      a: convertHexToDecimal(match2[4] + "" + match2[4]),
-      format: named ? "name" : "hex8"
-    };
-  }
-  if (match2 = matchers.hex3.exec(color2)) {
-    return {
-      r: parseIntFromHex(match2[1] + "" + match2[1]),
-      g: parseIntFromHex(match2[2] + "" + match2[2]),
-      b: parseIntFromHex(match2[3] + "" + match2[3]),
-      format: named ? "name" : "hex"
-    };
-  }
-  return false;
-}
-function validateWCAG2Parms(parms) {
-  var level, size;
-  parms = parms || {
-    level: "AA",
-    size: "small"
-  };
-  level = (parms.level || "AA").toUpperCase();
-  size = (parms.size || "small").toLowerCase();
-  if (level !== "AA" && level !== "AAA") {
-    level = "AA";
-  }
-  if (size !== "small" && size !== "large") {
-    size = "small";
-  }
-  return {
-    level,
-    size
-  };
-}
-var simpleCheckForValidColor = function simpleCheckForValidColor2(data2) {
-  var keysToCheck = ["r", "g", "b", "a", "h", "s", "l", "v"];
-  var checked = 0;
-  var passed = 0;
-  forEach2(keysToCheck, function(letter) {
-    if (data2[letter]) {
-      checked += 1;
-      if (!isNaN(data2[letter])) {
-        passed += 1;
-      }
-      if (letter === "s" || letter === "l") {
-        var percentPatt = /^\d+%$/;
-        if (percentPatt.test(data2[letter])) {
-          passed += 1;
-        }
-      }
-    }
-  });
-  return checked === passed ? data2 : false;
-};
-var toState = function toState2(data2, oldHue) {
-  var color2 = data2.hex ? tinycolor(data2.hex) : tinycolor(data2);
-  var hsl = color2.toHsl();
-  var hsv2 = color2.toHsv();
-  var rgb = color2.toRgb();
-  var hex = color2.toHex();
-  if (hsl.s === 0) {
-    hsl.h = oldHue || 0;
-    hsv2.h = oldHue || 0;
-  }
-  var transparent = hex === "000000" && rgb.a === 0;
-  return {
-    hsl,
-    hex: transparent ? "transparent" : "#" + hex,
-    rgb,
-    hsv: hsv2,
-    oldHue: data2.h || oldHue || hsl.h,
-    source: data2.source
-  };
-};
-var isValidHex = function isValidHex2(hex) {
-  if (hex === "transparent") {
-    return true;
-  }
-  var lh2 = String(hex).charAt(0) === "#" ? 1 : 0;
-  return hex.length !== 4 + lh2 && hex.length < 7 + lh2 && tinycolor(hex).isValid();
-};
-var getContrastingColor = function getContrastingColor2(data2) {
-  if (!data2) {
-    return "#fff";
-  }
-  var col = toState(data2);
-  if (col.hex === "transparent") {
-    return "rgba(0,0,0,0.4)";
-  }
-  var yiq = (col.rgb.r * 299 + col.rgb.g * 587 + col.rgb.b * 114) / 1e3;
-  return yiq >= 128 ? "#000" : "#fff";
-};
-var isvalidColorString = function isvalidColorString2(string2, type) {
-  var stringWithoutDegree = string2.replace("°", "");
-  return tinycolor(type + " (" + stringWithoutDegree + ")")._ok;
-};
-var _extends$8 = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var _createClass$3 = /* @__PURE__ */ function() {
-  function defineProperties(target, props) {
-    for (var i5 = 0; i5 < props.length; i5++) {
-      var descriptor = props[i5];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-  return function(Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-function _classCallCheck$3(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _possibleConstructorReturn$3(self2, call) {
-  if (!self2) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return call && (typeof call === "object" || typeof call === "function") ? call : self2;
-}
-function _inherits$3(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-var ColorWrap = function ColorWrap2(Picker) {
-  var ColorPicker = function(_ref) {
-    _inherits$3(ColorPicker2, _ref);
-    function ColorPicker2(props) {
-      _classCallCheck$3(this, ColorPicker2);
-      var _this = _possibleConstructorReturn$3(this, (ColorPicker2.__proto__ || Object.getPrototypeOf(ColorPicker2)).call(this));
-      _this.handleChange = function(data2, event) {
-        var isValidColor = simpleCheckForValidColor(data2);
-        if (isValidColor) {
-          var colors = toState(data2, data2.h || _this.state.oldHue);
-          _this.setState(colors);
-          _this.props.onChangeComplete && _this.debounce(_this.props.onChangeComplete, colors, event);
-          _this.props.onChange && _this.props.onChange(colors, event);
-        }
-      };
-      _this.handleSwatchHover = function(data2, event) {
-        var isValidColor = simpleCheckForValidColor(data2);
-        if (isValidColor) {
-          var colors = toState(data2, data2.h || _this.state.oldHue);
-          _this.props.onSwatchHover && _this.props.onSwatchHover(colors, event);
-        }
-      };
-      _this.state = _extends$8({}, toState(props.color, 0));
-      _this.debounce = debounce(function(fn, data2, event) {
-        fn(data2, event);
-      }, 100);
-      return _this;
-    }
-    _createClass$3(ColorPicker2, [{
-      key: "render",
-      value: function render3() {
-        var optionalEvents = {};
-        if (this.props.onSwatchHover) {
-          optionalEvents.onSwatchHover = this.handleSwatchHover;
-        }
-        return React.createElement(Picker, _extends$8({}, this.props, this.state, {
-          onChange: this.handleChange
-        }, optionalEvents));
-      }
-    }], [{
-      key: "getDerivedStateFromProps",
-      value: function getDerivedStateFromProps(nextProps, state) {
-        return _extends$8({}, toState(nextProps.color, state.oldHue));
-      }
-    }]);
-    return ColorPicker2;
-  }(reactExports.PureComponent || reactExports.Component);
-  ColorPicker.propTypes = _extends$8({}, Picker.propTypes);
-  ColorPicker.defaultProps = _extends$8({}, Picker.defaultProps, {
-    color: {
-      h: 250,
-      s: 0.5,
-      l: 0.2,
-      a: 1
-    }
-  });
-  return ColorPicker;
-};
-var _extends$7 = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var _createClass$2 = /* @__PURE__ */ function() {
-  function defineProperties(target, props) {
-    for (var i5 = 0; i5 < props.length; i5++) {
-      var descriptor = props[i5];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-  return function(Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-function _classCallCheck$2(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _possibleConstructorReturn$2(self2, call) {
-  if (!self2) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return call && (typeof call === "object" || typeof call === "function") ? call : self2;
-}
-function _inherits$2(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-var handleFocus = function handleFocus2(Component2) {
-  var Span = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "span";
-  return function(_React$Component) {
-    _inherits$2(Focus, _React$Component);
-    function Focus() {
-      var _ref;
-      var _temp, _this, _ret;
-      _classCallCheck$2(this, Focus);
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-      return _ret = (_temp = (_this = _possibleConstructorReturn$2(this, (_ref = Focus.__proto__ || Object.getPrototypeOf(Focus)).call.apply(_ref, [this].concat(args))), _this), _this.state = { focus: false }, _this.handleFocus = function() {
-        return _this.setState({ focus: true });
-      }, _this.handleBlur = function() {
-        return _this.setState({ focus: false });
-      }, _temp), _possibleConstructorReturn$2(_this, _ret);
-    }
-    _createClass$2(Focus, [{
-      key: "render",
-      value: function render3() {
-        return React.createElement(
-          Span,
-          { onFocus: this.handleFocus, onBlur: this.handleBlur },
-          React.createElement(Component2, _extends$7({}, this.props, this.state))
-        );
-      }
-    }]);
-    return Focus;
-  }(React.Component);
-};
-var _extends$6 = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var ENTER = 13;
-var Swatch = function Swatch2(_ref) {
-  var color2 = _ref.color, style2 = _ref.style, _ref$onClick = _ref.onClick, onClick = _ref$onClick === void 0 ? function() {
-  } : _ref$onClick, onHover = _ref.onHover, _ref$title = _ref.title, title = _ref$title === void 0 ? color2 : _ref$title, children = _ref.children, focus = _ref.focus, _ref$focusStyle = _ref.focusStyle, focusStyle = _ref$focusStyle === void 0 ? {} : _ref$focusStyle;
-  var transparent = color2 === "transparent";
-  var styles2 = _default$2({
-    default: {
-      swatch: _extends$6({
-        background: color2,
-        height: "100%",
-        width: "100%",
-        cursor: "pointer",
-        position: "relative",
-        outline: "none"
-      }, style2, focus ? focusStyle : {})
-    }
-  });
-  var handleClick = function handleClick2(e3) {
-    return onClick(color2, e3);
-  };
-  var handleKeyDown = function handleKeyDown2(e3) {
-    return e3.keyCode === ENTER && onClick(color2, e3);
-  };
-  var handleHover2 = function handleHover3(e3) {
-    return onHover(color2, e3);
-  };
-  var optionalEvents = {};
-  if (onHover) {
-    optionalEvents.onMouseOver = handleHover2;
-  }
-  return React.createElement(
-    "div",
-    _extends$6({
-      style: styles2.swatch,
-      onClick: handleClick,
-      title,
-      tabIndex: 0,
-      onKeyDown: handleKeyDown
-    }, optionalEvents),
-    children,
-    transparent && React.createElement(Checkboard, {
-      borderRadius: styles2.swatch.borderRadius,
-      boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.1)"
-    })
-  );
-};
-const Swatch$1 = handleFocus(Swatch);
-var AlphaPointer = function AlphaPointer2(_ref) {
-  var direction = _ref.direction;
-  var styles2 = _default$2({
-    "default": {
-      picker: {
-        width: "18px",
-        height: "18px",
-        borderRadius: "50%",
-        transform: "translate(-9px, -1px)",
-        backgroundColor: "rgb(248, 248, 248)",
-        boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.37)"
-      }
-    },
-    "vertical": {
-      picker: {
-        transform: "translate(-3px, -9px)"
-      }
-    }
-  }, { vertical: direction === "vertical" });
-  return React.createElement("div", { style: styles2.picker });
-};
-var _extends$5 = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var AlphaPicker = function AlphaPicker2(_ref) {
-  var rgb = _ref.rgb, hsl = _ref.hsl, width = _ref.width, height = _ref.height, onChange2 = _ref.onChange, direction = _ref.direction, style2 = _ref.style, renderers = _ref.renderers, pointer = _ref.pointer, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
-  var styles2 = _default$2({
-    "default": {
-      picker: {
-        position: "relative",
-        width,
-        height
-      },
-      alpha: {
-        radius: "2px",
-        style: style2
-      }
-    }
-  });
-  return React.createElement(
-    "div",
-    { style: styles2.picker, className: "alpha-picker " + className },
-    React.createElement(Alpha, _extends$5({}, styles2.alpha, {
-      rgb,
-      hsl,
-      pointer,
-      renderers,
-      onChange: onChange2,
-      direction
-    }))
-  );
-};
-AlphaPicker.defaultProps = {
-  width: "316px",
-  height: "16px",
-  direction: "horizontal",
-  pointer: AlphaPointer
-};
-ColorWrap(AlphaPicker);
-function arrayMap(array, iteratee) {
-  var index2 = -1, length2 = array == null ? 0 : array.length, result = Array(length2);
-  while (++index2 < length2) {
-    result[index2] = iteratee(array[index2], index2, array);
-  }
-  return result;
-}
-var HASH_UNDEFINED = "__lodash_hash_undefined__";
-function setCacheAdd(value) {
-  this.__data__.set(value, HASH_UNDEFINED);
-  return this;
-}
-function setCacheHas(value) {
-  return this.__data__.has(value);
-}
-function SetCache(values2) {
-  var index2 = -1, length2 = values2 == null ? 0 : values2.length;
-  this.__data__ = new MapCache();
-  while (++index2 < length2) {
-    this.add(values2[index2]);
-  }
-}
-SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
-SetCache.prototype.has = setCacheHas;
-function arraySome(array, predicate) {
-  var index2 = -1, length2 = array == null ? 0 : array.length;
-  while (++index2 < length2) {
-    if (predicate(array[index2], index2, array)) {
-      return true;
-    }
-  }
-  return false;
-}
-function cacheHas(cache2, key) {
-  return cache2.has(key);
-}
-var COMPARE_PARTIAL_FLAG$5 = 1, COMPARE_UNORDERED_FLAG$3 = 2;
-function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
-  var isPartial = bitmask & COMPARE_PARTIAL_FLAG$5, arrLength = array.length, othLength = other.length;
-  if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
-    return false;
-  }
-  var arrStacked = stack.get(array);
-  var othStacked = stack.get(other);
-  if (arrStacked && othStacked) {
-    return arrStacked == other && othStacked == array;
-  }
-  var index2 = -1, result = true, seen2 = bitmask & COMPARE_UNORDERED_FLAG$3 ? new SetCache() : void 0;
-  stack.set(array, other);
-  stack.set(other, array);
-  while (++index2 < arrLength) {
-    var arrValue = array[index2], othValue = other[index2];
-    if (customizer) {
-      var compared = isPartial ? customizer(othValue, arrValue, index2, other, array, stack) : customizer(arrValue, othValue, index2, array, other, stack);
-    }
-    if (compared !== void 0) {
-      if (compared) {
-        continue;
-      }
-      result = false;
-      break;
-    }
-    if (seen2) {
-      if (!arraySome(other, function(othValue2, othIndex) {
-        if (!cacheHas(seen2, othIndex) && (arrValue === othValue2 || equalFunc(arrValue, othValue2, bitmask, customizer, stack))) {
-          return seen2.push(othIndex);
-        }
-      })) {
-        result = false;
-        break;
-      }
-    } else if (!(arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
-      result = false;
-      break;
-    }
-  }
-  stack["delete"](array);
-  stack["delete"](other);
-  return result;
-}
-function mapToArray(map3) {
-  var index2 = -1, result = Array(map3.size);
-  map3.forEach(function(value, key) {
-    result[++index2] = [key, value];
-  });
-  return result;
-}
-function setToArray(set5) {
-  var index2 = -1, result = Array(set5.size);
-  set5.forEach(function(value) {
-    result[++index2] = value;
-  });
-  return result;
-}
-var COMPARE_PARTIAL_FLAG$4 = 1, COMPARE_UNORDERED_FLAG$2 = 2;
-var boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", mapTag$1 = "[object Map]", numberTag = "[object Number]", regexpTag = "[object RegExp]", setTag$1 = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]";
-var arrayBufferTag = "[object ArrayBuffer]", dataViewTag$1 = "[object DataView]";
-var symbolProto$1 = Symbol$1 ? Symbol$1.prototype : void 0, symbolValueOf = symbolProto$1 ? symbolProto$1.valueOf : void 0;
-function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
-  switch (tag) {
-    case dataViewTag$1:
-      if (object.byteLength != other.byteLength || object.byteOffset != other.byteOffset) {
-        return false;
-      }
-      object = object.buffer;
-      other = other.buffer;
-    case arrayBufferTag:
-      if (object.byteLength != other.byteLength || !equalFunc(new Uint8Array$1(object), new Uint8Array$1(other))) {
-        return false;
-      }
-      return true;
-    case boolTag:
-    case dateTag:
-    case numberTag:
-      return eq(+object, +other);
-    case errorTag:
-      return object.name == other.name && object.message == other.message;
-    case regexpTag:
-    case stringTag:
-      return object == other + "";
-    case mapTag$1:
-      var convert2 = mapToArray;
-    case setTag$1:
-      var isPartial = bitmask & COMPARE_PARTIAL_FLAG$4;
-      convert2 || (convert2 = setToArray);
-      if (object.size != other.size && !isPartial) {
-        return false;
-      }
-      var stacked = stack.get(object);
-      if (stacked) {
-        return stacked == other;
-      }
-      bitmask |= COMPARE_UNORDERED_FLAG$2;
-      stack.set(object, other);
-      var result = equalArrays(convert2(object), convert2(other), bitmask, customizer, equalFunc, stack);
-      stack["delete"](object);
-      return result;
-    case symbolTag:
-      if (symbolValueOf) {
-        return symbolValueOf.call(object) == symbolValueOf.call(other);
-      }
-  }
-  return false;
-}
-function arrayPush(array, values2) {
-  var index2 = -1, length2 = values2.length, offset = array.length;
-  while (++index2 < length2) {
-    array[offset + index2] = values2[index2];
-  }
-  return array;
-}
-function baseGetAllKeys(object, keysFunc, symbolsFunc) {
-  var result = keysFunc(object);
-  return isArray$1(object) ? result : arrayPush(result, symbolsFunc(object));
-}
-function arrayFilter(array, predicate) {
-  var index2 = -1, length2 = array == null ? 0 : array.length, resIndex = 0, result = [];
-  while (++index2 < length2) {
-    var value = array[index2];
-    if (predicate(value, index2, array)) {
-      result[resIndex++] = value;
-    }
-  }
-  return result;
-}
-function stubArray() {
-  return [];
-}
-var objectProto$2 = Object.prototype;
-var propertyIsEnumerable = objectProto$2.propertyIsEnumerable;
-var nativeGetSymbols = Object.getOwnPropertySymbols;
-var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
-  if (object == null) {
-    return [];
-  }
-  object = Object(object);
-  return arrayFilter(nativeGetSymbols(object), function(symbol) {
-    return propertyIsEnumerable.call(object, symbol);
-  });
-};
-function getAllKeys(object) {
-  return baseGetAllKeys(object, keys$1, getSymbols);
-}
-var COMPARE_PARTIAL_FLAG$3 = 1;
-var objectProto$1 = Object.prototype;
-var hasOwnProperty$2 = objectProto$1.hasOwnProperty;
-function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
-  var isPartial = bitmask & COMPARE_PARTIAL_FLAG$3, objProps = getAllKeys(object), objLength = objProps.length, othProps = getAllKeys(other), othLength = othProps.length;
-  if (objLength != othLength && !isPartial) {
-    return false;
-  }
-  var index2 = objLength;
-  while (index2--) {
-    var key = objProps[index2];
-    if (!(isPartial ? key in other : hasOwnProperty$2.call(other, key))) {
-      return false;
-    }
-  }
-  var objStacked = stack.get(object);
-  var othStacked = stack.get(other);
-  if (objStacked && othStacked) {
-    return objStacked == other && othStacked == object;
-  }
-  var result = true;
-  stack.set(object, other);
-  stack.set(other, object);
-  var skipCtor = isPartial;
-  while (++index2 < objLength) {
-    key = objProps[index2];
-    var objValue = object[key], othValue = other[key];
-    if (customizer) {
-      var compared = isPartial ? customizer(othValue, objValue, key, other, object, stack) : customizer(objValue, othValue, key, object, other, stack);
-    }
-    if (!(compared === void 0 ? objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack) : compared)) {
-      result = false;
-      break;
-    }
-    skipCtor || (skipCtor = key == "constructor");
-  }
-  if (result && !skipCtor) {
-    var objCtor = object.constructor, othCtor = other.constructor;
-    if (objCtor != othCtor && ("constructor" in object && "constructor" in other) && !(typeof objCtor == "function" && objCtor instanceof objCtor && typeof othCtor == "function" && othCtor instanceof othCtor)) {
-      result = false;
-    }
-  }
-  stack["delete"](object);
-  stack["delete"](other);
-  return result;
-}
-var DataView$1 = getNative(root$3, "DataView");
-var Promise$1 = getNative(root$3, "Promise");
-var Set$1 = getNative(root$3, "Set");
-var WeakMap$1 = getNative(root$3, "WeakMap");
-var mapTag = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag = "[object Set]", weakMapTag = "[object WeakMap]";
-var dataViewTag = "[object DataView]";
-var dataViewCtorString = toSource(DataView$1), mapCtorString = toSource(Map$1), promiseCtorString = toSource(Promise$1), setCtorString = toSource(Set$1), weakMapCtorString = toSource(WeakMap$1);
-var getTag = baseGetTag;
-if (DataView$1 && getTag(new DataView$1(new ArrayBuffer(1))) != dataViewTag || Map$1 && getTag(new Map$1()) != mapTag || Promise$1 && getTag(Promise$1.resolve()) != promiseTag || Set$1 && getTag(new Set$1()) != setTag || WeakMap$1 && getTag(new WeakMap$1()) != weakMapTag) {
-  getTag = function(value) {
-    var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
-    if (ctorString) {
-      switch (ctorString) {
-        case dataViewCtorString:
-          return dataViewTag;
-        case mapCtorString:
-          return mapTag;
-        case promiseCtorString:
-          return promiseTag;
-        case setCtorString:
-          return setTag;
-        case weakMapCtorString:
-          return weakMapTag;
-      }
-    }
-    return result;
-  };
-}
-var COMPARE_PARTIAL_FLAG$2 = 1;
-var argsTag = "[object Arguments]", arrayTag = "[object Array]", objectTag = "[object Object]";
-var objectProto = Object.prototype;
-var hasOwnProperty$1 = objectProto.hasOwnProperty;
-function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
-  var objIsArr = isArray$1(object), othIsArr = isArray$1(other), objTag = objIsArr ? arrayTag : getTag(object), othTag = othIsArr ? arrayTag : getTag(other);
-  objTag = objTag == argsTag ? objectTag : objTag;
-  othTag = othTag == argsTag ? objectTag : othTag;
-  var objIsObj = objTag == objectTag, othIsObj = othTag == objectTag, isSameTag = objTag == othTag;
-  if (isSameTag && isBuffer(object)) {
-    if (!isBuffer(other)) {
-      return false;
-    }
-    objIsArr = true;
-    objIsObj = false;
-  }
-  if (isSameTag && !objIsObj) {
-    stack || (stack = new Stack());
-    return objIsArr || isTypedArray(object) ? equalArrays(object, other, bitmask, customizer, equalFunc, stack) : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
-  }
-  if (!(bitmask & COMPARE_PARTIAL_FLAG$2)) {
-    var objIsWrapped = objIsObj && hasOwnProperty$1.call(object, "__wrapped__"), othIsWrapped = othIsObj && hasOwnProperty$1.call(other, "__wrapped__");
-    if (objIsWrapped || othIsWrapped) {
-      var objUnwrapped = objIsWrapped ? object.value() : object, othUnwrapped = othIsWrapped ? other.value() : other;
-      stack || (stack = new Stack());
-      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
-    }
-  }
-  if (!isSameTag) {
-    return false;
-  }
-  stack || (stack = new Stack());
-  return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
-}
-function baseIsEqual(value, other, bitmask, customizer, stack) {
-  if (value === other) {
-    return true;
-  }
-  if (value == null || other == null || !isObjectLike(value) && !isObjectLike(other)) {
-    return value !== value && other !== other;
-  }
-  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
-}
-var COMPARE_PARTIAL_FLAG$1 = 1, COMPARE_UNORDERED_FLAG$1 = 2;
-function baseIsMatch(object, source2, matchData, customizer) {
-  var index2 = matchData.length, length2 = index2;
-  if (object == null) {
-    return !length2;
-  }
-  object = Object(object);
-  while (index2--) {
-    var data2 = matchData[index2];
-    if (data2[2] ? data2[1] !== object[data2[0]] : !(data2[0] in object)) {
-      return false;
-    }
-  }
-  while (++index2 < length2) {
-    data2 = matchData[index2];
-    var key = data2[0], objValue = object[key], srcValue = data2[1];
-    if (data2[2]) {
-      if (objValue === void 0 && !(key in object)) {
-        return false;
-      }
-    } else {
-      var stack = new Stack();
-      var result;
-      if (!(result === void 0 ? baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG$1 | COMPARE_UNORDERED_FLAG$1, customizer, stack) : result)) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-function isStrictComparable(value) {
-  return value === value && !isObject(value);
-}
-function getMatchData(object) {
-  var result = keys$1(object), length2 = result.length;
-  while (length2--) {
-    var key = result[length2], value = object[key];
-    result[length2] = [key, value, isStrictComparable(value)];
-  }
-  return result;
-}
-function matchesStrictComparable(key, srcValue) {
-  return function(object) {
-    if (object == null) {
-      return false;
-    }
-    return object[key] === srcValue && (srcValue !== void 0 || key in Object(object));
-  };
-}
-function baseMatches(source2) {
-  var matchData = getMatchData(source2);
-  if (matchData.length == 1 && matchData[0][2]) {
-    return matchesStrictComparable(matchData[0][0], matchData[0][1]);
-  }
-  return function(object) {
-    return object === source2 || baseIsMatch(object, source2, matchData);
-  };
-}
-var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/, reIsPlainProp = /^\w*$/;
-function isKey(value, object) {
-  if (isArray$1(value)) {
-    return false;
-  }
-  var type = typeof value;
-  if (type == "number" || type == "symbol" || type == "boolean" || value == null || isSymbol(value)) {
-    return true;
-  }
-  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || object != null && value in Object(object);
-}
-var FUNC_ERROR_TEXT = "Expected a function";
-function memoize(func, resolver2) {
-  if (typeof func != "function" || resolver2 != null && typeof resolver2 != "function") {
-    throw new TypeError(FUNC_ERROR_TEXT);
-  }
-  var memoized = function() {
-    var args = arguments, key = resolver2 ? resolver2.apply(this, args) : args[0], cache2 = memoized.cache;
-    if (cache2.has(key)) {
-      return cache2.get(key);
-    }
-    var result = func.apply(this, args);
-    memoized.cache = cache2.set(key, result) || cache2;
-    return result;
-  };
-  memoized.cache = new (memoize.Cache || MapCache)();
-  return memoized;
-}
-memoize.Cache = MapCache;
-var MAX_MEMOIZE_SIZE = 500;
-function memoizeCapped(func) {
-  var result = memoize(func, function(key) {
-    if (cache2.size === MAX_MEMOIZE_SIZE) {
-      cache2.clear();
-    }
-    return key;
-  });
-  var cache2 = result.cache;
-  return result;
-}
-var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
-var reEscapeChar = /\\(\\)?/g;
-var stringToPath = memoizeCapped(function(string2) {
-  var result = [];
-  if (string2.charCodeAt(0) === 46) {
-    result.push("");
-  }
-  string2.replace(rePropName, function(match2, number2, quote, subString) {
-    result.push(quote ? subString.replace(reEscapeChar, "$1") : number2 || match2);
-  });
-  return result;
-});
-var symbolProto = Symbol$1 ? Symbol$1.prototype : void 0, symbolToString = symbolProto ? symbolProto.toString : void 0;
-function baseToString(value) {
-  if (typeof value == "string") {
-    return value;
-  }
-  if (isArray$1(value)) {
-    return arrayMap(value, baseToString) + "";
-  }
-  if (isSymbol(value)) {
-    return symbolToString ? symbolToString.call(value) : "";
-  }
-  var result = value + "";
-  return result == "0" && 1 / value == -Infinity ? "-0" : result;
-}
-function toString$2(value) {
-  return value == null ? "" : baseToString(value);
-}
-function castPath(value, object) {
-  if (isArray$1(value)) {
-    return value;
-  }
-  return isKey(value, object) ? [value] : stringToPath(toString$2(value));
-}
-function toKey(value) {
-  if (typeof value == "string" || isSymbol(value)) {
-    return value;
-  }
-  var result = value + "";
-  return result == "0" && 1 / value == -Infinity ? "-0" : result;
-}
-function baseGet(object, path) {
-  path = castPath(path, object);
-  var index2 = 0, length2 = path.length;
-  while (object != null && index2 < length2) {
-    object = object[toKey(path[index2++])];
-  }
-  return index2 && index2 == length2 ? object : void 0;
-}
-function get4(object, path, defaultValue) {
-  var result = object == null ? void 0 : baseGet(object, path);
-  return result === void 0 ? defaultValue : result;
-}
-function baseHasIn(object, key) {
-  return object != null && key in Object(object);
-}
-function hasPath(object, path, hasFunc) {
-  path = castPath(path, object);
-  var index2 = -1, length2 = path.length, result = false;
-  while (++index2 < length2) {
-    var key = toKey(path[index2]);
-    if (!(result = object != null && hasFunc(object, key))) {
-      break;
-    }
-    object = object[key];
-  }
-  if (result || ++index2 != length2) {
-    return result;
-  }
-  length2 = object == null ? 0 : object.length;
-  return !!length2 && isLength(length2) && isIndex(key, length2) && (isArray$1(object) || isArguments(object));
-}
-function hasIn(object, path) {
-  return object != null && hasPath(object, path, baseHasIn);
-}
-var COMPARE_PARTIAL_FLAG = 1, COMPARE_UNORDERED_FLAG = 2;
-function baseMatchesProperty(path, srcValue) {
-  if (isKey(path) && isStrictComparable(srcValue)) {
-    return matchesStrictComparable(toKey(path), srcValue);
-  }
-  return function(object) {
-    var objValue = get4(object, path);
-    return objValue === void 0 && objValue === srcValue ? hasIn(object, path) : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);
-  };
-}
-function baseProperty(key) {
-  return function(object) {
-    return object == null ? void 0 : object[key];
-  };
-}
-function basePropertyDeep(path) {
-  return function(object) {
-    return baseGet(object, path);
-  };
-}
-function property(path) {
-  return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
-}
-function baseIteratee(value) {
-  if (typeof value == "function") {
-    return value;
-  }
-  if (value == null) {
-    return identity;
-  }
-  if (typeof value == "object") {
-    return isArray$1(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
-  }
-  return property(value);
-}
-function baseMap(collection2, iteratee) {
-  var index2 = -1, result = isArrayLike(collection2) ? Array(collection2.length) : [];
-  baseEach(collection2, function(value, key, collection3) {
-    result[++index2] = iteratee(value, key, collection3);
-  });
-  return result;
-}
-function map2(collection2, iteratee) {
-  var func = isArray$1(collection2) ? arrayMap : baseMap;
-  return func(collection2, baseIteratee(iteratee));
-}
-var BlockSwatches = function BlockSwatches2(_ref) {
-  var colors = _ref.colors, onClick = _ref.onClick, onSwatchHover = _ref.onSwatchHover;
-  var styles2 = _default$2({
-    "default": {
-      swatches: {
-        marginRight: "-10px"
-      },
-      swatch: {
-        width: "22px",
-        height: "22px",
-        float: "left",
-        marginRight: "10px",
-        marginBottom: "10px",
-        borderRadius: "4px"
-      },
-      clear: {
-        clear: "both"
-      }
-    }
-  });
-  return React.createElement(
-    "div",
-    { style: styles2.swatches },
-    map2(colors, function(c2) {
-      return React.createElement(Swatch$1, {
-        key: c2,
-        color: c2,
-        style: styles2.swatch,
-        onClick,
-        onHover: onSwatchHover,
-        focusStyle: {
-          boxShadow: "0 0 4px " + c2
-        }
-      });
-    }),
-    React.createElement("div", { style: styles2.clear })
-  );
-};
-var Block2 = function Block3(_ref) {
-  var onChange2 = _ref.onChange, onSwatchHover = _ref.onSwatchHover, hex = _ref.hex, colors = _ref.colors, width = _ref.width, triangle = _ref.triangle, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
-  var transparent = hex === "transparent";
-  var handleChange = function handleChange2(hexCode, e3) {
-    isValidHex(hexCode) && onChange2({
-      hex: hexCode,
-      source: "hex"
-    }, e3);
-  };
-  var styles2 = _default$2(merge$1({
-    "default": {
-      card: {
-        width,
-        background: "#fff",
-        boxShadow: "0 1px rgba(0,0,0,.1)",
-        borderRadius: "6px",
-        position: "relative"
-      },
-      head: {
-        height: "110px",
-        background: hex,
-        borderRadius: "6px 6px 0 0",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative"
-      },
-      body: {
-        padding: "10px"
-      },
-      label: {
-        fontSize: "18px",
-        color: getContrastingColor(hex),
-        position: "relative"
-      },
-      triangle: {
-        width: "0px",
-        height: "0px",
-        borderStyle: "solid",
-        borderWidth: "0 10px 10px 10px",
-        borderColor: "transparent transparent " + hex + " transparent",
-        position: "absolute",
-        top: "-10px",
-        left: "50%",
-        marginLeft: "-10px"
-      },
-      input: {
-        width: "100%",
-        fontSize: "12px",
-        color: "#666",
-        border: "0px",
-        outline: "none",
-        height: "22px",
-        boxShadow: "inset 0 0 0 1px #ddd",
-        borderRadius: "4px",
-        padding: "0 7px",
-        boxSizing: "border-box"
-      }
-    },
-    "hide-triangle": {
-      triangle: {
-        display: "none"
-      }
-    }
-  }, passedStyles), { "hide-triangle": triangle === "hide" });
-  return React.createElement(
-    "div",
-    { style: styles2.card, className: "block-picker " + className },
-    React.createElement("div", { style: styles2.triangle }),
-    React.createElement(
-      "div",
-      { style: styles2.head },
-      transparent && React.createElement(Checkboard, { borderRadius: "6px 6px 0 0" }),
-      React.createElement(
-        "div",
-        { style: styles2.label },
-        hex
-      )
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.body },
-      React.createElement(BlockSwatches, { colors, onClick: handleChange, onSwatchHover }),
-      React.createElement(EditableInput, {
-        style: { input: styles2.input },
-        value: hex,
-        onChange: handleChange
-      })
-    )
-  );
-};
-Block2.propTypes = {
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  colors: PropTypes.arrayOf(PropTypes.string),
-  triangle: PropTypes.oneOf(["top", "hide"]),
-  styles: PropTypes.object
-};
-Block2.defaultProps = {
-  width: 170,
-  colors: ["#D9E3F0", "#F47373", "#697689", "#37D67A", "#2CCCE4", "#555555", "#dce775", "#ff8a65", "#ba68c8"],
-  triangle: "top",
-  styles: {}
-};
-ColorWrap(Block2);
-var red = { "100": "#ffcdd2", "300": "#e57373", "500": "#f44336", "700": "#d32f2f", "900": "#b71c1c" };
-var pink = { "100": "#f8bbd0", "300": "#f06292", "500": "#e91e63", "700": "#c2185b", "900": "#880e4f" };
-var purple = { "100": "#e1bee7", "300": "#ba68c8", "500": "#9c27b0", "700": "#7b1fa2", "900": "#4a148c" };
-var deepPurple = { "100": "#d1c4e9", "300": "#9575cd", "500": "#673ab7", "700": "#512da8", "900": "#311b92" };
-var indigo = { "100": "#c5cae9", "300": "#7986cb", "500": "#3f51b5", "700": "#303f9f", "900": "#1a237e" };
-var blue = { "100": "#bbdefb", "300": "#64b5f6", "500": "#2196f3", "700": "#1976d2", "900": "#0d47a1" };
-var lightBlue = { "100": "#b3e5fc", "300": "#4fc3f7", "500": "#03a9f4", "700": "#0288d1", "900": "#01579b" };
-var cyan = { "100": "#b2ebf2", "300": "#4dd0e1", "500": "#00bcd4", "700": "#0097a7", "900": "#006064" };
-var teal = { "100": "#b2dfdb", "300": "#4db6ac", "500": "#009688", "700": "#00796b", "900": "#004d40" };
-var green = { "100": "#c8e6c9", "300": "#81c784", "500": "#4caf50", "700": "#388e3c" };
-var lightGreen = { "100": "#dcedc8", "300": "#aed581", "500": "#8bc34a", "700": "#689f38", "900": "#33691e" };
-var lime = { "100": "#f0f4c3", "300": "#dce775", "500": "#cddc39", "700": "#afb42b", "900": "#827717" };
-var yellow = { "100": "#fff9c4", "300": "#fff176", "500": "#ffeb3b", "700": "#fbc02d", "900": "#f57f17" };
-var amber = { "100": "#ffecb3", "300": "#ffd54f", "500": "#ffc107", "700": "#ffa000", "900": "#ff6f00" };
-var orange = { "100": "#ffe0b2", "300": "#ffb74d", "500": "#ff9800", "700": "#f57c00", "900": "#e65100" };
-var deepOrange = { "100": "#ffccbc", "300": "#ff8a65", "500": "#ff5722", "700": "#e64a19", "900": "#bf360c" };
-var brown = { "100": "#d7ccc8", "300": "#a1887f", "500": "#795548", "700": "#5d4037", "900": "#3e2723" };
-var blueGrey = { "100": "#cfd8dc", "300": "#90a4ae", "500": "#607d8b", "700": "#455a64", "900": "#263238" };
-var CircleSwatch = function CircleSwatch2(_ref) {
-  var color2 = _ref.color, onClick = _ref.onClick, onSwatchHover = _ref.onSwatchHover, hover3 = _ref.hover, active3 = _ref.active, circleSize = _ref.circleSize, circleSpacing = _ref.circleSpacing;
-  var styles2 = _default$2({
-    "default": {
-      swatch: {
-        width: circleSize,
-        height: circleSize,
-        marginRight: circleSpacing,
-        marginBottom: circleSpacing,
-        transform: "scale(1)",
-        transition: "100ms transform ease"
-      },
-      Swatch: {
-        borderRadius: "50%",
-        background: "transparent",
-        boxShadow: "inset 0 0 0 " + (circleSize / 2 + 1) + "px " + color2,
-        transition: "100ms box-shadow ease"
-      }
-    },
-    "hover": {
-      swatch: {
-        transform: "scale(1.2)"
-      }
-    },
-    "active": {
-      Swatch: {
-        boxShadow: "inset 0 0 0 3px " + color2
-      }
-    }
-  }, { hover: hover3, active: active3 });
-  return React.createElement(
-    "div",
-    { style: styles2.swatch },
-    React.createElement(Swatch$1, {
-      style: styles2.Swatch,
-      color: color2,
-      onClick,
-      onHover: onSwatchHover,
-      focusStyle: { boxShadow: styles2.Swatch.boxShadow + ", 0 0 5px " + color2 }
-    })
-  );
-};
-CircleSwatch.defaultProps = {
-  circleSize: 28,
-  circleSpacing: 14
-};
-const CircleSwatch$1 = handleHover(CircleSwatch);
-var Circle = function Circle2(_ref) {
-  var width = _ref.width, onChange2 = _ref.onChange, onSwatchHover = _ref.onSwatchHover, colors = _ref.colors, hex = _ref.hex, circleSize = _ref.circleSize, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, circleSpacing = _ref.circleSpacing, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
-  var styles2 = _default$2(merge$1({
-    "default": {
-      card: {
-        width,
-        display: "flex",
-        flexWrap: "wrap",
-        marginRight: -circleSpacing,
-        marginBottom: -circleSpacing
-      }
-    }
-  }, passedStyles));
-  var handleChange = function handleChange2(hexCode, e3) {
-    return onChange2({ hex: hexCode, source: "hex" }, e3);
-  };
-  return React.createElement(
-    "div",
-    { style: styles2.card, className: "circle-picker " + className },
-    map2(colors, function(c2) {
-      return React.createElement(CircleSwatch$1, {
-        key: c2,
-        color: c2,
-        onClick: handleChange,
-        onSwatchHover,
-        active: hex === c2.toLowerCase(),
-        circleSize,
-        circleSpacing
-      });
-    })
-  );
-};
-Circle.propTypes = {
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  circleSize: PropTypes.number,
-  circleSpacing: PropTypes.number,
-  styles: PropTypes.object
-};
-Circle.defaultProps = {
-  width: 252,
-  circleSize: 28,
-  circleSpacing: 14,
-  colors: [red["500"], pink["500"], purple["500"], deepPurple["500"], indigo["500"], blue["500"], lightBlue["500"], cyan["500"], teal["500"], green["500"], lightGreen["500"], lime["500"], yellow["500"], amber["500"], orange["500"], deepOrange["500"], brown["500"], blueGrey["500"]],
-  styles: {}
-};
-ColorWrap(Circle);
-function isUndefined(value) {
-  return value === void 0;
-}
-var UnfoldMoreHorizontalIcon = {};
-Object.defineProperty(UnfoldMoreHorizontalIcon, "__esModule", {
-  value: true
-});
-var _extends$4 = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var _react$2 = reactExports;
-var _react2$1 = _interopRequireDefault$2(_react$2);
-function _interopRequireDefault$2(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-function _objectWithoutProperties$2(obj, keys2) {
-  var target = {};
-  for (var i5 in obj) {
-    if (keys2.indexOf(i5) >= 0) continue;
-    if (!Object.prototype.hasOwnProperty.call(obj, i5)) continue;
-    target[i5] = obj[i5];
-  }
-  return target;
-}
-var DEFAULT_SIZE$1 = 24;
-var _default$1 = UnfoldMoreHorizontalIcon.default = function(_ref) {
-  var _ref$fill = _ref.fill, fill = _ref$fill === void 0 ? "currentColor" : _ref$fill, _ref$width = _ref.width, width = _ref$width === void 0 ? DEFAULT_SIZE$1 : _ref$width, _ref$height = _ref.height, height = _ref$height === void 0 ? DEFAULT_SIZE$1 : _ref$height, _ref$style = _ref.style, style2 = _ref$style === void 0 ? {} : _ref$style, props = _objectWithoutProperties$2(_ref, ["fill", "width", "height", "style"]);
-  return _react2$1.default.createElement(
-    "svg",
-    _extends$4({
-      viewBox: "0 0 " + DEFAULT_SIZE$1 + " " + DEFAULT_SIZE$1,
-      style: _extends$4({ fill, width, height }, style2)
-    }, props),
-    _react2$1.default.createElement("path", { d: "M12,18.17L8.83,15L7.42,16.41L12,21L16.59,16.41L15.17,15M12,5.83L15.17,9L16.58,7.59L12,3L7.41,7.59L8.83,9L12,5.83Z" })
-  );
-};
-var _createClass$1 = /* @__PURE__ */ function() {
-  function defineProperties(target, props) {
-    for (var i5 = 0; i5 < props.length; i5++) {
-      var descriptor = props[i5];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-  return function(Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-function _classCallCheck$1(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _possibleConstructorReturn$1(self2, call) {
-  if (!self2) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return call && (typeof call === "object" || typeof call === "function") ? call : self2;
-}
-function _inherits$1(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-var ChromeFields = function(_React$Component) {
-  _inherits$1(ChromeFields2, _React$Component);
-  function ChromeFields2(props) {
-    _classCallCheck$1(this, ChromeFields2);
-    var _this = _possibleConstructorReturn$1(this, (ChromeFields2.__proto__ || Object.getPrototypeOf(ChromeFields2)).call(this));
-    _this.toggleViews = function() {
-      if (_this.state.view === "hex") {
-        _this.setState({ view: "rgb" });
-      } else if (_this.state.view === "rgb") {
-        _this.setState({ view: "hsl" });
-      } else if (_this.state.view === "hsl") {
-        if (_this.props.hsl.a === 1) {
-          _this.setState({ view: "hex" });
-        } else {
-          _this.setState({ view: "rgb" });
-        }
-      }
-    };
-    _this.handleChange = function(data2, e3) {
-      if (data2.hex) {
-        isValidHex(data2.hex) && _this.props.onChange({
-          hex: data2.hex,
-          source: "hex"
-        }, e3);
-      } else if (data2.r || data2.g || data2.b) {
-        _this.props.onChange({
-          r: data2.r || _this.props.rgb.r,
-          g: data2.g || _this.props.rgb.g,
-          b: data2.b || _this.props.rgb.b,
-          source: "rgb"
-        }, e3);
-      } else if (data2.a) {
-        if (data2.a < 0) {
-          data2.a = 0;
-        } else if (data2.a > 1) {
-          data2.a = 1;
-        }
-        _this.props.onChange({
-          h: _this.props.hsl.h,
-          s: _this.props.hsl.s,
-          l: _this.props.hsl.l,
-          a: Math.round(data2.a * 100) / 100,
-          source: "rgb"
-        }, e3);
-      } else if (data2.h || data2.s || data2.l) {
-        if (typeof data2.s === "string" && data2.s.includes("%")) {
-          data2.s = data2.s.replace("%", "");
-        }
-        if (typeof data2.l === "string" && data2.l.includes("%")) {
-          data2.l = data2.l.replace("%", "");
-        }
-        if (data2.s == 1) {
-          data2.s = 0.01;
-        } else if (data2.l == 1) {
-          data2.l = 0.01;
-        }
-        _this.props.onChange({
-          h: data2.h || _this.props.hsl.h,
-          s: Number(!isUndefined(data2.s) ? data2.s : _this.props.hsl.s),
-          l: Number(!isUndefined(data2.l) ? data2.l : _this.props.hsl.l),
-          source: "hsl"
-        }, e3);
-      }
-    };
-    _this.showHighlight = function(e3) {
-      e3.currentTarget.style.background = "#eee";
-    };
-    _this.hideHighlight = function(e3) {
-      e3.currentTarget.style.background = "transparent";
-    };
-    if (props.hsl.a !== 1 && props.view === "hex") {
-      _this.state = {
-        view: "rgb"
-      };
-    } else {
-      _this.state = {
-        view: props.view
-      };
-    }
-    return _this;
-  }
-  _createClass$1(ChromeFields2, [{
-    key: "render",
-    value: function render3() {
-      var _this2 = this;
-      var styles2 = _default$2({
-        "default": {
-          wrap: {
-            paddingTop: "16px",
-            display: "flex"
-          },
-          fields: {
-            flex: "1",
-            display: "flex",
-            marginLeft: "-6px"
-          },
-          field: {
-            paddingLeft: "6px",
-            width: "100%"
-          },
-          alpha: {
-            paddingLeft: "6px",
-            width: "100%"
-          },
-          toggle: {
-            width: "32px",
-            textAlign: "right",
-            position: "relative"
-          },
-          icon: {
-            marginRight: "-4px",
-            marginTop: "12px",
-            cursor: "pointer",
-            position: "relative"
-          },
-          iconHighlight: {
-            position: "absolute",
-            width: "24px",
-            height: "28px",
-            background: "#eee",
-            borderRadius: "4px",
-            top: "10px",
-            left: "12px",
-            display: "none"
-          },
-          input: {
-            fontSize: "11px",
-            color: "#333",
-            width: "100%",
-            borderRadius: "2px",
-            border: "none",
-            boxShadow: "inset 0 0 0 1px #dadada",
-            height: "21px",
-            textAlign: "center"
-          },
-          label: {
-            textTransform: "uppercase",
-            fontSize: "11px",
-            lineHeight: "11px",
-            color: "#969696",
-            textAlign: "center",
-            display: "block",
-            marginTop: "12px"
-          },
-          svg: {
-            fill: "#333",
-            width: "24px",
-            height: "24px",
-            border: "1px transparent solid",
-            borderRadius: "5px"
-          }
-        },
-        "disableAlpha": {
-          alpha: {
-            display: "none"
-          }
-        }
-      }, this.props, this.state);
-      var fields = void 0;
-      if (this.state.view === "hex") {
-        fields = React.createElement(
-          "div",
-          { style: styles2.fields, className: "flexbox-fix" },
-          React.createElement(
-            "div",
-            { style: styles2.field },
-            React.createElement(EditableInput, {
-              style: { input: styles2.input, label: styles2.label },
-              label: "hex",
-              value: this.props.hex,
-              onChange: this.handleChange
-            })
-          )
-        );
-      } else if (this.state.view === "rgb") {
-        fields = React.createElement(
-          "div",
-          { style: styles2.fields, className: "flexbox-fix" },
-          React.createElement(
-            "div",
-            { style: styles2.field },
-            React.createElement(EditableInput, {
-              style: { input: styles2.input, label: styles2.label },
-              label: "r",
-              value: this.props.rgb.r,
-              onChange: this.handleChange
-            })
-          ),
-          React.createElement(
-            "div",
-            { style: styles2.field },
-            React.createElement(EditableInput, {
-              style: { input: styles2.input, label: styles2.label },
-              label: "g",
-              value: this.props.rgb.g,
-              onChange: this.handleChange
-            })
-          ),
-          React.createElement(
-            "div",
-            { style: styles2.field },
-            React.createElement(EditableInput, {
-              style: { input: styles2.input, label: styles2.label },
-              label: "b",
-              value: this.props.rgb.b,
-              onChange: this.handleChange
-            })
-          ),
-          React.createElement(
-            "div",
-            { style: styles2.alpha },
-            React.createElement(EditableInput, {
-              style: { input: styles2.input, label: styles2.label },
-              label: "a",
-              value: this.props.rgb.a,
-              arrowOffset: 0.01,
-              onChange: this.handleChange
-            })
-          )
-        );
-      } else if (this.state.view === "hsl") {
-        fields = React.createElement(
-          "div",
-          { style: styles2.fields, className: "flexbox-fix" },
-          React.createElement(
-            "div",
-            { style: styles2.field },
-            React.createElement(EditableInput, {
-              style: { input: styles2.input, label: styles2.label },
-              label: "h",
-              value: Math.round(this.props.hsl.h),
-              onChange: this.handleChange
-            })
-          ),
-          React.createElement(
-            "div",
-            { style: styles2.field },
-            React.createElement(EditableInput, {
-              style: { input: styles2.input, label: styles2.label },
-              label: "s",
-              value: Math.round(this.props.hsl.s * 100) + "%",
-              onChange: this.handleChange
-            })
-          ),
-          React.createElement(
-            "div",
-            { style: styles2.field },
-            React.createElement(EditableInput, {
-              style: { input: styles2.input, label: styles2.label },
-              label: "l",
-              value: Math.round(this.props.hsl.l * 100) + "%",
-              onChange: this.handleChange
-            })
-          ),
-          React.createElement(
-            "div",
-            { style: styles2.alpha },
-            React.createElement(EditableInput, {
-              style: { input: styles2.input, label: styles2.label },
-              label: "a",
-              value: this.props.hsl.a,
-              arrowOffset: 0.01,
-              onChange: this.handleChange
-            })
-          )
-        );
-      }
-      return React.createElement(
-        "div",
-        { style: styles2.wrap, className: "flexbox-fix" },
-        fields,
-        React.createElement(
-          "div",
-          { style: styles2.toggle },
-          React.createElement(
-            "div",
-            { style: styles2.icon, onClick: this.toggleViews, ref: function ref(icon2) {
-              return _this2.icon = icon2;
-            } },
-            React.createElement(_default$1, {
-              style: styles2.svg,
-              onMouseOver: this.showHighlight,
-              onMouseEnter: this.showHighlight,
-              onMouseOut: this.hideHighlight
-            })
-          )
-        )
-      );
-    }
-  }], [{
-    key: "getDerivedStateFromProps",
-    value: function getDerivedStateFromProps(nextProps, state) {
-      if (nextProps.hsl.a !== 1 && state.view === "hex") {
-        return { view: "rgb" };
-      }
-      return null;
-    }
-  }]);
-  return ChromeFields2;
-}(React.Component);
-ChromeFields.defaultProps = {
-  view: "hex"
-};
-var ChromePointer = function ChromePointer2() {
-  var styles2 = _default$2({
-    "default": {
-      picker: {
-        width: "12px",
-        height: "12px",
-        borderRadius: "6px",
-        transform: "translate(-6px, -1px)",
-        backgroundColor: "rgb(248, 248, 248)",
-        boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.37)"
-      }
-    }
-  });
-  return React.createElement("div", { style: styles2.picker });
-};
-var ChromePointerCircle = function ChromePointerCircle2() {
-  var styles2 = _default$2({
-    "default": {
-      picker: {
-        width: "12px",
-        height: "12px",
-        borderRadius: "6px",
-        boxShadow: "inset 0 0 0 1px #fff",
-        transform: "translate(-6px, -6px)"
-      }
-    }
-  });
-  return React.createElement("div", { style: styles2.picker });
-};
-var Chrome = function Chrome2(_ref) {
-  var width = _ref.width, onChange2 = _ref.onChange, disableAlpha = _ref.disableAlpha, rgb = _ref.rgb, hsl = _ref.hsl, hsv2 = _ref.hsv, hex = _ref.hex, renderers = _ref.renderers, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className, defaultView = _ref.defaultView;
-  var styles2 = _default$2(merge$1({
-    "default": {
-      picker: {
-        width,
-        background: "#fff",
-        borderRadius: "2px",
-        boxShadow: "0 0 2px rgba(0,0,0,.3), 0 4px 8px rgba(0,0,0,.3)",
-        boxSizing: "initial",
-        fontFamily: "Menlo"
-      },
-      saturation: {
-        width: "100%",
-        paddingBottom: "55%",
-        position: "relative",
-        borderRadius: "2px 2px 0 0",
-        overflow: "hidden"
-      },
-      Saturation: {
-        radius: "2px 2px 0 0"
-      },
-      body: {
-        padding: "16px 16px 12px"
-      },
-      controls: {
-        display: "flex"
-      },
-      color: {
-        width: "32px"
-      },
-      swatch: {
-        marginTop: "6px",
-        width: "16px",
-        height: "16px",
-        borderRadius: "8px",
-        position: "relative",
-        overflow: "hidden"
-      },
-      active: {
-        absolute: "0px 0px 0px 0px",
-        borderRadius: "8px",
-        boxShadow: "inset 0 0 0 1px rgba(0,0,0,.1)",
-        background: "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", " + rgb.a + ")",
-        zIndex: "2"
-      },
-      toggles: {
-        flex: "1"
-      },
-      hue: {
-        height: "10px",
-        position: "relative",
-        marginBottom: "8px"
-      },
-      Hue: {
-        radius: "2px"
-      },
-      alpha: {
-        height: "10px",
-        position: "relative"
-      },
-      Alpha: {
-        radius: "2px"
-      }
-    },
-    "disableAlpha": {
-      color: {
-        width: "22px"
-      },
-      alpha: {
-        display: "none"
-      },
-      hue: {
-        marginBottom: "0px"
-      },
-      swatch: {
-        width: "10px",
-        height: "10px",
-        marginTop: "0px"
-      }
-    }
-  }, passedStyles), { disableAlpha });
-  return React.createElement(
-    "div",
-    { style: styles2.picker, className: "chrome-picker " + className },
-    React.createElement(
-      "div",
-      { style: styles2.saturation },
-      React.createElement(Saturation, {
-        style: styles2.Saturation,
-        hsl,
-        hsv: hsv2,
-        pointer: ChromePointerCircle,
-        onChange: onChange2
-      })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.body },
-      React.createElement(
-        "div",
-        { style: styles2.controls, className: "flexbox-fix" },
-        React.createElement(
-          "div",
-          { style: styles2.color },
-          React.createElement(
-            "div",
-            { style: styles2.swatch },
-            React.createElement("div", { style: styles2.active }),
-            React.createElement(Checkboard, { renderers })
-          )
-        ),
-        React.createElement(
-          "div",
-          { style: styles2.toggles },
-          React.createElement(
-            "div",
-            { style: styles2.hue },
-            React.createElement(Hue, {
-              style: styles2.Hue,
-              hsl,
-              pointer: ChromePointer,
-              onChange: onChange2
-            })
-          ),
-          React.createElement(
-            "div",
-            { style: styles2.alpha },
-            React.createElement(Alpha, {
-              style: styles2.Alpha,
-              rgb,
-              hsl,
-              pointer: ChromePointer,
-              renderers,
-              onChange: onChange2
-            })
-          )
-        )
-      ),
-      React.createElement(ChromeFields, {
-        rgb,
-        hsl,
-        hex,
-        view: defaultView,
-        onChange: onChange2,
-        disableAlpha
-      })
-    )
-  );
-};
-Chrome.propTypes = {
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  disableAlpha: PropTypes.bool,
-  styles: PropTypes.object,
-  defaultView: PropTypes.oneOf(["hex", "rgb", "hsl"])
-};
-Chrome.defaultProps = {
-  width: 225,
-  disableAlpha: false,
-  styles: {}
-};
-ColorWrap(Chrome);
-var CompactColor = function CompactColor2(_ref) {
-  var color2 = _ref.color, _ref$onClick = _ref.onClick, onClick = _ref$onClick === void 0 ? function() {
-  } : _ref$onClick, onSwatchHover = _ref.onSwatchHover, active3 = _ref.active;
-  var styles2 = _default$2({
-    "default": {
-      color: {
-        background: color2,
-        width: "15px",
-        height: "15px",
-        float: "left",
-        marginRight: "5px",
-        marginBottom: "5px",
-        position: "relative",
-        cursor: "pointer"
-      },
-      dot: {
-        absolute: "5px 5px 5px 5px",
-        background: getContrastingColor(color2),
-        borderRadius: "50%",
-        opacity: "0"
-      }
-    },
-    "active": {
-      dot: {
-        opacity: "1"
-      }
-    },
-    "color-#FFFFFF": {
-      color: {
-        boxShadow: "inset 0 0 0 1px #ddd"
-      },
-      dot: {
-        background: "#000"
-      }
-    },
-    "transparent": {
-      dot: {
-        background: "#000"
-      }
-    }
-  }, { active: active3, "color-#FFFFFF": color2 === "#FFFFFF", "transparent": color2 === "transparent" });
-  return React.createElement(
-    Swatch$1,
-    {
-      style: styles2.color,
-      color: color2,
-      onClick,
-      onHover: onSwatchHover,
-      focusStyle: { boxShadow: "0 0 4px " + color2 }
-    },
-    React.createElement("div", { style: styles2.dot })
-  );
-};
-var CompactFields = function CompactFields2(_ref) {
-  var hex = _ref.hex, rgb = _ref.rgb, onChange2 = _ref.onChange;
-  var styles2 = _default$2({
-    "default": {
-      fields: {
-        display: "flex",
-        paddingBottom: "6px",
-        paddingRight: "5px",
-        position: "relative"
-      },
-      active: {
-        position: "absolute",
-        top: "6px",
-        left: "5px",
-        height: "9px",
-        width: "9px",
-        background: hex
-      },
-      HEXwrap: {
-        flex: "6",
-        position: "relative"
-      },
-      HEXinput: {
-        width: "80%",
-        padding: "0px",
-        paddingLeft: "20%",
-        border: "none",
-        outline: "none",
-        background: "none",
-        fontSize: "12px",
-        color: "#333",
-        height: "16px"
-      },
-      HEXlabel: {
-        display: "none"
-      },
-      RGBwrap: {
-        flex: "3",
-        position: "relative"
-      },
-      RGBinput: {
-        width: "70%",
-        padding: "0px",
-        paddingLeft: "30%",
-        border: "none",
-        outline: "none",
-        background: "none",
-        fontSize: "12px",
-        color: "#333",
-        height: "16px"
-      },
-      RGBlabel: {
-        position: "absolute",
-        top: "3px",
-        left: "0px",
-        lineHeight: "16px",
-        textTransform: "uppercase",
-        fontSize: "12px",
-        color: "#999"
-      }
-    }
-  });
-  var handleChange = function handleChange2(data2, e3) {
-    if (data2.r || data2.g || data2.b) {
-      onChange2({
-        r: data2.r || rgb.r,
-        g: data2.g || rgb.g,
-        b: data2.b || rgb.b,
-        source: "rgb"
-      }, e3);
-    } else {
-      onChange2({
-        hex: data2.hex,
-        source: "hex"
-      }, e3);
-    }
-  };
-  return React.createElement(
-    "div",
-    { style: styles2.fields, className: "flexbox-fix" },
-    React.createElement("div", { style: styles2.active }),
-    React.createElement(EditableInput, {
-      style: { wrap: styles2.HEXwrap, input: styles2.HEXinput, label: styles2.HEXlabel },
-      label: "hex",
-      value: hex,
-      onChange: handleChange
-    }),
-    React.createElement(EditableInput, {
-      style: { wrap: styles2.RGBwrap, input: styles2.RGBinput, label: styles2.RGBlabel },
-      label: "r",
-      value: rgb.r,
-      onChange: handleChange
-    }),
-    React.createElement(EditableInput, {
-      style: { wrap: styles2.RGBwrap, input: styles2.RGBinput, label: styles2.RGBlabel },
-      label: "g",
-      value: rgb.g,
-      onChange: handleChange
-    }),
-    React.createElement(EditableInput, {
-      style: { wrap: styles2.RGBwrap, input: styles2.RGBinput, label: styles2.RGBlabel },
-      label: "b",
-      value: rgb.b,
-      onChange: handleChange
-    })
-  );
-};
-var Compact = function Compact2(_ref) {
-  var onChange2 = _ref.onChange, onSwatchHover = _ref.onSwatchHover, colors = _ref.colors, hex = _ref.hex, rgb = _ref.rgb, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
-  var styles2 = _default$2(merge$1({
-    "default": {
-      Compact: {
-        background: "#f6f6f6",
-        radius: "4px"
-      },
-      compact: {
-        paddingTop: "5px",
-        paddingLeft: "5px",
-        boxSizing: "initial",
-        width: "240px"
-      },
-      clear: {
-        clear: "both"
-      }
-    }
-  }, passedStyles));
-  var handleChange = function handleChange2(data2, e3) {
-    if (data2.hex) {
-      isValidHex(data2.hex) && onChange2({
-        hex: data2.hex,
-        source: "hex"
-      }, e3);
-    } else {
-      onChange2(data2, e3);
-    }
-  };
-  return React.createElement(
-    Raised,
-    { style: styles2.Compact, styles: passedStyles },
-    React.createElement(
-      "div",
-      { style: styles2.compact, className: "compact-picker " + className },
-      React.createElement(
-        "div",
-        null,
-        map2(colors, function(c2) {
-          return React.createElement(CompactColor, {
-            key: c2,
-            color: c2,
-            active: c2.toLowerCase() === hex,
-            onClick: handleChange,
-            onSwatchHover
-          });
-        }),
-        React.createElement("div", { style: styles2.clear })
-      ),
-      React.createElement(CompactFields, { hex, rgb, onChange: handleChange })
-    )
-  );
-};
-Compact.propTypes = {
-  colors: PropTypes.arrayOf(PropTypes.string),
-  styles: PropTypes.object
-};
-Compact.defaultProps = {
-  colors: ["#4D4D4D", "#999999", "#FFFFFF", "#F44E3B", "#FE9200", "#FCDC00", "#DBDF00", "#A4DD00", "#68CCCA", "#73D8FF", "#AEA1FF", "#FDA1FF", "#333333", "#808080", "#cccccc", "#D33115", "#E27300", "#FCC400", "#B0BC00", "#68BC00", "#16A5A5", "#009CE0", "#7B64FF", "#FA28FF", "#000000", "#666666", "#B3B3B3", "#9F0500", "#C45100", "#FB9E00", "#808900", "#194D33", "#0C797D", "#0062B1", "#653294", "#AB149E"],
-  styles: {}
-};
-ColorWrap(Compact);
-var GithubSwatch = function GithubSwatch2(_ref) {
-  var hover3 = _ref.hover, color2 = _ref.color, onClick = _ref.onClick, onSwatchHover = _ref.onSwatchHover;
-  var hoverSwatch = {
-    position: "relative",
-    zIndex: "2",
-    outline: "2px solid #fff",
-    boxShadow: "0 0 5px 2px rgba(0,0,0,0.25)"
-  };
-  var styles2 = _default$2({
-    "default": {
-      swatch: {
-        width: "25px",
-        height: "25px",
-        fontSize: "0"
-      }
-    },
-    "hover": {
-      swatch: hoverSwatch
-    }
-  }, { hover: hover3 });
-  return React.createElement(
-    "div",
-    { style: styles2.swatch },
-    React.createElement(Swatch$1, {
-      color: color2,
-      onClick,
-      onHover: onSwatchHover,
-      focusStyle: hoverSwatch
-    })
-  );
-};
-const GithubSwatch$1 = handleHover(GithubSwatch);
-var Github = function Github2(_ref) {
-  var width = _ref.width, colors = _ref.colors, onChange2 = _ref.onChange, onSwatchHover = _ref.onSwatchHover, triangle = _ref.triangle, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
-  var styles2 = _default$2(merge$1({
-    "default": {
-      card: {
-        width,
-        background: "#fff",
-        border: "1px solid rgba(0,0,0,0.2)",
-        boxShadow: "0 3px 12px rgba(0,0,0,0.15)",
-        borderRadius: "4px",
-        position: "relative",
-        padding: "5px",
-        display: "flex",
-        flexWrap: "wrap"
-      },
-      triangle: {
-        position: "absolute",
-        border: "7px solid transparent",
-        borderBottomColor: "#fff"
-      },
-      triangleShadow: {
-        position: "absolute",
-        border: "8px solid transparent",
-        borderBottomColor: "rgba(0,0,0,0.15)"
-      }
-    },
-    "hide-triangle": {
-      triangle: {
-        display: "none"
-      },
-      triangleShadow: {
-        display: "none"
-      }
-    },
-    "top-left-triangle": {
-      triangle: {
-        top: "-14px",
-        left: "10px"
-      },
-      triangleShadow: {
-        top: "-16px",
-        left: "9px"
-      }
-    },
-    "top-right-triangle": {
-      triangle: {
-        top: "-14px",
-        right: "10px"
-      },
-      triangleShadow: {
-        top: "-16px",
-        right: "9px"
-      }
-    },
-    "bottom-left-triangle": {
-      triangle: {
-        top: "35px",
-        left: "10px",
-        transform: "rotate(180deg)"
-      },
-      triangleShadow: {
-        top: "37px",
-        left: "9px",
-        transform: "rotate(180deg)"
-      }
-    },
-    "bottom-right-triangle": {
-      triangle: {
-        top: "35px",
-        right: "10px",
-        transform: "rotate(180deg)"
-      },
-      triangleShadow: {
-        top: "37px",
-        right: "9px",
-        transform: "rotate(180deg)"
-      }
-    }
-  }, passedStyles), {
-    "hide-triangle": triangle === "hide",
-    "top-left-triangle": triangle === "top-left",
-    "top-right-triangle": triangle === "top-right",
-    "bottom-left-triangle": triangle === "bottom-left",
-    "bottom-right-triangle": triangle === "bottom-right"
-  });
-  var handleChange = function handleChange2(hex, e3) {
-    return onChange2({ hex, source: "hex" }, e3);
-  };
-  return React.createElement(
-    "div",
-    { style: styles2.card, className: "github-picker " + className },
-    React.createElement("div", { style: styles2.triangleShadow }),
-    React.createElement("div", { style: styles2.triangle }),
-    map2(colors, function(c2) {
-      return React.createElement(GithubSwatch$1, {
-        color: c2,
-        key: c2,
-        onClick: handleChange,
-        onSwatchHover
-      });
-    })
-  );
-};
-Github.propTypes = {
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  colors: PropTypes.arrayOf(PropTypes.string),
-  triangle: PropTypes.oneOf(["hide", "top-left", "top-right", "bottom-left", "bottom-right"]),
-  styles: PropTypes.object
-};
-Github.defaultProps = {
-  width: 200,
-  colors: ["#B80000", "#DB3E00", "#FCCB00", "#008B02", "#006B76", "#1273DE", "#004DCF", "#5300EB", "#EB9694", "#FAD0C3", "#FEF3BD", "#C1E1C5", "#BEDADC", "#C4DEF6", "#BED3F3", "#D4C4FB"],
-  triangle: "top-left",
-  styles: {}
-};
-const GithubPicker = ColorWrap(Github);
-var SliderPointer$1 = function SliderPointer(_ref) {
-  var direction = _ref.direction;
-  var styles2 = _default$2({
-    "default": {
-      picker: {
-        width: "18px",
-        height: "18px",
-        borderRadius: "50%",
-        transform: "translate(-9px, -1px)",
-        backgroundColor: "rgb(248, 248, 248)",
-        boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.37)"
-      }
-    },
-    "vertical": {
-      picker: {
-        transform: "translate(-3px, -9px)"
-      }
-    }
-  }, { vertical: direction === "vertical" });
-  return React.createElement("div", { style: styles2.picker });
-};
-var _extends$3 = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var HuePicker = function HuePicker2(_ref) {
-  var width = _ref.width, height = _ref.height, onChange2 = _ref.onChange, hsl = _ref.hsl, direction = _ref.direction, pointer = _ref.pointer, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
-  var styles2 = _default$2(merge$1({
-    "default": {
-      picker: {
-        position: "relative",
-        width,
-        height
-      },
-      hue: {
-        radius: "2px"
-      }
-    }
-  }, passedStyles));
-  var handleChange = function handleChange2(data2) {
-    return onChange2({ a: 1, h: data2.h, l: 0.5, s: 1 });
-  };
-  return React.createElement(
-    "div",
-    { style: styles2.picker, className: "hue-picker " + className },
-    React.createElement(Hue, _extends$3({}, styles2.hue, {
-      hsl,
-      pointer,
-      onChange: handleChange,
-      direction
-    }))
-  );
-};
-HuePicker.propTypes = {
-  styles: PropTypes.object
-};
-HuePicker.defaultProps = {
-  width: "316px",
-  height: "16px",
-  direction: "horizontal",
-  pointer: SliderPointer$1,
-  styles: {}
-};
-ColorWrap(HuePicker);
-var Material = function Material2(_ref) {
-  var onChange2 = _ref.onChange, hex = _ref.hex, rgb = _ref.rgb, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
-  var styles2 = _default$2(merge$1({
-    "default": {
-      material: {
-        width: "98px",
-        height: "98px",
-        padding: "16px",
-        fontFamily: "Roboto"
-      },
-      HEXwrap: {
-        position: "relative"
-      },
-      HEXinput: {
-        width: "100%",
-        marginTop: "12px",
-        fontSize: "15px",
-        color: "#333",
-        padding: "0px",
-        border: "0px",
-        borderBottom: "2px solid " + hex,
-        outline: "none",
-        height: "30px"
-      },
-      HEXlabel: {
-        position: "absolute",
-        top: "0px",
-        left: "0px",
-        fontSize: "11px",
-        color: "#999999",
-        textTransform: "capitalize"
-      },
-      Hex: {
-        style: {}
-      },
-      RGBwrap: {
-        position: "relative"
-      },
-      RGBinput: {
-        width: "100%",
-        marginTop: "12px",
-        fontSize: "15px",
-        color: "#333",
-        padding: "0px",
-        border: "0px",
-        borderBottom: "1px solid #eee",
-        outline: "none",
-        height: "30px"
-      },
-      RGBlabel: {
-        position: "absolute",
-        top: "0px",
-        left: "0px",
-        fontSize: "11px",
-        color: "#999999",
-        textTransform: "capitalize"
-      },
-      split: {
-        display: "flex",
-        marginRight: "-10px",
-        paddingTop: "11px"
-      },
-      third: {
-        flex: "1",
-        paddingRight: "10px"
-      }
-    }
-  }, passedStyles));
-  var handleChange = function handleChange2(data2, e3) {
-    if (data2.hex) {
-      isValidHex(data2.hex) && onChange2({
-        hex: data2.hex,
-        source: "hex"
-      }, e3);
-    } else if (data2.r || data2.g || data2.b) {
-      onChange2({
-        r: data2.r || rgb.r,
-        g: data2.g || rgb.g,
-        b: data2.b || rgb.b,
-        source: "rgb"
-      }, e3);
-    }
-  };
-  return React.createElement(
-    Raised,
-    { styles: passedStyles },
-    React.createElement(
-      "div",
-      { style: styles2.material, className: "material-picker " + className },
-      React.createElement(EditableInput, {
-        style: { wrap: styles2.HEXwrap, input: styles2.HEXinput, label: styles2.HEXlabel },
-        label: "hex",
-        value: hex,
-        onChange: handleChange
-      }),
-      React.createElement(
-        "div",
-        { style: styles2.split, className: "flexbox-fix" },
-        React.createElement(
-          "div",
-          { style: styles2.third },
-          React.createElement(EditableInput, {
-            style: { wrap: styles2.RGBwrap, input: styles2.RGBinput, label: styles2.RGBlabel },
-            label: "r",
-            value: rgb.r,
-            onChange: handleChange
-          })
-        ),
-        React.createElement(
-          "div",
-          { style: styles2.third },
-          React.createElement(EditableInput, {
-            style: { wrap: styles2.RGBwrap, input: styles2.RGBinput, label: styles2.RGBlabel },
-            label: "g",
-            value: rgb.g,
-            onChange: handleChange
-          })
-        ),
-        React.createElement(
-          "div",
-          { style: styles2.third },
-          React.createElement(EditableInput, {
-            style: { wrap: styles2.RGBwrap, input: styles2.RGBinput, label: styles2.RGBlabel },
-            label: "b",
-            value: rgb.b,
-            onChange: handleChange
-          })
-        )
-      )
-    )
-  );
-};
-ColorWrap(Material);
-var PhotoshopPicker = function PhotoshopPicker2(_ref) {
-  var onChange2 = _ref.onChange, rgb = _ref.rgb, hsv2 = _ref.hsv, hex = _ref.hex;
-  var styles2 = _default$2({
-    "default": {
-      fields: {
-        paddingTop: "5px",
-        paddingBottom: "9px",
-        width: "80px",
-        position: "relative"
-      },
-      divider: {
-        height: "5px"
-      },
-      RGBwrap: {
-        position: "relative"
-      },
-      RGBinput: {
-        marginLeft: "40%",
-        width: "40%",
-        height: "18px",
-        border: "1px solid #888888",
-        boxShadow: "inset 0 1px 1px rgba(0,0,0,.1), 0 1px 0 0 #ECECEC",
-        marginBottom: "5px",
-        fontSize: "13px",
-        paddingLeft: "3px",
-        marginRight: "10px"
-      },
-      RGBlabel: {
-        left: "0px",
-        top: "0px",
-        width: "34px",
-        textTransform: "uppercase",
-        fontSize: "13px",
-        height: "18px",
-        lineHeight: "22px",
-        position: "absolute"
-      },
-      HEXwrap: {
-        position: "relative"
-      },
-      HEXinput: {
-        marginLeft: "20%",
-        width: "80%",
-        height: "18px",
-        border: "1px solid #888888",
-        boxShadow: "inset 0 1px 1px rgba(0,0,0,.1), 0 1px 0 0 #ECECEC",
-        marginBottom: "6px",
-        fontSize: "13px",
-        paddingLeft: "3px"
-      },
-      HEXlabel: {
-        position: "absolute",
-        top: "0px",
-        left: "0px",
-        width: "14px",
-        textTransform: "uppercase",
-        fontSize: "13px",
-        height: "18px",
-        lineHeight: "22px"
-      },
-      fieldSymbols: {
-        position: "absolute",
-        top: "5px",
-        right: "-7px",
-        fontSize: "13px"
-      },
-      symbol: {
-        height: "20px",
-        lineHeight: "22px",
-        paddingBottom: "7px"
-      }
-    }
-  });
-  var handleChange = function handleChange2(data2, e3) {
-    if (data2["#"]) {
-      isValidHex(data2["#"]) && onChange2({
-        hex: data2["#"],
-        source: "hex"
-      }, e3);
-    } else if (data2.r || data2.g || data2.b) {
-      onChange2({
-        r: data2.r || rgb.r,
-        g: data2.g || rgb.g,
-        b: data2.b || rgb.b,
-        source: "rgb"
-      }, e3);
-    } else if (data2.h || data2.s || data2.v) {
-      onChange2({
-        h: data2.h || hsv2.h,
-        s: data2.s || hsv2.s,
-        v: data2.v || hsv2.v,
-        source: "hsv"
-      }, e3);
-    }
-  };
-  return React.createElement(
-    "div",
-    { style: styles2.fields },
-    React.createElement(EditableInput, {
-      style: { wrap: styles2.RGBwrap, input: styles2.RGBinput, label: styles2.RGBlabel },
-      label: "h",
-      value: Math.round(hsv2.h),
-      onChange: handleChange
-    }),
-    React.createElement(EditableInput, {
-      style: { wrap: styles2.RGBwrap, input: styles2.RGBinput, label: styles2.RGBlabel },
-      label: "s",
-      value: Math.round(hsv2.s * 100),
-      onChange: handleChange
-    }),
-    React.createElement(EditableInput, {
-      style: { wrap: styles2.RGBwrap, input: styles2.RGBinput, label: styles2.RGBlabel },
-      label: "v",
-      value: Math.round(hsv2.v * 100),
-      onChange: handleChange
-    }),
-    React.createElement("div", { style: styles2.divider }),
-    React.createElement(EditableInput, {
-      style: { wrap: styles2.RGBwrap, input: styles2.RGBinput, label: styles2.RGBlabel },
-      label: "r",
-      value: rgb.r,
-      onChange: handleChange
-    }),
-    React.createElement(EditableInput, {
-      style: { wrap: styles2.RGBwrap, input: styles2.RGBinput, label: styles2.RGBlabel },
-      label: "g",
-      value: rgb.g,
-      onChange: handleChange
-    }),
-    React.createElement(EditableInput, {
-      style: { wrap: styles2.RGBwrap, input: styles2.RGBinput, label: styles2.RGBlabel },
-      label: "b",
-      value: rgb.b,
-      onChange: handleChange
-    }),
-    React.createElement("div", { style: styles2.divider }),
-    React.createElement(EditableInput, {
-      style: { wrap: styles2.HEXwrap, input: styles2.HEXinput, label: styles2.HEXlabel },
-      label: "#",
-      value: hex.replace("#", ""),
-      onChange: handleChange
-    }),
-    React.createElement(
-      "div",
-      { style: styles2.fieldSymbols },
-      React.createElement(
-        "div",
-        { style: styles2.symbol },
-        "°"
-      ),
-      React.createElement(
-        "div",
-        { style: styles2.symbol },
-        "%"
-      ),
-      React.createElement(
-        "div",
-        { style: styles2.symbol },
-        "%"
-      )
-    )
-  );
-};
-var PhotoshopPointerCircle$1 = function PhotoshopPointerCircle(_ref) {
-  var hsl = _ref.hsl;
-  var styles2 = _default$2({
-    "default": {
-      picker: {
-        width: "12px",
-        height: "12px",
-        borderRadius: "6px",
-        boxShadow: "inset 0 0 0 1px #fff",
-        transform: "translate(-6px, -6px)"
-      }
-    },
-    "black-outline": {
-      picker: {
-        boxShadow: "inset 0 0 0 1px #000"
-      }
-    }
-  }, { "black-outline": hsl.l > 0.5 });
-  return React.createElement("div", { style: styles2.picker });
-};
-var PhotoshopPointerCircle2 = function PhotoshopPointerCircle3() {
-  var styles2 = _default$2({
-    "default": {
-      triangle: {
-        width: 0,
-        height: 0,
-        borderStyle: "solid",
-        borderWidth: "4px 0 4px 6px",
-        borderColor: "transparent transparent transparent #fff",
-        position: "absolute",
-        top: "1px",
-        left: "1px"
-      },
-      triangleBorder: {
-        width: 0,
-        height: 0,
-        borderStyle: "solid",
-        borderWidth: "5px 0 5px 8px",
-        borderColor: "transparent transparent transparent #555"
-      },
-      left: {
-        Extend: "triangleBorder",
-        transform: "translate(-13px, -4px)"
-      },
-      leftInside: {
-        Extend: "triangle",
-        transform: "translate(-8px, -5px)"
-      },
-      right: {
-        Extend: "triangleBorder",
-        transform: "translate(20px, -14px) rotate(180deg)"
-      },
-      rightInside: {
-        Extend: "triangle",
-        transform: "translate(-8px, -5px)"
-      }
-    }
-  });
-  return React.createElement(
-    "div",
-    { style: styles2.pointer },
-    React.createElement(
-      "div",
-      { style: styles2.left },
-      React.createElement("div", { style: styles2.leftInside })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.right },
-      React.createElement("div", { style: styles2.rightInside })
-    )
-  );
-};
-var PhotoshopButton = function PhotoshopButton2(_ref) {
-  var onClick = _ref.onClick, label = _ref.label, children = _ref.children, active3 = _ref.active;
-  var styles2 = _default$2({
-    "default": {
-      button: {
-        backgroundImage: "linear-gradient(-180deg, #FFFFFF 0%, #E6E6E6 100%)",
-        border: "1px solid #878787",
-        borderRadius: "2px",
-        height: "20px",
-        boxShadow: "0 1px 0 0 #EAEAEA",
-        fontSize: "14px",
-        color: "#000",
-        lineHeight: "20px",
-        textAlign: "center",
-        marginBottom: "10px",
-        cursor: "pointer"
-      }
-    },
-    "active": {
-      button: {
-        boxShadow: "0 0 0 1px #878787"
-      }
-    }
-  }, { active: active3 });
-  return React.createElement(
-    "div",
-    { style: styles2.button, onClick },
-    label || children
-  );
-};
-var PhotoshopPreviews = function PhotoshopPreviews2(_ref) {
-  var rgb = _ref.rgb, currentColor = _ref.currentColor;
-  var styles2 = _default$2({
-    "default": {
-      swatches: {
-        border: "1px solid #B3B3B3",
-        borderBottom: "1px solid #F0F0F0",
-        marginBottom: "2px",
-        marginTop: "1px"
-      },
-      new: {
-        height: "34px",
-        background: "rgb(" + rgb.r + "," + rgb.g + ", " + rgb.b + ")",
-        boxShadow: "inset 1px 0 0 #000, inset -1px 0 0 #000, inset 0 1px 0 #000"
-      },
-      current: {
-        height: "34px",
-        background: currentColor,
-        boxShadow: "inset 1px 0 0 #000, inset -1px 0 0 #000, inset 0 -1px 0 #000"
-      },
-      label: {
-        fontSize: "14px",
-        color: "#000",
-        textAlign: "center"
-      }
-    }
-  });
-  return React.createElement(
-    "div",
-    null,
-    React.createElement(
-      "div",
-      { style: styles2.label },
-      "new"
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.swatches },
-      React.createElement("div", { style: styles2.new }),
-      React.createElement("div", { style: styles2.current })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.label },
-      "current"
-    )
-  );
-};
-var _createClass = /* @__PURE__ */ function() {
-  function defineProperties(target, props) {
-    for (var i5 = 0; i5 < props.length; i5++) {
-      var descriptor = props[i5];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-  return function(Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _possibleConstructorReturn(self2, call) {
-  if (!self2) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return call && (typeof call === "object" || typeof call === "function") ? call : self2;
-}
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-var Photoshop = function(_React$Component) {
-  _inherits(Photoshop2, _React$Component);
-  function Photoshop2(props) {
-    _classCallCheck(this, Photoshop2);
-    var _this = _possibleConstructorReturn(this, (Photoshop2.__proto__ || Object.getPrototypeOf(Photoshop2)).call(this));
-    _this.state = {
-      currentColor: props.hex
-    };
-    return _this;
-  }
-  _createClass(Photoshop2, [{
-    key: "render",
-    value: function render3() {
-      var _props = this.props, _props$styles = _props.styles, passedStyles = _props$styles === void 0 ? {} : _props$styles, _props$className = _props.className, className = _props$className === void 0 ? "" : _props$className;
-      var styles2 = _default$2(merge$1({
-        "default": {
-          picker: {
-            background: "#DCDCDC",
-            borderRadius: "4px",
-            boxShadow: "0 0 0 1px rgba(0,0,0,.25), 0 8px 16px rgba(0,0,0,.15)",
-            boxSizing: "initial",
-            width: "513px"
-          },
-          head: {
-            backgroundImage: "linear-gradient(-180deg, #F0F0F0 0%, #D4D4D4 100%)",
-            borderBottom: "1px solid #B1B1B1",
-            boxShadow: "inset 0 1px 0 0 rgba(255,255,255,.2), inset 0 -1px 0 0 rgba(0,0,0,.02)",
-            height: "23px",
-            lineHeight: "24px",
-            borderRadius: "4px 4px 0 0",
-            fontSize: "13px",
-            color: "#4D4D4D",
-            textAlign: "center"
-          },
-          body: {
-            padding: "15px 15px 0",
-            display: "flex"
-          },
-          saturation: {
-            width: "256px",
-            height: "256px",
-            position: "relative",
-            border: "2px solid #B3B3B3",
-            borderBottom: "2px solid #F0F0F0",
-            overflow: "hidden"
-          },
-          hue: {
-            position: "relative",
-            height: "256px",
-            width: "19px",
-            marginLeft: "10px",
-            border: "2px solid #B3B3B3",
-            borderBottom: "2px solid #F0F0F0"
-          },
-          controls: {
-            width: "180px",
-            marginLeft: "10px"
-          },
-          top: {
-            display: "flex"
-          },
-          previews: {
-            width: "60px"
-          },
-          actions: {
-            flex: "1",
-            marginLeft: "20px"
-          }
-        }
-      }, passedStyles));
-      return React.createElement(
-        "div",
-        { style: styles2.picker, className: "photoshop-picker " + className },
-        React.createElement(
-          "div",
-          { style: styles2.head },
-          this.props.header
-        ),
-        React.createElement(
-          "div",
-          { style: styles2.body, className: "flexbox-fix" },
-          React.createElement(
-            "div",
-            { style: styles2.saturation },
-            React.createElement(Saturation, {
-              hsl: this.props.hsl,
-              hsv: this.props.hsv,
-              pointer: PhotoshopPointerCircle$1,
-              onChange: this.props.onChange
-            })
-          ),
-          React.createElement(
-            "div",
-            { style: styles2.hue },
-            React.createElement(Hue, {
-              direction: "vertical",
-              hsl: this.props.hsl,
-              pointer: PhotoshopPointerCircle2,
-              onChange: this.props.onChange
-            })
-          ),
-          React.createElement(
-            "div",
-            { style: styles2.controls },
-            React.createElement(
-              "div",
-              { style: styles2.top, className: "flexbox-fix" },
-              React.createElement(
-                "div",
-                { style: styles2.previews },
-                React.createElement(PhotoshopPreviews, {
-                  rgb: this.props.rgb,
-                  currentColor: this.state.currentColor
-                })
-              ),
-              React.createElement(
-                "div",
-                { style: styles2.actions },
-                React.createElement(PhotoshopButton, { label: "OK", onClick: this.props.onAccept, active: true }),
-                React.createElement(PhotoshopButton, { label: "Cancel", onClick: this.props.onCancel }),
-                React.createElement(PhotoshopPicker, {
-                  onChange: this.props.onChange,
-                  rgb: this.props.rgb,
-                  hsv: this.props.hsv,
-                  hex: this.props.hex
-                })
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-  return Photoshop2;
-}(React.Component);
-Photoshop.propTypes = {
-  header: PropTypes.string,
-  styles: PropTypes.object
-};
-Photoshop.defaultProps = {
-  header: "Color Picker",
-  styles: {}
-};
-ColorWrap(Photoshop);
-var SketchFields = function SketchFields2(_ref) {
-  var onChange2 = _ref.onChange, rgb = _ref.rgb, hsl = _ref.hsl, hex = _ref.hex, disableAlpha = _ref.disableAlpha;
-  var styles2 = _default$2({
-    "default": {
-      fields: {
-        display: "flex",
-        paddingTop: "4px"
-      },
-      single: {
-        flex: "1",
-        paddingLeft: "6px"
-      },
-      alpha: {
-        flex: "1",
-        paddingLeft: "6px"
-      },
-      double: {
-        flex: "2"
-      },
-      input: {
-        width: "80%",
-        padding: "4px 10% 3px",
-        border: "none",
-        boxShadow: "inset 0 0 0 1px #ccc",
-        fontSize: "11px"
-      },
-      label: {
-        display: "block",
-        textAlign: "center",
-        fontSize: "11px",
-        color: "#222",
-        paddingTop: "3px",
-        paddingBottom: "4px",
-        textTransform: "capitalize"
-      }
-    },
-    "disableAlpha": {
-      alpha: {
-        display: "none"
-      }
-    }
-  }, { disableAlpha });
-  var handleChange = function handleChange2(data2, e3) {
-    if (data2.hex) {
-      isValidHex(data2.hex) && onChange2({
-        hex: data2.hex,
-        source: "hex"
-      }, e3);
-    } else if (data2.r || data2.g || data2.b) {
-      onChange2({
-        r: data2.r || rgb.r,
-        g: data2.g || rgb.g,
-        b: data2.b || rgb.b,
-        a: rgb.a,
-        source: "rgb"
-      }, e3);
-    } else if (data2.a) {
-      if (data2.a < 0) {
-        data2.a = 0;
-      } else if (data2.a > 100) {
-        data2.a = 100;
-      }
-      data2.a /= 100;
-      onChange2({
-        h: hsl.h,
-        s: hsl.s,
-        l: hsl.l,
-        a: data2.a,
-        source: "rgb"
-      }, e3);
-    }
-  };
-  return React.createElement(
-    "div",
-    { style: styles2.fields, className: "flexbox-fix" },
-    React.createElement(
-      "div",
-      { style: styles2.double },
-      React.createElement(EditableInput, {
-        style: { input: styles2.input, label: styles2.label },
-        label: "hex",
-        value: hex.replace("#", ""),
-        onChange: handleChange
-      })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.single },
-      React.createElement(EditableInput, {
-        style: { input: styles2.input, label: styles2.label },
-        label: "r",
-        value: rgb.r,
-        onChange: handleChange,
-        dragLabel: "true",
-        dragMax: "255"
-      })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.single },
-      React.createElement(EditableInput, {
-        style: { input: styles2.input, label: styles2.label },
-        label: "g",
-        value: rgb.g,
-        onChange: handleChange,
-        dragLabel: "true",
-        dragMax: "255"
-      })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.single },
-      React.createElement(EditableInput, {
-        style: { input: styles2.input, label: styles2.label },
-        label: "b",
-        value: rgb.b,
-        onChange: handleChange,
-        dragLabel: "true",
-        dragMax: "255"
-      })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.alpha },
-      React.createElement(EditableInput, {
-        style: { input: styles2.input, label: styles2.label },
-        label: "a",
-        value: Math.round(rgb.a * 100),
-        onChange: handleChange,
-        dragLabel: "true",
-        dragMax: "100"
-      })
-    )
-  );
-};
-var _extends$2 = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var SketchPresetColors = function SketchPresetColors2(_ref) {
-  var colors = _ref.colors, _ref$onClick = _ref.onClick, onClick = _ref$onClick === void 0 ? function() {
-  } : _ref$onClick, onSwatchHover = _ref.onSwatchHover;
-  var styles2 = _default$2({
-    "default": {
-      colors: {
-        margin: "0 -10px",
-        padding: "10px 0 0 10px",
-        borderTop: "1px solid #eee",
-        display: "flex",
-        flexWrap: "wrap",
-        position: "relative"
-      },
-      swatchWrap: {
-        width: "16px",
-        height: "16px",
-        margin: "0 10px 10px 0"
-      },
-      swatch: {
-        borderRadius: "3px",
-        boxShadow: "inset 0 0 0 1px rgba(0,0,0,.15)"
-      }
-    },
-    "no-presets": {
-      colors: {
-        display: "none"
-      }
-    }
-  }, {
-    "no-presets": !colors || !colors.length
-  });
-  var handleClick = function handleClick2(hex, e3) {
-    onClick({
-      hex,
-      source: "hex"
-    }, e3);
-  };
-  return React.createElement(
-    "div",
-    { style: styles2.colors, className: "flexbox-fix" },
-    colors.map(function(colorObjOrString) {
-      var c2 = typeof colorObjOrString === "string" ? { color: colorObjOrString } : colorObjOrString;
-      var key = "" + c2.color + (c2.title || "");
-      return React.createElement(
-        "div",
-        { key, style: styles2.swatchWrap },
-        React.createElement(Swatch$1, _extends$2({}, c2, {
-          style: styles2.swatch,
-          onClick: handleClick,
-          onHover: onSwatchHover,
-          focusStyle: {
-            boxShadow: "inset 0 0 0 1px rgba(0,0,0,.15), 0 0 4px " + c2.color
-          }
-        }))
-      );
-    })
-  );
-};
-SketchPresetColors.propTypes = {
-  colors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
-    color: PropTypes.string,
-    title: PropTypes.string
-  })])).isRequired
-};
-var _extends$1 = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var Sketch = function Sketch2(_ref) {
-  var width = _ref.width, rgb = _ref.rgb, hex = _ref.hex, hsv2 = _ref.hsv, hsl = _ref.hsl, onChange2 = _ref.onChange, onSwatchHover = _ref.onSwatchHover, disableAlpha = _ref.disableAlpha, presetColors = _ref.presetColors, renderers = _ref.renderers, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
-  var styles2 = _default$2(merge$1({
-    "default": _extends$1({
-      picker: {
-        width,
-        padding: "10px 10px 0",
-        boxSizing: "initial",
-        background: "#fff",
-        borderRadius: "4px",
-        boxShadow: "0 0 0 1px rgba(0,0,0,.15), 0 8px 16px rgba(0,0,0,.15)"
-      },
-      saturation: {
-        width: "100%",
-        paddingBottom: "75%",
-        position: "relative",
-        overflow: "hidden"
-      },
-      Saturation: {
-        radius: "3px",
-        shadow: "inset 0 0 0 1px rgba(0,0,0,.15), inset 0 0 4px rgba(0,0,0,.25)"
-      },
-      controls: {
-        display: "flex"
-      },
-      sliders: {
-        padding: "4px 0",
-        flex: "1"
-      },
-      color: {
-        width: "24px",
-        height: "24px",
-        position: "relative",
-        marginTop: "4px",
-        marginLeft: "4px",
-        borderRadius: "3px"
-      },
-      activeColor: {
-        absolute: "0px 0px 0px 0px",
-        borderRadius: "2px",
-        background: "rgba(" + rgb.r + "," + rgb.g + "," + rgb.b + "," + rgb.a + ")",
-        boxShadow: "inset 0 0 0 1px rgba(0,0,0,.15), inset 0 0 4px rgba(0,0,0,.25)"
-      },
-      hue: {
-        position: "relative",
-        height: "10px",
-        overflow: "hidden"
-      },
-      Hue: {
-        radius: "2px",
-        shadow: "inset 0 0 0 1px rgba(0,0,0,.15), inset 0 0 4px rgba(0,0,0,.25)"
-      },
-      alpha: {
-        position: "relative",
-        height: "10px",
-        marginTop: "4px",
-        overflow: "hidden"
-      },
-      Alpha: {
-        radius: "2px",
-        shadow: "inset 0 0 0 1px rgba(0,0,0,.15), inset 0 0 4px rgba(0,0,0,.25)"
-      }
-    }, passedStyles),
-    "disableAlpha": {
-      color: {
-        height: "10px"
-      },
-      hue: {
-        height: "10px"
-      },
-      alpha: {
-        display: "none"
-      }
-    }
-  }, passedStyles), { disableAlpha });
-  return React.createElement(
-    "div",
-    { style: styles2.picker, className: "sketch-picker " + className },
-    React.createElement(
-      "div",
-      { style: styles2.saturation },
-      React.createElement(Saturation, {
-        style: styles2.Saturation,
-        hsl,
-        hsv: hsv2,
-        onChange: onChange2
-      })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.controls, className: "flexbox-fix" },
-      React.createElement(
-        "div",
-        { style: styles2.sliders },
-        React.createElement(
-          "div",
-          { style: styles2.hue },
-          React.createElement(Hue, {
-            style: styles2.Hue,
-            hsl,
-            onChange: onChange2
-          })
-        ),
-        React.createElement(
-          "div",
-          { style: styles2.alpha },
-          React.createElement(Alpha, {
-            style: styles2.Alpha,
-            rgb,
-            hsl,
-            renderers,
-            onChange: onChange2
-          })
-        )
-      ),
-      React.createElement(
-        "div",
-        { style: styles2.color },
-        React.createElement(Checkboard, null),
-        React.createElement("div", { style: styles2.activeColor })
-      )
-    ),
-    React.createElement(SketchFields, {
-      rgb,
-      hsl,
-      hex,
-      onChange: onChange2,
-      disableAlpha
-    }),
-    React.createElement(SketchPresetColors, {
-      colors: presetColors,
-      onClick: onChange2,
-      onSwatchHover
-    })
-  );
-};
-Sketch.propTypes = {
-  disableAlpha: PropTypes.bool,
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  styles: PropTypes.object
-};
-Sketch.defaultProps = {
-  disableAlpha: false,
-  width: 200,
-  styles: {},
-  presetColors: ["#D0021B", "#F5A623", "#F8E71C", "#8B572A", "#7ED321", "#417505", "#BD10E0", "#9013FE", "#4A90E2", "#50E3C2", "#B8E986", "#000000", "#4A4A4A", "#9B9B9B", "#FFFFFF"]
-};
-ColorWrap(Sketch);
-var SliderSwatch = function SliderSwatch2(_ref) {
-  var hsl = _ref.hsl, offset = _ref.offset, _ref$onClick = _ref.onClick, onClick = _ref$onClick === void 0 ? function() {
-  } : _ref$onClick, active3 = _ref.active, first = _ref.first, last = _ref.last;
-  var styles2 = _default$2({
-    "default": {
-      swatch: {
-        height: "12px",
-        background: "hsl(" + hsl.h + ", 50%, " + offset * 100 + "%)",
-        cursor: "pointer"
-      }
-    },
-    "first": {
-      swatch: {
-        borderRadius: "2px 0 0 2px"
-      }
-    },
-    "last": {
-      swatch: {
-        borderRadius: "0 2px 2px 0"
-      }
-    },
-    "active": {
-      swatch: {
-        transform: "scaleY(1.8)",
-        borderRadius: "3.6px/2px"
-      }
-    }
-  }, { active: active3, first, last });
-  var handleClick = function handleClick2(e3) {
-    return onClick({
-      h: hsl.h,
-      s: 0.5,
-      l: offset,
-      source: "hsl"
-    }, e3);
-  };
-  return React.createElement("div", { style: styles2.swatch, onClick: handleClick });
-};
-var SliderSwatches = function SliderSwatches2(_ref) {
-  var onClick = _ref.onClick, hsl = _ref.hsl;
-  var styles2 = _default$2({
-    "default": {
-      swatches: {
-        marginTop: "20px"
-      },
-      swatch: {
-        boxSizing: "border-box",
-        width: "20%",
-        paddingRight: "1px",
-        float: "left"
-      },
-      clear: {
-        clear: "both"
-      }
-    }
-  });
-  var epsilon = 0.1;
-  return React.createElement(
-    "div",
-    { style: styles2.swatches },
-    React.createElement(
-      "div",
-      { style: styles2.swatch },
-      React.createElement(SliderSwatch, {
-        hsl,
-        offset: ".80",
-        active: Math.abs(hsl.l - 0.8) < epsilon && Math.abs(hsl.s - 0.5) < epsilon,
-        onClick,
-        first: true
-      })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.swatch },
-      React.createElement(SliderSwatch, {
-        hsl,
-        offset: ".65",
-        active: Math.abs(hsl.l - 0.65) < epsilon && Math.abs(hsl.s - 0.5) < epsilon,
-        onClick
-      })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.swatch },
-      React.createElement(SliderSwatch, {
-        hsl,
-        offset: ".50",
-        active: Math.abs(hsl.l - 0.5) < epsilon && Math.abs(hsl.s - 0.5) < epsilon,
-        onClick
-      })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.swatch },
-      React.createElement(SliderSwatch, {
-        hsl,
-        offset: ".35",
-        active: Math.abs(hsl.l - 0.35) < epsilon && Math.abs(hsl.s - 0.5) < epsilon,
-        onClick
-      })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.swatch },
-      React.createElement(SliderSwatch, {
-        hsl,
-        offset: ".20",
-        active: Math.abs(hsl.l - 0.2) < epsilon && Math.abs(hsl.s - 0.5) < epsilon,
-        onClick,
-        last: true
-      })
-    ),
-    React.createElement("div", { style: styles2.clear })
-  );
-};
-var SliderPointer2 = function SliderPointer3() {
-  var styles2 = _default$2({
-    "default": {
-      picker: {
-        width: "14px",
-        height: "14px",
-        borderRadius: "6px",
-        transform: "translate(-7px, -1px)",
-        backgroundColor: "rgb(248, 248, 248)",
-        boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.37)"
-      }
-    }
-  });
-  return React.createElement("div", { style: styles2.picker });
-};
-var Slider = function Slider2(_ref) {
-  var hsl = _ref.hsl, onChange2 = _ref.onChange, pointer = _ref.pointer, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
-  var styles2 = _default$2(merge$1({
-    "default": {
-      hue: {
-        height: "12px",
-        position: "relative"
-      },
-      Hue: {
-        radius: "2px"
-      }
-    }
-  }, passedStyles));
-  return React.createElement(
-    "div",
-    { style: styles2.wrap || {}, className: "slider-picker " + className },
-    React.createElement(
-      "div",
-      { style: styles2.hue },
-      React.createElement(Hue, {
-        style: styles2.Hue,
-        hsl,
-        pointer,
-        onChange: onChange2
-      })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.swatches },
-      React.createElement(SliderSwatches, { hsl, onClick: onChange2 })
-    )
-  );
-};
-Slider.propTypes = {
-  styles: PropTypes.object
-};
-Slider.defaultProps = {
-  pointer: SliderPointer2,
-  styles: {}
-};
-ColorWrap(Slider);
-var CheckIcon = {};
-Object.defineProperty(CheckIcon, "__esModule", {
-  value: true
-});
-var _extends = Object.assign || function(target) {
-  for (var i5 = 1; i5 < arguments.length; i5++) {
-    var source2 = arguments[i5];
-    for (var key in source2) {
-      if (Object.prototype.hasOwnProperty.call(source2, key)) {
-        target[key] = source2[key];
-      }
-    }
-  }
-  return target;
-};
-var _react$1 = reactExports;
-var _react2 = _interopRequireDefault$1(_react$1);
-function _interopRequireDefault$1(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-function _objectWithoutProperties$1(obj, keys2) {
-  var target = {};
-  for (var i5 in obj) {
-    if (keys2.indexOf(i5) >= 0) continue;
-    if (!Object.prototype.hasOwnProperty.call(obj, i5)) continue;
-    target[i5] = obj[i5];
-  }
-  return target;
-}
-var DEFAULT_SIZE = 24;
-var _default = CheckIcon.default = function(_ref) {
-  var _ref$fill = _ref.fill, fill = _ref$fill === void 0 ? "currentColor" : _ref$fill, _ref$width = _ref.width, width = _ref$width === void 0 ? DEFAULT_SIZE : _ref$width, _ref$height = _ref.height, height = _ref$height === void 0 ? DEFAULT_SIZE : _ref$height, _ref$style = _ref.style, style2 = _ref$style === void 0 ? {} : _ref$style, props = _objectWithoutProperties$1(_ref, ["fill", "width", "height", "style"]);
-  return _react2.default.createElement(
-    "svg",
-    _extends({
-      viewBox: "0 0 " + DEFAULT_SIZE + " " + DEFAULT_SIZE,
-      style: _extends({ fill, width, height }, style2)
-    }, props),
-    _react2.default.createElement("path", { d: "M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" })
-  );
-};
-var SwatchesColor = function SwatchesColor2(_ref) {
-  var color2 = _ref.color, _ref$onClick = _ref.onClick, onClick = _ref$onClick === void 0 ? function() {
-  } : _ref$onClick, onSwatchHover = _ref.onSwatchHover, first = _ref.first, last = _ref.last, active3 = _ref.active;
-  var styles2 = _default$2({
-    "default": {
-      color: {
-        width: "40px",
-        height: "24px",
-        cursor: "pointer",
-        background: color2,
-        marginBottom: "1px"
-      },
-      check: {
-        color: getContrastingColor(color2),
-        marginLeft: "8px",
-        display: "none"
-      }
-    },
-    "first": {
-      color: {
-        overflow: "hidden",
-        borderRadius: "2px 2px 0 0"
-      }
-    },
-    "last": {
-      color: {
-        overflow: "hidden",
-        borderRadius: "0 0 2px 2px"
-      }
-    },
-    "active": {
-      check: {
-        display: "block"
-      }
-    },
-    "color-#FFFFFF": {
-      color: {
-        boxShadow: "inset 0 0 0 1px #ddd"
-      },
-      check: {
-        color: "#333"
-      }
-    },
-    "transparent": {
-      check: {
-        color: "#333"
-      }
-    }
-  }, {
-    first,
-    last,
-    active: active3,
-    "color-#FFFFFF": color2 === "#FFFFFF",
-    "transparent": color2 === "transparent"
-  });
-  return React.createElement(
-    Swatch$1,
-    {
-      color: color2,
-      style: styles2.color,
-      onClick,
-      onHover: onSwatchHover,
-      focusStyle: { boxShadow: "0 0 4px " + color2 }
-    },
-    React.createElement(
-      "div",
-      { style: styles2.check },
-      React.createElement(_default, null)
-    )
-  );
-};
-var SwatchesGroup = function SwatchesGroup2(_ref) {
-  var onClick = _ref.onClick, onSwatchHover = _ref.onSwatchHover, group = _ref.group, active3 = _ref.active;
-  var styles2 = _default$2({
-    "default": {
-      group: {
-        paddingBottom: "10px",
-        width: "40px",
-        float: "left",
-        marginRight: "10px"
-      }
-    }
-  });
-  return React.createElement(
-    "div",
-    { style: styles2.group },
-    map2(group, function(color2, i5) {
-      return React.createElement(SwatchesColor, {
-        key: color2,
-        color: color2,
-        active: color2.toLowerCase() === active3,
-        first: i5 === 0,
-        last: i5 === group.length - 1,
-        onClick,
-        onSwatchHover
-      });
-    })
-  );
-};
-var Swatches = function Swatches2(_ref) {
-  var width = _ref.width, height = _ref.height, onChange2 = _ref.onChange, onSwatchHover = _ref.onSwatchHover, colors = _ref.colors, hex = _ref.hex, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
-  var styles2 = _default$2(merge$1({
-    "default": {
-      picker: {
-        width,
-        height
-      },
-      overflow: {
-        height,
-        overflowY: "scroll"
-      },
-      body: {
-        padding: "16px 0 6px 16px"
-      },
-      clear: {
-        clear: "both"
-      }
-    }
-  }, passedStyles));
-  var handleChange = function handleChange2(data2, e3) {
-    return onChange2({ hex: data2, source: "hex" }, e3);
-  };
-  return React.createElement(
-    "div",
-    { style: styles2.picker, className: "swatches-picker " + className },
-    React.createElement(
-      Raised,
-      null,
-      React.createElement(
-        "div",
-        { style: styles2.overflow },
-        React.createElement(
-          "div",
-          { style: styles2.body },
-          map2(colors, function(group) {
-            return React.createElement(SwatchesGroup, {
-              key: group.toString(),
-              group,
-              active: hex,
-              onClick: handleChange,
-              onSwatchHover
-            });
-          }),
-          React.createElement("div", { style: styles2.clear })
-        )
-      )
-    )
-  );
-};
-Swatches.propTypes = {
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  colors: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-  styles: PropTypes.object
-  /* eslint-disable max-len */
-};
-Swatches.defaultProps = {
-  width: 320,
-  height: 240,
-  colors: [[red["900"], red["700"], red["500"], red["300"], red["100"]], [pink["900"], pink["700"], pink["500"], pink["300"], pink["100"]], [purple["900"], purple["700"], purple["500"], purple["300"], purple["100"]], [deepPurple["900"], deepPurple["700"], deepPurple["500"], deepPurple["300"], deepPurple["100"]], [indigo["900"], indigo["700"], indigo["500"], indigo["300"], indigo["100"]], [blue["900"], blue["700"], blue["500"], blue["300"], blue["100"]], [lightBlue["900"], lightBlue["700"], lightBlue["500"], lightBlue["300"], lightBlue["100"]], [cyan["900"], cyan["700"], cyan["500"], cyan["300"], cyan["100"]], [teal["900"], teal["700"], teal["500"], teal["300"], teal["100"]], ["#194D33", green["700"], green["500"], green["300"], green["100"]], [lightGreen["900"], lightGreen["700"], lightGreen["500"], lightGreen["300"], lightGreen["100"]], [lime["900"], lime["700"], lime["500"], lime["300"], lime["100"]], [yellow["900"], yellow["700"], yellow["500"], yellow["300"], yellow["100"]], [amber["900"], amber["700"], amber["500"], amber["300"], amber["100"]], [orange["900"], orange["700"], orange["500"], orange["300"], orange["100"]], [deepOrange["900"], deepOrange["700"], deepOrange["500"], deepOrange["300"], deepOrange["100"]], [brown["900"], brown["700"], brown["500"], brown["300"], brown["100"]], [blueGrey["900"], blueGrey["700"], blueGrey["500"], blueGrey["300"], blueGrey["100"]], ["#000000", "#525252", "#969696", "#D9D9D9", "#FFFFFF"]],
-  styles: {}
-};
-ColorWrap(Swatches);
-var Twitter = function Twitter2(_ref) {
-  var onChange2 = _ref.onChange, onSwatchHover = _ref.onSwatchHover, hex = _ref.hex, colors = _ref.colors, width = _ref.width, triangle = _ref.triangle, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
-  var styles2 = _default$2(merge$1({
-    "default": {
-      card: {
-        width,
-        background: "#fff",
-        border: "0 solid rgba(0,0,0,0.25)",
-        boxShadow: "0 1px 4px rgba(0,0,0,0.25)",
-        borderRadius: "4px",
-        position: "relative"
-      },
-      body: {
-        padding: "15px 9px 9px 15px"
-      },
-      label: {
-        fontSize: "18px",
-        color: "#fff"
-      },
-      triangle: {
-        width: "0px",
-        height: "0px",
-        borderStyle: "solid",
-        borderWidth: "0 9px 10px 9px",
-        borderColor: "transparent transparent #fff transparent",
-        position: "absolute"
-      },
-      triangleShadow: {
-        width: "0px",
-        height: "0px",
-        borderStyle: "solid",
-        borderWidth: "0 9px 10px 9px",
-        borderColor: "transparent transparent rgba(0,0,0,.1) transparent",
-        position: "absolute"
-      },
-      hash: {
-        background: "#F0F0F0",
-        height: "30px",
-        width: "30px",
-        borderRadius: "4px 0 0 4px",
-        float: "left",
-        color: "#98A1A4",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      },
-      input: {
-        width: "100px",
-        fontSize: "14px",
-        color: "#666",
-        border: "0px",
-        outline: "none",
-        height: "28px",
-        boxShadow: "inset 0 0 0 1px #F0F0F0",
-        boxSizing: "content-box",
-        borderRadius: "0 4px 4px 0",
-        float: "left",
-        paddingLeft: "8px"
-      },
-      swatch: {
-        width: "30px",
-        height: "30px",
-        float: "left",
-        borderRadius: "4px",
-        margin: "0 6px 6px 0"
-      },
-      clear: {
-        clear: "both"
-      }
-    },
-    "hide-triangle": {
-      triangle: {
-        display: "none"
-      },
-      triangleShadow: {
-        display: "none"
-      }
-    },
-    "top-left-triangle": {
-      triangle: {
-        top: "-10px",
-        left: "12px"
-      },
-      triangleShadow: {
-        top: "-11px",
-        left: "12px"
-      }
-    },
-    "top-right-triangle": {
-      triangle: {
-        top: "-10px",
-        right: "12px"
-      },
-      triangleShadow: {
-        top: "-11px",
-        right: "12px"
-      }
-    }
-  }, passedStyles), {
-    "hide-triangle": triangle === "hide",
-    "top-left-triangle": triangle === "top-left",
-    "top-right-triangle": triangle === "top-right"
-  });
-  var handleChange = function handleChange2(hexcode, e3) {
-    isValidHex(hexcode) && onChange2({
-      hex: hexcode,
-      source: "hex"
-    }, e3);
-  };
-  return React.createElement(
-    "div",
-    { style: styles2.card, className: "twitter-picker " + className },
-    React.createElement("div", { style: styles2.triangleShadow }),
-    React.createElement("div", { style: styles2.triangle }),
-    React.createElement(
-      "div",
-      { style: styles2.body },
-      map2(colors, function(c2, i5) {
-        return React.createElement(Swatch$1, {
-          key: i5,
-          color: c2,
-          hex: c2,
-          style: styles2.swatch,
-          onClick: handleChange,
-          onHover: onSwatchHover,
-          focusStyle: {
-            boxShadow: "0 0 4px " + c2
-          }
-        });
-      }),
-      React.createElement(
-        "div",
-        { style: styles2.hash },
-        "#"
-      ),
-      React.createElement(EditableInput, {
-        label: null,
-        style: { input: styles2.input },
-        value: hex.replace("#", ""),
-        onChange: handleChange
-      }),
-      React.createElement("div", { style: styles2.clear })
-    )
-  );
-};
-Twitter.propTypes = {
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  triangle: PropTypes.oneOf(["hide", "top-left", "top-right"]),
-  colors: PropTypes.arrayOf(PropTypes.string),
-  styles: PropTypes.object
-};
-Twitter.defaultProps = {
-  width: 276,
-  colors: ["#FF6900", "#FCB900", "#7BDCB5", "#00D084", "#8ED1FC", "#0693E3", "#ABB8C3", "#EB144C", "#F78DA7", "#9900EF"],
-  triangle: "top-left",
-  styles: {}
-};
-ColorWrap(Twitter);
-var GooglePointerCircle = function GooglePointerCircle2(props) {
-  var styles2 = _default$2({
-    "default": {
-      picker: {
-        width: "20px",
-        height: "20px",
-        borderRadius: "22px",
-        border: "2px #fff solid",
-        transform: "translate(-12px, -13px)",
-        background: "hsl(" + Math.round(props.hsl.h) + ", " + Math.round(props.hsl.s * 100) + "%, " + Math.round(props.hsl.l * 100) + "%)"
-      }
-    }
-  });
-  return React.createElement("div", { style: styles2.picker });
-};
-GooglePointerCircle.propTypes = {
-  hsl: PropTypes.shape({
-    h: PropTypes.number,
-    s: PropTypes.number,
-    l: PropTypes.number,
-    a: PropTypes.number
-  })
-};
-GooglePointerCircle.defaultProps = {
-  hsl: { a: 1, h: 249.94, l: 0.2, s: 0.5 }
-};
-var GooglePointer = function GooglePointer2(props) {
-  var styles2 = _default$2({
-    "default": {
-      picker: {
-        width: "20px",
-        height: "20px",
-        borderRadius: "22px",
-        transform: "translate(-10px, -7px)",
-        background: "hsl(" + Math.round(props.hsl.h) + ", 100%, 50%)",
-        border: "2px white solid"
-      }
-    }
-  });
-  return React.createElement("div", { style: styles2.picker });
-};
-GooglePointer.propTypes = {
-  hsl: PropTypes.shape({
-    h: PropTypes.number,
-    s: PropTypes.number,
-    l: PropTypes.number,
-    a: PropTypes.number
-  })
-};
-GooglePointer.defaultProps = {
-  hsl: { a: 1, h: 249.94, l: 0.2, s: 0.5 }
-};
-var GoogleFields = function GoogleFields2(_ref) {
-  var onChange2 = _ref.onChange, rgb = _ref.rgb, hsl = _ref.hsl, hex = _ref.hex, hsv2 = _ref.hsv;
-  var handleChange = function handleChange2(data2, e3) {
-    if (data2.hex) {
-      isValidHex(data2.hex) && onChange2({
-        hex: data2.hex,
-        source: "hex"
-      }, e3);
-    } else if (data2.rgb) {
-      var values2 = data2.rgb.split(",");
-      isvalidColorString(data2.rgb, "rgb") && onChange2({
-        r: values2[0],
-        g: values2[1],
-        b: values2[2],
-        a: 1,
-        source: "rgb"
-      }, e3);
-    } else if (data2.hsv) {
-      var _values = data2.hsv.split(",");
-      if (isvalidColorString(data2.hsv, "hsv")) {
-        _values[2] = _values[2].replace("%", "");
-        _values[1] = _values[1].replace("%", "");
-        _values[0] = _values[0].replace("°", "");
-        if (_values[1] == 1) {
-          _values[1] = 0.01;
-        } else if (_values[2] == 1) {
-          _values[2] = 0.01;
-        }
-        onChange2({
-          h: Number(_values[0]),
-          s: Number(_values[1]),
-          v: Number(_values[2]),
-          source: "hsv"
-        }, e3);
-      }
-    } else if (data2.hsl) {
-      var _values2 = data2.hsl.split(",");
-      if (isvalidColorString(data2.hsl, "hsl")) {
-        _values2[2] = _values2[2].replace("%", "");
-        _values2[1] = _values2[1].replace("%", "");
-        _values2[0] = _values2[0].replace("°", "");
-        if (hsvValue[1] == 1) {
-          hsvValue[1] = 0.01;
-        } else if (hsvValue[2] == 1) {
-          hsvValue[2] = 0.01;
-        }
-        onChange2({
-          h: Number(_values2[0]),
-          s: Number(_values2[1]),
-          v: Number(_values2[2]),
-          source: "hsl"
-        }, e3);
-      }
-    }
-  };
-  var styles2 = _default$2({
-    "default": {
-      wrap: {
-        display: "flex",
-        height: "100px",
-        marginTop: "4px"
-      },
-      fields: {
-        width: "100%"
-      },
-      column: {
-        paddingTop: "10px",
-        display: "flex",
-        justifyContent: "space-between"
-      },
-      double: {
-        padding: "0px 4.4px",
-        boxSizing: "border-box"
-      },
-      input: {
-        width: "100%",
-        height: "38px",
-        boxSizing: "border-box",
-        padding: "4px 10% 3px",
-        textAlign: "center",
-        border: "1px solid #dadce0",
-        fontSize: "11px",
-        textTransform: "lowercase",
-        borderRadius: "5px",
-        outline: "none",
-        fontFamily: "Roboto,Arial,sans-serif"
-      },
-      input2: {
-        height: "38px",
-        width: "100%",
-        border: "1px solid #dadce0",
-        boxSizing: "border-box",
-        fontSize: "11px",
-        textTransform: "lowercase",
-        borderRadius: "5px",
-        outline: "none",
-        paddingLeft: "10px",
-        fontFamily: "Roboto,Arial,sans-serif"
-      },
-      label: {
-        textAlign: "center",
-        fontSize: "12px",
-        background: "#fff",
-        position: "absolute",
-        textTransform: "uppercase",
-        color: "#3c4043",
-        width: "35px",
-        top: "-6px",
-        left: "0",
-        right: "0",
-        marginLeft: "auto",
-        marginRight: "auto",
-        fontFamily: "Roboto,Arial,sans-serif"
-      },
-      label2: {
-        left: "10px",
-        textAlign: "center",
-        fontSize: "12px",
-        background: "#fff",
-        position: "absolute",
-        textTransform: "uppercase",
-        color: "#3c4043",
-        width: "32px",
-        top: "-6px",
-        fontFamily: "Roboto,Arial,sans-serif"
-      },
-      single: {
-        flexGrow: "1",
-        margin: "0px 4.4px"
-      }
-    }
-  });
-  var rgbValue = rgb.r + ", " + rgb.g + ", " + rgb.b;
-  var hslValue = Math.round(hsl.h) + "°, " + Math.round(hsl.s * 100) + "%, " + Math.round(hsl.l * 100) + "%";
-  var hsvValue = Math.round(hsv2.h) + "°, " + Math.round(hsv2.s * 100) + "%, " + Math.round(hsv2.v * 100) + "%";
-  return React.createElement(
-    "div",
-    { style: styles2.wrap, className: "flexbox-fix" },
-    React.createElement(
-      "div",
-      { style: styles2.fields },
-      React.createElement(
-        "div",
-        { style: styles2.double },
-        React.createElement(EditableInput, {
-          style: { input: styles2.input, label: styles2.label },
-          label: "hex",
-          value: hex,
-          onChange: handleChange
-        })
-      ),
-      React.createElement(
-        "div",
-        { style: styles2.column },
-        React.createElement(
-          "div",
-          { style: styles2.single },
-          React.createElement(EditableInput, {
-            style: { input: styles2.input2, label: styles2.label2 },
-            label: "rgb",
-            value: rgbValue,
-            onChange: handleChange
-          })
-        ),
-        React.createElement(
-          "div",
-          { style: styles2.single },
-          React.createElement(EditableInput, {
-            style: { input: styles2.input2, label: styles2.label2 },
-            label: "hsv",
-            value: hsvValue,
-            onChange: handleChange
-          })
-        ),
-        React.createElement(
-          "div",
-          { style: styles2.single },
-          React.createElement(EditableInput, {
-            style: { input: styles2.input2, label: styles2.label2 },
-            label: "hsl",
-            value: hslValue,
-            onChange: handleChange
-          })
-        )
-      )
-    )
-  );
-};
-var Google = function Google2(_ref) {
-  var width = _ref.width, onChange2 = _ref.onChange, rgb = _ref.rgb, hsl = _ref.hsl, hsv2 = _ref.hsv, hex = _ref.hex, header = _ref.header, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
-  var styles2 = _default$2(merge$1({
-    "default": {
-      picker: {
-        width,
-        background: "#fff",
-        border: "1px solid #dfe1e5",
-        boxSizing: "initial",
-        display: "flex",
-        flexWrap: "wrap",
-        borderRadius: "8px 8px 0px 0px"
-      },
-      head: {
-        height: "57px",
-        width: "100%",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "16px",
-        fontSize: "20px",
-        boxSizing: "border-box",
-        fontFamily: "Roboto-Regular,HelveticaNeue,Arial,sans-serif"
-      },
-      saturation: {
-        width: "70%",
-        padding: "0px",
-        position: "relative",
-        overflow: "hidden"
-      },
-      swatch: {
-        width: "30%",
-        height: "228px",
-        padding: "0px",
-        background: "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", 1)",
-        position: "relative",
-        overflow: "hidden"
-      },
-      body: {
-        margin: "auto",
-        width: "95%"
-      },
-      controls: {
-        display: "flex",
-        boxSizing: "border-box",
-        height: "52px",
-        paddingTop: "22px"
-      },
-      color: {
-        width: "32px"
-      },
-      hue: {
-        height: "8px",
-        position: "relative",
-        margin: "0px 16px 0px 16px",
-        width: "100%"
-      },
-      Hue: {
-        radius: "2px"
-      }
-    }
-  }, passedStyles));
-  return React.createElement(
-    "div",
-    { style: styles2.picker, className: "google-picker " + className },
-    React.createElement(
-      "div",
-      { style: styles2.head },
-      header
-    ),
-    React.createElement("div", { style: styles2.swatch }),
-    React.createElement(
-      "div",
-      { style: styles2.saturation },
-      React.createElement(Saturation, {
-        hsl,
-        hsv: hsv2,
-        pointer: GooglePointerCircle,
-        onChange: onChange2
-      })
-    ),
-    React.createElement(
-      "div",
-      { style: styles2.body },
-      React.createElement(
-        "div",
-        { style: styles2.controls, className: "flexbox-fix" },
-        React.createElement(
-          "div",
-          { style: styles2.hue },
-          React.createElement(Hue, {
-            style: styles2.Hue,
-            hsl,
-            radius: "4px",
-            pointer: GooglePointer,
-            onChange: onChange2
-          })
-        )
-      ),
-      React.createElement(GoogleFields, {
-        rgb,
-        hsl,
-        hex,
-        hsv: hsv2,
-        onChange: onChange2
-      })
-    )
-  );
-};
-Google.propTypes = {
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  styles: PropTypes.object,
-  header: PropTypes.string
-};
-Google.defaultProps = {
-  width: 652,
-  styles: {},
-  header: "Color picker"
-};
-ColorWrap(Google);
 const RightAlign = qe$1.div`
   justify-items: right;
   display: grid;
@@ -147393,6 +138642,7 @@ const WrapRows$1 = qe$1.div`
   gap: 0.25em;
 `;
 const WrapBox = qe$1.div`
+  color: ${({ color: color2 }) => color2};
   grid-template-columns: auto 1fr;
   justify-items: left;
   display: grid;
@@ -147400,6 +138650,7 @@ const WrapBox = qe$1.div`
 `;
 const Box = qe$1.div`
   background-color: #${({ color: color2 }) => color2};
+  outline: ${({ outline }) => outline};
   height: 1em;
   width: 1em;
   margin-top: 2px;
@@ -147411,10 +138662,10 @@ const defaultChannels = [
   { color: "FFFFFF", name: "White" }
 ];
 const LegendRow = (props) => {
-  const { channel } = props;
+  const { channel, channelVisibilities } = props;
   const channelName = channel.name;
-  const [picking2, setPicking] = reactExports.useState(false);
-  const { idx, name: name2, path, g: g2 } = props;
+  const visible = channelVisibilities[channelName];
+  const { idx, name: name2, path, g: g2, onClick } = props;
   const setInput = (t3) => {
     props.updateChannel({ ...channel, name: t3 }, { idx, g: g2 });
   };
@@ -147430,14 +138681,21 @@ const LegendRow = (props) => {
     cache: /* @__PURE__ */ new Map(),
     uuid
   };
-  const pickColor = () => setPicking(true);
-  const picked = `#${props.channel.color}`;
-  const updateColor = ({ hex }) => {
-    props.updateChannel({ ...channel, color: hex.slice(1) }, { idx, g: g2 });
-    setPicking(false);
+  const wrapProps = {
+    color: "rgb(238, 238, 238)",
+    onClick
   };
-  const coreUI = picking2 ? /* @__PURE__ */ jsxRuntimeExports.jsx(GithubPicker, { color: picked, onChangeComplete: updateColor }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(WrapBox, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Box, { ...{ ...props.channel, onClick: pickColor } }),
+  const boxProps = {
+    ...props.channel,
+    outline: "none"
+  };
+  if (!visible) {
+    boxProps.color = "black";
+    wrapProps.color = "rgb(138, 138, 138)";
+    boxProps.outline = "2px solid #cccccc";
+  }
+  const coreUI = /* @__PURE__ */ jsxRuntimeExports.jsxs(WrapBox, { ...wrapProps, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Box, { ...boxProps }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Status, { ...statusProps, children: channelName })
   ] });
   const editSwitch = [
@@ -147449,7 +138707,7 @@ const LegendRow = (props) => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: extraUI });
 };
 const Legend = (props) => {
-  const { g: g2, pushChannel } = props;
+  const { g: g2, pushChannel, toggleChannel } = props;
   const nextIdx = props.channels.length + 1;
   const newChannel = defaultChannels[nextIdx % defaultChannels.length];
   const onPush = () => {
@@ -147463,7 +138721,13 @@ const Legend = (props) => {
   const { channels: channels2 } = props;
   const total = channels2.length;
   const rows = channels2.map((c2, k4) => {
-    const rowProps = { ...props, total, channel: c2, idx: k4 };
+    const rowProps = {
+      ...props,
+      total,
+      channel: c2,
+      idx: k4,
+      onClick: () => toggleChannel(c2)
+    };
     return /* @__PURE__ */ jsxRuntimeExports.jsx(LegendRow, { ...rowProps }, k4);
   });
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
@@ -147512,9 +138776,9 @@ const GroupRow = (props) => {
     ) || Groups2[0],
     [Groups2]
   );
-  const active3 = active_group.UUID === row_group.UUID;
-  const outline = active3 ? "var(--theme-glass-edge)" : "none";
-  const color2 = active3 ? "var(--theme-dark-main-color)" : "none";
+  const active = active_group.UUID === row_group.UUID;
+  const outline = active ? "var(--theme-glass-edge)" : "none";
+  const color2 = active ? "var(--theme-dark-main-color)" : "none";
   const toGroup = () => {
     if (row_group) {
       setActiveChannelGroup(row_group.UUID);
@@ -147524,12 +138788,12 @@ const GroupRow = (props) => {
   const nameProps = { color: color2, outline, ref };
   const { updateGroup } = props;
   reactExports.useEffect(() => {
-    if (active3 && ref.current !== null) {
+    if (active && ref.current !== null) {
       window.requestAnimationFrame(() => {
         ref.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
     }
-  }, [active3]);
+  }, [active]);
   `group/name/${group.g}`;
   ({
     ...props
@@ -147640,6 +138904,9 @@ const TextWrap = qe$1.div`
   > div.core.hide {
     transform: translateX(100%); 
   }
+  .dim {
+    color: #aaa;
+  }
 `;
 const TextOther = qe$1.div`
   grid-row: 1;
@@ -147653,7 +138920,9 @@ const Channel = (props) => {
   const { Groups: Groups2 } = props.config.ItemRegistry;
   const hidden = props.retrievingMetadata;
   const {
-    activeChannelGroupId
+    activeChannelGroupId,
+    setChannelVisibilities,
+    channelVisibilities
   } = useOverlayStore();
   const group_name = (_b2 = (_a3 = Groups2.find(
     ({ UUID }) => UUID === activeChannelGroupId
@@ -147664,7 +138933,21 @@ const Channel = (props) => {
     g: 0,
     channels: []
   };
-  const legendProps = { ...props, ...group };
+  const toggleChannel = ({ name: name2 }) => {
+    setChannelVisibilities(
+      Object.fromEntries(
+        Object.entries(channelVisibilities).map(
+          ([k4, v2]) => [k4, k4 === name2 ? !v2 : v2]
+        )
+      )
+    );
+  };
+  const legendProps = {
+    ...props,
+    ...group,
+    channelVisibilities,
+    toggleChannel
+  };
   const hideClass = [
     "show core",
     "hide core"
@@ -147720,9 +139003,9 @@ class Schema2 {
    * @returns
    *   Schema.
    */
-  constructor(property2, normal, space2) {
+  constructor(property, normal, space2) {
     this.normal = normal;
-    this.property = property2;
+    this.property = property;
     if (space2) {
       this.space = space2;
     }
@@ -147732,13 +139015,13 @@ Schema2.prototype.normal = {};
 Schema2.prototype.property = {};
 Schema2.prototype.space = void 0;
 function merge(definitions, space2) {
-  const property2 = {};
+  const property = {};
   const normal = {};
   for (const definition2 of definitions) {
-    Object.assign(property2, definition2.property);
+    Object.assign(property, definition2.property);
     Object.assign(normal, definition2.normal);
   }
-  return new Schema2(property2, normal, space2);
+  return new Schema2(property, normal, space2);
 }
 function normalize$1(value) {
   return value.toLowerCase();
@@ -147752,9 +139035,9 @@ class Info {
    * @returns
    *   Info.
    */
-  constructor(property2, attribute2) {
+  constructor(property, attribute2) {
     this.attribute = attribute2;
-    this.property = property2;
+    this.property = property;
   }
 }
 Info.prototype.attribute = "";
@@ -147808,9 +139091,9 @@ class DefinedInfo extends Info {
    * @returns
    *   Info.
    */
-  constructor(property2, attribute2, mask, space2) {
+  constructor(property, attribute2, mask, space2) {
     let index2 = -1;
-    super(property2, attribute2);
+    super(property, attribute2);
     mark(this, "space", space2);
     if (typeof mask === "number") {
       while (++index2 < checks.length) {
@@ -147829,19 +139112,19 @@ function mark(values2, key, value) {
 function create$1(definition2) {
   const properties = {};
   const normals = {};
-  for (const [property2, value] of Object.entries(definition2.properties)) {
+  for (const [property, value] of Object.entries(definition2.properties)) {
     const info = new DefinedInfo(
-      property2,
-      definition2.transform(definition2.attributes || {}, property2),
+      property,
+      definition2.transform(definition2.attributes || {}, property),
       value,
       definition2.space
     );
-    if (definition2.mustUseProperty && definition2.mustUseProperty.includes(property2)) {
+    if (definition2.mustUseProperty && definition2.mustUseProperty.includes(property)) {
       info.mustUseProperty = true;
     }
-    properties[property2] = info;
-    normals[normalize$1(property2)] = property2;
-    normals[normalize$1(info.attribute)] = property2;
+    properties[property] = info;
+    normals[normalize$1(property)] = property;
+    normals[normalize$1(info.attribute)] = property;
   }
   return new Schema2(properties, normals, definition2.space);
 }
@@ -147897,15 +139180,15 @@ const aria = create$1({
     ariaValueText: null,
     role: null
   },
-  transform(_2, property2) {
-    return property2 === "role" ? property2 : "aria-" + property2.slice(4).toLowerCase();
+  transform(_2, property) {
+    return property === "role" ? property : "aria-" + property.slice(4).toLowerCase();
   }
 });
 function caseSensitiveTransform(attributes, attribute2) {
   return attribute2 in attributes ? attributes[attribute2] : attribute2;
 }
-function caseInsensitiveTransform(attributes, property2) {
-  return caseSensitiveTransform(attributes, property2.toLowerCase());
+function caseInsensitiveTransform(attributes, property) {
+  return caseSensitiveTransform(attributes, property.toLowerCase());
 }
 const html$2 = create$1({
   attributes: {
@@ -148840,8 +140123,8 @@ const xlink = create$1({
     xLinkType: null
   },
   space: "xlink",
-  transform(_2, property2) {
-    return "xlink:" + property2.slice(5).toLowerCase();
+  transform(_2, property) {
+    return "xlink:" + property.slice(5).toLowerCase();
   }
 });
 const xmlns = create$1({
@@ -148853,8 +140136,8 @@ const xmlns = create$1({
 const xml = create$1({
   properties: { xmlBase: null, xmlLang: null, xmlSpace: null },
   space: "xml",
-  transform(_2, property2) {
-    return "xml:" + property2.slice(3).toLowerCase();
+  transform(_2, property) {
+    return "xml:" + property.slice(3).toLowerCase();
   }
 });
 const hastToReact = {
@@ -148881,7 +140164,7 @@ const dash = /-[a-z]/g;
 const valid = /^data[-\w.:]+$/i;
 function find(schema2, value) {
   const normal = normalize$1(value);
-  let property2 = value;
+  let property = value;
   let Type = Info;
   if (normal in schema2.normal) {
     return schema2.property[schema2.normal[normal]];
@@ -148889,7 +140172,7 @@ function find(schema2, value) {
   if (normal.length > 4 && normal.slice(0, 4) === "data" && valid.test(value)) {
     if (value.charAt(4) === "-") {
       const rest = value.slice(5).replace(dash, camelcase);
-      property2 = "data" + rest.charAt(0).toUpperCase() + rest.slice(1);
+      property = "data" + rest.charAt(0).toUpperCase() + rest.slice(1);
     } else {
       const rest = value.slice(4);
       if (!dash.test(rest)) {
@@ -148902,7 +140185,7 @@ function find(schema2, value) {
     }
     Type = DefinedInfo;
   }
-  return new Type(property2, value);
+  return new Type(property, value);
 }
 function kebab($0) {
   return "-" + $0.toLowerCase();
@@ -149057,12 +140340,12 @@ function StyleToObject(style2, iterator) {
     if (declaration2.type !== "declaration") {
       return;
     }
-    const { property: property2, value } = declaration2;
+    const { property, value } = declaration2;
     if (hasIterator) {
-      iterator(property2, value, declaration2);
+      iterator(property, value, declaration2);
     } else if (value) {
       styleObject = styleObject || {};
-      styleObject[property2] = value;
+      styleObject[property] = value;
     }
   });
   return styleObject;
@@ -149080,8 +140363,8 @@ var HYPHEN_REGEX = /-([a-z])/g;
 var NO_HYPHEN_REGEX = /^[^-]+$/;
 var VENDOR_PREFIX_REGEX = /^-(webkit|moz|ms|o|khtml)-/;
 var MS_VENDOR_PREFIX_REGEX = /^-(ms)-/;
-var skipCamelCase = function(property2) {
-  return !property2 || NO_HYPHEN_REGEX.test(property2) || CUSTOM_PROPERTY_REGEX.test(property2);
+var skipCamelCase = function(property) {
+  return !property || NO_HYPHEN_REGEX.test(property) || CUSTOM_PROPERTY_REGEX.test(property);
 };
 var capitalize = function(match2, character) {
   return character.toUpperCase();
@@ -149089,20 +140372,20 @@ var capitalize = function(match2, character) {
 var trimHyphen = function(match2, prefix2) {
   return "".concat(prefix2, "-");
 };
-var camelCase = function(property2, options) {
+var camelCase = function(property, options) {
   if (options === void 0) {
     options = {};
   }
-  if (skipCamelCase(property2)) {
-    return property2;
+  if (skipCamelCase(property)) {
+    return property;
   }
-  property2 = property2.toLowerCase();
+  property = property.toLowerCase();
   if (options.reactCompat) {
-    property2 = property2.replace(MS_VENDOR_PREFIX_REGEX, trimHyphen);
+    property = property.replace(MS_VENDOR_PREFIX_REGEX, trimHyphen);
   } else {
-    property2 = property2.replace(VENDOR_PREFIX_REGEX, trimHyphen);
+    property = property.replace(VENDOR_PREFIX_REGEX, trimHyphen);
   }
-  return property2.replace(HYPHEN_REGEX, capitalize);
+  return property.replace(HYPHEN_REGEX, capitalize);
 };
 utilities.camelCase = camelCase;
 var __importDefault = commonjsGlobal$1 && commonjsGlobal$1.__importDefault || function(mod2) {
@@ -149115,9 +140398,9 @@ function StyleToJS(style2, options) {
   if (!style2 || typeof style2 !== "string") {
     return output;
   }
-  (0, style_to_object_1.default)(style2, function(property2, value) {
-    if (property2 && value) {
-      output[(0, utilities_1.camelCase)(property2, options)] = value;
+  (0, style_to_object_1.default)(style2, function(property, value) {
+    if (property && value) {
+      output[(0, utilities_1.camelCase)(property, options)] = value;
     }
   });
   return output;
@@ -149523,11 +140806,11 @@ function createJsxElementProps(state, node2) {
         ok$1(expression.type === "ExpressionStatement");
         const objectExpression = expression.expression;
         ok$1(objectExpression.type === "ObjectExpression");
-        const property2 = objectExpression.properties[0];
-        ok$1(property2.type === "SpreadElement");
+        const property = objectExpression.properties[0];
+        ok$1(property.type === "SpreadElement");
         Object.assign(
           props,
-          state.evaluater.evaluateExpression(property2.argument)
+          state.evaluater.evaluateExpression(property.argument)
         );
       } else {
         crashEstree(state, node2.position);
@@ -153304,7 +144587,7 @@ function createTokenizer(parser, initialize2, from2) {
     containerState: {},
     defineSkip,
     events: [],
-    now: now2,
+    now,
     parser,
     previous: null,
     sliceSerialize,
@@ -153332,7 +144615,7 @@ function createTokenizer(parser, initialize2, from2) {
   function sliceStream(token) {
     return sliceChunks(chunks, token);
   }
-  function now2() {
+  function now() {
     const {
       _bufferIndex,
       _index,
@@ -153399,14 +144682,14 @@ function createTokenizer(parser, initialize2, from2) {
   function enter(type, fields) {
     const token = fields || {};
     token.type = type;
-    token.start = now2();
+    token.start = now();
     context.events.push(["enter", token, context]);
     stack.push(token);
     return token;
   }
   function exit2(type) {
     const token = stack.pop();
-    token.end = now2();
+    token.end = now();
     context.events.push(["exit", token, context]);
     return token;
   }
@@ -153502,7 +144785,7 @@ function createTokenizer(parser, initialize2, from2) {
     }
   }
   function store() {
-    const startPoint = now2();
+    const startPoint = now();
     const startPrevious = context.previous;
     const startCurrentConstruct = context.currentConstruct;
     const startEventsIndex = context.events.length;
@@ -154992,13 +146275,13 @@ const deserializer = ($2, _2) => {
 };
 const deserialize = (serialized) => deserializer(/* @__PURE__ */ new Map(), serialized)(0);
 const EMPTY = "";
-const { toString: toString2 } = {};
+const { toString } = {};
 const { keys } = Object;
 const typeOf = (value) => {
   const type = typeof value;
   if (type !== "object" || !value)
     return [PRIMITIVE, type];
-  const asString = toString2.call(value).slice(8, -1);
+  const asString = toString.call(value).slice(8, -1);
   switch (asString) {
     case "Array":
       return [ARRAY, EMPTY];
@@ -155647,8 +146930,8 @@ var getProperty = function getProperty2(obj, name2) {
   }
   return obj[name2];
 };
-var extend2 = function extend3() {
-  var options, name2, src, copy2, copyIsArray, clone3;
+var extend = function extend2() {
+  var options, name2, src, copy2, copyIsArray, clone2;
   var target = arguments[0];
   var i5 = 1;
   var length2 = arguments.length;
@@ -155671,11 +146954,11 @@ var extend2 = function extend3() {
           if (deep && copy2 && (isPlainObject$1(copy2) || (copyIsArray = isArray(copy2)))) {
             if (copyIsArray) {
               copyIsArray = false;
-              clone3 = src && isArray(src) ? src : [];
+              clone2 = src && isArray(src) ? src : [];
             } else {
-              clone3 = src && isPlainObject$1(src) ? src : {};
+              clone2 = src && isPlainObject$1(src) ? src : {};
             }
-            setProperty(target, { name: name2, newValue: extend3(deep, clone3, copy2) });
+            setProperty(target, { name: name2, newValue: extend2(deep, clone2, copy2) });
           } else if (typeof copy2 !== "undefined") {
             setProperty(target, { name: name2, newValue: copy2 });
           }
@@ -155685,7 +146968,7 @@ var extend2 = function extend3() {
   }
   return target;
 };
-const extend$1 = /* @__PURE__ */ getDefaultExportFromCjs$1(extend2);
+const extend$1 = /* @__PURE__ */ getDefaultExportFromCjs$1(extend);
 function isPlainObject2(value) {
   if (typeof value !== "object" || value === null) {
     return false;
@@ -155905,15 +147188,15 @@ function join(...segments) {
 }
 function normalize2(path) {
   assertPath$1(path);
-  const absolute2 = path.codePointAt(0) === 47;
-  let value = normalizeString(path, !absolute2);
-  if (value.length === 0 && !absolute2) {
+  const absolute = path.codePointAt(0) === 47;
+  let value = normalizeString(path, !absolute);
+  if (value.length === 0 && !absolute) {
     value = ".";
   }
   if (value.length > 0 && path.codePointAt(path.length - 1) === 47) {
     value += "/";
   }
-  return absolute2 ? "/" + value : value;
+  return absolute ? "/" + value : value;
 }
 function normalizeString(path, allowAboveRoot) {
   let result = "";
@@ -156501,7 +147784,7 @@ const CallableInstance = (
    * @param {string | symbol} property
    * @returns {(...parameters: Array<unknown>) => unknown}
    */
-  function(property2) {
+  function(property) {
     const self2 = this;
     const constr = self2.constructor;
     const proto2 = (
@@ -156510,7 +147793,7 @@ const CallableInstance = (
       // type-coverage:ignore-next-line
       constr.prototype
     );
-    const value = proto2[property2];
+    const value = proto2[property];
     const apply2 = function() {
       return value.apply(apply2, arguments);
     };
@@ -157217,7 +148500,7 @@ function post(tree, options) {
       );
     }
   }
-  visit(tree, transform2);
+  visit(tree, transform);
   return toJsxRuntime(tree, {
     Fragment: jsxRuntimeExports.Fragment,
     components,
@@ -157227,7 +148510,7 @@ function post(tree, options) {
     passKeys: true,
     passNode: true
   });
-  function transform2(node2, index2, parent) {
+  function transform(node2, index2, parent) {
     if (node2.type === "raw" && parent && typeof index2 === "number") {
       if (skipHtml) {
         parent.children.splice(index2, 1);
@@ -158283,7 +149566,7 @@ addDecoder([8, 32946], () => __vitePreload(() => import("./deflate-_X0BzjB2.js")
 addDecoder(32773, () => __vitePreload(() => import("./packbits-Ds9W8fyQ.js"), true ? __vite__mapDeps([9,5]) : void 0, import.meta.url).then((m2) => m2.default));
 addDecoder(
   34887,
-  () => __vitePreload(() => import("./lerc-CJBcXVJm.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
+  () => __vitePreload(() => import("./lerc-DH7Fxgvh.js"), true ? __vite__mapDeps([10,1,3,5]) : void 0, import.meta.url).then(async (m2) => {
     await m2.zstd.init();
     return m2;
   }).then((m2) => m2.default)
@@ -158491,8 +149774,45 @@ const Content = (props) => {
     ID: crypto.randomUUID()
   });
   const {
-    setActiveChannelGroup
+    setActiveChannelGroup,
+    setChannelVisibilities,
+    setGroupChannelLists,
+    setGroupNames
   } = useOverlayStore();
+  const updateGroupChannelLists = ({
+    SourceChannels,
+    GroupChannels,
+    Groups: Groups2
+  }) => {
+    setGroupNames(Object.fromEntries(
+      Groups2.map(({ Properties, UUID }) => [
+        UUID,
+        Properties.Name
+      ])
+    ));
+    const groupChannelLists = Object.fromEntries(
+      Groups2.map(({ Properties, UUID }) => {
+        return [
+          Properties.Name,
+          GroupChannels.filter(
+            ({ Associations }) => UUID === Associations.Group.UUID
+          ).map(
+            ({ Associations }) => {
+              return ((found2) => (found2 == null ? void 0 : found2.Properties.Name) || "")(SourceChannels.find(
+                ({ UUID: UUID2 }) => UUID2 === Associations.SourceChannel.UUID
+              ));
+            }
+          )
+        ];
+      })
+    );
+    setGroupChannelLists(groupChannelLists);
+    const groupName = Groups2[0].Properties.Name;
+    const channelList = groupChannelLists[groupName] || [];
+    setChannelVisibilities(Object.fromEntries(
+      channelList.map((name2) => [name2, true])
+    ));
+  };
   const resetItems = (ItemRegistry2) => {
     setConfig((config22) => ({
       ...config22,
@@ -158526,7 +149846,7 @@ const Content = (props) => {
     );
   };
   const onRecall = async () => {
-    const newHandle = await get$5(handleKeys[0]);
+    const newHandle = await get$1(handleKeys[0]);
     const isGranted = (permission) => permission === "granted";
     const options = { mode: "readwrite" };
     if (isGranted(await newHandle.queryPermission(options)) || isGranted(await newHandle.requestPermission(options))) {
@@ -158547,6 +149867,11 @@ const Content = (props) => {
       GroupChannels,
       Groups: Groups2,
       Colors
+    });
+    updateGroupChannelLists({
+      SourceChannels,
+      GroupChannels,
+      Groups: Groups2
     });
     extractDistributions(loader).then(
       (sourceDistributionMap) => {
@@ -158659,6 +149984,11 @@ const Content = (props) => {
       GroupChannels,
       Groups: Groups2,
       Colors
+    });
+    updateGroupChannelLists({
+      SourceChannels,
+      GroupChannels,
+      Groups: Groups2
     });
   };
   const mutableFields = [
@@ -159172,12 +150502,12 @@ const require$$3$1 = {
   male: male$1,
   female: female$1
 };
-(function(exports2) {
-  Object.defineProperty(exports2, "__esModule", {
+(function(exports) {
+  Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports2["default"] = void 0;
-  var _react3 = _interopRequireDefault2(reactExports);
+  exports["default"] = void 0;
+  var _react2 = _interopRequireDefault2(reactExports);
   var _propTypes2 = _interopRequireDefault2(propTypesExports);
   var _utils2 = utils;
   var _avatars = _interopRequireDefault2(require$$3$1);
@@ -159236,7 +150566,7 @@ const require$$3$1 = {
       var randomIndex = (0, _utils2.randomFromRange)(0, _avatars["default"][finalGender].length - 1);
       return _avatars["default"][finalGender][randomIndex];
     };
-    return _react3["default"].createElement("img", _extends2({
+    return _react2["default"].createElement("img", _extends2({
       src: getRandomAvatar()
     }, otherProps, {
       alt: "Avatar"
@@ -159247,7 +150577,7 @@ const require$$3$1 = {
   };
   Avatar.defaultProps = defaultProps2;
   var _default2 = Avatar;
-  exports2["default"] = _default2;
+  exports["default"] = _default2;
 })(avatar);
 const male = [
   "James",
@@ -159756,17 +151086,17 @@ const require$$4 = {
   adjectives,
   nouns
 };
-(function(exports2) {
-  Object.defineProperty(exports2, "__esModule", {
+(function(exports) {
+  Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  Object.defineProperty(exports2, "Avatar", {
+  Object.defineProperty(exports, "Avatar", {
     enumerable: true,
-    get: function get5() {
+    get: function get4() {
       return _avatar["default"];
     }
   });
-  exports2.username = exports2.surname = exports2.name = exports2.fullname = void 0;
+  exports.username = exports.surname = exports.name = exports.fullname = void 0;
   var _avatar = _interopRequireDefault2(avatar);
   var _utils2 = utils;
   var _names = _interopRequireDefault2(require$$2);
@@ -159782,18 +151112,18 @@ const require$$4 = {
     if (["male", "female"].includes(gender)) finalGender = gender;
     return _names["default"][finalGender][(0, _utils2.randomFromRange)(0, _names["default"][finalGender].length - 1)];
   };
-  exports2.name = name2;
+  exports.name = name2;
   var surname = function surname2() {
     return _surnames["default"][(0, _utils2.randomFromRange)(0, _surnames["default"].length - 1)];
   };
-  exports2.surname = surname;
+  exports.surname = surname;
   var fullname = function fullname2() {
     var gender = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : "all";
     var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var midName = Math.random() < 0.1 ? "".concat(letters.charAt((0, _utils2.randomFromRange)(0, letters.length - 1)), ". ") : "";
     return "".concat(name2(gender), " ").concat(midName).concat(surname());
   };
-  exports2.fullname = fullname;
+  exports.fullname = fullname;
   var username = function username2() {
     var adjective = _usernames["default"].adjectives[(0, _utils2.randomFromRange)(0, _usernames["default"].adjectives.length - 1)];
     var noun = _usernames["default"].nouns[(0, _utils2.randomFromRange)(0, _usernames["default"].nouns.length - 1)];
@@ -159803,59 +151133,59 @@ const require$$4 = {
     var number2 = !withNumber ? "" : (0, _utils2.randomFromRange)(0, 2e3);
     return "".concat(adjective).concat(seperator).concat(noun).concat(number2);
   };
-  exports2.username = username;
+  exports.username = username;
 })(user);
-(function(exports2) {
-  Object.defineProperty(exports2, "__esModule", {
+(function(exports) {
+  Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  Object.defineProperty(exports2, "Avatar", {
+  Object.defineProperty(exports, "Avatar", {
     enumerable: true,
-    get: function get5() {
+    get: function get4() {
       return _user.Avatar;
     }
   });
-  Object.defineProperty(exports2, "LoremIpsum", {
+  Object.defineProperty(exports, "LoremIpsum", {
     enumerable: true,
-    get: function get5() {
+    get: function get4() {
       return _loremIpsum.LoremIpsum;
     }
   });
-  exports2["default"] = void 0;
-  Object.defineProperty(exports2, "fullname", {
+  exports["default"] = void 0;
+  Object.defineProperty(exports, "fullname", {
     enumerable: true,
-    get: function get5() {
+    get: function get4() {
       return _user.fullname;
     }
   });
-  Object.defineProperty(exports2, "loremIpsum", {
+  Object.defineProperty(exports, "loremIpsum", {
     enumerable: true,
-    get: function get5() {
+    get: function get4() {
       return _loremIpsum.loremIpsum;
     }
   });
-  Object.defineProperty(exports2, "name", {
+  Object.defineProperty(exports, "name", {
     enumerable: true,
-    get: function get5() {
+    get: function get4() {
       return _user.name;
     }
   });
-  Object.defineProperty(exports2, "surname", {
+  Object.defineProperty(exports, "surname", {
     enumerable: true,
-    get: function get5() {
+    get: function get4() {
       return _user.surname;
     }
   });
-  Object.defineProperty(exports2, "username", {
+  Object.defineProperty(exports, "username", {
     enumerable: true,
-    get: function get5() {
+    get: function get4() {
       return _user.username;
     }
   });
   var _loremIpsum = loremIpsum$1;
   var _user = user;
   var _default2 = _loremIpsum.LoremIpsum;
-  exports2["default"] = _default2;
+  exports["default"] = _default2;
 })(dist);
 const configWaypoints = [
   {
